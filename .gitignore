@@ -127,3 +127,20 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PyCharm project settings
+/.idea/
+
+# development files
+*scratch.py
+*scratch.ipynb
+*.dot
+*.profile
+
+# data files
+pdr_tests/data
+pdr_tests/reference/temp
+
+# logs
+*.log
+
