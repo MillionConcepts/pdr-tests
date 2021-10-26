@@ -141,6 +141,4 @@ dmypy.json
 pdr_tests/data
 pdr_tests/reference/temp
 
-# logs
-*.log
 
