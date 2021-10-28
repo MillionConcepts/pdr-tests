@@ -19,7 +19,10 @@ DATASET_TESTING_RULES = {
         "hazcam": {"filter": "MSLHAZ", "extra_checks": [specified_image_size]},
         "navcam": {"filter": "MSLNAV"},
     },
-    "lro": {"lyman_alpha": {"filter": "LROLAM"}, "lroc": {"filter": "LROLRC"}},
+    "lro": {
+        "lyman_alpha": {"filter": "LROLAM"},
+        "lroc": {"index": "lro_lroc.csv"}
+    },
     "mer": {
         "pancam": {"index": "mer_pancam.csv"},
         "navcam": {"index": "mer_navcam.csv"},
