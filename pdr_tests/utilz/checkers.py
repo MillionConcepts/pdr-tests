@@ -2,7 +2,7 @@
 
 from typing import Callable
 
-from pdr import pdr
+import pdr
 from pdr_tests.definitions import dimensions as dimensions
 
 
