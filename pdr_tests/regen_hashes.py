@@ -9,14 +9,15 @@ by default, this will attempt to download all products referenced in the
 product index to data/$MISSION/$DATASET if they are not present.
 """
 
-from pdr_tests.definitions.datasets import DATASET_TESTING_RULES
+from definitions.datasets import DATASET_TESTING_RULES
 from pdr_tests.utilz.test_utilz import regenerate_test_hashes
 
 # "settings"
 dump_browse = True
+dump_kwargs = {"band_ix": 3}
 
 # regenerate hashes for a single set:
-regenerate_test_hashes("lro", "lroc", dump_browse=dump_browse)
+regenerate_test_hashes("lro", "lroc", dump_browse=dump_browse, dump_kwargs=dump_kwargs)
 
 # regenerate hashes for all defined sets:
 # for mission_name, datasets in DATASET_TESTING_RULES.items():

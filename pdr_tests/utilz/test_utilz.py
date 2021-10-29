@@ -16,9 +16,9 @@ from dustgoggles.func import disjoint, intersection
 from dustgoggles.pivot import pdstr
 from rasterio.errors import NotGeoreferencedWarning
 
-import pdr
+from pdr import pdr
 from pdr_tests.definitions.datasets import DATASET_TESTING_RULES
-from pdr.utils import get_pds3_pointers
+from pdr.pdr.utils import get_pds3_pointers
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
