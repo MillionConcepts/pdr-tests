@@ -260,19 +260,21 @@ def collect_files(product, references, local_only=False):
         perform_test_download(url, references)
 
 
-def checksum_object(obj, hasher=md5):
+def checksum_object(obj, hash_function=md5):
     """
     make stable byte array from python object. the general case of this is,
     I think, impossible, or at least implementation-dependent, so I am
     attempting to cover the specific cases we have...this is a first pass.
     """
+    hasher = hash_function(usedforsecurity=False)
     if isinstance(obj, np.ndarray):
-        bytestr = obj.tobytes()
+        for line in obj:
+            hasher.update(line)
     else:
         # TODO: determine when this is and is not actually stable...we'll
         #  find out!
-        bytestr = obj.__repr__().encode("utf-8")
-    return hasher(bytestr).hexdigest()
+        hasher.update(obj.__repr__().encode("utf-8"))
+    return hasher.hexdigest()
 
 
 def check_product(product, references, checks, local_only=False):
@@ -454,6 +456,6 @@ def dump_test_browse(data, dataset, dump_args, mission, product):
     os.makedirs(dump_args["outpath"], exist_ok=True)
     if "prefix" not in dump_args.keys():
         dump_args["prefix"] = product["product_id"]
-    if "delete" not in dump_args.keys():
-        dump_args["delete"] = True
+    if "purge" not in dump_args.keys():
+        dump_args["purge"] = True
     data.dump_browse(**dump_args)
