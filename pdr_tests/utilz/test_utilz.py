@@ -427,7 +427,9 @@ def regenerate_test_hashes(
             pdrtestlog.info(
                 f"dumping browse products for {product['product_id']}"
             )
-            dump_test_browse(data, dataset, dump_kwargs, mission, product)
+            dump_test_browse(
+                data, dataset, dump_kwargs, mission, product['product_id']
+            )
             pdrtestlog.info(
                 f"dumped browse products for {product['product_id']}"
             )
@@ -446,7 +448,7 @@ def regenerate_test_hashes(
     return serialframe
 
 
-def dump_test_browse(data, dataset, dump_args, mission, product):
+def dump_test_browse(data, dataset, dump_args, mission):
     if dump_args is None:
         dump_args = {}
     if "outpath" not in dump_args.keys():
@@ -454,8 +456,6 @@ def dump_test_browse(data, dataset, dump_args, mission, product):
             REF_ROOT, "temp", "browse", mission, dataset
         )
     os.makedirs(dump_args["outpath"], exist_ok=True)
-    if "prefix" not in dump_args.keys():
-        dump_args["prefix"] = product["product_id"]
     if "purge" not in dump_args.keys():
         dump_args["purge"] = True
     data.dump_browse(**dump_args)
