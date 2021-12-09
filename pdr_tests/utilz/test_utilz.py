@@ -427,9 +427,7 @@ def regenerate_test_hashes(
             pdrtestlog.info(
                 f"dumping browse products for {product['product_id']}"
             )
-            dump_test_browse(
-                data, dataset, dump_kwargs, mission, product['product_id']
-            )
+            dump_test_browse(data, dataset, dump_kwargs, mission)
             pdrtestlog.info(
                 f"dumped browse products for {product['product_id']}"
             )
