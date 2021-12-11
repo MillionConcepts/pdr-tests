@@ -447,13 +447,12 @@ def regenerate_test_hashes(
 
 
 def dump_test_browse(data, dataset, dump_args, mission):
-    if dump_args is None:
-        dump_args = {}
-    if "outpath" not in dump_args.keys():
-        dump_args["outpath"] = Path(
-            REF_ROOT, "temp", "browse", mission, dataset
-        )
-    os.makedirs(dump_args["outpath"], exist_ok=True)
-    if "purge" not in dump_args.keys():
-        dump_args["purge"] = True
-    data.dump_browse(**dump_args)
+    kwargs = {} if dump_args is None else dump_args.copy()
+    if "outpath" not in kwargs.keys():
+        kwargs["outpath"] = Path(REF_ROOT, "temp", "browse", mission, dataset)
+    os.makedirs(kwargs["outpath"], exist_ok=True)
+    if "purge" not in kwargs.keys():
+        kwargs["purge"] = True
+    if "scaled" not in kwargs.keys():
+        kwargs["scaled"] = "both"
+    data.dump_browse(**kwargs)

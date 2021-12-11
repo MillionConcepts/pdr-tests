@@ -17,7 +17,7 @@ import pandas as pd
 from pdr_tests.utilz.test_utilz import label_urls_to_test_index
 
 
-test_case = "lro_lroc"
+test_case = "ch1"
 
 label_urls = pd.read_csv(
     f"reference/url_lists/{test_case}.csv", header=None
