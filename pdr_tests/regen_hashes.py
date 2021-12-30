@@ -14,21 +14,22 @@ from pdr_tests.utilz.test_utilz import regenerate_test_hashes
 
 # "settings"
 dump_browse = True
-dump_kwargs = {"band_ix": 3}
-#dump_kwargs = {}
+# dump_kwargs = {"band_ix": 3}
+dump_kwargs = {}
 
 # regenerate hashes for a single set:
-regenerate_test_hashes("lro", "lroc", dump_browse=dump_browse, dump_kwargs=dump_kwargs)
+# regenerate_test_hashes("msl", "hazcam", dump_browse=dump_browse, dump_kwargs=dump_kwargs)
 
 # regenerate hashes for all defined sets:
-# for mission_name, datasets in DATASET_TESTING_RULES.items():
-#     for dataset in datasets.keys():
-#        print(mission_name, dataset)
-#        regenerate_test_hashes(mission_name, dataset, dump_browse, dump_kwargs=dump_kwargs)
+for mission_name, datasets in DATASET_TESTING_RULES.items():
+    for dataset in datasets.keys():
+        print(mission_name, dataset)
+        regenerate_test_hashes(
+            mission_name, dataset, dump_browse, dump_kwargs=dump_kwargs
+        )
 
 # regenerate hashes for specific sets within a given mission:
 # for mission_name, datasets in DATASET_TESTING_RULES.items():
 #     for dataset in datasets.keys():
 #         if mission_name=='lro' and 'WAC' in dataset:
 #           print(mission_name, dataset)
-#           regenerate_test_hashes(mission_name, dataset, dump_browse, dump_kwargs=dump_kwargs)

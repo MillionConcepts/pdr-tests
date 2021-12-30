@@ -17,8 +17,10 @@ from dustgoggles.pivot import pdstr
 from rasterio.errors import NotGeoreferencedWarning
 
 import pdr
+from pdr.pdr import decompress
+from pdr.utils import get_pds3_pointers, trim_label
 from pdr_tests.definitions.datasets import DATASET_TESTING_RULES
-from pdr.utils import get_pds3_pointers
+
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
@@ -179,7 +181,7 @@ def read_test_rules(
 
 def find_test_paths(mission: str, dataset: str, rules: Mapping):
     """
-    Intakes the mission and dataset strings and the rules for which files to read as a dictionary.
+    Intakes the mission and dataset as strings and the rules for which files to read as a dictionary.
     It then reads in the index csv file as a pandas table (product_table) and filters it by the filter
     (if present) in the rules dictionary. Outputs the filtered product table and reference file paths
     (for the location of the reference csv files and the data itself).
@@ -332,7 +334,7 @@ def make_pds4_row(xmlfile):
 
 
 def make_pds3_row(local_path):
-    label = pvl.load(local_path)
+    label = pvl.loads(trim_label(decompress(str(local_path))))
     pointer_targets = get_pds3_pointers(label)
     targets = [pt[1] for pt in pointer_targets]
     files = [local_path.name]
@@ -447,13 +449,13 @@ def regenerate_test_hashes(
 
 
 def dump_test_browse(data, dataset, dump_args, mission):
-    if dump_args is None:
-        dump_args = {}
-    if "outpath" not in dump_args.keys():
-        dump_args["outpath"] = Path(
-            REF_ROOT, "temp", "browse", mission, dataset
-        )
-    os.makedirs(dump_args["outpath"], exist_ok=True)
-    if "purge" not in dump_args.keys():
-        dump_args["purge"] = True
-    data.dump_browse(**dump_args)
+    kwargs = {} if dump_args is None else dump_args.copy()
+    if "outpath" not in kwargs.keys():
+        kwargs["outpath"] = Path(REF_ROOT, "temp", "browse", mission, dataset)
+    os.makedirs(kwargs["outpath"], exist_ok=True)
+    if "purge" not in kwargs.keys():
+        kwargs["purge"] = True
+    if "scaled" not in kwargs.keys():
+        kwargs["scaled"] = "both"
+    data.dump_browse(**kwargs)
+
