@@ -284,7 +284,7 @@ def check_product(product, references, checks, local_only=False):
         collect_files(product, references, local_only)
     except OSError:
         pdrtestlog.warning(
-            "file not present and I couldn't download it or something"
+            f"Some member of {product['files']} not present and I couldn't download it or something"
         )
         return None, None
     data = pdr.read(str(Path(references["data"], product["label_file"])))
