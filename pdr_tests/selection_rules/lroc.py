@@ -1,9 +1,7 @@
-from mission_scrape import select_and_scrape
-
 """These should be database file names that contain the relevant file information from the spider/scrapers."""
 cdr_file = 'img_lroc_cdr_size_corrected.csv'
 edr_file = 'img_lroc_edr_size_corrected.csv'
-rdr_file = 'img_lroc_rdr_size_corrected.csv'
+rdr_file = '../img_lroc_rdr_size_corrected.csv'
 
 """This is a dictionary of information about each file type:
     dataset: the name of the dataset type (this will be the name of the folder these data are downloaded into
@@ -95,4 +93,3 @@ file_information = {'NAC_CDR_if': {'database': cdr_file,
                                  'fn_must_contain': ['ANAGLYPH', '.TIF'],
                                  "label": "D"},
                     }
-select_and_scrape('lroc', file_information)
