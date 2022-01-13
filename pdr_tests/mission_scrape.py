@@ -5,6 +5,7 @@ import sh
 from pdr.formats import DATA_EXTENSIONS
 from importlib import import_module
 
+# TODO: output a metadata csv file for each product type.
 headers = {
     'User-Agent': 'MillionConcepts-PDART-pdrtestsuitespider (sierra@millionconcepts.com)'}
 
