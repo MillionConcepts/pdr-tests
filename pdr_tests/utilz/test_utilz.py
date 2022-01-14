@@ -19,7 +19,6 @@ from rasterio.errors import NotGeoreferencedWarning
 import pdr
 from pdr.pdr import decompress
 from pdr.utils import get_pds3_pointers, trim_label
-from pdr_tests.definitions.datasets import DATASET_TESTING_RULES
 
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
@@ -359,37 +358,13 @@ def make_pds3_row(local_path):
     return row
 
 
-def get_product_row(data_path, local_only, url):
-    local_path = Path(data_path, Path(url).name)
-    if not local_path.exists():
-        if local_only is True:
-            pdrtestlog.warning(f"{local_path} not here and local_only=True")
-            return {}
-        label_response = requests.get(url)
-        label_response.raise_for_status()
-        with open(local_path, "wb") as file:
-            file.write(label_response.content)
-    if local_path.suffix == ".xml":
-        row = make_pds4_row(local_path)
+def get_product_row(label_path, url):
+    if label_path.suffix == ".xml":
+        row = make_pds4_row(label_path)
     else:
-        row = make_pds3_row(local_path)
+        row = make_pds3_row(label_path)
     row["url_stem"] = os.path.dirname(url)
     return row
-
-
-def label_urls_to_test_index(label_urls, data_path=None, local_only=False):
-    """
-    warning: actually downloads labels if you let it --
-    and if they're attached labels, that might be a lot of downloading
-    """
-    if data_path is None:
-        data_path = Path(REF_ROOT, "temp", "index_label_cache")
-    if not data_path.exists():
-        os.makedirs(data_path)
-    rows = []
-    for url in label_urls:
-        rows.append(get_product_row(data_path, local_only, url))
-    return pd.DataFrame(rows)
 
 
 def regenerate_test_hashes(
@@ -459,3 +434,14 @@ def dump_test_browse(data, dataset, dump_args, mission):
         kwargs["scaled"] = "both"
     data.dump_browse(**kwargs)
 
+
+def split_node_manifest_line(line: str) -> tuple[str, str, int]:
+    # header row
+    if line.startswith("file_url"):
+        return "", "", 0
+    line_list = line.split(",")
+    size_value = line_list[1]
+    if size_value == "ErrorLogged":
+        return "", "", 0
+    # filename, url, size
+    return Path(line_list[0]).name, line_list[0], int(size_value)
