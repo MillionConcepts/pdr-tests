@@ -143,4 +143,5 @@ pdr_tests/reference/temp
 
 
 /pdr_tests/node_manifests/
-*_complete.csv
+*.parquet
+**/url_lists/

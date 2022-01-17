@@ -367,60 +367,7 @@ def get_product_row(label_path, url):
     return row
 
 
-def regenerate_test_hashes(
-    mission,
-    dataset,
-    dump_browse=False,
-    write=True,
-    dump_kwargs=None
-):
-    """
-    (re)generate test hashes for a specified mission and dataset defined in
-    pdr_tests.definitions.datasets.DATASET_TESTING_RULES. Doesn't care about
-    any other checks defined in those rules, and doesn't even care if "nohash"
-    is set in the rules; just hashes.
 
-    dump_browse: if True, also write browse products (by default write to
-    reference/temp/browse/mission/dataset/, although this can be overridden
-    by passing a different path in dump_kwargs
-
-    write: if False, do a 'dry run' -- don't write any hashes
-
-    dump_kwargs: kwargs for dump_browse
-    """
-    rules = DATASET_TESTING_RULES[mission][dataset]
-    products, references = find_test_paths(mission, dataset, rules)
-    if len(products) == 0:
-        pdrtestlog.warning(f"no products found for {mission} {dataset}")
-        return None
-    results = {}
-    for _, product in products.iterrows():
-        pdrtestlog.info(f"hashing {product['product_id']}")
-        results[product["product_id"]], data = check_product(
-            product, references, [just_hash]
-        )
-        pdrtestlog.info(f"hashed {product['product_id']}")
-        if dump_browse:
-            pdrtestlog.info(
-                f"dumping browse products for {product['product_id']}"
-            )
-            dump_test_browse(data, dataset, dump_kwargs, mission)
-            pdrtestlog.info(
-                f"dumped browse products for {product['product_id']}"
-            )
-    serial = {
-        product_id: json.dumps(hashes)
-        for product_id, hashes in results.items()
-    }
-    serialframe = pd.DataFrame.from_dict(serial, orient="index")
-    serialframe.columns = ["hashes"]
-    serialframe["product_id"] = serialframe.index
-    if write:
-        hash_path = Path(REF_ROOT, "temp", "hash", f"{mission}_{dataset}.csv")
-        os.makedirs(hash_path.parent, exist_ok=True)
-        # noinspection PyTypeChecker
-        serialframe.to_csv(hash_path, index=None)
-    return serialframe
 
 
 def dump_test_browse(data, dataset, dump_args, mission):
