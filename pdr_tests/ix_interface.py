@@ -1,38 +1,47 @@
-from pdr_tests.datasets import ProductPicker, IndexMaker, IndexDownloader
+from pdr_tests.datasets import (
+    ProductPicker,
+    IndexMaker,
+    IndexDownloader,
+    TestHasher,
+)
+
+COMMANDS = ["sort", "pick", "index", "download", "check"]
 
 
-COMMANDS = ["pl", "pick", "labels", "index", "download"]
-
-
-def pl(dataset):
+def sort(dataset, product_type=None):
     picker = ProductPicker(dataset)
-    picker.create_product_lists()
+    picker.make_product_list(product_type)
 
 
-def pick(dataset, product_type=None, *, subset_size: "s"=200, max_gb: "m"=8):
+def pick(
+    dataset, product_type=None, *, subset_size: "s" = 200, max_gb: "m" = 8
+):
     picker = ProductPicker(dataset)
-    if product_type is None:
-        picker.pick_randomly_from_all(subset_size, max_gb)
-    else:
-        picker.random_picks(product_type, subset_size, max_gb)
+    picker.random_picks(product_type, subset_size, max_gb)
 
 
-def index(dataset, product_type=None):
+def index(dataset, product_type=None, *, dry_run: "d" = False):
     indexer = IndexMaker(dataset)
-    if product_type is None:
-        indexer.get_all_labels()
-        indexer.write_indices()
-    else:
-        indexer.get_labels(product_type)
-        indexer.write_subset_index(product_type)
+    indexer.get_labels(product_type, dry_run)
+    if dry_run:
+        return
+    indexer.write_subset_index(product_type)
 
 
 def download(dataset, product_type=None):
     downloader = IndexDownloader(dataset)
-    if product_type is None:
-        downloader.download_indices()
-    else:
-        downloader.download_index(product_type)
+    downloader.download_index(product_type)
+
+
+def check(
+    dataset,
+    product_type=None,
+    *,
+    dump_browse: "d" = True,
+    dump_kwargs: "k" = None,
+):
+    hasher = TestHasher(dataset)
+    hasher.hash_product_type(product_type, dump_browse, dump_kwargs)
 
 
 def ix_help(*_, **__):

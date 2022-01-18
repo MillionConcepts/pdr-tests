@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 import numpy as np
 import pandas as pd
 import pvl
+import datetime as dt
 import requests
 from dustgoggles.func import disjoint, intersection
 from dustgoggles.pivot import pdstr
@@ -29,6 +30,16 @@ pdrtestlog.addHandler(logging.FileHandler("pdrtests.log"))
 pdrtestlog.setLevel("INFO")
 
 warnings.filterwarnings("ignore", category=NotGeoreferencedWarning)
+
+
+def stamp() -> str:
+    return f"{dt.datetime.utcnow().isoformat()[:-7]}: "
+
+
+def console_and_log(message, level="info", do_stamp=True):
+    stamp_txt = stamp() if do_stamp is True else ""
+    getattr(pdrtestlog, level)(f"{stamp_txt}{message}")
+    print(f"{stamp_txt}{message}")
 
 
 @cache
@@ -134,6 +145,7 @@ def make_hash_comparison(compare_hashes_to_reference: Callable):
     Intakes a function that defines problems, outputs internally defined\
     function hash_and_check.
     """
+
     def hash_and_check(data):
         """
         Intakes data and creates a hash for it. Hashes are compared to reference
@@ -278,15 +290,8 @@ def checksum_object(obj, hash_function=md5):
     return hasher.hexdigest()
 
 
-def check_product(product, references, checks, local_only=False):
-    try:
-        collect_files(product, references, local_only)
-    except OSError:
-        pdrtestlog.warning(
-            f"Some member of {product['files']} not present and I couldn't download it or something"
-        )
-        return None, None
-    data = pdr.read(str(Path(references["data"], product["label_file"])))
+def check_product(product, data_path, checks):
+    data = pdr.read(str(Path(data_path, product["label_file"])))
     check_results = []
     for check in checks:
         result = check(data)
@@ -359,36 +364,9 @@ def make_pds3_row(local_path):
 
 
 def get_product_row(label_path, url):
-    if label_path.suffix == ".xml":
+    if Path(label_path).suffix == ".xml":
         row = make_pds4_row(label_path)
     else:
         row = make_pds3_row(label_path)
     row["url_stem"] = os.path.dirname(url)
     return row
-
-
-
-
-
-def dump_test_browse(data, dataset, dump_args, mission):
-    kwargs = {} if dump_args is None else dump_args.copy()
-    if "outpath" not in kwargs.keys():
-        kwargs["outpath"] = Path(REF_ROOT, "temp", "browse", mission, dataset)
-    os.makedirs(kwargs["outpath"], exist_ok=True)
-    if "purge" not in kwargs.keys():
-        kwargs["purge"] = True
-    if "scaled" not in kwargs.keys():
-        kwargs["scaled"] = "both"
-    data.dump_browse(**kwargs)
-
-
-def split_node_manifest_line(line: str) -> tuple[str, str, int]:
-    # header row
-    if line.startswith("file_url"):
-        return "", "", 0
-    line_list = line.split(",")
-    size_value = line_list[1]
-    if size_value == "ErrorLogged":
-        return "", "", 0
-    # filename, url, size
-    return Path(line_list[0]).name, line_list[0], int(size_value)
