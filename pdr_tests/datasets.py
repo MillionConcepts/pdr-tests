@@ -111,13 +111,18 @@ class ProductPicker(DatasetDefinition):
         filts = []
         if "url_must_contain" in info.keys():
             for string in info["url_must_contain"]:
-                filts.append(("url", string))
-        for string in info["fn_must_contain"]:
-            filts.append(("filename", string))
-        for column, substring in filts:
-            table = table.filter(
-                pa.compute.match_substring(table[column], substring)
-            )
+                filts.append((pa.compute.match_substring, "url", string))
+        if "fn_ends_with" in info.keys():
+            ends = info["fn_ends_with"]
+            assert len(ends) == 1, "only one filename ending may be specified"
+            filts.append((flip_ends_with, "filename", ends[0]))
+        if "fn_must_contain" in info.keys():
+            for string in info["fn_must_contain"]:
+                filts.append((pa.compute.match_substring, "filename", string))
+        if len(filts) == 0:
+            raise ValueError("filters must be specified for product types.")
+        for method, column, substring in filts:
+            table = table.filter(method(table[column], substring))
         return table
 
     def random_picks(
@@ -193,12 +198,18 @@ class IndexMaker(DatasetDefinition):
 
     def load_subset_table(self, product_type: str, verbose: bool = True):
         subset = pd.read_csv(self.subset_list_path(product_type))
-        detached = self.rules[product_type]["label"] == "D"
+        detached = self.rules[product_type]["label"] != "A"
         if detached:
             # TODO: PDS4
-            subset["filename"] = subset["filename"].map(
-                lambda fn: Path(fn).with_suffix(".LBL")
-            )
+            label_rule = self.rules[product_type]["label"]
+            if isinstance(label_rule, tuple):
+                subset["filename"] = subset["filename"].str.replace(
+                    *label_rule, regex=False
+                )
+            else:
+                subset["filename"] = subset["filename"].map(
+                    lambda fn: Path(fn).with_suffix(".LBL").name
+                )
         subset["url"] = assemble_urls(subset)
         subset["path"] = subset["filename"].map(
             lambda fn: Path(self.product_data_path(product_type), fn)
@@ -217,6 +228,8 @@ class IndexMaker(DatasetDefinition):
         return subset
 
     def write_subset_index(self, product_type: str):
+        if product_type is None:
+            return self.across_all_types("write_subset_index")
         print(f"Writing index for {self.dataset} {product_type}")
         subset = self.load_subset_table(product_type, verbose=False)
         product_rows = []
@@ -344,7 +357,7 @@ def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
         console_and_log(f"Download of {url} failed.")
         return
     with open(Path(temp_path, Path(url).name), "wb+") as fp:
-        for chunk in response.iter_content(chunk_size=10**8):
+        for chunk in response.iter_content(chunk_size=10 ** 8):
             fp.write(chunk)
     sh.mv(Path(temp_path, Path(url).name), Path(data_path, Path(url).name))
     console_and_log(f"completed download of {url}.")
@@ -353,3 +366,7 @@ def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
 # noinspection HttpUrlsUsage
 def assemble_urls(subset: pd.DataFrame):
     return "http://" + subset.domain + "/" + subset.url + "/" + subset.filename
+
+
+def flip_ends_with(strings, ending):
+    return pa.compute.ends_with(strings, pattern=ending)
