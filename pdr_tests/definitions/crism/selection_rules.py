@@ -46,14 +46,14 @@ file_information = {
     },
     "DDR": {
         "manifest": GEO_MRO_FILE,
-        "fn_must_contain": [],
-        "url_must_contain": [],
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['/ddr/'],
         "label": "D",
     },
     "LDR": {
         "manifest": GEO_MRO_FILE,
-        "fn_must_contain": [],
-        "url_must_contain": [],
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['/ldr/'],
         "label": "D",
     },
     "TRDR": {
@@ -62,15 +62,10 @@ file_information = {
         "url_must_contain": ["/trdr/"],
         "label": "D",
     },
-    "ADR": {
-        "manifest": GEO_MRO_FILE,
-        "fn_must_contain": [],
-        "url_must_contain": [],
-        "label": "D",
-    },
     "MRDR": {
         "manifest": GEO_MRO_FILE,
-        "fn_must_contain": [],
+        "fn_must_contain": [".img"],
+        "url_must_contain": ['/mrdr/'],
         "label": "D",
     },
     "TER": {
@@ -81,7 +76,16 @@ file_information = {
     },
     "MTRDR": {
         "manifest": GEO_MRO_FILE,
-        "fn_must_contain": [],
+        "fn_must_contain": ['.img'],
+        'url_must_contain': ['/mtrdr'],
         "label": "D",
     },
+    'speclib': {'database': GEO_MRO_FILE,
+                'fn_must_contain': ['.tab'],
+                'url_must_contain': ['speclib-v1'],
+                'label': "A"},
+    'typespec': {'database': GEO_MRO_FILE,
+                 'fn_must_contain': ['.tab'],
+                 'url_must_contain': ['typespec-v1'],
+                 'label': 'D'},
 }
