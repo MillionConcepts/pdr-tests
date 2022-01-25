@@ -357,7 +357,7 @@ def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
         console_and_log(f"Download of {url} failed.")
         return
     with open(Path(temp_path, Path(url).name), "wb+") as fp:
-        for chunk in response.iter_content(chunk_size=10 ** 8):
+        for chunk in response.iter_content(chunk_size=10 ** 7):
             fp.write(chunk)
     sh.mv(Path(temp_path, Path(url).name), Path(data_path, Path(url).name))
     console_and_log(f"completed download of {url}.")
