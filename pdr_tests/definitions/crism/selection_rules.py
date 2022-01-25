@@ -36,7 +36,7 @@ file_information = {
     "EDR": {
         "manifest": GEO_MRO_FILE,
         "fn_must_contain": [".img"],
-        "url_must_contain": ["/edr/"],
+        "url_must_contain": ["edr"],
         "label": "D",
     },
     "CDR": {
