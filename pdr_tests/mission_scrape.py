@@ -32,7 +32,7 @@ class TempName:
                         url = line_list[0]
                         filename = url.split('/')[-1]
                         size = line_list[1]
-                        if int(size) != 0:
+                        if size != 'ErrorLogged' and int(size) != 0:
                             if all(val in filename for val in self.file_information[key]['fn_must_contain']) and \
                                     'thumbnail' not in filename.lower():
                                 try:

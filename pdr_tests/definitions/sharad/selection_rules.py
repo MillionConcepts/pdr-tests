@@ -30,23 +30,23 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquet")
+GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquets")
 
 file_information = {
     'EDR': {'database': GEO_MRO_FILE,
             "fn_must_contain": ['_s', '.dat'],
-            "url_must_contain": ['-edr-', '/data/'],
+            "url_must_contain": ['sharad', '-edr-', '/data/'],
             "label": "D"},
     'RDR': {'database': GEO_MRO_FILE,
             "fn_must_contain": ['.dat'],
-            "url_must_contain": ['/data/', '-rdr-'],
+            "url_must_contain": ['sharad', '/data/', '-rdr-'],
             "label": "D"},
     'rgram': {'database': GEO_MRO_FILE,
               'fn_must_contain': ['.img'],
-              'url_must_contain': ['/rgram/'],
+              'url_must_contain': ['sharad', '/rgram/'],
               "label": "D"},
     'geom': {'database': GEO_MRO_FILE,
              'fn_must_contain': ['.tab'],
-             'url_must_contain': ['/geom/'],
+             'url_must_contain': ['sharad', '/geom/'],
              "label": "D"},
 }
