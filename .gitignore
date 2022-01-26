@@ -140,8 +140,9 @@ dmypy.json
 # data files
 pdr_tests/data
 pdr_tests/reference/temp
-
+pdr_tests/browse
 
 /pdr_tests/node_manifests/
 *.parquet
 **/url_lists/
+pdr_tests/definitions/**/*.csv
