@@ -1,5 +1,5 @@
-filename, url
-EDRHK.fmt, https://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0002/label/edrhk.fmt
-TRDRHK.fmt, https://pds-geosciences.wustl.edu/mro/mro-m-crism-3-rdr-targeted-v1/mrocr_2101/label/trdrhk.fmt
-MRR_MAP.cat, https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-multispectral-v1/mrocr_3001/catalog/mrr_map.cat
-MTR_MAP.cat, https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-mptargeted-v1/mrocr_4001/catalog/mtr_map.cat
+filename,url
+EDRHK.fmt,https://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0002/label/edrhk.fmt
+TRDRHK.fmt,https://pds-geosciences.wustl.edu/mro/mro-m-crism-3-rdr-targeted-v1/mrocr_2101/label/trdrhk.fmt
+MRR_MAP.cat,https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-multispectral-v1/mrocr_3001/catalog/mrr_map.cat
+MTR_MAP.cat,https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-mptargeted-v1/mrocr_4001/catalog/mtr_map.cat
