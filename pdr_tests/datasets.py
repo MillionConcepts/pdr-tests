@@ -46,10 +46,10 @@ class DatasetDefinition:
         )
 
     def subset_list_path(self, product_type):
-        return Path(self.def_path, "url_lists", f"{product_type}_subset.csv")
+        return Path(self.def_path, "sample_lists", f"{product_type}_subset.csv")
 
     def shared_list_path(self, product_type):
-        return Path(self.def_path, "url_lists", f"{product_type}_shared.csv")
+        return Path(self.def_path, "shared_lists", f"{product_type}_shared.csv")
 
     def product_data_path(self, product_type):
         return Path(self.data_path, product_type)
@@ -261,10 +261,6 @@ class IndexDownloader(DatasetDefinition):
         temp_path = self.temp_data_path(product_type)
         os.makedirs(data_path, exist_ok=True)
         os.makedirs(temp_path, exist_ok=True)
-        index = pd.read_csv(Path(self.def_path, f"{product_type}.csv"))
-        for ix, row in index.iterrows():
-            console_and_log(f"Downloading product id: {row['product_id']}")
-            download_product_row(data_path, temp_path, row)
         if self.shared_list_path(product_type).exists():
             print(f"Checking shared files for {self.dataset} {product_type}.")
             shared_index = pd.read_csv(self.shared_list_path(product_type))
@@ -272,6 +268,10 @@ class IndexDownloader(DatasetDefinition):
                 verbose_temp_download(
                     data_path, temp_path, row["url"], skip_quietly=False
                 )
+        index = pd.read_csv(Path(self.index_path(product_type)))
+        for ix, row in index.iterrows():
+            console_and_log(f"Downloading product id: {row['product_id']}")
+            download_product_row(data_path, temp_path, row)
 
 
 class TestHasher(DatasetDefinition):
