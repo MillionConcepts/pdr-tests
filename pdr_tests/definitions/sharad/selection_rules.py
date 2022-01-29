@@ -33,19 +33,19 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquets")
 
 file_information = {
-    'EDR': {'database': GEO_MRO_FILE,
+    'EDR': {'manifest': GEO_MRO_FILE,
             "fn_must_contain": ['_s', '.dat'],
             "url_must_contain": ['sharad', '-edr-', '/data/'],
             "label": "D"},
-    'RDR': {'database': GEO_MRO_FILE,
+    'RDR': {'manifest': GEO_MRO_FILE,
             "fn_must_contain": ['.dat'],
             "url_must_contain": ['sharad', '/data/', '-rdr-'],
             "label": "D"},
-    'rgram': {'database': GEO_MRO_FILE,
+    'rgram': {'manifest': GEO_MRO_FILE,
               'fn_must_contain': ['.img'],
               'url_must_contain': ['sharad', '/rgram/'],
               "label": "D"},
-    'geom': {'database': GEO_MRO_FILE,
+    'geom': {'manifest': GEO_MRO_FILE,
              'fn_must_contain': ['.tab'],
              'url_must_contain': ['sharad', '/geom/'],
              "label": "D"},

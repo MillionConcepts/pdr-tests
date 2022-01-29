@@ -33,27 +33,27 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquet")
 
 file_information = {
-    'odf': {'database': GEO_MRO_FILE,
+    'odf': {'manifest': GEO_MRO_FILE,
             "fn_must_contain": ['.odf'],
             "url_must_contain": ['rss', '/odf/'],  # this is probably unnecessary, but it's here anyway
             "label": "D"},
-    'rsr': {'database': GEO_MRO_FILE,
+    'rsr': {'manifest': GEO_MRO_FILE,
             "fn_must_contain": ['.1a1'],
             "url_must_contain": ['rss', '/rsr/'],
             "label": "D"},
-    'tnf': {'database': GEO_MRO_FILE,
+    'tnf': {'manifest': GEO_MRO_FILE,
             'fn_must_contain': ['.tnf'],
             'url_must_contain': ['rss', '/tnf/'],  # same thing here
             "label": "D"},
-    'rsdmap': {'database': GEO_MRO_FILE,
+    'rsdmap': {'manifest': GEO_MRO_FILE,
                'fn_must_contain': ['.img'],
                'url_must_contain': ['rss', '/rsdmap/'],
                "label": "D"},
-    'shadr': {'database': GEO_MRO_FILE,
+    'shadr': {'manifest': GEO_MRO_FILE,
               'fn_must_contain': ['.tab'],
               'url_must_contain': ['rss', '/shadr/'],
               "label": "D"},
-    'shbdr': {'database': GEO_MRO_FILE,
+    'shbdr': {'manifest': GEO_MRO_FILE,
               'fn_must_contain': ['.dat'],
               'url_must_contain': ['rss', '/shbdr/'],
               "label": "D"},
