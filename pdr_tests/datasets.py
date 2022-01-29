@@ -205,6 +205,7 @@ class IndexMaker(DatasetDefinition):
             if isinstance(label_rule, tuple):
                 try:
                     regex = self.rules[product_type]["regex"]
+                    print(f'regex has been set to {regex} for {product_type}')
                 except KeyError:
                     regex = False
                 subset["filename"] = subset["filename"].str.replace(
