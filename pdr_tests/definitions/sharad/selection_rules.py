@@ -34,9 +34,9 @@ GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquet")
 
 file_information = {
     'EDR': {'manifest': GEO_MRO_FILE,
-            "fn_must_contain": ['_s', '.dat'],
+            "fn_must_contain": ['a_s', '.dat'],
             "url_must_contain": ['sharad', '-edr-', '/data/'],
-            "label": {"a_*.dat", "a.lbl"},
+            "label": ("a_..dat", "a.lbl"),
             "regex": True},
     'RDR': {'manifest': GEO_MRO_FILE,
             "fn_must_contain": ['.dat'],
