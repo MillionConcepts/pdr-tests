@@ -203,8 +203,12 @@ class IndexMaker(DatasetDefinition):
             # TODO: PDS4
             label_rule = self.rules[product_type]["label"]
             if isinstance(label_rule, tuple):
+                try:
+                    regex = self.rules[product_type]["regex"]
+                except KeyError:
+                    regex = False
                 subset["filename"] = subset["filename"].str.replace(
-                    *label_rule, regex=False
+                    *label_rule, regex
                 )
             else:
                 subset["filename"] = subset["filename"].map(
