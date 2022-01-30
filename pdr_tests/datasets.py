@@ -42,7 +42,7 @@ class DatasetDefinition:
 
     def complete_list_path(self, product_type):
         return Path(
-            self.def_path, "url_lists", f"{product_type}_complete.parquet"
+            self.def_path, "sample_lists", f"{product_type}_complete.parquet"
         )
 
     def subset_list_path(self, product_type):
@@ -87,7 +87,7 @@ class ProductPicker(DatasetDefinition):
     def make_product_list(self, product_type):
         if product_type is None:
             return self.across_all_types("make_product_list")
-        os.makedirs(self.complete_list_path("").parent, exist_ok=True)
+        os.makedirs(self.complete_list_path(product_type).parent, exist_ok=True)
         print(f"Making product list for {product_type} ...... ", end="")
         self.complete_list_path(product_type).unlink(missing_ok=True)
         manifest = self.rules[product_type]["manifest"]
