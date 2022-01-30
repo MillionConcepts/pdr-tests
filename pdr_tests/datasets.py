@@ -4,6 +4,8 @@ from importlib import import_module
 from pathlib import Path
 
 import numpy as np
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 import pyarrow as pa
 import requests
