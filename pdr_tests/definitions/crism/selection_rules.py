@@ -88,5 +88,5 @@ file_information = {
     'typespec': {'manifest': GEO_MRO_FILE,
                  'fn_must_contain': ['.tab'],
                  'url_must_contain': ['crism', 'typespec-v1'],
-                 'label': 'D'},
+                 'label': 'A'},
 }
