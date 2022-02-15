@@ -10,6 +10,7 @@ import requests
 import sh
 from pyarrow import parquet
 
+from pdr.utils import check_cases
 from pdr_tests.utilz.test_utilz import (
     get_product_row,
     just_hash,
@@ -355,12 +356,15 @@ def download_product_row(data_path, temp_path, row):
 # TODO / note: this is yet one more download
 #  thing that we should somehow unify and consolidate
 def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
-    if Path(data_path, Path(url).name).exists():
+    try:
+        check_cases(Path(data_path, Path(url).name))
         if skip_quietly is False:
             console_and_log(
                 f"{Path(url).name} already present, skipping download."
             )
         return
+    except FileNotFoundError:
+        pass
     console_and_log(f"attempting to download {url}.")
     response = requests.get(url, stream=True, headers=headers)
     if not response.ok:
