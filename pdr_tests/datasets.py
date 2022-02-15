@@ -119,6 +119,11 @@ class ProductPicker(DatasetDefinition):
         if "fn_must_contain" in info.keys():
             for string in info["fn_must_contain"]:
                 filts.append((pa.compute.match_substring, "filename", string))
+        if "fn_regex" in info.keys():
+            for string in info["fn_regex"]:
+                filts.append(
+                    (pa.compute.match_substring_regex, "filename", string)
+                )
         if len(filts) == 0:
             raise ValueError("filters must be specified for product types.")
         for method, column, substring in filts:
