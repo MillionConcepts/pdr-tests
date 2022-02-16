@@ -92,64 +92,64 @@ file_information = {
         "url_must_contain": ["msl-m-chemin-4-rdr-v1"],
         "label": "D",
     },
-    # "CCD_FRAME": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*ecc.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "DIFFRACTION_SINGLE": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*ed1.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "DIFFRACTION_SPLIT": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*eds.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "DIFFRACTION_ALL": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*eda.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "ENERGY_ALL": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*eea.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "ENERGY_SINGLE": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*ee1.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "ENERGY_SPLIT": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*ees.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "FILM": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*efm.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "HOUSEKEEPING": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*ehk.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
-    # "TRANSMIT_RAW": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*etr.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D"
-    # }
+    "CCD_FRAME": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*ecc.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "DIFFRACTION_SINGLE": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*ed1.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "DIFFRACTION_SPLIT": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*eds.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "DIFFRACTION_ALL": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*eda.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "ENERGY_ALL": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*eea.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "ENERGY_SINGLE": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*ee1.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "ENERGY_SPLIT": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*ees.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "FILM": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*efm.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "HOUSEKEEPING": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*ehk.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+    },
+    "TRANSMIT_RAW": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*etr.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D"
+    }
 }
