@@ -23,7 +23,6 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-from itertools import product
 from pathlib import Path
 
 import pdr_tests
@@ -31,41 +30,48 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .parquet files
-IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl_navcam.parquet")
+IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl_mastcam.parquet")
 
 base = {
     "manifest": IMG_FILE,
-    # note: "DATA_V1" is not an older version, but data from
-    # the first 2000 sols -- make sure not to filter it out
-    "url_must_contain": ["MSLNAV_1XXX/DATA"],
+    "url_must_contain": ["/RDR/"],
     "label": "D",
 }
 
-
+# see table below
 ptypes = (
- 'ARM', 'ARP', 'DFF', 'DSP', 'DSR', 'ILT', 'MDS',
- 'MXY', 'RAD', 'RAS', 'RNE', 'RNG', 'RNR', 'RUD',
- 'RUT', 'SHD', 'SLP', 'SMG', 'SNT', 'SRD', 'UVS', 'UVW',
- 'XYE', 'XYM', 'XYR', 'XYZ'
+    'B', 'C', 'D', 'E', 'F', 'H', 'I', 'K', 'L', 'M', 'Q', 'R', 'T'
 )
-samps = ("D", "F", "S", "T")
 
-# see: MSL Camera SIS, pp. 88+
-file_information = {"ANAGLYPH": base | {"fn_regex": [r"NA.*"]}}
-for ptype, samp in product(ptypes, samps):
-    info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}"]}
-    file_information[f"{ptype}_{samp}"] = info
+file_information = {}
+for ptype in ptypes:
+    # caution: f-string + regex overload curly braces, and f-string wins
+    info = base | {"fn_regex": ["^.{22}" + ptype + r".*\.IMG"]}
+    file_information[ptype] = info
 
-# range maps persistently reference this: don't know where it is
-SKIP_FILES = ["MIPL_ERROR_METHODS.TXT"]
+"""
+product type codes (not all exist in RDR archive)
+see MMM Camera SIS (pp. 23-24)
 
-
-# identified as bad in testing (apparently a write underrun):
-# NRA_404684268DFF_F0050104NCAM00107M1.IMG
-
-# scaling behavior is a little inconsistent within some of the engineering
-# maps because of label inconsistencies -- ARP maps for instance
-# sometimes list 0 as a missing/invalid constant and sometimes, not
-# but are almost always valued _only_ 0 and some other number --
-# how to handle situations like this is unclear at the moment
-
+A Raster 16 bit image
+B Raster 8 bit image
+C Losslessly compressed raster 8 bit image
+D JPEG grayscale image
+E JPEG 422 image
+F JPEG 444 image
+G Raster 8 bit thumbnail
+H JPEG grayscale thumbnail
+I JPEG 444 thumbnail
+J Raster 8 bit video
+K Losslessly compressed raster 8 bit video
+L JPEG grayscale video
+M JPEG 422 video
+N JPEG 444 video
+O Raster 8 bit video thumbnail
+P JPEG grayscale video thumbnail
+Q JPEG 444 video thumbnail
+R JPEG 444 focus merge image
+S JPEG grayscale range map image
+T JPEG 444 focus merge thumbnail
+U JPEG grayscale range map thumbnail
+"""

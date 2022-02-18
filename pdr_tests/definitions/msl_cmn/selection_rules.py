@@ -7,9 +7,9 @@ pdr-tests: index files, data downloads, etc.
 These selection rules are ideally for the _largest individual file_ of each
 product (which in some cases will be the only file; lucky you, if so).
 
-manifest: the .csv file that contains urls, file sizes, etc., scraped directly
+manifest: the .parquet file that contains urls, file sizes, etc., scraped directly
 from the hosting institution for this product type. for some data sets, all
-urls will be found in the same .csv file; for others, they may be split
+urls will be found in the same .parquet file; for others, they may be split
 between nodes or scraping sessions.
 
 fn_must_contain: a list of strings that must be in the file name (not counting
