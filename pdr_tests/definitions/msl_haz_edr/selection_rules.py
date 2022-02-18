@@ -23,7 +23,7 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-
+from itertools import product
 from pathlib import Path
 
 import pdr_tests
@@ -37,22 +37,23 @@ IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl.parquet")
 # categories, but no examples of them are actually present in the online
 # archive.
 
-
-from itertools import product
-
-
 base = {
         "manifest": IMG_FILE,
-        "url_must_contain": ["MSLHAZ_0XXX"],
+        "url_must_contain": ["MSLHAZ_0XXX/DATA"],
         "label": "D",
     }
 
+# see: MSL Camera SIS, pp. 88+
 file_information = {}
-for inst, ptype, samp in product(
-    ("[LR]", "A", "S"),
+for ptype, samp in product(
     ("EDR", "ERP"),
-    ("F", "S", "D", "M")
+    ("F", "S", "D", "T")
 ):
-    pattern = f"{inst}.*{ptype}_{samp}.*"
+    if (ptype == "ERP") and (samp != "S"):
+        continue
+    # underscore between ptype and samp because these are never linearized (I think)
+    pattern = f"[FR][LR].*{ptype}_{samp}.*"
     info = base | {"fn_regex": [pattern]}
-    file_information[pattern] = info
+    file_information[
+        f"{ptype}_{samp}"
+    ] = info
