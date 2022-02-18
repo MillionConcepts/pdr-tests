@@ -258,6 +258,11 @@ class IndexMaker(DatasetDefinition):
 class IndexDownloader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
+        rules_module = import_module(f"definitions.{name}.selection_rules")
+        if hasattr(rules_module, "SKIP_FILES"):
+            self.skip_files = getattr(rules_module, "SKIP_FILES")
+        else:
+            self.skip_files = ()
 
     def download_index(self, product_type: str):
         if product_type is None:
@@ -277,7 +282,7 @@ class IndexDownloader(DatasetDefinition):
         index = pd.read_csv(Path(self.index_path(product_type)))
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
-            download_product_row(data_path, temp_path, row)
+            download_product_row(data_path, temp_path, row, self.skip_files)
 
 
 class TestHasher(DatasetDefinition):
@@ -343,11 +348,13 @@ class TestHasher(DatasetDefinition):
         data.dump_browse(**kwargs)
 
 
-def download_product_row(data_path, temp_path, row):
+def download_product_row(data_path, temp_path, row, skip_files=()):
     files = json.loads(row["files"])
     for file in files:
         if Path(data_path, file).exists():
             console_and_log(f"... {file} present, skipping ...")
+            continue
+        if any((file == skip_file for skip_file in skip_files)):
             continue
         url = f"{row['url_stem']}/{file}"
         verbose_temp_download(data_path, temp_path, url)
