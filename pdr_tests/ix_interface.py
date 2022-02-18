@@ -1,3 +1,6 @@
+from ast import literal_eval
+from types import MappingProxyType
+
 from pdr_tests.datasets import (
     ProductPicker,
     IndexMaker,
@@ -40,8 +43,10 @@ def check(
     dump_browse: "d" = True,
     dump_kwargs: "k" = None,
 ):
+    if dump_kwargs is not None:
+        dump_kwargs = literal_eval(dump_kwargs)
     hasher = TestHasher(dataset)
-    hasher.hash_product_type(product_type, dump_browse, dump_kwargs)
+    hasher.hash_product_type(product_type, dump_browse, True, dump_kwargs)
 
 
 def ix_help(*_, **__):
