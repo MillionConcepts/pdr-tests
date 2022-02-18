@@ -101,7 +101,12 @@ class ProductPicker(DatasetDefinition):
                 )
             )
         product_list_table = pa.concat_tables(results)
-        print(f"{len(product_list_table)} products found")
+        size_gb = round(
+            pa.compute.sum(product_list_table["size"]).as_py() / 10**9, 2
+        )
+        print(
+            f"{len(product_list_table)} products found, {size_gb} estimated GB"
+        )
         parquet.write_table(
             product_list_table,
             self.complete_list_path(product_type),
