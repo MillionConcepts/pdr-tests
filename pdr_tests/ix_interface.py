@@ -58,6 +58,7 @@ def index_directory(
     from pathlib import Path
     import pandas as pd
     from pyarrow import parquet
+    from pdr_tests.datasets import assemble_urls
     from pdr_tests.utilz.test_utilz import console_and_log, get_product_row
     product_rows = []
     for file in Path(target).iterdir():
@@ -67,7 +68,7 @@ def index_directory(
             )
             assert len(match) == 1, f"{file.name} not found in manifest"
             match = match.to_pandas().iloc[0]
-            row = get_product_row(file, f"{match['domain']}/{match['url']}")
+            row = get_product_row(file, assemble_urls(match))
             product_rows.append(row)
         except KeyboardInterrupt:
             raise
