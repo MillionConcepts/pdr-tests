@@ -1,0 +1,8 @@
+filename,url
+chmn_edr_ccd_header_frame.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-chemin-2-edr-v1/mslcmn_0xxx/label/chmn_edr_ccd_header_frame.fmt
+chmn_edr_housekeeping.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-chemin-2-edr-v1/mslcmn_0xxx/label/chmn_edr_housekeeping.fmt
+chmn_edr_hsk_n_header.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-chemin-2-edr-v1/mslcmn_0xxx/label/chmn_edr_hsk_n_header.fmt
+chmn_edr_transmit_raw.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-chemin-2-edr-v1/mslcmn_0xxx/label/chmn_edr_transmit_raw.fmt
+chemin_min.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-chemin-4-rdr-v1/mslcmn_1xxx/label/chemin_min.fmt
+chemin_edh.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-chemin-4-rdr-v1/mslcmn_1xxx/label/chemin_edh.fmt
+chemin_xrd.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-chemin-4-rdr-v1/mslcmn_1xxx/label/chemin_xrd.fmt

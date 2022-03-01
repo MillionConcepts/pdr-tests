@@ -1,0 +1,5 @@
+filename,url
+apxs_edr_cwa_header.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-apxs-2-edr-v1/mslapx_0xxx/label/apxs_edr_cwa_header.fmt
+apxs_edr_engineering.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-apxs-2-edr-v1/mslapx_0xxx/label/apxs_edr_engineering.fmt
+apxs_edr_science.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-apxs-2-edr-v1/mslapx_0xxx/label/apxs_edr_science.fmt
+apxs_edr_sci_header.fmt,https://pds-geosciences.wustl.edu/msl/msl-m-apxs-2-edr-v1/mslapx_0xxx/label/apxs_edr_sci_header.fmt

@@ -10,6 +10,7 @@ import requests
 import sh
 from pyarrow import parquet
 
+from pdr.utils import check_cases
 from pdr_tests.utilz.test_utilz import (
     get_product_row,
     just_hash,
@@ -100,7 +101,12 @@ class ProductPicker(DatasetDefinition):
                 )
             )
         product_list_table = pa.concat_tables(results)
-        print(f"{len(product_list_table)} products found")
+        size_gb = round(
+            pa.compute.sum(product_list_table["size"]).as_py() / 10**9, 2
+        )
+        print(
+            f"{len(product_list_table)} products found, {size_gb} estimated GB"
+        )
         parquet.write_table(
             product_list_table,
             self.complete_list_path(product_type),
@@ -119,6 +125,11 @@ class ProductPicker(DatasetDefinition):
         if "fn_must_contain" in info.keys():
             for string in info["fn_must_contain"]:
                 filts.append((pa.compute.match_substring, "filename", string))
+        if "fn_regex" in info.keys():
+            for string in info["fn_regex"]:
+                filts.append(
+                    (pa.compute.match_substring_regex, "filename", string)
+                )
         if len(filts) == 0:
             raise ValueError("filters must be specified for product types.")
         for method, column, substring in filts:
@@ -252,6 +263,11 @@ class IndexMaker(DatasetDefinition):
 class IndexDownloader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
+        rules_module = import_module(f"definitions.{name}.selection_rules")
+        if hasattr(rules_module, "SKIP_FILES"):
+            self.skip_files = getattr(rules_module, "SKIP_FILES")
+        else:
+            self.skip_files = ()
 
     def download_index(self, product_type: str):
         if product_type is None:
@@ -271,7 +287,7 @@ class IndexDownloader(DatasetDefinition):
         index = pd.read_csv(Path(self.index_path(product_type)))
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
-            download_product_row(data_path, temp_path, row)
+            download_product_row(data_path, temp_path, row, self.skip_files)
 
 
 class TestHasher(DatasetDefinition):
@@ -337,11 +353,13 @@ class TestHasher(DatasetDefinition):
         data.dump_browse(**kwargs)
 
 
-def download_product_row(data_path, temp_path, row):
+def download_product_row(data_path, temp_path, row, skip_files=()):
     files = json.loads(row["files"])
     for file in files:
         if Path(data_path, file).exists():
             console_and_log(f"... {file} present, skipping ...")
+            continue
+        if any((file == skip_file for skip_file in skip_files)):
             continue
         url = f"{row['url_stem']}/{file}"
         verbose_temp_download(data_path, temp_path, url)
@@ -350,12 +368,15 @@ def download_product_row(data_path, temp_path, row):
 # TODO / note: this is yet one more download
 #  thing that we should somehow unify and consolidate
 def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
-    if Path(data_path, Path(url).name).exists():
+    try:
+        check_cases(Path(data_path, Path(url).name))
         if skip_quietly is False:
             console_and_log(
                 f"{Path(url).name} already present, skipping download."
             )
         return
+    except FileNotFoundError:
+        pass
     console_and_log(f"attempting to download {url}.")
     response = requests.get(url, stream=True, headers=headers)
     if not response.ok:
