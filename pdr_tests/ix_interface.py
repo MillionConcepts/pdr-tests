@@ -65,9 +65,10 @@ def index_directory(
             match = parquet.read_table(
                 manifest, filters=[("filename", "=", file.name)]
             )
-            assert len(match) == 1
-            url = match['url'].to_numpy()[0]
-            product_rows.append(get_product_row(file, url))
+            assert len(match) == 1, f"{file.name} not found in manifest"
+            match = match.to_pandas().iloc[0]
+            row = get_product_row(file, f"{match['domain']}/{match['url']}")
+            product_rows.append(row)
         except KeyboardInterrupt:
             raise
         except Exception as ex:
