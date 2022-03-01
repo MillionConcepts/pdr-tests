@@ -370,4 +370,3 @@ def get_product_row(label_path, url):
         row = make_pds3_row(label_path)
     row["url_stem"] = os.path.dirname(url)
     return row
-
