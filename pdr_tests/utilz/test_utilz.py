@@ -1,26 +1,27 @@
+import datetime as dt
 import json
 import logging
 import os
+import warnings
+import xml.etree.ElementTree as ET
 from functools import cache
 from hashlib import md5
 from pathlib import Path
-from typing import Callable, Mapping, Sequence
-import warnings
-import xml.etree.ElementTree as ET
+from typing import Mapping, Sequence
 
 import numpy as np
 import pandas as pd
 import pvl
-import datetime as dt
+import pyarrow as pa
 import requests
+import sh
 from dustgoggles.func import disjoint, intersection
-from dustgoggles.pivot import pdstr
 from rasterio.errors import NotGeoreferencedWarning
 
 import pdr
 from pdr.pdr import decompress
-from pdr.utils import get_pds3_pointers, trim_label
-
+from pdr.utils import get_pds3_pointers, trim_label, check_cases
+from pdr_tests.settings import headers
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
@@ -48,231 +49,6 @@ def read_csv_cached(fn: str, *args, **kwargs) -> pd.DataFrame:
     return pd.read_csv(fn, *args, **kwargs)
 
 
-def record_mismatches(results, absent, novel):
-    """Assigns strings of "missing from output" and "not found in reference" to
-    the value of the missing and new keys in the results dictionary."""
-    for key in absent:
-        results[key] = "missing from output"
-    for key in novel:
-        results[key] = "not found in reference"
-    return results
-
-
-def make_hash_reference(hash_path: str) -> Callable[[str, Mapping], dict]:
-    """
-    Intakes the directory path for the hash csv file.
-    Returns the 'compare_hashes' function defined within.
-    """
-    reference_hash_table = read_csv_cached(hash_path)
-    reference_hash_table.index = reference_hash_table["product_id"]
-
-    def compare_hashes(product_id: str, test_hashes: Mapping):
-        """
-        Loads in reference hash table handed to it by make_hash_reference.
-        Looks for new (in test_hashes not in references) or missing hashes (in
-        reference, not in test_hashes) in test_hashes that do not appear in
-        the reference hash table. These missing/new hashes are returned as a
-        dictionary called problems.
-        """
-        reference_hashes = json.loads(
-            reference_hash_table.loc[product_id]["hashes"]
-        )[0]
-        problems = {}
-        missing_keys, new_keys = disjoint(reference_hashes, test_hashes)
-        # note keys that are completely new or missing
-        if len(new_keys + missing_keys):
-            problems |= record_mismatches(problems, missing_keys, new_keys)
-        # do comparisons between others
-        for key in intersection(test_hashes, reference_hashes):
-            if test_hashes[key] != reference_hashes[key]:
-                problems[key] = (
-                    f"mismatched hatches; test: "
-                    f"{test_hashes[key]}, reference: "
-                    f"{reference_hashes[key]}"
-                )
-        return problems
-
-    return compare_hashes
-
-
-def find_ref_paths(mission: str, dataset: str, rules: Mapping):
-    """
-    Intakes the mission, dataset, and rules (from dataset.py) and returns
-    the directory paths for the hash, index, shared .csv files and where the
-    data itself lives as a dictionary: ref_paths. If these csv files or data
-    directory don't exist they are created.
-    """
-    ref_paths = {}
-    for ref_type in ["hash", "index", "shared"]:
-        if ref_type in rules.keys():
-            stem = rules[ref_type]
-        # TODO: why am I making these defaults different? huh
-        else:
-            stem = {
-                "hash": f"{mission.lower()}_{dataset.lower()}.csv",
-                "index": f"{mission.lower()}.csv",
-                "shared": f"{mission.lower()}_{dataset.lower()}.csv",
-            }[ref_type]
-        ref_paths[ref_type] = str(Path(REF_ROOT, ref_type, stem))
-    ref_paths["data"] = Path(DATA_ROOT, mission, dataset)
-    if not ref_paths["data"].exists():
-        os.makedirs(ref_paths["data"])
-    ref_paths["local_contents"] = os.listdir(ref_paths["data"])
-    return ref_paths
-
-
-def filter_products(file_table, filt):
-    """
-    select only those products from a product index whose ids match a passed
-    predicate. predicates should map themselves across series. strings are
-    taken to be "product id contains".
-
-    this could be made _much_ more sophisticated; we could have a whole little
-    DSL here.
-    """
-    if isinstance(filt, Callable):
-        predicate = filt
-    else:
-        predicate = pdstr("contains", filt)
-    file_table = file_table.loc[
-        predicate(file_table["url_stem"] + file_table["label_file"])
-    ].reset_index(drop=True)
-    return file_table
-
-
-def make_hash_comparison(compare_hashes_to_reference: Callable):
-    """
-    Intakes a function that defines problems, outputs internally defined\
-    function hash_and_check.
-    """
-
-    def hash_and_check(data):
-        """
-        Intakes data and creates a hash for it. Hashes are compared to reference
-        hashes and any that don't match it raises a ValueError.
-        """
-        hashes = {key: checksum_object(data[key]) for key in data.keys()}
-        if "PRODUCT_ID" in data.LABEL.keys():
-            nominal_product_id = data.LABEL["PRODUCT_ID"]
-        else:
-            nominal_product_id = Path(data.filename).stem
-        problems = compare_hashes_to_reference(nominal_product_id, hashes)
-        # TODO: log this more usefully
-        if problems:
-            raise ValueError(problems)
-
-    return hash_and_check
-
-
-# TODO, maybe: special case handling would go somewhere in here as a wrapper,
-#  although it might be better dealt with by entirely separate
-#  lists or filters, to the extent it's necessary at all -- perhaps
-#  there's not even such a thing as a special case for testing because we
-#  expect them to always be appropriately handled upstream, and files that
-#  we know to be out of scope or corrupt are simply not placed in our testing
-#  indices
-def read_test_rules(
-    mission: str, dataset: str
-) -> tuple[pd.DataFrame, dict, Sequence[Callable]]:
-    """
-    Takes in a mission and dataset string. Reads through dataset_testing_rules
-    from datasets.py (which says which files are what kinds). Then creates a
-    list of functions called checks based on the preferences in the rules.
-    """
-    rules = DATASET_TESTING_RULES[mission][dataset]
-    products, references = find_test_paths(mission, dataset, rules)
-    checks = []
-    if "nohash" not in rules.keys():
-        hash_reference_checker = make_hash_reference(references["hash"])
-        checks.append(make_hash_comparison(hash_reference_checker))
-    if "extra_checks" in rules.keys():
-        checks += rules["extra_checks"]
-    return products, references, checks
-
-
-def find_test_paths(mission: str, dataset: str, rules: Mapping):
-    """
-    Intakes the mission and dataset as strings and the rules for which files to read as a dictionary.
-    It then reads in the index csv file as a pandas table (product_table) and filters it by the filter
-    (if present) in the rules dictionary. Outputs the filtered product table and reference file paths
-    (for the location of the reference csv files and the data itself).
-    """
-    ref_paths = find_ref_paths(mission, dataset, rules)
-    product_table = read_csv_cached(ref_paths["index"])
-    if "filter" in rules.keys():
-        product_table = filter_products(product_table, rules["filter"])
-    return product_table, ref_paths
-
-
-# TODO: this can eventually be have options to do something other
-#  than bang lists of urls...many options here. or we could just mount
-#  buckets w/s3fs for cloud testing. If we _do_ want to just bang lists of
-#  urls, maybe integrate with get function in pdr.__init__
-
-# TODO: decide if we actually want file discovery to work like this...it could
-#  plausibly be more productive to change flow to always infer from the
-#  label, or...idk. that's why i'm not consolidating with url lister for now
-
-
-def concatenate_url_list(absent, product, shared_file_table, shared_files):
-    """
-    If a file is not present, the filename is appended to the url stem
-    and added to a list of possible_urls as their online location.
-    """
-    possible_urls = []
-    for file in absent:
-        if file in shared_files:
-            possible_urls.append(
-                shared_file_table.loc[
-                    shared_file_table["filename"] == file
-                ].iloc[0]["url"]
-            )
-        else:
-            possible_urls.append(f"{product['url_stem']}/{file}")
-    return possible_urls
-
-
-def perform_test_download(url, references):
-    response = requests.get(url)
-    if response.status_code == 404:
-        pdrtestlog.warning(f"404 result on {url}")
-        response = requests.get(url.lower())
-        if response.status_code == 404:
-            pdrtestlog.warning(f"404 result on {url}")
-            return
-    try:
-        with open(
-            Path(references["data"], Path(url).name), "wb"
-        ) as local_file:
-            local_file.write(response.content)
-    except requests.exceptions.RequestException as e:
-        pdrtestlog.warning(e)
-        return
-
-
-def collect_files(product, references, local_only=False):
-    """Attempts a test download of missing files if any and if not local_only."""
-    files = json.loads(product["files"])
-    absent = [
-        file for file in files if file not in references["local_contents"]
-    ]
-    if absent and local_only:
-        raise OSError(f"not allowed to download absent files {absent}")
-    if not absent:
-        return
-    if Path(references["shared"]).exists():
-        shared_file_table = read_csv_cached(Path(references["shared"]))
-        shared_files = shared_file_table["filename"].values
-    else:
-        shared_file_table = []
-        shared_files = []
-    possible_urls = concatenate_url_list(
-        absent, product, shared_file_table, shared_files
-    )
-    for url in possible_urls:
-        perform_test_download(url, references)
-
-
 def checksum_object(obj, hash_function=md5):
     """
     make stable byte array from python object. the general case of this is,
@@ -290,16 +66,6 @@ def checksum_object(obj, hash_function=md5):
     return hasher.hexdigest()
 
 
-def check_product(product, data_path, checks):
-    data = pdr.read(str(Path(data_path, product["label_file"])))
-    check_results = []
-    for check in checks:
-        result = check(data)
-        if result is not None:
-            check_results.append(check(data))
-    return check_results, data
-
-
 def just_hash(data):
     hashes = {}
     for key in data.keys():
@@ -309,22 +75,6 @@ def just_hash(data):
             continue
         hashes[key] = checksum_object(data[key])
     return hashes
-
-
-def perform_dataset_test(mission: str, dataset: str, local_only=False):
-    products, references, checks = read_test_rules(mission, dataset)
-    results = {}
-    for _, product in products.iterrows():
-        test_results, __ = check_product(
-            product, references, checks, local_only
-        )
-        if not test_results:
-            result_message = "successful"
-        else:
-            result_message = str(test_results)
-        pdrtestlog.info(f"{product['product_id']}: {result_message}")
-        results[product["product_id"]] = test_results
-    return results
 
 
 def get_nodelist(xmlfile):
@@ -377,3 +127,97 @@ def get_product_row(label_path, url):
         row = make_pds3_row(label_path)
     row["url_stem"] = os.path.dirname(url)
     return row
+
+
+def download_product_row(data_path, temp_path, row, skip_files=()):
+    files = json.loads(row["files"])
+    for file in files:
+        if Path(data_path, file).exists():
+            console_and_log(f"... {file} present, skipping ...")
+            continue
+        if any((file == skip_file for skip_file in skip_files)):
+            continue
+        url = f"{row['url_stem']}/{file}"
+        verbose_temp_download(data_path, temp_path, url)
+
+
+# TODO / note: this is yet one more download
+#  thing that we should somehow unify and consolidate
+def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
+    try:
+        check_cases(Path(data_path, Path(url).name))
+        if skip_quietly is False:
+            console_and_log(
+                f"{Path(url).name} already present, skipping download."
+            )
+        return
+    except FileNotFoundError:
+        pass
+    console_and_log(f"attempting to download {url}.")
+    response = requests.get(url, stream=True, headers=headers)
+    if not response.ok:
+        console_and_log(f"Download of {url} failed.")
+        return
+    with open(Path(temp_path, Path(url).name), "wb+") as fp:
+        for chunk in response.iter_content(chunk_size=10**7):
+            fp.write(chunk)
+    sh.mv(Path(temp_path, Path(url).name), Path(data_path, Path(url).name))
+    console_and_log(f"completed download of {url}.")
+
+
+# noinspection HttpUrlsUsage
+def assemble_urls(subset: pd.DataFrame):
+    return "http://" + subset.domain + "/" + subset.url + "/" + subset.filename
+
+
+def record_mismatches(results, absent, novel):
+    """Assigns strings of "missing from output" and "not found in reference" to
+    the value of the missing and new keys in the results dictionary."""
+    for key in absent:
+        results[key] = "missing from output"
+    for key in novel:
+        results[key] = "not found in reference"
+    return results
+
+
+def compare_hashes(
+    test: Mapping[str, str], reference: Mapping[str, str]
+) -> Mapping[str, str]:
+    """
+    Compares two mappings, notionally from object name to hashed value of
+    object.
+
+    Returns a dictionary containing new keys, missing keys, and keys with
+    mismatched hash values.
+    """
+    problems = {}
+    new_keys, missing_keys = disjoint(test, reference)
+    # note keys that are completely new or missing
+    if len(new_keys + missing_keys):
+        problems |= record_mismatches(problems, missing_keys, new_keys)
+    # do comparisons between others
+    for key in intersection(test, reference):
+        if test[key] != reference[key]:
+            problems[
+                key
+            ] = f"hashes !=; test: {test[key]}; reference: {reference[key]}"
+    return problems
+
+
+def flip_ends_with(strings, ending):
+    return pa.compute.ends_with(strings, pattern=ending)
+
+
+def read_and_hash(log_row, path, product, debug):
+    data = pdr.read(str(path), debug=debug)
+    hashes = just_hash(data)
+    console_and_log(f"Opened and hashed {product['product_id']}")
+    return data, hashes, log_row
+
+
+def record_comparison(test, reference, log_row):
+    result = compare_hashes(test, reference)
+    if result != {}:
+        log_row["status"] = "hash mismatch"
+        log_row["error"] = str(result)
+    return log_row

@@ -1,3 +1,5 @@
+"""handler functions and classes for ix workflow"""
+
 import json
 import os
 from importlib import import_module
@@ -7,34 +9,31 @@ from typing import Mapping, Optional
 import numpy as np
 import pandas as pd
 import pyarrow as pa
-import requests
-import sh
-from dustgoggles.func import disjoint, intersection
 from pyarrow import parquet
 
 import pdr
-from pdr.utils import check_cases
 from pdr_tests.utilz.test_utilz import (
     get_product_row,
-    just_hash,
     console_and_log,
-    check_product, stamp,
+    stamp,
+    download_product_row,
+    verbose_temp_download,
+    assemble_urls,
+    flip_ends_with,
+    read_and_hash,
+    record_comparison,
 )
 
-# TODO: I'm inclined not to hardcode this...but not sure. --michael
 
-headers = {
-    "User-Agent": "MillionConcepts-PDART-pdrtestsuitespider (sierra@millionconcepts.com)"
-}
-
-PARQUET_SETTINGS = {
-    "row_group_size": 100000,
-    "version": "2.6",
-    "use_dictionary": ["domain", "url", "size"],
-}
+# ############ INDEX & TESTING CLASSES #############
 
 
 class DatasetDefinition:
+    """
+    base class for this module. defines and encapsulates references / directory
+    structure for the ix workflow.
+    """
+
     def __init__(self, name):
         rules_module = import_module(f"definitions.{name}.selection_rules")
         self.rules = getattr(rules_module, "file_information")
@@ -50,10 +49,14 @@ class DatasetDefinition:
         )
 
     def subset_list_path(self, product_type):
-        return Path(self.def_path, "sample_lists", f"{product_type}_subset.csv")
+        return Path(
+            self.def_path, "sample_lists", f"{product_type}_subset.csv"
+        )
 
     def shared_list_path(self):
-        return Path(self.def_path, "shared_lists", f"{self.dataset}_shared.csv")
+        return Path(
+            self.def_path, "shared_lists", f"{self.dataset}_shared.csv"
+        )
 
     def product_data_path(self, product_type):
         return Path(self.data_path, product_type)
@@ -86,12 +89,13 @@ class ProductPicker(DatasetDefinition):
     # TODO, maybe: it is possibly time-inefficient to iterate through
     #  the manifest a bunch of times, although it's very
     #  memory-efficient. idk. it might not be as bad as i think,
-    #  though, unless we did clever segmentation of results on
-    #  each group.
+    #  though, unless we did clever segmentation of results on each group.
     def make_product_list(self, product_type):
         if product_type is None:
             return self.across_all_types("make_product_list")
-        os.makedirs(self.complete_list_path(product_type).parent, exist_ok=True)
+        os.makedirs(
+            self.complete_list_path(product_type).parent, exist_ok=True
+        )
         print(f"Making product list for {product_type} ...... ", end="")
         self.complete_list_path(product_type).unlink(missing_ok=True)
         manifest = self.rules[product_type]["manifest"]
@@ -103,17 +107,11 @@ class ProductPicker(DatasetDefinition):
                     product_type, manifest_parquet.read_row_group(group_ix)
                 )
             )
-        product_list_table = pa.concat_tables(results)
-        size_gb = round(
-            pa.compute.sum(product_list_table["size"]).as_py() / 10**9, 2
-        )
-        print(
-            f"{len(product_list_table)} products found, {size_gb} estimated GB"
-        )
-        parquet.write_table(
-            product_list_table,
-            self.complete_list_path(product_type),
-        )
+        products = pa.concat_tables(results)
+        size_gb = round(pa.compute.sum(products["size"]).as_py() / 10**9, 2)
+        # TODO: this estimate is bad for products with several large files
+        print(f"{len(products)} products found, {size_gb} estimated GB")
+        parquet.write_table(products, self.complete_list_path(product_type))
 
     def filter_table(self, product_type, table):
         info = self.rules[product_type]
@@ -151,7 +149,7 @@ class ProductPicker(DatasetDefinition):
             f"picking test subset for {self.dataset} {product_type} ...... ",
             end="",
         )
-        max_bytes = max_gb * 10 ** 9
+        max_bytes = max_gb * 10**9
         complete = self.complete_list_path(product_type)
         subset = self.subset_list_path(product_type)
         total = parquet.read_metadata(complete).num_rows
@@ -160,7 +158,6 @@ class ProductPicker(DatasetDefinition):
             small_enough = parquet.read_table(
                 complete, filters=[("size", "<", max_bytes)]
             )
-
             print(
                 f"{total} products; {len(small_enough)}/{total} < {max_gb} GB "
                 f"cutoff; taking all {len(small_enough)}"
@@ -177,8 +174,7 @@ class ProductPicker(DatasetDefinition):
             f"cutoff; randomly picking {subset_size}"
         )
         # TODO: this is not very clever
-        ix_base = 0
-        picks = []
+        ix_base, picks = 0, []
         complete_parquet = parquet.ParquetFile(complete)
         for group_ix in range(complete_parquet.num_row_groups):
             group = complete_parquet.read_row_group(group_ix)
@@ -219,7 +215,10 @@ class IndexMaker(DatasetDefinition):
             if isinstance(label_rule, tuple):
                 try:
                     regex = self.rules[product_type]["regex"]
-                    print(f'regex has been set to {regex} for {product_type} label replacement rules.')
+                    print(
+                        f"regex has been set to {regex} for {product_type} "
+                        f"label replacement rules."
+                    )
                 except KeyError:
                     regex = False
                 subset["filename"] = subset["filename"].str.replace(
@@ -238,7 +237,7 @@ class IndexMaker(DatasetDefinition):
             if detached:
                 size_message = "detached labels; "
             else:
-                size = round(subset.loc[~present]["size"].sum() / 10 ** 9, 1)
+                size = round(subset.loc[~present]["size"].sum() / 10**9, 1)
                 size_message = f"attached labels; total download ~{size} GB"
             print(
                 f"{len(subset)} labels; "
@@ -267,10 +266,9 @@ class IndexDownloader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
         rules_module = import_module(f"definitions.{name}.selection_rules")
+        self.skip_files = ()
         if hasattr(rules_module, "SKIP_FILES"):
             self.skip_files = getattr(rules_module, "SKIP_FILES")
-        else:
-            self.skip_files = ()
 
     def download_index(self, product_type: str, get_test: bool = False):
         if product_type is None:
@@ -279,8 +277,7 @@ class IndexDownloader(DatasetDefinition):
         console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
         data_path = self.product_data_path(product_type)
         temp_path = self.temp_data_path(product_type)
-        os.makedirs(data_path, exist_ok=True)
-        os.makedirs(temp_path, exist_ok=True)
+        self.data_mkdirs(product_type)
         if self.shared_list_path().exists():
             print(f"Checking shared files for {self.dataset}.")
             shared_index = pd.read_csv(self.shared_list_path())
@@ -300,6 +297,7 @@ class IndexDownloader(DatasetDefinition):
 class ProductChecker(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
+    hash_rows, log_rows = {}, {}
 
     def compare_test_hashes(
         self,
@@ -308,7 +306,7 @@ class ProductChecker(DatasetDefinition):
         write=True,
         debug=True,
         dump_browse=False,
-        dump_kwargs=None
+        dump_kwargs=None,
     ):
         """
         generate and / or compare test hashes for a specified mission and
@@ -334,7 +332,7 @@ class ProductChecker(DatasetDefinition):
                 write,
                 debug,
                 dump_browse,
-                dump_kwargs
+                dump_kwargs,
             )
         console_and_log(f"Hashing {self.dataset} {product_type}.")
         index = pd.read_csv(self.test_path(product_type))
@@ -345,13 +343,12 @@ class ProductChecker(DatasetDefinition):
         compare = not ((regen is True) or ("hash" not in index.columns))
         # compare/overwrite are redundant rn, but presumably we might want
         # different logic in the future.
-        overwrite = ((regen is True) or ("hash" not in index.columns))
-        hash_rows = {}
-        log_rows = {}
+        overwrite = (regen is True) or ("hash" not in index.columns)
         data_path = self.product_data_path(product_type)
+        self.hash_rows, self.log_rows = {}, {}
         for ix, product in index.iterrows():
             console_and_log(f"testing {product['product_id']}")
-            data, hash_rows[ix], log_rows[ix] = test_product(
+            data, self.hash_rows[ix], self.log_rows[ix] = test_product(
                 product, Path(data_path, product["label_file"]), compare, debug
             )
             if (dump_browse is True) and (data is not None):
@@ -365,18 +362,21 @@ class ProductChecker(DatasetDefinition):
         if (overwrite is True) and (write is False):
             console_and_log("write=False passed, not updating hashes in csv")
         elif overwrite is True:
-            index["hash"] = pd.Series(hash_rows)
+            index["hash"] = pd.Series(self.hash_rows)
             index.to_csv(self.test_path(product_type), index=False)
-        log_df = pd.DataFrame.from_dict(log_rows, orient='index')
+        self.write_test_log(product_type)
+
+    def write_test_log(self, product_type):
+        log_df = pd.DataFrame.from_dict(self.log_rows, orient="index")
         timestamp = stamp()[:-2].replace(":", "_").replace("-", "_")
         Path(self.def_path, "logs").mkdir(exist_ok=True)
         log_df.to_csv(
             Path(self.def_path, "logs", f"{product_type}_log_{timestamp}.csv"),
-            index=False
+            index=False,
         )
         log_df.to_csv(
             Path(self.def_path, "logs", f"{product_type}_log_latest.csv"),
-            index=False
+            index=False,
         )
 
     def check_product_type(
@@ -398,20 +398,23 @@ class ProductChecker(DatasetDefinition):
         console_and_log(f"Checking {self.dataset} {product_type}.")
         index = pd.read_csv(self.index_path(product_type))
         for _, product in index.iterrows():
-            console_and_log(f"checking {product['product_id']}")
-            path = Path(
-                self.product_data_path(product_type), product["label_file"]
+            self.check_product(dump_browse, dump_kwargs, product, product_type)
+
+    def check_product(self, dump_browse, dump_kwargs, product, product_type):
+        console_and_log(f"checking {product['product_id']}")
+        path = Path(
+            self.product_data_path(product_type), product["label_file"]
+        )
+        data = pdr.read(str(path))
+        console_and_log(f"opened {product['product_id']}")
+        if dump_browse:
+            console_and_log(
+                f"dumping browse products for {product['product_id']}"
             )
-            data = pdr.read(str(path))
-            console_and_log(f"opened {product['product_id']}")
-            if dump_browse:
-                console_and_log(
-                    f"dumping browse products for {product['product_id']}"
-                )
-                self.dump_test_browse(data, product_type, dump_kwargs)
-                console_and_log(
-                    f"dumped browse products for {product['product_id']}"
-                )
+            self.dump_test_browse(data, product_type, dump_kwargs)
+            console_and_log(
+                f"dumped browse products for {product['product_id']}"
+            )
 
     def dump_test_browse(self, data, product_type, dump_args):
         kwargs = {} if dump_args is None else dump_args.copy()
@@ -425,112 +428,27 @@ class ProductChecker(DatasetDefinition):
         data.dump_browse(**kwargs)
 
 
-def download_product_row(data_path, temp_path, row, skip_files=()):
-    files = json.loads(row["files"])
-    for file in files:
-        if Path(data_path, file).exists():
-            console_and_log(f"... {file} present, skipping ...")
-            continue
-        if any((file == skip_file for skip_file in skip_files)):
-            continue
-        url = f"{row['url_stem']}/{file}"
-        verbose_temp_download(data_path, temp_path, url)
-
-
-# TODO / note: this is yet one more download
-#  thing that we should somehow unify and consolidate
-def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
-    try:
-        check_cases(Path(data_path, Path(url).name))
-        if skip_quietly is False:
-            console_and_log(
-                f"{Path(url).name} already present, skipping download."
-            )
-        return
-    except FileNotFoundError:
-        pass
-    console_and_log(f"attempting to download {url}.")
-    response = requests.get(url, stream=True, headers=headers)
-    if not response.ok:
-        console_and_log(f"Download of {url} failed.")
-        return
-    with open(Path(temp_path, Path(url).name), "wb+") as fp:
-        for chunk in response.iter_content(chunk_size=10 ** 7):
-            fp.write(chunk)
-    sh.mv(Path(temp_path, Path(url).name), Path(data_path, Path(url).name))
-    console_and_log(f"completed download of {url}.")
-
-
-# noinspection HttpUrlsUsage
-def assemble_urls(subset: pd.DataFrame):
-    return "http://" + subset.domain + "/" + subset.url + "/" + subset.filename
-
-
-def record_mismatches(results, absent, novel):
-    """Assigns strings of "missing from output" and "not found in reference" to
-    the value of the missing and new keys in the results dictionary."""
-    for key in absent:
-        results[key] = "missing from output"
-    for key in novel:
-        results[key] = "not found in reference"
-    return results
-
-
-def compare_hashes(
-    test: Mapping[str, str], reference: Mapping[str, str]
-) -> Mapping[str, str]:
-    """
-    Compares two mappings, notionally from object name to hashed value of
-    object.
-
-    Returns a dictionary containing new keys, missing keys, and keys with
-    mismatched hash values.
-    """
-    problems = {}
-    new_keys, missing_keys = disjoint(test, reference)
-    # note keys that are completely new or missing
-    if len(new_keys + missing_keys):
-        problems |= record_mismatches(problems, missing_keys, new_keys)
-    # do comparisons between others
-    for key in intersection(test, reference):
-        if test[key] != reference[key]:
-            problems[key] = (
-                f"hashes !=; test: {test[key]}; reference: {reference[key]}"
-            )
-    return problems
-
-
-def flip_ends_with(strings, ending):
-    return pa.compute.ends_with(strings, pattern=ending)
-
-
-def read_and_hash(log_row, path, product, debug):
-    data = pdr.read(str(path), debug=debug)
-    hashes = just_hash(data)
-    console_and_log(f"Opened and hashed {product['product_id']}")
-    return data, hashes, log_row
-
-
-def record_comparison(test, reference, log_row):
-    result = compare_hashes(test, reference)
-    if result != {}:
-        log_row["status"] = "hash mismatch"
-        log_row["error"] = str(result)
-    return log_row
+# ############## STANDALONE / HANDLER FUNCTIONS ###############
 
 
 def test_product(
     product: Mapping[str, str], path: Path, compare: bool, debug: bool
 ) -> tuple[Optional[pdr.Data], str, dict]:
+    """
+    handler function for testing an individual product: records exceptions
+    and (when instructed) hash/index comparisons.
+    """
     data, hash_json = None, ""
     log_row = {
-        "product_id": product['product_id'], "status": "ok", "error": None
+        "product_id": product["product_id"],
+        "status": "ok",
+        "error": None,
     }
     try:
         data, hashes, log_row = read_and_hash(log_row, path, product, debug)
         if compare is True:
             log_row = record_comparison(
-                hashes, json.loads(product['hash']), log_row
+                hashes, json.loads(product["hash"]), log_row
             )
         hash_json = json.dumps(hashes)
     except KeyboardInterrupt:
@@ -543,3 +461,32 @@ def test_product(
         output_string += f"; {log_row['error']}"
     console_and_log(output_string)
     return data, hash_json, log_row
+
+
+def directory_to_index(target, manifest, output="index.csv", debug=False):
+    """
+    standalone function for producing an index from all labels in a directory.
+    does not rely on a dataset definitions module. does require a manifest.
+    """
+    product_rows = []
+    for file in Path(target).iterdir():
+        try:
+            pluck_row_from_manifest(file, manifest, product_rows)
+        except KeyboardInterrupt:
+            raise
+        except Exception as ex:
+            if debug is True:
+                raise ex
+            console_and_log(f"failed on {file.name}: {type(ex)}: {ex}")
+    pd.DataFrame(product_rows).to_csv(output, index=False)
+
+
+def pluck_row_from_manifest(file, manifest, product_rows):
+    """inner row constructor for index_directory"""
+    match = parquet.read_table(
+        manifest, filters=[("filename", "=", file.name)]
+    )
+    assert len(match) == 1, f"{file.name} not found in manifest"
+    match = match.to_pandas().iloc[0]
+    row = get_product_row(file, assemble_urls(match))
+    product_rows.append(row)

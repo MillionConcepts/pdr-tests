@@ -146,3 +146,4 @@ pdr_tests/browse
 *.parquet
 **/url_lists/
 /pdr_tests/definitions/**/logs
+/pdr_tests/definitions/**/sample_lists
