@@ -231,8 +231,9 @@ def flip_ends_with(strings, ending):
 
 def read_and_hash(log_row, path, product, debug):
     data = pdr.read(str(path), debug=debug)
+    console_and_log(f"Opened {product['product_id']}")
     hashes = just_hash(data)
-    console_and_log(f"Opened and hashed {product['product_id']}")
+    console_and_log(f"Computed hashes forg {product['product_id']}")
     return data, hashes, log_row
 
 
