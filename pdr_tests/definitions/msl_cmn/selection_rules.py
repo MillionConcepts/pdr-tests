@@ -134,12 +134,13 @@ file_information = {
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
-    "FILM": {
-        "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*efm.*"],
-        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-        "label": "D",
-    },
+    # TODO: currently unsupported (BIT_COLUMNs)
+    # "FILM": {
+    #     "manifest": GEO_FILE,
+    #     "fn_regex": [r"cm.*efm.*"],
+    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+    #     "label": "D",
+    # },
     "HOUSEKEEPING": {
         "manifest": GEO_FILE,
         "fn_regex": [r"cm.*ehk.*"],

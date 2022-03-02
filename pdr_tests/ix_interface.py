@@ -1,14 +1,15 @@
 from ast import literal_eval
-from types import MappingProxyType
 
 from pdr_tests.datasets import (
     ProductPicker,
     IndexMaker,
     IndexDownloader,
-    TestHasher,
+    ProductChecker,
 )
 
-COMMANDS = ["sort", "pick", "index", "download", "check", "index_directory"]
+COMMANDS = [
+    "sort", "pick", "index", "download", "check", "test", "index_directory"
+]
 
 
 def sort(dataset, product_type=None):
@@ -31,9 +32,9 @@ def index(dataset, product_type=None, *, dry_run: "d" = False):
     indexer.write_subset_index(product_type)
 
 
-def download(dataset, product_type=None):
+def download(dataset, product_type=None, *, get_test: "t"=False):
     downloader = IndexDownloader(dataset)
-    downloader.download_index(product_type)
+    downloader.download_index(product_type, get_test)
 
 
 def check(
@@ -45,8 +46,26 @@ def check(
 ):
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
-    hasher = TestHasher(dataset)
-    hasher.hash_product_type(product_type, dump_browse, True, dump_kwargs)
+    hasher = ProductChecker(dataset)
+    hasher.check_product_type(product_type, dump_browse, dump_kwargs)
+
+
+def test(
+    dataset,
+    product_type=None,
+    *,
+    regen: "r" = False,
+    write: "w" = True,
+    debug: "g" = True,
+    dump_browse: "d" = False,
+    dump_kwargs: "k" = None,
+):
+    if dump_kwargs is not None:
+        dump_kwargs = literal_eval(dump_kwargs)
+    hasher = ProductChecker(dataset)
+    hasher.compare_test_hashes(
+        product_type, regen, write, debug, dump_browse, dump_kwargs
+    )
 
 
 def index_directory(
@@ -76,7 +95,7 @@ def index_directory(
             if debug is True:
                 raise ex
             console_and_log(f"failed on {file.name}: {type(ex)}: {ex}")
-    pd.DataFrame(product_rows).to_csv(output, index=None)
+    pd.DataFrame(product_rows).to_csv(output, index=False)
 
 
 def ix_help(*_, **__):

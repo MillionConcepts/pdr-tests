@@ -57,3 +57,6 @@ for ptype, samp in product(
     file_information[
         f"{ptype}_{samp}"
     ] = info
+
+# irrelevant
+SKIP_FILES = ["VICAR2.TXT", "ODL.TXT"]

@@ -56,8 +56,9 @@ for ptype, samp in product(ptypes, samps):
     info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}"]}
     file_information[f"{ptype}_{samp}"] = info
 
-# range maps persistently reference this: don't know where it is
-SKIP_FILES = ["MIPL_ERROR_METHODS.TXT"]
+# range maps persistently reference first, don't know where it is;
+# others are irrelevant
+SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT"]
 
 
 # identified as bad in testing (apparently a write underrun):

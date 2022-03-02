@@ -48,4 +48,5 @@ for ptype_samp in (
     info = base | {"fn_must_contain": [ptype_samp]}
     file_information[ptype_samp] = info
 
-
+# irrelevant
+SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT"]

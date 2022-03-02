@@ -71,3 +71,6 @@ file_information = {
         "label": "D",
     },
 }
+
+#irrelevant
+SKIP_FILES = ["VICAR2.TXT ", "ODL.TXT"]

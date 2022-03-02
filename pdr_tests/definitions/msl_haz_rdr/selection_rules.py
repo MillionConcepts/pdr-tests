@@ -40,9 +40,9 @@ base = {
     "label": "D",
 }
 
-# range maps persistently reference this: don't know where it is
-SKIP_FILES = ["MIPL_ERROR_METHODS.TXT"]
-
+# range maps persistently reference first, don't know where it is;
+# others are irrelevant
+SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT"]
 
 # see: MSL Camera SIS, pp. 88+
 file_information = {"ANAGLYPH": base | {"fn_regex": [r"[FR]A[AB].*"]}}

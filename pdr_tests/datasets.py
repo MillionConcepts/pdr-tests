@@ -2,20 +2,23 @@ import json
 import os
 from importlib import import_module
 from pathlib import Path
+from typing import Mapping, Optional
 
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import requests
 import sh
+from dustgoggles.func import disjoint, intersection
 from pyarrow import parquet
 
+import pdr
 from pdr.utils import check_cases
 from pdr_tests.utilz.test_utilz import (
     get_product_row,
     just_hash,
     console_and_log,
-    check_product,
+    check_product, stamp,
 )
 
 # TODO: I'm inclined not to hardcode this...but not sure. --michael
@@ -61,8 +64,8 @@ class DatasetDefinition:
     def index_path(self, product_type):
         return Path(self.def_path, f"{product_type}.csv")
 
-    def hash_path(self, product_type):
-        return Path(self.def_path, f"{product_type}_hash.csv")
+    def test_path(self, product_type):
+        return Path(self.def_path, f"{product_type}_test.csv")
 
     def product_browse_path(self, product_type):
         return Path(self.browse_path, product_type)
@@ -269,10 +272,11 @@ class IndexDownloader(DatasetDefinition):
         else:
             self.skip_files = ()
 
-    def download_index(self, product_type: str):
+    def download_index(self, product_type: str, get_test: bool = False):
         if product_type is None:
-            return self.across_all_types("download_index")
-        console_and_log(f"Downloading {self.dataset} {product_type} subset.")
+            return self.across_all_types("download_index", get_test)
+        ptype = "subset files" if get_test is False else "test files"
+        console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
         data_path = self.product_data_path(product_type)
         temp_path = self.temp_data_path(product_type)
         os.makedirs(data_path, exist_ok=True)
@@ -284,43 +288,122 @@ class IndexDownloader(DatasetDefinition):
                 verbose_temp_download(
                     data_path, temp_path, row["url"], skip_quietly=False
                 )
-        index = pd.read_csv(Path(self.index_path(product_type)))
+        if get_test is True:
+            index = pd.read_csv(self.test_path(product_type))
+        else:
+            index = pd.read_csv(self.index_path(product_type))
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
             download_product_row(data_path, temp_path, row, self.skip_files)
 
 
-class TestHasher(DatasetDefinition):
+class ProductChecker(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def hash_product_type(
-        self, product_type, dump_browse=False, write=True, dump_kwargs=None
+    def compare_test_hashes(
+        self,
+        product_type,
+        regen=False,
+        write=True,
+        debug=True,
+        dump_browse=False,
+        dump_kwargs=None
     ):
         """
-        (re)generate test hashes for a specified mission and dataset.
+        generate and / or compare test hashes for a specified mission and
+        dataset. writes new hashes into test index files if no hashes are
+        present.
+
+        regenerate: if True, skip hash comparisons and instead overwrite any
+        hashes found in test index files
+
+        write: if False, do a 'dry run' -- don't write anything besides logs
+        regardless of other settings/results
+
+        debug: should we open products in debug mode?
+
+        dump_browse: if True, also write browse products
+
+        dump_kwargs: kwargs for browse writer
+        """
+        if product_type is None:
+            return self.across_all_types(
+                "compare_test_hashes",
+                regen,
+                write,
+                debug,
+                dump_browse,
+                dump_kwargs
+            )
+        console_and_log(f"Hashing {self.dataset} {product_type}.")
+        index = pd.read_csv(self.test_path(product_type))
+        if "hash" not in index.columns:
+            console_and_log(f"no hashes found for {product_type}, writing new")
+        elif regen is True:
+            console_and_log(f"regenerate=True passed, overwriting hashes")
+        compare = not ((regen is True) or ("hash" not in index.columns))
+        # compare/overwrite are redundant rn, but presumably we might want
+        # different logic in the future.
+        overwrite = ((regen is True) or ("hash" not in index.columns))
+        hash_rows = {}
+        log_rows = {}
+        data_path = self.product_data_path(product_type)
+        for ix, product in index.iterrows():
+            console_and_log(f"testing {product['product_id']}")
+            data, hash_rows[ix], log_rows[ix] = test_product(
+                product, Path(data_path, product["label_file"]), compare, debug
+            )
+            if (dump_browse is True) and (data is not None):
+                console_and_log(
+                    f"dumping browse products for {product['product_id']}"
+                )
+                self.dump_test_browse(data, product_type, dump_kwargs)
+                console_and_log(
+                    f"dumped browse products for {product['product_id']}"
+                )
+        if (overwrite is True) and (write is False):
+            console_and_log("write=False passed, not updating hashes in csv")
+        elif overwrite is True:
+            index["hash"] = pd.Series(hash_rows)
+            index.to_csv(self.test_path(product_type), index=False)
+        log_df = pd.DataFrame.from_dict(log_rows, orient='index')
+        timestamp = stamp()[:-2].replace(":", "_").replace("-", "_")
+        Path(self.def_path, "logs").mkdir(exist_ok=True)
+        log_df.to_csv(
+            Path(self.def_path, "logs", f"{product_type}_log_{timestamp}.csv"),
+            index=False
+        )
+        log_df.to_csv(
+            Path(self.def_path, "logs", f"{product_type}_log_latest.csv"),
+            index=False
+        )
+
+    def check_product_type(
+        self, product_type, dump_browse=True, dump_kwargs=None
+    ):
+        """
+        generate browse products for a specified mission and dataset.
 
         dump_browse: if True, also write browse products (by default, write to
         browse/mission/dataset/, although this can be overridden by passing a
         different path in dump_kwargs
 
-        write: if False, do a 'dry run' -- don't write any hashes
-
-        dump_kwargs: kwargs for dump_browse
+        dump_kwargs: kwargs for browse writer
         """
         if product_type is None:
             return self.across_all_types(
-                "hash_product_type", dump_browse, write, dump_kwargs
+                "check_product_type", dump_browse, dump_kwargs
             )
-        console_and_log(f"Making hashes for {self.dataset} {product_type}.")
+        console_and_log(f"Checking {self.dataset} {product_type}.")
         index = pd.read_csv(self.index_path(product_type))
-        results = {}
         for _, product in index.iterrows():
-            console_and_log(f"hashing {product['product_id']}")
-            results[product["product_id"]], data = check_product(
-                product, self.product_data_path(product_type), [just_hash]
+            console_and_log(f"checking {product['product_id']}")
+            path = Path(
+                self.product_data_path(product_type), product["label_file"]
             )
-            console_and_log(f"hashed {product['product_id']}")
+            data = pdr.read(str(path))
+            console_and_log(f"opened {product['product_id']}")
             if dump_browse:
                 console_and_log(
                     f"dumping browse products for {product['product_id']}"
@@ -329,17 +412,6 @@ class TestHasher(DatasetDefinition):
                 console_and_log(
                     f"dumped browse products for {product['product_id']}"
                 )
-        serial = {
-            product_id: json.dumps(hashes)
-            for product_id, hashes in results.items()
-        }
-        serialframe = pd.DataFrame.from_dict(serial, orient="index")
-        serialframe.columns = ["hashes"]
-        serialframe["product_id"] = serialframe.index
-        if write:
-            os.makedirs(self.hash_path(product_type).parent, exist_ok=True)
-            # noinspection PyTypeChecker
-            serialframe.to_csv(self.hash_path(product_type), index=None)
 
     def dump_test_browse(self, data, product_type, dump_args):
         kwargs = {} if dump_args is None else dump_args.copy()
@@ -394,5 +466,80 @@ def assemble_urls(subset: pd.DataFrame):
     return "http://" + subset.domain + "/" + subset.url + "/" + subset.filename
 
 
+def record_mismatches(results, absent, novel):
+    """Assigns strings of "missing from output" and "not found in reference" to
+    the value of the missing and new keys in the results dictionary."""
+    for key in absent:
+        results[key] = "missing from output"
+    for key in novel:
+        results[key] = "not found in reference"
+    return results
+
+
+def compare_hashes(
+    test: Mapping[str, str], reference: Mapping[str, str]
+) -> Mapping[str, str]:
+    """
+    Compares two mappings, notionally from object name to hashed value of
+    object.
+
+    Returns a dictionary containing new keys, missing keys, and keys with
+    mismatched hash values.
+    """
+    problems = {}
+    new_keys, missing_keys = disjoint(test, reference)
+    # note keys that are completely new or missing
+    if len(new_keys + missing_keys):
+        problems |= record_mismatches(problems, missing_keys, new_keys)
+    # do comparisons between others
+    for key in intersection(test, reference):
+        if test[key] != reference[key]:
+            problems[key] = (
+                f"hashes !=; test: {test[key]}; reference: {reference[key]}"
+            )
+    return problems
+
+
 def flip_ends_with(strings, ending):
     return pa.compute.ends_with(strings, pattern=ending)
+
+
+def read_and_hash(log_row, path, product, debug):
+    data = pdr.read(str(path), debug=debug)
+    hashes = just_hash(data)
+    console_and_log(f"Opened and hashed {product['product_id']}")
+    return data, hashes, log_row
+
+
+def record_comparison(test, reference, log_row):
+    result = compare_hashes(test, reference)
+    if result != {}:
+        log_row["status"] = "hash mismatch"
+        log_row["error"] = str(result)
+    return log_row
+
+
+def test_product(
+    product: Mapping[str, str], path: Path, compare: bool, debug: bool
+) -> tuple[Optional[pdr.Data], str, dict]:
+    data, hash_json = None, ""
+    log_row = {
+        "product_id": product['product_id'], "status": "ok", "error": None
+    }
+    try:
+        data, hashes, log_row = read_and_hash(log_row, path, product, debug)
+        if compare is True:
+            log_row = record_comparison(
+                hashes, json.loads(product['hash']), log_row
+            )
+        hash_json = json.dumps(hashes)
+    except KeyboardInterrupt:
+        raise
+    except Exception as ex:
+        log_row["status"] = "read exception"
+        log_row["error"] = f"{type(ex)}: {ex}".replace(",", ";")
+    output_string = f"status: {log_row['status']}"
+    if log_row["error"] is not None:
+        output_string += f"; {log_row['error']}"
+    console_and_log(output_string)
+    return data, hash_json, log_row

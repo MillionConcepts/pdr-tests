@@ -301,7 +301,14 @@ def check_product(product, data_path, checks):
 
 
 def just_hash(data):
-    return {key: checksum_object(data[key]) for key in data.keys()}
+    hashes = {}
+    for key in data.keys():
+        # objects not loaded by default, whether due to lazy-loading or
+        # membership in OBJECTS_IGNORED_BY_DEFAULT (like MODEL_DESC)
+        if not hasattr(data, key):
+            continue
+        hashes[key] = checksum_object(data[key])
+    return hashes
 
 
 def perform_dataset_test(mission: str, dataset: str, local_only=False):
