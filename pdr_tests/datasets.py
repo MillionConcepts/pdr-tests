@@ -449,8 +449,9 @@ def test_product(
     try:
         data, hashes, log_row = read_and_hash(log_row, path, product, debug)
         if compare is True:
-            if np.isnan(product["hash"]):
-                raise MissingHashError
+            if isinstance(product["hash"], float):
+                if np.isnan(product["hash"]):
+                    raise MissingHashError
             log_row = record_comparison(
                 hashes, json.loads(product["hash"]), log_row
             )

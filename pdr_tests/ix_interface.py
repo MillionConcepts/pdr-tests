@@ -76,6 +76,8 @@ def test(
             )
         except MissingHashError:
             return
+        except FileNotFoundError as fnf:
+            f"Necessary file missing for this dataset: {fnf}"
 
 
 def index_directory(target, manifest, output="index.csv", debug=False):
