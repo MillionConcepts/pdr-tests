@@ -60,19 +60,27 @@ def checksum_object(obj, hash_function=md5):
         for line in obj:
             hasher.update(line)
     elif isinstance(obj, pd.DataFrame):
-        # TODO: I am not at all sure why indices -- especially column indices
-        #  -- do not appear to have stable byte-level representations without
-        #  first converting to python objects.
-        hasher.update(np.array(obj.columns.tolist()))
-        hasher.update(np.array(obj.index.tolist()))
-        # TODO, maybe: the arrays underlying dataframes are typically not
-        #  stored in C-contiguous order. copying the array is somewhat
-        #  memory-inefficient. another solution is to dump each line as bytes;
-        #  this is slower but smaller.
-        for line in obj.values.copy():
-            hasher.update(line)
-
-
+        # TODO: I am not sure why object ('O') dtypes do not appear to
+        #  have stable byte-level representations without first converting to
+        #  python objects. something strange is happening
+        #  behind the numpy API. this plausibly also affects ndarrays, but
+        #  I don't know if we're ever working with ndarrays with object dtypes.
+        hasher.update(str(obj.columns.tolist()).encode('utf-8'))
+        # print(str(obj.columns.tolist()))
+        hasher.update(str(obj.index.tolist()).encode('utf-8'))
+        blocks = obj._to_dict_of_blocks(copy=False)
+        for dtype, block in blocks.items():
+            if dtype == 'object':
+                for ix in block.index:
+                    hasher.update(str(block.loc[ix].tolist()).encode('utf-8'))
+            else:
+                # TODO, maybe: the arrays underlying dataframes are
+                #  typically not stored in C-contiguous order. copying the
+                #  array is somewhat memory-inefficient. another solution is
+                #  to dump each line as string or bytes -- like we do for
+                #  object dtypes above -- which would be slower but smaller.
+                for ix in block.index:
+                    hasher.update(block.loc[ix].values.copy())
     else:
         # TODO: determine when this is and is not actually stable
         hasher.update(obj.__repr__().encode("utf-8"))
