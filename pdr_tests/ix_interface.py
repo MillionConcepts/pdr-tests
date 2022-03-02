@@ -7,6 +7,7 @@ from pdr_tests.datasets import (
     IndexDownloader,
     ProductChecker, directory_to_index, MissingHashError,
 )
+from pdr_tests.utilz.test_utilz import console_and_log
 
 COMMANDS = [
     "sort", "pick", "index", "download", "check", "test", "index_directory"
@@ -72,16 +73,25 @@ def test(
         ]
     else:
         datasets = [dataset]
+    logs = []
     for dataset in datasets:
         hasher = ProductChecker(dataset)
         try:
-            hasher.compare_test_hashes(
+            test_log = hasher.compare_test_hashes(
                 product_type, regen, write, debug, dump_browse, dump_kwargs
             )
+            logs.append(test_log)
         except MissingHashError:
             return
         except FileNotFoundError as fnf:
             f"Necessary file missing for this dataset: {fnf}"
+        except KeyboardInterrupt:
+            console_and_log("received keyboard interrupt, halting")
+            break
+    if logs:
+        import pandas as pd
+        pd.concat(logs, axis=1).to_csv("combined_test_log_latest.csv")
+
 
 
 def index_directory(target, manifest, output="index.csv", debug=False):

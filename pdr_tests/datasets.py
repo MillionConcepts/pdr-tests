@@ -367,7 +367,7 @@ class ProductChecker(DatasetDefinition):
         elif overwrite is True:
             index["hash"] = pd.Series(self.hash_rows)
             index.to_csv(self.test_path(product_type), index=False)
-        self.write_test_log(product_type)
+        return self.write_test_log(product_type)
 
     def write_test_log(self, product_type):
         log_df = pd.DataFrame.from_dict(self.log_rows, orient="index")
@@ -381,6 +381,7 @@ class ProductChecker(DatasetDefinition):
             Path(self.def_path, "logs", f"{product_type}_log_latest.csv"),
             index=False,
         )
+        return log_df
 
     def check_product_type(
         self, product_type, dump_browse=True, dump_kwargs=None
