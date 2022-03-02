@@ -1,4 +1,5 @@
 from ast import literal_eval
+from pathlib import Path
 
 from pdr_tests.datasets import (
     ProductPicker,
@@ -51,7 +52,7 @@ def check(
 
 
 def test(
-    dataset,
+    dataset=None,
     product_type=None,
     *,
     regen: "r" = False,
@@ -62,10 +63,16 @@ def test(
 ):
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
-    hasher = ProductChecker(dataset)
-    hasher.compare_test_hashes(
-        product_type, regen, write, debug, dump_browse, dump_kwargs
-    )
+    if dataset is None:
+        print("no dataset argument provided; testing all defined datasets")
+        datasets = [d.name for d in Path("definitions").iterdir()]
+    else:
+        datasets = [dataset]
+    for dataset in datasets:
+        hasher = ProductChecker(dataset)
+        hasher.compare_test_hashes(
+            product_type, regen, write, debug, dump_browse, dump_kwargs
+        )
 
 
 def index_directory(target, manifest, output="index.csv", debug=False):
