@@ -145,4 +145,4 @@ pdr_tests/browse
 /pdr_tests/node_manifests/
 *.parquet
 **/url_lists/
-pdr_tests/definitions/url_lists/*.csv
+/pdr_tests/definitions/**/logs
