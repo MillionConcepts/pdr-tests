@@ -93,7 +93,7 @@ def test(
         except MissingHashError:
             return
         except FileNotFoundError as fnf:
-            f"Necessary file missing for this dataset: {fnf}"
+            print(f"Necessary file missing for this dataset: {fnf}")
         except KeyboardInterrupt:
             console_and_log("received keyboard interrupt, halting")
             break
