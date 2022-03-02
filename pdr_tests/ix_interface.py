@@ -5,7 +5,7 @@ from pdr_tests.datasets import (
     ProductPicker,
     IndexMaker,
     IndexDownloader,
-    ProductChecker, directory_to_index,
+    ProductChecker, directory_to_index, MissingHashError,
 )
 
 COMMANDS = [
@@ -70,9 +70,12 @@ def test(
         datasets = [dataset]
     for dataset in datasets:
         hasher = ProductChecker(dataset)
-        hasher.compare_test_hashes(
-            product_type, regen, write, debug, dump_browse, dump_kwargs
-        )
+        try:
+            hasher.compare_test_hashes(
+                product_type, regen, write, debug, dump_browse, dump_kwargs
+            )
+        except MissingHashError:
+            return
 
 
 def index_directory(target, manifest, output="index.csv", debug=False):

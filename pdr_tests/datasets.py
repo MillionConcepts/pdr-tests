@@ -27,6 +27,9 @@ from pdr_tests.utilz.test_utilz import (
 
 # ############ INDEX & TESTING CLASSES #############
 
+class MissingHashError(ValueError):
+    pass
+
 
 class DatasetDefinition:
     """
@@ -430,7 +433,6 @@ class ProductChecker(DatasetDefinition):
 
 # ############## STANDALONE / HANDLER FUNCTIONS ###############
 
-
 def test_product(
     product: Mapping[str, str], path: Path, compare: bool, debug: bool
 ) -> tuple[Optional[pdr.Data], str, dict]:
@@ -447,10 +449,20 @@ def test_product(
     try:
         data, hashes, log_row = read_and_hash(log_row, path, product, debug)
         if compare is True:
+            if np.isnan(product["hash"]):
+                raise MissingHashError
             log_row = record_comparison(
                 hashes, json.loads(product["hash"]), log_row
             )
         hash_json = json.dumps(hashes)
+    except MissingHashError:
+        console_and_log(
+            "Hash column present but hash value missing for one or more "
+            "products. This may indicate a corrupt file or an interrupted "
+            "hash generation process. Pass --regen=True to ignore this error "
+            "and populate these values."
+        )
+        raise MissingHashError
     except KeyboardInterrupt:
         raise
     except Exception as ex:
