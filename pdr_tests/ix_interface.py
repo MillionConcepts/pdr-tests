@@ -65,7 +65,11 @@ def test(
         dump_kwargs = literal_eval(dump_kwargs)
     if dataset is None:
         print("no dataset argument provided; testing all defined datasets")
-        datasets = [d.name for d in Path("definitions").iterdir()]
+        datasets = [
+            d.name
+            for d in Path("definitions").iterdir()
+            if d.is_dir()
+        ]
     else:
         datasets = [dataset]
     for dataset in datasets:
