@@ -59,9 +59,22 @@ def checksum_object(obj, hash_function=md5):
     if isinstance(obj, np.ndarray):
         for line in obj:
             hasher.update(line)
+    elif isinstance(obj, pd.DataFrame):
+        # TODO: I am not at all sure why indices -- especially column indices
+        #  -- do not appear to have stable byte-level representations without
+        #  first converting to python objects.
+        hasher.update(np.array(obj.columns.tolist()))
+        hasher.update(np.array(obj.index.tolist()))
+        # TODO, maybe: the arrays underlying dataframes are typically not
+        #  stored in C-contiguous order. copying the array is somewhat
+        #  memory-inefficient. another solution is to dump each line as bytes;
+        #  this is slower but smaller.
+        for line in obj.values.copy():
+            hasher.update(line)
+
+
     else:
-        # TODO: determine when this is and is not actually stable...we'll
-        #  find out!
+        # TODO: determine when this is and is not actually stable
         hasher.update(obj.__repr__().encode("utf-8"))
     return hasher.hexdigest()
 

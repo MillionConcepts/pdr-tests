@@ -81,8 +81,11 @@ class DatasetDefinition:
         os.makedirs(self.temp_data_path(product_type), exist_ok=True)
 
     def across_all_types(self, method_name, *args, **kwargs):
+        output = []
         for product_type in self.rules:
-            getattr(self, method_name)(product_type, *args, **kwargs)
+            result = getattr(self, method_name)(product_type, *args, **kwargs)
+            output.append(result)
+        return output
 
 
 class ProductPicker(DatasetDefinition):

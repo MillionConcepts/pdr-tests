@@ -5,12 +5,20 @@ from pdr_tests.datasets import (
     ProductPicker,
     IndexMaker,
     IndexDownloader,
-    ProductChecker, directory_to_index, MissingHashError,
+    ProductChecker,
+    directory_to_index,
+    MissingHashError,
 )
 from pdr_tests.utilz.test_utilz import console_and_log
 
 COMMANDS = [
-    "sort", "pick", "index", "download", "check", "test", "index_directory"
+    "sort",
+    "pick",
+    "index",
+    "download",
+    "check",
+    "test",
+    "index_directory",
 ]
 
 
@@ -34,7 +42,7 @@ def index(dataset, product_type=None, *, dry_run: "d" = False):
     indexer.write_subset_index(product_type)
 
 
-def download(dataset, product_type=None, *, get_test: "t"=False):
+def download(dataset, product_type=None, *, get_test: "t" = False):
     downloader = IndexDownloader(dataset)
     downloader.download_index(product_type, get_test)
 
@@ -67,9 +75,7 @@ def test(
     if dataset is None:
         print("no dataset argument provided; testing all defined datasets")
         datasets = [
-            d.name
-            for d in Path("definitions").iterdir()
-            if d.is_dir()
+            d.name for d in Path("definitions").iterdir() if d.is_dir()
         ]
     else:
         datasets = [dataset]
@@ -77,10 +83,13 @@ def test(
     for dataset in datasets:
         hasher = ProductChecker(dataset)
         try:
-            test_log = hasher.compare_test_hashes(
+            test_logs = hasher.compare_test_hashes(
                 product_type, regen, write, debug, dump_browse, dump_kwargs
             )
-            logs.append(test_log)
+            if isinstance(test_logs, list):
+                logs += test_logs
+            else:
+                logs += [test_logs]
         except MissingHashError:
             return
         except FileNotFoundError as fnf:
@@ -90,8 +99,10 @@ def test(
             break
     if logs:
         import pandas as pd
-        pd.concat(logs, axis=1).to_csv("combined_test_log_latest.csv")
 
+        pd.concat(logs, axis=1).to_csv(
+            "combined_test_log_latest.csv", index=False
+        )
 
 
 def index_directory(target, manifest, output="index.csv", debug=False):
