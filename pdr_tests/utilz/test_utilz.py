@@ -65,22 +65,24 @@ def checksum_object(obj, hash_function=md5):
         #  python objects. something strange is happening
         #  behind the numpy API. this plausibly also affects ndarrays, but
         #  I don't know if we're ever working with ndarrays with object dtypes.
-        hasher.update(str(obj.columns.tolist()).encode('utf-8'))
-        # print(str(obj.columns.tolist()))
-        hasher.update(str(obj.index.tolist()).encode('utf-8'))
         blocks = obj._to_dict_of_blocks(copy=False)
         for dtype, block in blocks.items():
+            # TODO, maybe: going by row or column is stunningly slow for
+            #  really long or wide tables. trying this and seeing if it takes
+            #  too much memory.
             if dtype == 'object':
-                for ix in block.index:
-                    hasher.update(str(block.loc[ix].tolist()).encode('utf-8'))
+                # for ix in block.index:
+                #     hasher.update(str(block.loc[ix].tolist()).encode('utf-8'))
+                hasher.update(block.to_string().encode('utf-8'))
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
                 #  array is somewhat memory-inefficient. another solution is
                 #  to dump each line as string or bytes -- like we do for
                 #  object dtypes above -- which would be slower but smaller.
-                for ix in block.index:
-                    hasher.update(block.loc[ix].values.copy())
+                # for ix in block.index:
+                #     hasher.update(block.loc[ix].values.copy())
+                hasher.update(block.values.copy())
     else:
         # TODO: determine when this is and is not actually stable
         hasher.update(obj.__repr__().encode("utf-8"))
@@ -233,7 +235,7 @@ def read_and_hash(log_row, path, product, debug):
     data = pdr.read(str(path), debug=debug)
     console_and_log(f"Opened {product['product_id']}")
     hashes = just_hash(data)
-    console_and_log(f"Computed hashes forg {product['product_id']}")
+    console_and_log(f"Computed hashes for {product['product_id']}")
     return data, hashes, log_row
 
 
