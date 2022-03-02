@@ -33,18 +33,18 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquet")
 
 file_information = {
-    'odf': {'manifest': GEO_MRO_FILE,
-            "fn_must_contain": ['.odf'],
-            "url_must_contain": ['rss', '/odf'],  # this is probably unnecessary, but it's here anyway
-            "label": "D"},
+    # 'odf': {'manifest': GEO_MRO_FILE,
+    #         "fn_must_contain": ['.odf'],
+    #         "url_must_contain": ['rss', '/odf'],  # this is probably unnecessary, but it's here anyway
+    #         "label": "D"},
     'rsr': {'manifest': GEO_MRO_FILE,
             "fn_must_contain": ['.1a1'],
             "url_must_contain": ['rss', '/rsr'],
             "label": "D"},
-    'tnf': {'manifest': GEO_MRO_FILE,
-            'fn_must_contain': ['.tnf'],
-            'url_must_contain': ['rss', '/tnf'],  # same thing here
-            "label": "D"},
+    # 'tnf': {'manifest': GEO_MRO_FILE,
+    #         'fn_must_contain': ['.tnf'],
+    #         'url_must_contain': ['rss', '/tnf'],  # same thing here
+    #         "label": "D"},
     'rsdmap': {'manifest': GEO_MRO_FILE,
                'fn_must_contain': ['.img'],
                'url_must_contain': ['rss', '/rsdmap'],
