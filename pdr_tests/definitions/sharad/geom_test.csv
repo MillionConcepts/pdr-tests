@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-s_00200502_geom.LBL,"[""S_00200502_GEOM.TAB"", ""s_00200502_geom.LBL""]",S_00200502_GEOM,http://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-radargram-v2/mrosh_2101/data/geom/s_0020xx
+label_file,files,product_id,url_stem,hash
+s_00200502_geom.LBL,"[""S_00200502_GEOM.TAB"", ""s_00200502_geom.LBL""]",S_00200502_GEOM,http://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-radargram-v2/mrosh_2101/data/geom/s_0020xx,"{""LABEL"": ""4ed3ea96135e62a1a3413be43c06382b"", ""TABLE"": ""b7fbf883d4099c0a14302f2aaa7d154d""}"

@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-t1889_mrral_70n245_0256_1.LBL,"[""t1889_mrral_70n245_0256_1.LBL"", ""T1889_MRRAL_70N245_0256_1.IMG"", ""MRR_MAP.CAT""]",T1889_MRRAL_70N245_0256_1,http://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-multispectral-v1/mrocr_3001/mrdr/mc01
+label_file,files,product_id,url_stem,hash
+t1889_mrral_70n245_0256_1.LBL,"[""t1889_mrral_70n245_0256_1.LBL"", ""T1889_MRRAL_70N245_0256_1.IMG"", ""MRR_MAP.CAT""]",T1889_MRRAL_70N245_0256_1,http://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-multispectral-v1/mrocr_3001/mrdr/mc01,"{""LABEL"": ""fcc15927a315f780dd2b04fbb14917ac"", ""IMAGE"": ""89699c4af2e5cb2fb624d5762f41a8bc""}"
