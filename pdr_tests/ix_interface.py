@@ -75,7 +75,9 @@ def test(
     if dataset is None:
         print("no dataset argument provided; testing all defined datasets")
         datasets = [
-            d.name for d in Path("definitions").iterdir() if (d.is_dir() and ("cache" not in d))
+            d.name
+            for d in Path("definitions").iterdir()
+            if (d.is_dir() and ("cache" not in d.name))
         ]
     else:
         datasets = [dataset]
