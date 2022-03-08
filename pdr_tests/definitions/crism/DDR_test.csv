@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-frt0001a3de_02_de118s_ddr1.LBL,"[""frt0001a3de_02_de118s_ddr1.LBL"", ""FRT0001A3DE_02_DE118S_DDR1.IMG""]",FRT0001A3DE_02_DE118S_DDR1,http://pds-geosciences.wustl.edu/mro/mro-m-crism-6-ddr-v1/mrocr_1003/ddr/2010/2010_221/frt0001a3de
+label_file,files,product_id,url_stem,hash
+frt0001a3de_02_de118s_ddr1.LBL,"[""frt0001a3de_02_de118s_ddr1.LBL"", ""FRT0001A3DE_02_DE118S_DDR1.IMG""]",FRT0001A3DE_02_DE118S_DDR1,http://pds-geosciences.wustl.edu/mro/mro-m-crism-6-ddr-v1/mrocr_1003/ddr/2010/2010_221/frt0001a3de,"{""LABEL"": ""87aea67420e0be0a2d2227253ac465b3"", ""IMAGE"": ""bfa197a33f677a9880cf567ee718aeba""}"

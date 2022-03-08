@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-crism_typespec_chloride.LBL,"[""crism_typespec_chloride.LBL"", ""CRISM_TYPESPEC_CHLORIDE.TAB""]",CRISM_TYPESPEC_CHLORIDE,http://pds-geosciences.wustl.edu/mro/mro-m-crism-4-typespec-v1/mrocr_8001/data
+label_file,files,product_id,url_stem,hash
+crism_typespec_chloride.LBL,"[""crism_typespec_chloride.LBL"", ""CRISM_TYPESPEC_CHLORIDE.TAB""]",CRISM_TYPESPEC_CHLORIDE,http://pds-geosciences.wustl.edu/mro/mro-m-crism-4-typespec-v1/mrocr_8001/data,"{""LABEL"": ""8be2e8433eb1f1bfb3b2599b59497f12"", ""TABLE"": ""f9fbedd966437799e37e3d0409271d01""}"

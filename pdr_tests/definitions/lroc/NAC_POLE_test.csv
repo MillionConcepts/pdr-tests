@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-NAC_POLE_P860N0112.IMG,"[""NAC_POLE_P860N0112.IMG"", ""DSMAP.CAT""]",NAC_POLE_P860N0112,http://pds.lroc.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/NAC_POLE/NAC_POLE_NORTH
+label_file,files,product_id,url_stem,hash
+NAC_POLE_P860N0112.IMG,"[""NAC_POLE_P860N0112.IMG"", ""DSMAP.CAT""]",NAC_POLE_P860N0112,http://pds.lroc.asu.edu/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/NAC_POLE/NAC_POLE_NORTH,

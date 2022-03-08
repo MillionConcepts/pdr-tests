@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-bkr1jb001.tab,"[""bkr1jb001.tab""]",BKR1JB001,http://pds-geosciences.wustl.edu/mro/mro-m-crism-4-speclib-v1/mrocr_90xx/data/synthetic/solid/from_natural/inorganic
+label_file,files,product_id,url_stem,hash
+bkr1jb001.tab,"[""bkr1jb001.tab""]",BKR1JB001,http://pds-geosciences.wustl.edu/mro/mro-m-crism-4-speclib-v1/mrocr_90xx/data/synthetic/solid/from_natural/inorganic,"{""LABEL"": ""01e318e6e8be544d1a3cf227ec029159"", ""TABLE"": ""bcac235e1a38e8c2bf606e659307f6e3""}"

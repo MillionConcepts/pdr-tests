@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-074maoe2008023_0035nnnx63rm.LBL,"[""074maoe2008023_0035nnnx63rm.1a1"", ""074maoe2008023_0035nnnx63rm.LBL""]",074maoe2008023_0035nnnx63rm.1a1,http://pds-geosciences.wustl.edu/mro/mro-m-rss-1-magr-v1/mrors_0xxx/rsr
+label_file,files,product_id,url_stem,hash
+074maoe2008023_0035nnnx63rm.LBL,"[""074maoe2008023_0035nnnx63rm.1a1"", ""074maoe2008023_0035nnnx63rm.LBL""]",074maoe2008023_0035nnnx63rm.1a1,http://pds-geosciences.wustl.edu/mro/mro-m-rss-1-magr-v1/mrors_0xxx/rsr,"{""LABEL"": ""cd5838d5881707e58960bf653e7cedb7"", ""TABLE"": ""18e6ccf476ef23b03765c66b00f88f90""}"
