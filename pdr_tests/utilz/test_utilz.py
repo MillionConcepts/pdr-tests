@@ -2,6 +2,7 @@ import datetime as dt
 import json
 import logging
 import os
+import shutil
 import warnings
 import xml.etree.ElementTree as ET
 from functools import cache
@@ -14,7 +15,6 @@ import pandas as pd
 import pvl
 import pyarrow as pa
 import requests
-import sh
 from dustgoggles.func import disjoint, intersection
 from rasterio.errors import NotGeoreferencedWarning
 
@@ -184,7 +184,9 @@ def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
     with open(Path(temp_path, Path(url).name), "wb+") as fp:
         for chunk in response.iter_content(chunk_size=10**7):
             fp.write(chunk)
-    sh.mv(Path(temp_path, Path(url).name), Path(data_path, Path(url).name))
+    shutil.move(
+        Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
+    )
     console_and_log(f"completed download of {url}.")
 
 
