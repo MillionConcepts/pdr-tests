@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-ggmro_095a_anom_085.LBL,"[""GGMRO_095A_ANOM_085.IMG"", ""ggmro_095a_anom_085.LBL"", ""DSMAP.CAT""]",GGMRO_095A_ANOM_085.IMG,http://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/rsdmap
+label_file,files,product_id,url_stem,hash
+ggmro_095a_anom_085.LBL,"[""GGMRO_095A_ANOM_085.IMG"", ""ggmro_095a_anom_085.LBL"", ""DSMAP.CAT""]",GGMRO_095A_ANOM_085.IMG,http://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/rsdmap,"{""LABEL"": ""b33896ca4979836e4e5bb5a9db4897be"", ""IMAGE"": ""06c6bcef575558def513d1f862b5f2ae""}"
