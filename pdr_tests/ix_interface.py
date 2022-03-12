@@ -9,7 +9,7 @@ from pdr_tests.datasets import (
     directory_to_index,
     MissingHashError,
 )
-from pdr_tests.utilz.test_utilz import console_and_log
+from pdr_tests.utilz.ix_utilz import console_and_log
 
 COMMANDS = [
     "sort",

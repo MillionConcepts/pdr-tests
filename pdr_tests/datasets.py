@@ -12,7 +12,7 @@ import pyarrow as pa
 from pyarrow import parquet
 
 import pdr
-from pdr_tests.utilz.test_utilz import (
+from pdr_tests.utilz.ix_utilz import (
     get_product_row,
     console_and_log,
     stamp,
