@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 from functools import cache
 from hashlib import md5
 from pathlib import Path
-from typing import Mapping, Sequence
+from typing import Mapping, Sequence, MutableMapping, Collection, Callable
 
 import numpy as np
 import pandas as pd
@@ -229,19 +229,35 @@ def compare_hashes(
     return problems
 
 
-def flip_ends_with(strings, ending):
+def flip_ends_with(strings: Collection[str], ending: str) -> Callable:
+    """partially-evaluated form of pa.compute.ends_with"""
     return pa.compute.ends_with(strings, pattern=ending)
 
 
-def read_and_hash(log_row, path, product, debug):
+def read_and_hash(
+    path: Path,
+    product: Mapping[str, str],
+    debug: bool
+) -> tuple[pdr.Data, dict[str, str]]:
+    """
+    read a product at a specified path, compute hashes from its data objects,
+    log appropriately
+    """
     data = pdr.read(str(path), debug=debug)
     console_and_log(f"Opened {product['product_id']}")
     hashes = just_hash(data)
     console_and_log(f"Computed hashes for {product['product_id']}")
-    return data, hashes, log_row
+    return data, hashes
 
 
-def record_comparison(test, reference, log_row):
+def record_comparison(
+    test: Mapping[str, str],
+    reference: Mapping[str, str],
+    log_row: MutableMapping[str, str]
+) -> MutableMapping[str, str]:
+    """
+    check product hashes against saved reference from hash file, record in log_row
+    """
     result = compare_hashes(test, reference)
     if result != {}:
         log_row["status"] = "hash mismatch"

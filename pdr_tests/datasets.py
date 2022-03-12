@@ -96,7 +96,10 @@ class ProductPicker(DatasetDefinition):
     #  the manifest a bunch of times, although it's very
     #  memory-efficient. idk. it might not be as bad as i think,
     #  though, unless we did clever segmentation of results on each group.
-    def make_product_list(self, product_type):
+    def make_product_list(self, product_type: str):
+        """
+        construct and write full-set parquet file for a given product type.
+        """
         if product_type is None:
             return self.across_all_types("make_product_list")
         os.makedirs(
@@ -119,7 +122,12 @@ class ProductPicker(DatasetDefinition):
         print(f"{len(products)} products found, {size_gb} estimated GB")
         parquet.write_table(products, self.complete_list_path(product_type))
 
-    def filter_table(self, product_type, table):
+    def filter_table(self, product_type: str, table: pa.Table) -> pa.Table:
+        """
+        construct list of filter functions -- methods of pa.compute --
+        based on selection rules for dataset and product type. apply them
+        to select examples of specified product type from manifest table.
+        """
         info = self.rules[product_type]
         filts = []
         if "url_must_contain" in info.keys():
@@ -149,6 +157,11 @@ class ProductPicker(DatasetDefinition):
         subset_size: int = 200,
         max_gb: float = 8,
     ):
+        """
+        randomly select a subset of products from a given product type; write
+        this subset to disk as a csv file. optionally specify subset size and
+        cap file size in GB.
+        """
         if product_type is None:
             return self.across_all_types("random_picks", subset_size, max_gb)
         print(
@@ -451,7 +464,7 @@ def test_product(
         "error": None,
     }
     try:
-        data, hashes, log_row = read_and_hash(log_row, path, product, debug)
+        data, hashes = read_and_hash(path, product, debug)
         if compare is True:
             if isinstance(product["hash"], float):
                 if np.isnan(product["hash"]):
