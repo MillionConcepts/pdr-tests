@@ -60,10 +60,3 @@ def reverse_sample_types(category, endian):
     if category == "v":
         return "MSB_BIT_STRING"
     raise ValueError
-
-
-mock = MockData()
-arr = np.array([[1, 2, 3]], dtype="<f4")
-mock.create_test_raster(arr)
-im = mock.read_image("IMAGE")
-assert (im == arr).all()
