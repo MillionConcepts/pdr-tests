@@ -67,14 +67,15 @@ def checksum_object(obj, hash_function=md5):
         #  behind the numpy API. this plausibly also affects ndarrays, but
         #  I don't know if we're ever working with ndarrays with object dtypes.
         blocks = obj._to_dict_of_blocks(copy=False)
-        for dtype, block in blocks.items():
+        # sorting to improve consistency between pandas versions
+        for dtype in sorted(blocks.keys()):
             # TODO, maybe: going by row or column is stunningly slow for
             #  really long or wide tables. trying this and seeing if it takes
             #  too much memory.
             if dtype == 'object':
                 # for ix in block.index:
                 #     hasher.update(str(block.loc[ix].tolist()).encode('utf-8'))
-                hasher.update(block.to_string().encode('utf-8'))
+                hasher.update(blocks[dtype].to_string().encode('utf-8'))
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
@@ -83,7 +84,7 @@ def checksum_object(obj, hash_function=md5):
                 #  object dtypes above -- which would be slower but smaller.
                 # for ix in block.index:
                 #     hasher.update(block.loc[ix].values.copy())
-                hasher.update(block.values.copy())
+                hasher.update(blocks[dtype].values.copy())
     else:
         # TODO: determine when this is and is not actually stable
         hasher.update(obj.__repr__().encode("utf-8"))
