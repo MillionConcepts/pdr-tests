@@ -98,6 +98,9 @@ def just_hash(data):
         # membership in OBJECTS_IGNORED_BY_DEFAULT (like MODEL_DESC)
         if not hasattr(data, key):
             continue
+        # ignore pvl objects for now
+        if isinstance(data[key], (pvl.PVLModule, pvl.PVLObject)):
+            continue
         hashes[key] = checksum_object(data[key])
     return hashes
 
@@ -198,8 +201,10 @@ def assemble_urls(subset: pd.DataFrame):
 
 
 def record_mismatches(results, absent, novel):
-    """Assigns strings of "missing from output" and "not found in reference" to
-    the value of the missing and new keys in the results dictionary."""
+    """
+    Assigns strings of "missing from output" and "not found in reference" to
+    the value of the missing and new keys in the results dictionary.
+    """
     for key in absent:
         results[key] = "missing from output"
     for key in novel:
@@ -239,13 +244,17 @@ def flip_ends_with(strings: Collection[str], ending: str) -> Callable:
 def read_and_hash(
     path: Path,
     product: Mapping[str, str],
-    debug: bool
+    debug: bool,
 ) -> tuple[pdr.Data, dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
     log appropriately
     """
-    data = pdr.read(str(path), debug=debug)
+    with warnings.catch_warnings():
+        # We don't want to hear about UserWarnings we're intentionally raising
+        # inside pdr (for things like unsupported object types, etc.)
+        warnings.filterwarnings("ignore", category=UserWarning, module="pdr")
+        data = pdr.read(str(path), debug=debug)
     console_and_log(f"Opened {product['product_id']}")
     hashes = just_hash(data)
     console_and_log(f"Computed hashes for {product['product_id']}")
@@ -258,7 +267,8 @@ def record_comparison(
     log_row: MutableMapping[str, str]
 ) -> MutableMapping[str, str]:
     """
-    check product hashes against saved reference from hash file, record in log_row
+    check product hashes against saved reference from hash file,
+    record in log_row
     """
     result = compare_hashes(test, reference)
     if result != {}:

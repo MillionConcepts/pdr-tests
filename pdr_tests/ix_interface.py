@@ -102,7 +102,7 @@ def test(
     if logs:
         import pandas as pd
 
-        pd.concat(logs, axis=1).to_csv(
+        pd.concat(logs).to_csv(
             "combined_test_log_latest.csv", index=False
         )
 
