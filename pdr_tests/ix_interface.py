@@ -1,4 +1,5 @@
 from ast import literal_eval
+from itertools import chain
 from pathlib import Path
 
 from pdr_tests.datasets import (
@@ -105,6 +106,23 @@ def test(
         pd.concat(logs).to_csv(
             "combined_test_log_latest.csv", index=False
         )
+
+
+def test_paths(dataset=None, product_type=None):
+    if dataset is None:
+        print("no dataset argument provided; listing all defined datasets")
+        datasets = [
+            d.name
+            for d in Path(Path(__file__).parent, "definitions").iterdir()
+            if (d.is_dir() and ("cache" not in d.name))
+        ]
+    else:
+        datasets = [dataset]
+    paths = []
+    for dataset in datasets:
+        lister = ProductChecker(dataset)
+        paths += lister.dump_test_paths(product_type)
+    return tuple(chain.from_iterable(paths))
 
 
 def index_directory(target, manifest, output="index.csv", debug=False):

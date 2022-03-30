@@ -17,11 +17,11 @@ import pvl
 import pyarrow as pa
 import requests
 from dustgoggles.func import disjoint, intersection
+from multidict import MultiDict
 from rasterio.errors import NotGeoreferencedWarning
 
 import pdr
-from pdr.pdr import decompress
-from pdr.utils import get_pds3_pointers, trim_label, check_cases
+from pdr.utils import get_pds3_pointers, trim_label, check_cases, decompress
 from pdr_tests.settings import headers
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
@@ -99,7 +99,7 @@ def just_hash(data):
         if not hasattr(data, key):
             continue
         # ignore pvl objects for now
-        if isinstance(data[key], (pvl.PVLModule, pvl.PVLObject)):
+        if isinstance(data[key], (pvl.PVLModule, pvl.PVLObject, MultiDict)):
             continue
         hashes[key] = checksum_object(data[key])
     return hashes
