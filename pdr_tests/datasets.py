@@ -318,6 +318,16 @@ class ProductChecker(DatasetDefinition):
         super().__init__(name)
     hash_rows, log_rows = {}, {}
 
+    def dump_test_paths(self, product_type):
+        if product_type is None:
+            return self.across_all_types("dump_test_paths")
+        index = pd.read_csv(self.test_path(product_type))
+        data_path = self.product_data_path(product_type)
+        return [
+            str(Path(data_path, product["label_file"]))
+            for ix, product in index.iterrows()
+        ]
+
     def compare_test_hashes(
         self,
         product_type,
