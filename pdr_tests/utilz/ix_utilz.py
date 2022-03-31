@@ -21,7 +21,9 @@ from multidict import MultiDict
 from rasterio.errors import NotGeoreferencedWarning
 
 import pdr
-from pdr.utils import get_pds3_pointers, trim_label, check_cases, decompress
+from pdr.utils import check_cases, decompress
+from pdr.parselabel.pds3 import get_pds3_pointers
+from pdr.parselabel.utils import trim_label
 from pdr_tests.settings import headers
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
