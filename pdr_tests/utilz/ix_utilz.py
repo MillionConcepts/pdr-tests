@@ -98,8 +98,11 @@ def just_hash(data):
         # membership in OBJECTS_IGNORED_BY_DEFAULT (like MODEL_DESC)
         if not hasattr(data, key):
             continue
-        # ignore pvl objects for now
-        if isinstance(data[key], (pvl.PVLModule, pvl.PVLObject, MultiDict)):
+        # ignore text-type objects for now
+        if isinstance(
+            data[key],
+            (pvl.PVLModule, pvl.PVLObject, MultiDict, str)
+        ):
             continue
         hashes[key] = checksum_object(data[key])
     return hashes
