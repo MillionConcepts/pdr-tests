@@ -98,7 +98,7 @@ def just_hash(data):
     for key in data.keys():
         # objects not loaded by default, whether due to lazy-loading or
         # membership in OBJECTS_IGNORED_BY_DEFAULT (like MODEL_DESC)
-        if not hasattr(data, key):
+        if key not in dir(data):
             continue
         # ignore text-type objects for now
         if isinstance(
@@ -260,6 +260,7 @@ def read_and_hash(
         # inside pdr (for things like unsupported object types, etc.)
         warnings.filterwarnings("ignore", category=UserWarning, module="pdr")
         data = pdr.read(str(path), debug=debug)
+        data.load("all")
     console_and_log(f"Opened {product['product_id']}")
     hashes = just_hash(data)
     console_and_log(f"Computed hashes for {product['product_id']}")
