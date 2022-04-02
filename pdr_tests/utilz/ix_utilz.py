@@ -46,12 +46,6 @@ def console_and_log(message, level="info", do_stamp=True):
     print(f"{stamp_txt}{message}")
 
 
-@cache
-def read_csv_cached(fn: str, *args, **kwargs) -> pd.DataFrame:
-    """Creates a pandas dataframe from an input csv file."""
-    return pd.read_csv(fn, *args, **kwargs)
-
-
 def checksum_object(obj, hash_function=md5):
     """
     make stable byte array from python object. the general case of this is,
