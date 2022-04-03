@@ -6,7 +6,6 @@ import os
 import shutil
 import warnings
 import xml.etree.ElementTree as ET
-from functools import cache
 from hashlib import md5
 from pathlib import Path
 from typing import Mapping, Sequence, MutableMapping, Collection, Callable
@@ -18,13 +17,13 @@ import pyarrow as pa
 import requests
 from dustgoggles.func import disjoint, intersection
 from multidict import MultiDict
-from rasterio.errors import NotGeoreferencedWarning
 
 import pdr
 from pdr.utils import check_cases, decompress
 from pdr.parselabel.pds3 import get_pds3_pointers
 from pdr.parselabel.utils import trim_label
 from pdr_tests.settings import headers
+from pdr_tests.utilz.dev_utilz import Stopwatch
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
@@ -32,8 +31,6 @@ DATA_ROOT = Path(Path(__file__).parent.parent, "data")
 pdrtestlog = logging.getLogger()
 pdrtestlog.addHandler(logging.FileHandler("pdrtests.log"))
 pdrtestlog.setLevel("INFO")
-
-warnings.filterwarnings("ignore", category=NotGeoreferencedWarning)
 
 
 def stamp() -> str:
@@ -244,21 +241,31 @@ def read_and_hash(
     path: Path,
     product: Mapping[str, str],
     debug: bool,
-) -> tuple[pdr.Data, dict[str, str]]:
+) -> tuple[pdr.Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
     log appropriately
     """
+    watch, runtimes = Stopwatch(digits=3, silent=True), {}
     with warnings.catch_warnings():
         # We don't want to hear about UserWarnings we're intentionally raising
         # inside pdr (for things like unsupported object types, etc.)
         warnings.filterwarnings("ignore", category=UserWarning, module="pdr")
+        watch.start()
         data = pdr.read(str(path), debug=debug)
         data.load("all")
-    console_and_log(f"Opened {product['product_id']}")
+        runtimes["readtime"] = watch.peek()
+    console_and_log(
+        f"Opened {product['product_id']} ({runtimes['readtime']} s)"
+    )
+    watch.click()
     hashes = just_hash(data)
-    console_and_log(f"Computed hashes for {product['product_id']}")
-    return data, hashes
+    runtimes['hashtime'] = watch.peek()
+    console_and_log(
+        f"Computed hashes for {product['product_id']} "
+        f"({runtimes['hashtime']} s)"
+    )
+    return data, hashes, runtimes
 
 
 def record_comparison(

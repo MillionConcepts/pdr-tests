@@ -23,6 +23,7 @@ from pdr_tests.utilz.ix_utilz import (
     read_and_hash,
     record_comparison,
 )
+from pdr_tests.utilz.dev_utilz import FakeStopwatch, Stopwatch
 
 
 # ############ INDEX & TESTING CLASSES #############
@@ -472,9 +473,11 @@ def test_product(
         "product_id": product["product_id"],
         "status": "ok",
         "error": None,
+        "hashtime": None,
+        "readtime": None
     }
     try:
-        data, hashes = read_and_hash(path, product, debug)
+        data, hashes, runtimes = read_and_hash(path, product, debug)
         if compare is True:
             if isinstance(product["hash"], float):
                 if np.isnan(product["hash"]):
@@ -483,6 +486,7 @@ def test_product(
                 hashes, json.loads(product["hash"]), log_row
             )
         hash_json = json.dumps(hashes)
+        log_row |= runtimes
     except MissingHashError:
         console_and_log(
             "Hash column present but hash value missing for one or more "
