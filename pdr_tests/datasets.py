@@ -494,7 +494,6 @@ def test_product(
     except KeyboardInterrupt:
         raise
     except Exception as ex:
-        raise
         log_row["status"] = "read exception"
         log_row["error"] = f"{type(ex)}: {ex}".replace(",", ";")
     output_string = f"status: {log_row['status']}"
