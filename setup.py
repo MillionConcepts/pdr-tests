@@ -19,5 +19,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",
-    install_requires=["pytest", "pdr"],
+    install_requires=["pdr", "pyarrow", "requests", "clize", "pytest"],
 )
