@@ -398,6 +398,8 @@ class ProductChecker(DatasetDefinition):
 
     def write_test_log(self, product_type):
         log_df = pd.DataFrame.from_dict(self.log_rows, orient="index")
+        log_df["dataset"] = self.dataset
+        log_df["product_type"] = product_type
         timestamp = stamp()[:-2].replace(":", "_").replace("-", "_")
         Path(self.def_path, "logs").mkdir(exist_ok=True)
         log_df.to_csv(
