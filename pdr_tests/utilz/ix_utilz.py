@@ -12,7 +12,6 @@ from typing import Mapping, Sequence, MutableMapping, Collection, Callable
 
 import numpy as np
 import pandas as pd
-import pvl
 import pyarrow as pa
 import requests
 from dustgoggles.func import disjoint, intersection
@@ -20,7 +19,7 @@ from multidict import MultiDict
 
 import pdr
 from pdr.utils import check_cases, decompress
-from pdr.parselabel.pds3 import get_pds3_pointers
+from pdr.parselabel.pds3 import get_pds3_pointers, read_pvl_label
 from pdr.parselabel.utils import trim_label
 from pdr_tests.settings import headers
 from pdr_tests.utilz.dev_utilz import Stopwatch
@@ -92,10 +91,7 @@ def just_hash(data):
         if key not in dir(data):
             continue
         # ignore text-type objects for now
-        if isinstance(
-            data[key],
-            (pvl.PVLModule, pvl.PVLObject, MultiDict, str)
-        ):
+        if isinstance(data[key], (MultiDict, str)):
             continue
         hashes[key] = checksum_object(data[key])
     return hashes
@@ -119,7 +115,7 @@ def make_pds4_row(xmlfile):
 
 
 def make_pds3_row(local_path):
-    label = pvl.loads(trim_label(decompress(str(local_path))))
+    label = read_pvl_label(trim_label(decompress(str(local_path))))
     pointer_targets = get_pds3_pointers(label)
     targets = [pt[1] for pt in pointer_targets]
     files = [local_path.name]
