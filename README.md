@@ -1,5 +1,5 @@
 # pdr-tests
-This repository contains the test suite for [pdr](https://github.com/MillionConcepts/pdr). The test suite is pre-alpha and we do not recommend its use for any purpose whatsoever.
+This repository contains the testing suite / toolchain for [pdr](https://github.com/MillionConcepts/pdr). This software is at functional alpha status and in active use for both development and regression testing. You may do almost anything you want with it, subject to the extremely permissive terms of the BSD 3-Clause License. However, no documentation is presently available, and so we do not particularly recommend its use to external parties: caveat emptor.
 
 ----
 
