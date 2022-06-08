@@ -33,15 +33,9 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 PLASM_FILE = Path(MANIFEST_DIR, "plasm.parquet")
 
 file_information = {
-    "EDR_dat": {
+    "EDR": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.DAT'],
-        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-EDR-'],
-        "label": "D",
-    },
-    "EDR_tab": {
-        "manifest": PLASM_FILE,
-        "fn_must_contain": ['.TAB'],
         "url_must_contain": ['/data/', 'GO-', '-MAG-', '-EDR-'],
         "label": "D",
     },
