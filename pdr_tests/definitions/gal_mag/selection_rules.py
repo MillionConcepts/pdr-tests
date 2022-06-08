@@ -30,39 +30,43 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquet")
+PLASM_FILE = Path(MANIFEST_DIR, "plasm.parquet")
 
 file_information = {
-    "EDR": {
-        "manifest": GEO_MRO_FILE,
-        "fn_must_contain": ['_f.dat'],
-        "url_must_contain": ['/mex/', "-edr-"],
+    "EDR_dat": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-EDR-'],
         "label": "D",
     },
-    "SS_RDR": {
-        "manifest": GEO_MRO_FILE,
-        "fn_must_contain": ['_cmp_m.dat'],
-        "url_must_contain": ["/mex/", '-rdr-ss-'],
+    "EDR_tab": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-EDR-'],
         "label": "D",
     },
-    # we appear to not be able to read these (AIS_RDR) due to an inconsistent format file
-    "AIS_RDR": {
-        "manifest": GEO_MRO_FILE,
-        "fn_must_contain": ['_ais_rdr_', '.dat'],
-        "url_must_contain": ['/mex/', '-rdr-ais-'],
+    "REDR": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-REDR-'],
         "label": "D",
     },
-    "TEC_DDR": {
-        "manifest": GEO_MRO_FILE,
-        "fn_must_contain": ['tec_ddr', '.tab'],
-        "url_must_contain": ['/mex/', '-ddr-ss-tec-'],
+    "RDR_tab": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-RDR-'],
         "label": "D",
     },
-    "ELEDENS_BMAG_DDR": {
-        "manifest": GEO_MRO_FILE,
-        "fn_must_contain": ['_bmag_ddr', '.csv'],
-        "url_must_contain": ['/mex/', "-ddr-eledens-bmag-"],
+    "RDR_dat": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-RDR-'],
         "label": "D",
     },
-
+    "SUMM": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-SUMM-'],
+        "label": "D",
+    }
 }
