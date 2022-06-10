@@ -30,39 +30,43 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-GEO_MEX_FILE = Path(MANIFEST_DIR, "geomex.parquet")
+GEO_MESSENGER_FILE = Path(MANIFEST_DIR, "geomessenger.parquet")
 
 file_information = {
-    "EDR": {
-        "manifest": GEO_MEX_FILE,
-        "fn_must_contain": ['_f.dat'],
-        "url_must_contain": ['/mex/', "-edr-"],
+    "ns_CDR": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['grns', "/cdr/", '-ns-'],
         "label": "D",
     },
-    "SS_RDR": {
-        "manifest": GEO_MEX_FILE,
-        "fn_must_contain": ['_cmp_m.dat'],
-        "url_must_contain": ["/mex/", '-rdr-ss-'],
+    "ns_DDR": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['grns', "/ddr/", '-ns-'],
         "label": "D",
     },
-    # we appear to not be able to read these (AIS_RDR) due to an inconsistent format file
-    "AIS_RDR": {
-        "manifest": GEO_MEX_FILE,
-        "fn_must_contain": ['_ais_rdr_', '.dat'],
-        "url_must_contain": ['/mex/', '-rdr-ais-'],
+    "grs_DAP": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['grns', '/maps/', '-grs-'],
         "label": "D",
     },
-    "TEC_DDR": {
-        "manifest": GEO_MEX_FILE,
-        "fn_must_contain": ['tec_ddr', '.tab'],
-        "url_must_contain": ['/mex/', '-ddr-ss-tec-'],
+    "grs_CDRRDR": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['grns', '/grs_eng/'],
         "label": "D",
     },
-    "ELEDENS_BMAG_DDR": {
-        "manifest": GEO_MEX_FILE,
-        "fn_must_contain": ['_bmag_ddr', '.csv'],
-        "url_must_contain": ['/mex/', "-ddr-eledens-bmag-"],
+    "ns_EDR": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".dat"],
+        "url_must_contain": ['grns', "-ns-rawdata-"],
         "label": "D",
     },
-
+    "grs_EDR": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".dat"],
+        "url_must_contain": ['grns', '-grs-rawdata-'],
+        "label": "D",
+    },
 }
