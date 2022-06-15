@@ -118,7 +118,10 @@ class ProductPicker(DatasetDefinition):
                 )
             )
         products = pa.concat_tables(results)
-        size_gb = round(pa.compute.sum(products["size"]).as_py() / 10**9, 2)
+        try:
+            size_gb = round(pa.compute.sum(products["size"]).as_py() / 10**9, 2)
+        except TypeError:
+            print('No matches found, please check selection_rules and try again.')
         # TODO: this estimate is bad for products with several large files
         print(f"{len(products)} products found, {size_gb} estimated GB")
         parquet.write_table(products, self.complete_list_path(product_type))
