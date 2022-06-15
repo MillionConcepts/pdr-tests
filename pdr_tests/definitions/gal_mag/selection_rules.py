@@ -42,25 +42,25 @@ file_information = {
     "REDR": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.DAT'],
-        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-REDR-'],
+        "url_must_contain": ['GO-', '-MAG-', '-REDR-'],
         "label": "D",
     },
     "RDR_tab": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.TAB'],
-        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-RDR-'],
+        "url_must_contain": ['GO-', '-MAG-', '-RDR-'],
         "label": "D",
     },
     "RDR_dat": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.DAT'],
-        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-RDR-'],
+        "url_must_contain": ['GO-', '-MAG-', '-RDR-'],
         "label": "D",
     },
     "SUMM": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.TAB'],
-        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-SUMM-'],
+        "url_must_contain": ['GO-', '-MAG-', '-SUMM-'],
         "label": "D",
     }
 }
