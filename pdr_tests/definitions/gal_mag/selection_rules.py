@@ -36,7 +36,7 @@ file_information = {
     "EDR": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.DAT'],
-        "url_must_contain": ['/data/', 'GO-', '-MAG-', '-EDR-'],
+        "url_must_contain": ['GO-', '-MAG-', '-EDR-'],
         "label": "D",
     },
     "REDR": {
