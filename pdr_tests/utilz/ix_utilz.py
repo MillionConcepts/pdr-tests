@@ -115,7 +115,7 @@ def make_pds4_row(xmlfile):
 
 
 def make_pds3_row(local_path):
-    label = read_pvl_label(str(local_path))
+    label, _ = read_pvl_label(str(local_path))
     pointer_targets = get_pds3_pointers(label)
     targets = [pt[1] for pt in pointer_targets]
     files = [local_path.name]
