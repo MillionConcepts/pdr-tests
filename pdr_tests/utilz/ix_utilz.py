@@ -115,11 +115,11 @@ def make_pds4_row(xmlfile):
 
 
 def make_pds3_row(local_path):
-    label, _ = read_pvl_label(str(local_path))
-    pointer_targets = get_pds3_pointers(label)
-    targets = [pt[1] for pt in pointer_targets]
+    metadata = pdr.Metadata(read_pvl_label(str(local_path)))
+    pointers = get_pds3_pointers(metadata)
     files = [local_path.name]
-    for target in targets:
+    for pointer in pointers:
+        target = metadata.metaget_(pointer)
         if isinstance(target, str):
             files.append(target)
         elif isinstance(target, Sequence):
@@ -133,8 +133,8 @@ def make_pds3_row(local_path):
         "label_file": local_path.name,
         "files": json.dumps(files),
     }
-    if "PRODUCT_ID" in label.keys():
-        row["product_id"] = label["PRODUCT_ID"]
+    if "PRODUCT_ID" in metadata.fieldcounts.keys():
+        row["product_id"] = metadata.metaget_("PRODUCT_ID")
     else:
         row["product_id"] = local_path.stem
     return row
