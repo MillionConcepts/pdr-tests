@@ -33,12 +33,13 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 PLASM_FILE = Path(MANIFEST_DIR, "plasm.parquet")
 
 file_information = {
-    "EDR": {
-        "manifest": PLASM_FILE,
-        "fn_must_contain": ['.DAT'],
-        "url_must_contain": ['GO-', '-MAG-', '-EDR-'],
-        "label": "D",
-    },
+    # EDR officially unsupported.
+    # "EDR": {
+    #     "manifest": PLASM_FILE,
+    #     "fn_must_contain": ['.DAT'],
+    #     "url_must_contain": ['GO-', '-MAG-', '-EDR-'],
+    #     "label": "D",
+    # },
     "REDR": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.DAT'],
