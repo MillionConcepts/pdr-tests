@@ -126,6 +126,8 @@ def make_pds3_row(local_path):
             files.append(target[0])
         elif isinstance(target, int):
             continue
+        elif isinstance(target, set):
+            continue
         else:
             raise TypeError("what is this?")
     files = list(set(files))
