@@ -36,25 +36,25 @@ file_information = {
     "ns_CDR": {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": [".tab"],
-        "url_must_contain": ['grns', "/cdr/", '-ns-'],
+        "url_must_contain": ['grns', "/cdr", '-ns-'],
         "label": "D",
     },
     "ns_DDR": {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": [".tab"],
-        "url_must_contain": ['grns', "/ddr/", '-ns-'],
+        "url_must_contain": ['grns', "/ddr", '-ns-'],
         "label": "D",
     },
     "grs_DAP": {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['grns', '/maps/', '-grs-'],
+        "url_must_contain": ['grns', '/maps', '-grs-'],
         "label": "D",
     },
     "grs_CDRRDR": {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": ['.dat'],
-        "url_must_contain": ['grns', '/grs_eng/'],
+        "url_must_contain": ['grns', '/grs_eng'],
         "label": "D",
     },
     "ns_EDR": {
