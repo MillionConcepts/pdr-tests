@@ -47,8 +47,8 @@ file_information = {
     },
     "grs_DAP": {
         "manifest": GEO_MESSENGER_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['grns', '/maps', '-grs-'],
+        "fn_must_contain": ['grs_dap', '.img'],
+        "url_must_contain": ['grns', 'maps'],
         "label": "D",
     },
     "grs_CDRRDR": {
