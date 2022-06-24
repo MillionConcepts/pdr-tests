@@ -49,6 +49,6 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.TNF'],
         "url_must_contain": ['jnogrv'],
-        "label": "D",
+        "label": ('.TNF', '.xml'),
     },
 }
