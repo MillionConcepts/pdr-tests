@@ -42,7 +42,7 @@ file_information = {
     "MAPS": {
         "manifest": IMG_USGS_FILE,
         "fn_must_contain": [".IMG"],
-        "url_must_contain": ['JunoCam', "/GLOBAL_MAPS/"],
+        "url_must_contain": ['JunoCam', "GLOBAL_MAPS"],
         "label": "D",
     },
     "RDR": {
