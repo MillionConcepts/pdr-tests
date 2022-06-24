@@ -535,7 +535,7 @@ def pluck_row_from_manifest(file, manifest, product_rows):
     match = parquet.read_table(
         manifest, filters=[("filename", "=", file.name)]
     )
-    assert len(match) == 1, f"{file.name} not found in manifest"
+    assert len(match) >= 1, f"{file.name} not found in manifest"
     match = match.to_pandas().iloc[0]
     row = get_product_row(file, assemble_urls(match))
     product_rows.append(row)
