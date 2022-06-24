@@ -78,7 +78,7 @@ file_information = {
     "SPE_EDR": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.DAT', "SPE_EDR"],
-        'url_must_contain': ['juno-jiram-bundle', '/data_raw/'],
+        'url_must_contain': ['juno_jiram_bundle', '/data_raw/'],
         "label": "D",
     },
 }
