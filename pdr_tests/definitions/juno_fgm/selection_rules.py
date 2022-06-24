@@ -40,5 +40,6 @@ file_information = {
         "fn_must_contain": [".sts"],
         "url_must_contain": ['JNO', "FGM-CAL"],
         "label": "D",
+        "label_name": (".sts", ".lbl")
     },
 }
