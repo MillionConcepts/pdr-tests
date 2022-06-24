@@ -178,7 +178,9 @@ def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
     console_and_log(f"attempting to download {url}.")
     response = requests.get(url, stream=True, headers=headers)
     if not response.ok:
-        response = requests.get(url.lower(), stream=True, headers=headers)
+        urlsplit = url.split('.')
+        url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
+        response = requests.get(url, stream=True, headers=headers)
         if not response.ok:
             console_and_log(f"Download of {url} failed.")
             return
