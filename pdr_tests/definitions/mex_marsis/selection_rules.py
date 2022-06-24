@@ -36,32 +36,32 @@ file_information = {
     "EDR": {
         "manifest": GEO_MEX_FILE,
         "fn_must_contain": ['_f.dat'],
-        "url_must_contain": ['/mex/', "-edr-"],
+        "url_must_contain": ["-edr-"],
         "label": "D",
     },
     "SS_RDR": {
         "manifest": GEO_MEX_FILE,
         "fn_must_contain": ['_cmp_m.dat'],
-        "url_must_contain": ["/mex/", '-rdr-ss-'],
+        "url_must_contain": ['-rdr-ss-'],
         "label": "D",
     },
     # we appear to not be able to read these (AIS_RDR) due to an inconsistent format file
     "AIS_RDR": {
         "manifest": GEO_MEX_FILE,
         "fn_must_contain": ['_ais_rdr_', '.dat'],
-        "url_must_contain": ['/mex/', '-rdr-ais-'],
+        "url_must_contain": ['-rdr-ais-'],
         "label": "D",
     },
     "TEC_DDR": {
         "manifest": GEO_MEX_FILE,
         "fn_must_contain": ['tec_ddr', '.tab'],
-        "url_must_contain": ['/mex/', '-ddr-ss-tec-'],
+        "url_must_contain": ['-ddr-ss-tec-'],
         "label": "D",
     },
     "ELEDENS_BMAG_DDR": {
         "manifest": GEO_MEX_FILE,
         "fn_must_contain": ['_bmag_ddr', '.csv'],
-        "url_must_contain": ['/mex/', "-ddr-eledens-bmag-"],
+        "url_must_contain": ["-ddr-eledens-bmag-"],
         "label": "D",
     },
 
