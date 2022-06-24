@@ -39,7 +39,6 @@ file_information = {
         "manifest": PLASM_FILE,
         "fn_must_contain": [".sts"],
         "url_must_contain": ['JNO', "FGM-CAL"],
-        "label": "D",
-        "label_name": (".sts", ".lbl")
+        "label": (".sts", ".lbl"),
     },
 }
