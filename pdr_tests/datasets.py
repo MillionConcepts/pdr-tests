@@ -249,7 +249,7 @@ class IndexMaker(DatasetDefinition):
                 )
             else:
                 subset["filename"] = subset["filename"].map(
-                    lambda fn: Path(fn).with_suffix(".lbl").name
+                    lambda fn: Path(fn).with_suffix(".LBL").name
                 )
         subset["url"] = assemble_urls(subset)
         subset["path"] = subset["filename"].map(
