@@ -125,9 +125,9 @@ def test_paths(dataset=None, product_type=None):
     return tuple(chain.from_iterable(paths))
 
 
-def index_directory(target, manifest, output="index.csv", debug=False):
+def index_directory(target, manifest, output="index.csv", debug=False, filters=None):
     """simple wrapper for datasets.directory_to_index"""
-    directory_to_index(target, manifest, output, debug)
+    directory_to_index(target, manifest, output, debug, filters)
 
 
 def ix_help(*_, **__):
