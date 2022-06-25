@@ -558,6 +558,6 @@ def filter_by_substring(matches, filters):
             n = n + [fil[1]]
     matches = matches.to_pandas()
     for i in range(len(matches)):
-        if all(sub in matches.iloc[i] for sub in y) and not any(sub in matches.iloc[i] for sub in n):
+        if all(sub in matches.iloc[i].url for sub in y) and not any(sub in matches.iloc[i].url for sub in n):
             match = matches.to_pandas().iloc[i]
             return match
