@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 import pyarrow as pa
 from pyarrow import parquet
+import warnings
 
 import pdr
 from pdr_tests.utilz.ix_utilz import (
@@ -512,7 +513,7 @@ def test_product(
     return data, hash_json, log_row
 
 
-def directory_to_index(target, manifest, output="index.csv", debug=False):
+def directory_to_index(target, manifest, output="index.csv", debug=False, filters=None):
     """
     standalone function for producing an index from all labels in a directory.
     does not rely on a dataset definitions module. does require a manifest.
@@ -520,7 +521,7 @@ def directory_to_index(target, manifest, output="index.csv", debug=False):
     product_rows = []
     for file in Path(target).iterdir():
         try:
-            pluck_row_from_manifest(file, manifest, product_rows)
+            pluck_row_from_manifest(file, manifest, product_rows, filters)
         except KeyboardInterrupt:
             raise
         except Exception as ex:
@@ -530,12 +531,33 @@ def directory_to_index(target, manifest, output="index.csv", debug=False):
     pd.DataFrame(product_rows).to_csv(output, index=False)
 
 
-def pluck_row_from_manifest(file, manifest, product_rows):
+def pluck_row_from_manifest(file, manifest, product_rows, filters=None):
     """inner row constructor for index_directory"""
     match = parquet.read_table(
         manifest, filters=[("filename", "=", file.name)]
     )
     assert len(match) >= 1, f"{file.name} not found in manifest"
-    match = match.to_pandas().iloc[0]
+    if len(match) > 1:
+        warnings.warn(f'There are multiple matches to {file.name}. '
+                      f'If necessary to differentiate use filters=[("y/n", "substring_in_url")]')
+        if filters:
+            match = filter_by_substring(match, filters)
+        else:
+            match = match.to_pandas().iloc[0]
     row = get_product_row(file, assemble_urls(match))
     product_rows.append(row)
+
+
+def filter_by_substring(matches, filters):
+    y = []
+    n = []
+    for fil in filters:
+        if fil[0] == 'y':
+            y = y + [fil[1]]
+        if fil[1] == 'n':
+            n = n + [fil[1]]
+    matches = matches.to_pandas()
+    for i in range(len(matches)):
+        if all(sub in matches.iloc[i] for sub in y) and not any(sub in matches.iloc[i] for sub in n):
+            match = matches.to_pandas().iloc[i]
+            return match
