@@ -531,7 +531,7 @@ def directory_to_index(target, manifest, output="index.csv", debug=False, filter
     pd.DataFrame(product_rows).to_csv(output, index=False)
 
 
-def pluck_row_from_manifest(file, manifest, product_rows, filters=None):
+def pluck_row_from_manifest(file, manifest, product_rows, filters):
     """inner row constructor for index_directory"""
     match = parquet.read_table(
         manifest, filters=[("filename", "=", file.name)]
