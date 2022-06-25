@@ -554,7 +554,7 @@ def filter_by_substring(matches, filters):
     for fil in filters:
         if fil[0] == 'y':
             y = y + [fil[1]]
-        if fil[1] == 'n':
+        if fil[0] == 'n':
             n = n + [fil[1]]
     matches = matches.to_pandas()
     for i in range(len(matches)):
