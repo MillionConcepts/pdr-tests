@@ -539,11 +539,11 @@ def pluck_row_from_manifest(file, manifest, product_rows, filters):
     assert len(match) >= 1, f"{file.name} not found in manifest"
     if len(match) > 1:
         warnings.warn(f'There are multiple matches to {file.name}. '
-                      f'If necessary to differentiate use filters=[("y/n", "substring_in_url")]')
-        if filters:
-            match = filter_by_substring(match, filters)
-        else:
-            match = match.to_pandas().iloc[0]
+                      f'If necessary to differentiate use filters="[("y/n", "substring_in_url")]"')
+    if filters: 
+        match = filter_by_substring(match, filters)
+    else:
+        match = match.to_pandas().iloc[0]
     row = get_product_row(file, assemble_urls(match))
     product_rows.append(row)
 
@@ -559,5 +559,5 @@ def filter_by_substring(matches, filters):
     matches = matches.to_pandas()
     for i in range(len(matches)):
         if all(sub in matches.iloc[i].url for sub in y) and not any(sub in matches.iloc[i].url for sub in n):
-            match = matches.to_pandas().iloc[i]
+            match = matches.iloc[i]
             return match

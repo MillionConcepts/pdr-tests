@@ -127,6 +127,8 @@ def test_paths(dataset=None, product_type=None):
 
 def index_directory(target, manifest, output="index.csv", debug=False, filters=None):
     """simple wrapper for datasets.directory_to_index"""
+    if filters is not None:
+        filters = literal_eval(filters)
     directory_to_index(target, manifest, output, debug, filters)
 
 
