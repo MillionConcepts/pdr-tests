@@ -443,6 +443,7 @@ class ProductChecker(DatasetDefinition):
             self.product_data_path(product_type), product["label_file"]
         )
         data = pdr.read(str(path))
+        data.load("all")
         console_and_log(f"opened {product['product_id']}")
         if dump_browse:
             console_and_log(
