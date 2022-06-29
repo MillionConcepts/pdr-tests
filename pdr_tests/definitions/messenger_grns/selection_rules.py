@@ -55,7 +55,7 @@ file_information = {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['grns', '/grs_eng'],
-        "label": "D",
+        "label": ('.dat', '.xml'),
     },
     "ns_EDR": {
         "manifest": GEO_MESSENGER_FILE,
