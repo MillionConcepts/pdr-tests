@@ -43,13 +43,13 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_must_contain": [".TAB", "LOG_IMG_RDR"],
         "url_must_contain": ['juno_jiram_bundle', "/data_calibrated/"],
-        "label": ('.tab', '.xml'),
+        "label": ('.TAB', '.xml'),
     },
     "LOG_SPE_RDR": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.TAB', "LOG_SPE_RDR"],
         "url_must_contain": ['juno_jiram_bundle', '/data_calibrated/'],
-        "label": ('.tab', '.xml'),
+        "label": ('.TAB', '.xml'),
     },
     "SPE_RDR": {
         "manifest": ATM_FILE,
@@ -67,13 +67,13 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_must_contain": [".TAB", "LOG_IMG_EDR"],
         "url_must_contain": ['juno_jiram_bundle', '/data_raw/'],
-        "label": ('.tab', '.xml'),
+        "label": ('.TAB', '.xml'),
     },
     "LOG_SPE_EDR": {
         "manifest": ATM_FILE,
         "fn_must_contain": [".TAB", "LOG_SPE_EDR"],
         "url_must_contain": ['juno_jiram_bundle', "/data_raw/"],
-        "label": ('.tab', '.xml'),
+        "label": ('.TAB', '.xml'),
     },
     "SPE_EDR": {
         "manifest": ATM_FILE,
