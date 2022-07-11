@@ -104,6 +104,7 @@ def get_nodelist(xmlfile):
 def make_pds4_row(xmlfile):
     nodelist = get_nodelist(xmlfile)
     return {
+        "label_file": str(xmlfile).split('/')[-1],
         "product_id": next(
             node for node in nodelist if "logical_identifier" in node.tag
         ).text,
