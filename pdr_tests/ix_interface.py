@@ -7,6 +7,7 @@ from pdr_tests.datasets import (
     IndexMaker,
     IndexDownloader,
     ProductChecker,
+    S3Uploader,
     directory_to_index,
     MissingHashError,
 )
@@ -20,6 +21,7 @@ COMMANDS = [
     "check",
     "test",
     "index_directory",
+    "subset_upload"
 ]
 
 
@@ -123,6 +125,15 @@ def test_paths(dataset=None, product_type=None):
         lister = ProductChecker(dataset)
         paths += lister.dump_test_paths(product_type)
     return tuple(chain.from_iterable(paths))
+
+
+def upload(dataset=None, product_type=None):
+    if dataset is None:
+        print("Upload requires a dataset argument. We don't want to re-upload all the files in the s3 bucket.")
+        return
+    else:
+        uploader = S3Uploader(dataset)
+        uploader.upload_test_subset(dataset, product_type)
 
 
 def index_directory(target, manifest, output="index.csv", debug=False, filters=None):

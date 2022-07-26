@@ -466,6 +466,37 @@ class ProductChecker(DatasetDefinition):
         data.dump_browse(**kwargs)
 
 
+class S3Uploader(DatasetDefinition):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def upload_test_subset(self, dataset, product_type):
+        if product_type is None:
+            return self.across_all_types("upload_test_subset")
+        if not self.test_path(product_type).is_file():
+            self.create_test_subset_csv(product_type)
+        self.upload_to_s3(dataset, product_type)
+
+    def create_test_subset_csv(self, product_type):
+        with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
+            index_length = sum(1 for _ in index_f)
+            integer_choice = np.random.choice(np.arange(1, index_length))
+            for pos, line in enumerate(index_f):
+                if pos == 0 or integer_choice:
+                    test_f.write(line)
+
+    def upload_to_s3(self, dataset, product_type):
+        import killscreen.aws.s3.Bucket as Ks
+        with open(self.test_path(product_type)) as test_f:
+            next(test_f)
+            for line in test_f:
+                file_list = line.replace(']', '[').split('[')[1].replace('"','').split(',')
+                for file in file_list:
+                    Ks.put(bucket='mc-pdr-permanent-test-corpus',
+                           obj=Path(self.product_data_path(product_type),file),
+                           key=f'{dataset}/{product_type}/{file}')
+
+
 # ############## STANDALONE / HANDLER FUNCTIONS ###############
 
 def test_product(
