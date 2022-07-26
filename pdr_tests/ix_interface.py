@@ -128,6 +128,7 @@ def test_paths(dataset=None, product_type=None):
 
 
 def upload(dataset=None, product_type=None):
+    """Creates a test subset (if necessary) and uploads relevant test files to s3."""
     if dataset is None:
         print("Upload requires a dataset argument. We don't want to re-upload all the files in the s3 bucket.")
         return

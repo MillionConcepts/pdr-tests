@@ -492,9 +492,12 @@ class S3Uploader(DatasetDefinition):
             for line in test_f:
                 file_list = line.replace(']', '[').split('[')[1].replace('"','').split(',')
                 for file in file_list:
-                    Ks.put(bucket='mc-pdr-permanent-test-corpus',
-                           obj=Path(self.product_data_path(product_type),file),
-                           key=f'{dataset}/{product_type}/{file}')
+                    try:
+                        Ks.put(bucket='mc-pdr-permanent-test-corpus',
+                               obj=Path(self.product_data_path(product_type), file),
+                               key=f'{dataset}/{product_type}/{file}')
+                    except FileNotFoundError:
+                        print(f'{file} not present in subset folder. Please go get it and retry.')
 
 
 # ############## STANDALONE / HANDLER FUNCTIONS ###############
