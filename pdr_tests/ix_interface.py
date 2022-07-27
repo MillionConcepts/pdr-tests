@@ -127,7 +127,7 @@ def test_paths(dataset=None, product_type=None):
     return tuple(chain.from_iterable(paths))
 
 
-def upload(dataset=None, product_type=None, *, product=None, regen: "r" = False):
+def upload(dataset=None, product_type=None, product=None, *, regen: "r" = False):
     """Creates a test subset (if necessary) and uploads relevant test files to s3."""
     if dataset is None:
         print("Upload requires a dataset argument. We don't want to re-upload all the files in the s3 bucket.")
