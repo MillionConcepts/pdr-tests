@@ -134,7 +134,7 @@ def upload(dataset=None, product_type=None):
         return
     else:
         uploader = S3Uploader(dataset)
-        uploader.upload_test_subset(dataset, product_type)
+        uploader.upload_test_subset(product_type)
 
 
 def index_directory(target, manifest, output="index.csv", debug=False, filters=None):

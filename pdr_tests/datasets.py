@@ -470,12 +470,12 @@ class S3Uploader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def upload_test_subset(self, dataset, product_type):
+    def upload_test_subset(self, product_type):
         if product_type is None:
             return self.across_all_types("upload_test_subset")
         if not self.test_path(product_type).is_file():
             self.create_test_subset_csv(product_type)
-        self.upload_to_s3(dataset, product_type)
+        self.upload_to_s3(product_type)
 
     def create_test_subset_csv(self, product_type):
         with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
@@ -485,7 +485,7 @@ class S3Uploader(DatasetDefinition):
                 if pos == 0 or integer_choice:
                     test_f.write(line)
 
-    def upload_to_s3(self, dataset, product_type):
+    def upload_to_s3(self, product_type):
         import killscreen.aws.s3.Bucket as Ks
         with open(self.test_path(product_type)) as test_f:
             next(test_f)
@@ -495,7 +495,7 @@ class S3Uploader(DatasetDefinition):
                     try:
                         Ks.put(bucket='mc-pdr-permanent-test-corpus',
                                obj=Path(self.product_data_path(product_type), file),
-                               key=f'{dataset}/{product_type}/{file}')
+                               key=f'{self.dataset}/{product_type}/{file}')
                     except FileNotFoundError:
                         print(f'{file} not present in subset folder. Please go get it and retry.')
 
