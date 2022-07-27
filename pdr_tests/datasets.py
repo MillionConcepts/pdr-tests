@@ -490,8 +490,10 @@ class S3Uploader(DatasetDefinition):
                 for pos, line in enumerate(index_f):
                     if pos == 0 or product in line:
                         test_f.write(line)
+                        print('I added a line')
                     test_f.seek(0)
                     test_length = sum(1 for _ in index_f)
+                    print(f'test_length = {test_length}')
                     if test_length < 2:
                         print(f'{product} not found in {self.dataset} {product_type} index. '
                               f'Check your spelling and try again using regen=True.')
