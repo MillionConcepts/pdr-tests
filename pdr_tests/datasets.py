@@ -470,21 +470,31 @@ class S3Uploader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def create_and_upload_test_subset(self, product_type):
+    def create_and_upload_test_subset(self, product_type, product=None, regen=False):
         if product_type is None:
             return self.across_all_types("create_and_upload_test_subset")
-        if not self.test_path(product_type).is_file():
-            self.create_test_subset_csv(product_type)
+        if not self.test_path(product_type).is_file() or regen:
+            self.create_test_subset_csv(product_type, product)
         self.upload_to_s3(product_type)
 
-    def create_test_subset_csv(self, product_type):
+    def create_test_subset_csv(self, product_type, product):
         with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
-            index_length = sum(1 for _ in index_f)
-            integer_choice = np.random.choice(np.arange(1, index_length-1))
-            index_f.seek(0)
-            for pos, line in enumerate(index_f):
-                if pos == 0 or pos == integer_choice:
-                    test_f.write(line)
+            if not product:
+                index_length = sum(1 for _ in index_f)
+                integer_choice = np.random.choice(np.arange(1, index_length-1))
+                index_f.seek(0)
+                for pos, line in enumerate(index_f):
+                    if pos == 0 or pos == integer_choice:
+                        test_f.write(line)
+            else:
+                for pos, line in enumerate(index_f):
+                    if pos == 0 or product in line:
+                        test_f.write(line)
+                    test_f.seek(0)
+                    test_length = sum(1 for _ in index_f)
+                    if test_length < 2:
+                        print(f'{product} not found in {self.dataset} {product_type} index. '
+                              f'Check your spelling and try again using regen=True.')
 
     def upload_to_s3(self, product_type):
         from killscreen.aws.s3 import put
