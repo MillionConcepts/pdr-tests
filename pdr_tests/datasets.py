@@ -478,7 +478,7 @@ class S3Uploader(DatasetDefinition):
         self.upload_to_s3(product_type)
 
     def create_test_subset_csv(self, product_type):
-        with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
+        with open(self.subset_list_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
             index_length = sum(1 for _ in index_f)
             integer_choice = np.random.choice(np.arange(1, index_length-1))
             index_f.seek(0)
