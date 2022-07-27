@@ -36,10 +36,11 @@ def stamp() -> str:
     return f"{dt.datetime.utcnow().isoformat()[:-7]}: "
 
 
-def console_and_log(message, level="info", do_stamp=True):
+def console_and_log(message, level="info", do_stamp=True, quiet=False):
     stamp_txt = stamp() if do_stamp is True else ""
     getattr(pdrtestlog, level)(f"{stamp_txt}{message}")
-    print(f"{stamp_txt}{message}")
+    if not quiet:
+        print(f"{stamp_txt}{message}")
 
 
 def checksum_object(obj, hash_function=md5):
@@ -246,6 +247,7 @@ def read_and_hash(
     path: Path,
     product: Mapping[str, str],
     debug: bool,
+    quiet: bool,
 ) -> tuple[pdr.Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
@@ -261,14 +263,14 @@ def read_and_hash(
         data.load("all")
         runtimes["readtime"] = watch.peek()
     console_and_log(
-        f"Opened {product['product_id']} ({runtimes['readtime']} s)"
+        f"Opened {product['product_id']} ({runtimes['readtime']} s)", quiet=quiet
     )
     watch.click()
     hashes = just_hash(data)
     runtimes['hashtime'] = watch.peek()
     console_and_log(
         f"Computed hashes for {product['product_id']} "
-        f"({runtimes['hashtime']} s)"
+        f"({runtimes['hashtime']} s)", quiet=quiet
     )
     return data, hashes, runtimes
 
