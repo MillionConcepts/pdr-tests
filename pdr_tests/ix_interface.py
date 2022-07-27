@@ -12,7 +12,6 @@ from pdr_tests.datasets import (
     MissingHashError,
 )
 from pdr_tests.utilz.ix_utilz import console_and_log
-from typing import Optional
 
 COMMANDS = [
     "sort",
@@ -128,10 +127,7 @@ def test_paths(dataset=None, product_type=None):
     return tuple(chain.from_iterable(paths))
 
 
-def upload(dataset: Optional[str] = None,
-           product_type: Optional[str] = None,
-           product: Optional[str] = None,
-           regen: bool = False):
+def upload(dataset=None, product_type=None, product=None, regen=False):
     """Creates a test subset (if necessary) and uploads relevant test files to s3."""
     if dataset is None:
         print("Upload requires a dataset argument. We don't want to re-upload all the files in the s3 bucket.")
