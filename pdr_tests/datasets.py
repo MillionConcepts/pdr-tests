@@ -490,19 +490,20 @@ class S3Uploader(DatasetDefinition):
                     test_f.write(line)
 
     def upload_to_s3(self, product_type):
-        from killscreen.aws.s3 import Bucket
+        from killscreen.aws.s3 import put
         with open(self.test_path(product_type)) as test_f:
             next(test_f)
             for line in test_f:
-                file_list = line.replace(']', '[').split('[')[1].replace('"','').split(',')
+                file_list = line.replace(']', '[').split('[')[1].replace('"', '').split(',')
                 for file in file_list:
                     try:
-                        Bucket.put(bucket='mc-pdr-permanent-test-corpus',
-                               obj=Path(self.product_data_path(product_type), file),
-                               key=f'{self.dataset}/{product_type}/{file}')
-                        print(f'{dataset} {subset}: {file} uploaded to s3.')
+                        put(bucket='mc-pdr-permanent-test-corpus',
+                            obj=Path(self.product_data_path(product_type), file),
+                            key=f'{self.dataset}/{product_type}/{file}')
+                        print(f'{self.dataset} {product_type}: {file} uploaded to s3.')
                     except FileNotFoundError:
-                        print(f'{file} not present in subset folder. Please go get it and retry.')
+                        print(f'{file} not present in subset folder. '
+                              f'Please put it in data/{self.dataset}/{product_type} and retry.')
 
 
 # ############## STANDALONE / HANDLER FUNCTIONS ###############
