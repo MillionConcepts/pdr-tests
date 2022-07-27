@@ -486,9 +486,10 @@ class S3Uploader(DatasetDefinition):
             test_f.seek(0)
             print(enumerate(index_f))
             for pos, line in enumerate(index_f):
-                print('pos={}')
+                print(f'pos={pos}')
                 if pos == 0 or pos == integer_choice:
                     test_f.write(line)
+            test_f.close()
 
     def upload_to_s3(self, product_type):
         from killscreen.aws.s3 import Bucket
