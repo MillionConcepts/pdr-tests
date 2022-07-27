@@ -486,14 +486,14 @@ class S3Uploader(DatasetDefinition):
                     test_f.write(line)
 
     def upload_to_s3(self, product_type):
-        import killscreen.aws.s3.Bucket as Ks
+        from killscreen.aws.s3 import Bucket
         with open(self.test_path(product_type)) as test_f:
             next(test_f)
             for line in test_f:
                 file_list = line.replace(']', '[').split('[')[1].replace('"','').split(',')
                 for file in file_list:
                     try:
-                        Ks.put(bucket='mc-pdr-permanent-test-corpus',
+                        Bucket.put(bucket='mc-pdr-permanent-test-corpus',
                                obj=Path(self.product_data_path(product_type), file),
                                key=f'{self.dataset}/{product_type}/{file}')
                     except FileNotFoundError:
