@@ -480,12 +480,9 @@ class S3Uploader(DatasetDefinition):
     def create_test_subset_csv(self, product_type):
         with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
             index_length = sum(1 for _ in index_f)
-            print(f'index_length is {index_length}.')
             integer_choice = np.random.choice(np.arange(1, index_length-1))
-            print(f'integer_choice is {integer_choice}.')
             index_f.seek(0)
             for pos, line in enumerate(index_f):
-                print(f'pos={pos}')
                 if pos == 0 or pos == integer_choice:
                     test_f.write(line)
 
