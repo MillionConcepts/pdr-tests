@@ -484,11 +484,13 @@ class S3Uploader(DatasetDefinition):
             integer_choice = np.random.choice(np.arange(1, index_length))
             print(f'integer_choice is {integer_choice}.')
             test_f.seek(0)
-            print(enumerate(index_f))
-            for pos, line in enumerate(index_f):
+            for line in index_f:
+                pos = 0
                 print(f'pos={pos}')
                 if pos == 0 or pos == integer_choice:
                     test_f.write(line)
+                next(index_f)
+                pos += pos
             test_f.close()
 
     def upload_to_s3(self, product_type):
