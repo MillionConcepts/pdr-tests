@@ -21,7 +21,7 @@ COMMANDS = [
     "check",
     "test",
     "index_directory",
-    "subset_upload"
+    "upload"
 ]
 
 
