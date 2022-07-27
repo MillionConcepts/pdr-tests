@@ -470,7 +470,7 @@ class S3Uploader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def upload_test_subset(self, product_type):
+    def create_and_upload_test_subset(self, product_type):
         if product_type is None:
             return self.across_all_types("upload_test_subset")
         if not self.test_path(product_type).is_file():
@@ -480,8 +480,11 @@ class S3Uploader(DatasetDefinition):
     def create_test_subset_csv(self, product_type):
         with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
             index_length = sum(1 for _ in index_f)
+            print(f'index_length is {index_length}.')
             integer_choice = np.random.choice(np.arange(1, index_length))
+            print(f'integer_choice is {integer_choice}.')
             for pos, line in enumerate(index_f):
+                print('pos={}')
                 if pos == 0 or integer_choice:
                     test_f.write(line)
 
@@ -496,6 +499,7 @@ class S3Uploader(DatasetDefinition):
                         Bucket.put(bucket='mc-pdr-permanent-test-corpus',
                                obj=Path(self.product_data_path(product_type), file),
                                key=f'{self.dataset}/{product_type}/{file}')
+                        print(f'{dataset} {subset}: {file} uploaded to s3.')
                     except FileNotFoundError:
                         print(f'{file} not present in subset folder. Please go get it and retry.')
 
