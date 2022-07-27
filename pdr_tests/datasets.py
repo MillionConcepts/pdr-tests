@@ -494,6 +494,7 @@ class S3Uploader(DatasetDefinition):
                 file_list = line.replace(']', '[').split('[')[1].replace('"', '').split(',')
                 for file in file_list:
                     try:
+                        file = file.strip()
                         put(bucket='mc-pdr-permanent-test-corpus',
                             obj=Path(self.product_data_path(product_type), file),
                             key=f'{self.dataset}/{product_type}/{file}')
