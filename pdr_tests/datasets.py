@@ -466,25 +466,27 @@ class ProductChecker(DatasetDefinition):
         data.dump_browse(**kwargs)
 
 
-class S3Uploader(DatasetDefinition):
+class CorpusFinalizer(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def create_and_upload_test_subset(self, product_type, product=None, regen=False):
+    def create_and_upload_test_subset(self, product_type, product=None, subset_size=1, regen=False, local=False):
         if product_type is None:
             return self.across_all_types("create_and_upload_test_subset")
         if not self.test_path(product_type).is_file() or regen:
-            self.create_test_subset_csv(product_type, product)
+            self.create_test_subset_csv(product_type, product, subset_size)
+        if local:
+            return
         self.upload_to_s3(product_type)
 
-    def create_test_subset_csv(self, product_type, product):
+    def create_test_subset_csv(self, product_type, product, subset_size):
         with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
             if not product:
                 index_length = sum(1 for _ in index_f)
-                integer_choice = np.random.choice(np.arange(1, index_length-1))
+                integer_choice = np.random.choice(np.arange(1, index_length-1), size=subset_size)
                 index_f.seek(0)
                 for pos, line in enumerate(index_f):
-                    if pos == 0 or pos == integer_choice:
+                    if pos == 0 or any(pos == integer_choice):
                         test_f.write(line)
             else:
                 for pos, line in enumerate(index_f):

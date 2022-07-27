@@ -7,7 +7,7 @@ from pdr_tests.datasets import (
     IndexMaker,
     IndexDownloader,
     ProductChecker,
-    S3Uploader,
+    CorpusFinalizer,
     directory_to_index,
     MissingHashError,
 )
@@ -19,9 +19,9 @@ COMMANDS = [
     "index",
     "download",
     "check",
+    "finalize",
     "test",
-    "index_directory",
-    "upload"
+    "index_directory"
 ]
 
 
@@ -127,14 +127,17 @@ def test_paths(dataset=None, product_type=None):
     return tuple(chain.from_iterable(paths))
 
 
-def upload(dataset=None, product_type=None, product=None, *, regen: "r" = False):
+def finalize(dataset=None, product_type=None, product=None, *,
+             regen: "r" = False,
+             local: "l" = False,
+             subset_size: "n" = 1):
     """Creates a test subset (if necessary) and uploads relevant test files to s3."""
     if dataset is None:
         print("Upload requires a dataset argument. We don't want to re-upload all the files in the s3 bucket.")
         return
     else:
-        uploader = S3Uploader(dataset)
-        uploader.create_and_upload_test_subset(product_type, product, regen)
+        finalizer = CorpusFinalizer(dataset)
+        finalizer.create_and_upload_test_subset(product_type, product, subset_size, regen, local)
 
 
 def index_directory(target, manifest, output="index.csv", debug=False, filters=None):
