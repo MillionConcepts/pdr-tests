@@ -1,0 +1,33 @@
+name: pdrtests
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - clize
+  - cytoolz
+  - numpy
+  - pandas
+  - git
+  - dustgoggles
+  - pds4-tools
+  - pip
+  - pyarrow
+  - pytest
+  - python-Levenshtein
+  - multidict
+  - more-itertools
+  - pvl
+  - astropy
+  - jupyter
+  - pillow
+  - matplotlib
+  - boto3
+  - clize
+  - fire
+  - flask
+  - requests
+  - rich
+  - sh
+  - pip:
+      - git+https://github.com/MillionConcepts/killscreen.git
