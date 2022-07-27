@@ -10,7 +10,7 @@ dependencies:
   - pandas
   - git
   - dustgoggles
-  - pds4-tools
+  - pds4_tools
   - pip
   - pyarrow
   - pytest
