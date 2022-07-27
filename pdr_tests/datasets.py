@@ -472,7 +472,7 @@ class S3Uploader(DatasetDefinition):
 
     def create_and_upload_test_subset(self, product_type):
         if product_type is None:
-            return self.across_all_types("upload_test_subset")
+            return self.across_all_types("create_and_upload_test_subset")
         if not self.test_path(product_type).is_file():
             self.create_test_subset_csv(product_type)
         self.upload_to_s3(product_type)
