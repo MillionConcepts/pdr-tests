@@ -483,6 +483,7 @@ class S3Uploader(DatasetDefinition):
             print(f'index_length is {index_length}.')
             integer_choice = np.random.choice(np.arange(1, index_length))
             print(f'integer_choice is {integer_choice}.')
+            test_f.seek(0)
             for pos, line in enumerate(index_f):
                 print('pos={}')
                 if pos == 0 or integer_choice:
