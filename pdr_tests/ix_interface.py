@@ -72,6 +72,7 @@ def test(
     debug: "g" = True,
     dump_browse: "d" = False,
     dump_kwargs: "k" = None,
+    quiet: "q" = False
 ):
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
@@ -89,7 +90,7 @@ def test(
         hasher = ProductChecker(dataset)
         try:
             test_logs = hasher.compare_test_hashes(
-                product_type, regen, write, debug, dump_browse, dump_kwargs
+                product_type, regen, write, debug, dump_browse, dump_kwargs, quiet
             )
             if isinstance(test_logs, list):
                 logs += test_logs

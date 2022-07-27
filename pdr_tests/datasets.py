@@ -341,6 +341,7 @@ class ProductChecker(DatasetDefinition):
         debug=True,
         dump_browse=False,
         dump_kwargs=None,
+        quiet=False,
     ):
         """
         generate and / or compare test hashes for a specified mission and
@@ -367,13 +368,14 @@ class ProductChecker(DatasetDefinition):
                 debug,
                 dump_browse,
                 dump_kwargs,
+                quiet,
             )
-        console_and_log(f"Hashing {self.dataset} {product_type}.")
+        console_and_log(f"Hashing {self.dataset} {product_type}.", quiet=quiet)
         index = pd.read_csv(self.test_path(product_type))
         if "hash" not in index.columns:
-            console_and_log(f"no hashes found for {product_type}, writing new")
+            console_and_log(f"no hashes found for {product_type}, writing new", quiet=quiet)
         elif regen is True:
-            console_and_log(f"regenerate=True passed, overwriting hashes")
+            console_and_log(f"regenerate=True passed, overwriting hashes", quiet=quiet)
         compare = not ((regen is True) or ("hash" not in index.columns))
         # compare/overwrite are redundant rn, but presumably we might want
         # different logic in the future.
@@ -381,20 +383,20 @@ class ProductChecker(DatasetDefinition):
         data_path = self.product_data_path(product_type)
         self.hash_rows, self.log_rows = {}, {}
         for ix, product in index.iterrows():
-            console_and_log(f"testing {product['product_id']}")
+            console_and_log(f"testing {product['product_id']}", quiet=quiet)
             data, self.hash_rows[ix], self.log_rows[ix] = test_product(
-                product, Path(data_path, product["label_file"]), compare, debug
+                product, Path(data_path, product["label_file"]), compare, debug, quiet=quiet
             )
             if (dump_browse is True) and (data is not None):
                 console_and_log(
-                    f"dumping browse products for {product['product_id']}"
+                    f"dumping browse products for {product['product_id']}", quiet=quiet
                 )
                 self.dump_test_browse(data, product_type, dump_kwargs)
                 console_and_log(
-                    f"dumped browse products for {product['product_id']}"
+                    f"dumped browse products for {product['product_id']}", quiet=quiet
                 )
         if (overwrite is True) and (write is False):
-            console_and_log("write=False passed, not updating hashes in csv")
+            console_and_log("write=False passed, not updating hashes in csv", quiet=quiet)
         elif overwrite is True:
             index["hash"] = pd.Series(self.hash_rows)
             index.to_csv(self.test_path(product_type), index=False)
@@ -519,7 +521,7 @@ class CorpusFinalizer(DatasetDefinition):
 # ############## STANDALONE / HANDLER FUNCTIONS ###############
 
 def test_product(
-    product: Mapping[str, str], path: Path, compare: bool, debug: bool
+    product: Mapping[str, str], path: Path, compare: bool, debug: bool, quiet: bool
 ) -> tuple[Optional[pdr.Data], str, dict]:
     """
     handler function for testing an individual product: records exceptions
@@ -534,7 +536,7 @@ def test_product(
         "readtime": None
     }
     try:
-        data, hashes, runtimes = read_and_hash(path, product, debug)
+        data, hashes, runtimes = read_and_hash(path, product, debug, quiet)
         if compare is True:
             if isinstance(product["hash"], float):
                 if np.isnan(product["hash"]):
@@ -560,7 +562,11 @@ def test_product(
     output_string = f"status: {log_row['status']}"
     if log_row["error"] is not None:
         output_string += f"; {log_row['error']}"
-    console_and_log(output_string)
+    if log_row['status'] != 'ok' and quiet:
+        quiet = False
+        problem_file = str(path).split('data/')[-1].split('/')
+        print(" ".join(problem_file)+':')
+    console_and_log(output_string, quiet=quiet)
     return data, hash_json, log_row
 
 
