@@ -490,11 +490,11 @@ class S3Uploader(DatasetDefinition):
                 for pos, line in enumerate(index_f):
                     if pos == 0 or product in line:
                         test_f.write(line)
-                    test_f.seek(0)
-                    test_length = sum(1 for _ in test_f)
-                    if test_length < 2:
-                        print(f'{product} not found in {self.dataset} {product_type} index. '
-                              f'Check your spelling and try again using regen=True.')
+                test_f.seek(0)
+                test_length = sum(1 for _ in test_f)
+                if test_length < 2:
+                    print(f'{product} not found in {self.dataset} {product_type} index. '
+                          f'Check your spelling and try again using regen=True.')
 
     def upload_to_s3(self, product_type):
         from killscreen.aws.s3 import put
