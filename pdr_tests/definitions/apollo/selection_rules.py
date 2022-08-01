@@ -40,7 +40,15 @@ file_information = {
     "A12_SWS": {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
-        "url_must_contain": ['a12sw_0001'],
+        "url_must_contain": ['a12sw_0001/data'],
         "label": "D",
-    }
+    },
+    # A15 ALSEP 1-hour-resolution Solar Wind Spectrometer 
+    # Plasma data. same basic format as A12_SWS.
+    "A15_SWS_1h": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['a15sw_0002/data'],
+        "label": "D",
+    },
 }
