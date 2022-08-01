@@ -100,5 +100,16 @@ file_information = {
         "fn_must_contain": [".csv"],
         "url_must_contain": ['bug_9002', 'data'],
         "label": "D",
+    },
+    # hand-typed reproductions of handwritten charts made from
+    # the raw data of Earth-returned penetrometer drums + LSRP Soil Mechanics
+    # runs, presented as flat ASCII tables. photographs of the charts are also
+    # included, but these tables appear to contain all the "science" content
+    # of the charts. format is almost identical between A15 and A16.
+    "A15_16_SMSS": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['sm_000', 'data'],
+        "label": "D",
     }
 }
