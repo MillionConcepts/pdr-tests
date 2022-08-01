@@ -32,11 +32,17 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 # shorthand variables for specific .csv files
 LUNAR_FILE = Path(MANIFEST_DIR, "geolunar.parquet")
 
+# note: most of these tables are not easy to validate -- technically L1 but
+# lots of mysterious numbers read straight off cybernetic-era instrumentation.
+# bottom line is that the formatting looks sane.
+
 file_information = {
     # Apollo 12 ALSEP Solar Wind Spectrometer Plasma data.
     # one directory of L1-ish data from '69 to '76,
     # with gaps during lunar night. reformatted by NSSDC
     # in 2007. flat ASCII tables with slightly weird headers.
+    # PDR's insertion of label format content is very nice here
+    # because the in-table column headers are just numerical indices.
     "A12_SWS": {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
@@ -44,11 +50,28 @@ file_information = {
         "label": "D",
     },
     # A15 ALSEP 1-hour-resolution Solar Wind Spectrometer 
-    # Plasma data. same basic format as A12_SWS.
+    # Plasma data. same basic format as A12_SWS. '71-'72.
     "A15_SWS_1h": {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
         "url_must_contain": ['a15sw_0002/data'],
+        "label": "D",
+    },
+    # 28-second resolution version of previous. same format,
+    # but more of it.
+    "A15_SWS_28s": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['a15sw_0001/data'],
+        "label": "D",
+    },
+    # Another David Williams / NSSDC late-00s reformatted Apollo set.
+    # a ~week of x-ray spectrometry data collected from orbit. lots of
+    # mysterious numbers, but fundamentally just two flat ASCII files.
+    "A15_XRFS": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['a15xr_0001', 'data'],
         "label": "D",
     },
 }
