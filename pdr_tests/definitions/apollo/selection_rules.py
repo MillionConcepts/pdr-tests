@@ -46,7 +46,7 @@ file_information = {
     "A12_SWS": {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
-        "url_must_contain": ['a12sw_0001/data'],
+        "url_must_contain": ['a12sw_0001', 'data'],
         "label": "D",
     },
     # A15 ALSEP 1-hour-resolution Solar Wind Spectrometer 
@@ -54,7 +54,7 @@ file_information = {
     "A15_SWS_1h": {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
-        "url_must_contain": ['a15sw_0002/data'],
+        "url_must_contain": ['a15sw_0002', 'data'],
         "label": "D",
     },
     # 28-second resolution version of previous. same format,
@@ -62,7 +62,7 @@ file_information = {
     "A15_SWS_28s": {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
-        "url_must_contain": ['a15sw_0001/data'],
+        "url_must_contain": ['a15sw_0001', 'data'],
         "label": "D",
     },
     # Another David Williams / NSSDC late-00s reformatted Apollo set.
@@ -74,4 +74,23 @@ file_information = {
         "url_must_contain": ['a15xr_0001', 'data'],
         "label": "D",
     },
+    # atmospheric density plots directly scanned from microfiche and left as
+    # image files. format is identical between the a14 and a15 sets. the
+    # 'data' files here are indices; the TIF files under 'document' are the
+    # actual plots. although they're indices, I'm adding support because
+    # they're in a data tree and contain essential metadata for the data in
+    # 'documents'; although the data are basically structured like browse
+    # images, they're data, so I'm adding support for them too. confusing!
+    "A14_15_CCIG_index": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['ccg_000', 'data'],
+        "label": "D",
+    },
+    "A14_15_CCIG_plot": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tif"],
+        "url_must_contain": ['ccg_000', 'document'],
+        "label": "D",
+    }
 }
