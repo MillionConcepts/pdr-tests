@@ -92,5 +92,13 @@ file_information = {
         "fn_must_contain": [".tif"],
         "url_must_contain": ['ccg_000', 'document'],
         "label": "D",
+    },
+    # 4-band (453/550/751/952 nm) BRDFs for 6 Apollo soil samples, produced
+    # in the 00s. Simple ASCII CSV, well-labeled by GEO personnel.
+    "BUG": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".csv"],
+        "url_must_contain": ['bug_9002', 'data'],
+        "label": "D",
     }
 }
