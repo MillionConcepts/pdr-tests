@@ -9,6 +9,7 @@ dependencies:
   - fire
   - flask
   - pdr
+  - pip
   - pyarrow
   - pytest
   - requests
