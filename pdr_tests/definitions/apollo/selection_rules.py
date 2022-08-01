@@ -65,13 +65,14 @@ file_information = {
         "url_must_contain": ['a15sw_0001', 'data'],
         "label": "D",
     },
-    # Another David Williams / NSSDC late-00s reformatted Apollo set.
+    # More David Williams / NSSDC late-00s reformatted Apollo sets.
     # a ~week of x-ray spectrometry data collected from orbit. lots of
-    # mysterious numbers, but fundamentally just two flat ASCII files.
-    "A15_XRFS": {
+    # mysterious numbers, but fundamentally just four flat ASCII files.
+    # A15 and A16 formats are identical.
+    "A15_16_XRFS": {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
-        "url_must_contain": ['a15xr_0001', 'data'],
+        "url_must_contain": ['xr_0001', 'data'],
         "label": "D",
     },
     # atmospheric density plots directly scanned from microfiche and left as
