@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+frm_ais_rdr_5367.LBL,"[""frm_ais_rdr_5367.LBL"", ""AIS_FORMAT.FMT"", ""FRM_AIS_RDR_5367.DAT""]",FRM_AIS_RDR_5367.DAT,http://pds-geosciences.wustl.edu/mex/mex-m-marsis-3-rdr-ais-ext2-v1/mexmdi_1003/data/active_ionospheric_sounder/rdr536x,"{""AIS_TABLE"": ""f9fa67dcf9fd281b51409923dba135e0""}"

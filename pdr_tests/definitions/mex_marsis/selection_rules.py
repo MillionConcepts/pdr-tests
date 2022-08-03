@@ -37,7 +37,7 @@ file_information = {
         "manifest": GEO_MEX_FILE,
         "fn_must_contain": ['_f.dat'],
         "url_must_contain": ["-edr-"],
-        "label": "D",
+        "label": ('_f.dat', '.lbl'),
     },
     "SS_RDR": {
         "manifest": GEO_MEX_FILE,
