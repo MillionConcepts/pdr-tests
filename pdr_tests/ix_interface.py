@@ -21,7 +21,8 @@ COMMANDS = [
     "check",
     "finalize",
     "test",
-    "index_directory"
+    "index_directory",
+    "test_paths"
 ]
 
 
