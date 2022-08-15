@@ -508,6 +508,7 @@ class CorpusFinalizer(DatasetDefinition):
                 file_list = line.replace(']', '[').split('[')[1].replace('"', '').split(',')
                 for file in file_list:
                     try:
+                        file = file.split('/')[-1]
                         file = file.strip()
                         put(bucket='mc-pdr-permanent-test-corpus',
                             obj=Path(self.product_data_path(product_type), file),
