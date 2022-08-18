@@ -148,3 +148,5 @@ pdr_tests/browse
 /pdr_tests/definitions/**/logs
 /pdr_tests/definitions/**/sample_lists
 /pdr_tests/combined_test_log_latest.csv
+/pdr_tests/definitions/**/*.csv
+!/pdr_tests/definitions/**/*_test.csv
