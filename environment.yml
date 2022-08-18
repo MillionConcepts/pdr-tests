@@ -9,7 +9,7 @@ dependencies:
   - flask
   - pdr
   - pip
-  - pyarrow
+  - pyarrow >= 9.0.0
   - pytest
   - requests
   - rich
