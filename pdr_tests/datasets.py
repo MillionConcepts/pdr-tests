@@ -138,6 +138,9 @@ class ProductPicker(DatasetDefinition):
         if "url_must_contain" in info.keys():
             for string in info["url_must_contain"]:
                 filts.append((pa.compute.match_substring, "url", string))
+        if "url_regex" in info.keys():
+            for string in info["url_regex"]:
+                filts.append((pa.compute.match_substring_regex, "url", string))
         if "fn_ends_with" in info.keys():
             ends = info["fn_ends_with"]
             assert len(ends) == 1, "only one filename ending may be specified"
