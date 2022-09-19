@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+global_albedo_8ppd.LBL,"[""GLOBAL_ALBEDO_8PPD.IMG"", ""DSMAP.CAT"", ""global_albedo_8ppd.LBL""]",GLOBAL_ALBEDO_8PPD,http://pds-geosciences.wustl.edu/mgs/mgs-m-tes-special-v1,"{""IMAGE"": ""b9a679be85c036e35847de7320769f03""}"
