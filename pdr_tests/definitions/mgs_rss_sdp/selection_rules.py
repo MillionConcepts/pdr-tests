@@ -123,7 +123,7 @@ file_information = {
 
 """
 
-    # same as img but these have a typo in their labels: "IEEE REAL"
+    # same as img but these have a typo in their labels: SAMPLE_TYPE                = "IEEE REAL"
     "img_typo": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.img'],
