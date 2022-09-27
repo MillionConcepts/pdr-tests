@@ -49,7 +49,7 @@ file_information = {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": ['grs_dap', '.img'],
         "url_must_contain": ['grns', 'maps'],
-        "label": "D",
+        "label": ('.img', '.xml'),
     },
     "grs_CDRRDR": {
         "manifest": GEO_MESSENGER_FILE,
