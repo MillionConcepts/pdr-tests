@@ -33,48 +33,56 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
 
 file_information = {
+    # image data; well-labeled 2-dimentsional arrays
     "IMG_RDR": {
         "manifest": ATM_FILE,
         "fn_must_contain": [".IMG", "RDR"],
         "url_must_contain": ['juno_jiram_bundle', "/data_calibrated/"],
         "label": "D",
     },
-    "LOG_IMG_RDR": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": [".TAB", "LOG_IMG_RDR"],
-        "url_must_contain": ['juno_jiram_bundle', "/data_calibrated/"],
-        "label": ('.TAB', '.xml'),
-    },
-    "LOG_SPE_RDR": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": ['.TAB', "LOG_SPE_RDR"],
-        "url_must_contain": ['juno_jiram_bundle', '/data_calibrated/'],
-        "label": ('.TAB', '.xml'),
-    },
+#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
+#    "LOG_IMG_RDR": {
+#        "manifest": ATM_FILE,
+#        "fn_must_contain": [".TAB", "LOG_IMG_RDR"],
+#        "url_must_contain": ['juno_jiram_bundle', "/data_calibrated/"],
+#        "label": ('.TAB', '.xml'),
+#    },
+#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
+#    "LOG_SPE_RDR": {
+#        "manifest": ATM_FILE,
+#        "fn_must_contain": ['.TAB', "LOG_SPE_RDR"],
+#        "url_must_contain": ['juno_jiram_bundle', '/data_calibrated/'],
+#        "label": ('.TAB', '.xml'),
+#    },
+    # spectral data; fixed-length tables
     "SPE_RDR": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.DAT', 'SPE_RDR'],
         "url_must_contain": ['juno_jiram_bundle', '/data_calibrated/'],
         "label": "D",
     },
+    # image data; well-labeled 2-dimentsional arrays
     "IMG_EDR": {
         "manifest": ATM_FILE,
         "fn_must_contain": [".IMG", "EDR"],
         "url_must_contain": ['juno_jiram_bundle', "/data_raw/"],
         "label": "D",
     },
-    "LOG_IMG_EDR": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": [".TAB", "LOG_IMG_EDR"],
-        "url_must_contain": ['juno_jiram_bundle', '/data_raw/'],
-        "label": ('.TAB', '.xml'),
-    },
-    "LOG_SPE_EDR": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": [".TAB", "LOG_SPE_EDR"],
-        "url_must_contain": ['juno_jiram_bundle', "/data_raw/"],
-        "label": ('.TAB', '.xml'),
-    },
+#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
+#    "LOG_IMG_EDR": {
+#        "manifest": ATM_FILE,
+#        "fn_must_contain": [".TAB", "LOG_IMG_EDR"],
+#        "url_must_contain": ['juno_jiram_bundle', '/data_raw/'],
+#        "label": ('.TAB', '.xml'),
+#    },
+#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
+#    "LOG_SPE_EDR": {
+#        "manifest": ATM_FILE,
+#        "fn_must_contain": [".TAB", "LOG_SPE_EDR"],
+#        "url_must_contain": ['juno_jiram_bundle', "/data_raw/"],
+#        "label": ('.TAB', '.xml'),
+#    },
+    # spectral data; fixed-length tables
     "SPE_EDR": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.DAT', "SPE_EDR"],
