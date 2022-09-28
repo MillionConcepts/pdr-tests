@@ -45,6 +45,7 @@ file_information = {
         "url_must_contain": ['grns', "/ddr", '-ns-'],
         "label": "D",
     },
+    # opens from PDS4 labels, PDS3 labels give warning: cannot reshape array of size 64800 into shape (360,720)
     "grs_DAP": {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": ['grs_dap', '.img'],
