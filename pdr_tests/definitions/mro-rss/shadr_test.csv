@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-jgmro_110c_sha.LBL,"[""JGMRO_110C_SHA.TAB"", ""jgmro_110c_sha.LBL""]",JGMRO_110C_SHA.TAB,http://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/shadr,"{""SHADR_HEADER_TABLE"": ""7f238eaa96d7abf3c8103aeb51e4b7a2"", ""SHADR_COEFFICIENTS_TABLE"": ""8dada3078012b5bfa7b0428f02c70985""}"
+jgmro_110c_sha.LBL,"[""JGMRO_110C_SHA.TAB"", ""jgmro_110c_sha.LBL""]",JGMRO_110C_SHA.TAB,http://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/shadr,"{""SHADR_HEADER_TABLE"": ""e45f9b6b04d4e6ef978d2d4d3a92bfb2"", ""SHADR_COEFFICIENTS_TABLE"": ""8dada3078012b5bfa7b0428f02c70985""}"
