@@ -105,13 +105,13 @@ def get_nodelist(xmlfile):
 def make_pds4_row(xmlfile):
     nodelist = get_nodelist(xmlfile)
     return {
-        "label_file": str(xmlfile).split('/')[-1],
+        "label_file": Path(xmlfile).name,
         "product_id": next(
             node for node in nodelist if "logical_identifier" in node.tag
         ).text,
         "files": json.dumps(
             [node.text for node in nodelist if "file_name" in node.tag]
-            + [str(xmlfile)]
+            + [Path(xmlfile).name]
         ),
     }
 
