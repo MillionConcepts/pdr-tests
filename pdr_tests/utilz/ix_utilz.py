@@ -92,7 +92,11 @@ def just_hash(data):
         if key not in dir(data):
             continue
         # ignore text-type objects for now
-        if isinstance(data[key], (MultiDict, str)):
+        if (
+            isinstance(data[key], (MultiDict, str))
+            # pds4_tools label object
+            or ('_convenient_root' in dir(data[key]))
+        ):
             continue
         hashes[key] = checksum_object(data[key])
     return hashes
