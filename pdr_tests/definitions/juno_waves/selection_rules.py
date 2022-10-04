@@ -41,10 +41,12 @@ file_information = {
         "url_must_contain": ['JNO', "CDR", 'WAVES_BURST'],
         "label": "D",
     },
-    "CDR_SURVEY": {
-        "manifest": PLASM_FILE,
-        "fn_must_contain": [".CSV"],
-        "url_must_contain": ['JNO', "CDR", 'WAVES_SURVEY'],
-        "label": "D",
-    },
+#    # support planned, but only if time
+#    # the SPREADSHEET CSV files are very weirdly formatted with 5 lines of metadata and a change in table orientation partway through
+#    "CDR_SURVEY": {
+#        "manifest": PLASM_FILE,
+#        "fn_must_contain": [".CSV"],
+#        "url_must_contain": ['JNO', "CDR", 'WAVES_SURVEY'],
+#        "label": "D",
+#    },
 }
