@@ -40,20 +40,6 @@ file_information = {
         "url_must_contain": ['juno_jiram_bundle', "/data_calibrated/"],
         "label": "D",
     },
-#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
-#    "LOG_IMG_RDR": {
-#        "manifest": ATM_FILE,
-#        "fn_must_contain": [".TAB", "LOG_IMG_RDR"],
-#        "url_must_contain": ['juno_jiram_bundle', "/data_calibrated/"],
-#        "label": ('.TAB', '.xml'),
-#    },
-#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
-#    "LOG_SPE_RDR": {
-#        "manifest": ATM_FILE,
-#        "fn_must_contain": ['.TAB', "LOG_SPE_RDR"],
-#        "url_must_contain": ['juno_jiram_bundle', '/data_calibrated/'],
-#        "label": ('.TAB', '.xml'),
-#    },
     # spectral data; fixed-length tables
     "SPE_RDR": {
         "manifest": ATM_FILE,
@@ -68,20 +54,6 @@ file_information = {
         "url_must_contain": ['juno_jiram_bundle', "/data_raw/"],
         "label": "D",
     },
-#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
-#    "LOG_IMG_EDR": {
-#        "manifest": ATM_FILE,
-#        "fn_must_contain": [".TAB", "LOG_IMG_EDR"],
-#        "url_must_contain": ['juno_jiram_bundle', '/data_raw/'],
-#        "label": ('.TAB', '.xml'),
-#    },
-#    # opens during manual testing from PDS4 labels; not all products have PDS4 labels, some only have PDS3
-#    "LOG_SPE_EDR": {
-#        "manifest": ATM_FILE,
-#        "fn_must_contain": [".TAB", "LOG_SPE_EDR"],
-#        "url_must_contain": ['juno_jiram_bundle', "/data_raw/"],
-#        "label": ('.TAB', '.xml'),
-#    },
     # spectral data; fixed-length tables
     "SPE_EDR": {
         "manifest": ATM_FILE,
@@ -89,4 +61,33 @@ file_information = {
         'url_must_contain': ['juno_jiram_bundle', '/data_raw/'],
         "label": "D",
     },
+    # housekeeping telemetry data; fixed-length tables
+    "LOG_IMG_RDR": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": [".TAB", "LOG_IMG_RDR"],
+        "url_must_contain": ['juno_jiram_bundle', "/data_calibrated/"],
+        "label": "D",
+    },
+    # housekeeping telemetry data; fixed-length tables
+    "LOG_SPE_RDR": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.TAB', "LOG_SPE_RDR"],
+        "url_must_contain": ['juno_jiram_bundle', '/data_calibrated/'],
+        "label": "D",
+    },
+    # housekeeping telemetry data; fixed-length tables
+    "LOG_IMG_EDR": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": [".TAB", "LOG_IMG_EDR"],
+        "url_must_contain": ['juno_jiram_bundle', '/data_raw/'],
+        "label": "D",
+    },
+    # housekeeping telemetry data; fixed-length tables
+    "LOG_SPE_EDR": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": [".TAB", "LOG_SPE_EDR"],
+        "url_must_contain": ['juno_jiram_bundle', "/data_raw/"],
+        "label": "D",
+    },
+
 }
