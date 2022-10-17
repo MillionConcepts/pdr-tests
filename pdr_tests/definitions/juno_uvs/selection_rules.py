@@ -33,10 +33,10 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
 
 file_information = {
-    "EDR": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": [".FIT", "UVS"],
-        "url_must_contain": ['jnouvs'],
-        "label": "D",
-    },
+#     "EDR": {
+#         "manifest": ATM_FILE,
+#         "fn_must_contain": [".FIT", "UVS"],
+#         "url_must_contain": ['jnouvs'],
+#         "label": "D",
+#     },
 }
