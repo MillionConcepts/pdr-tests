@@ -154,4 +154,7 @@ pdr_tests/browse
 # folder metadata (macOS)
 .DS_Store
 
+#files for parquet assembly
 /pdr_tests/csv_forconverting/
+/pdr_tests/temp.pkl
+/pdr_tests/*.csv
