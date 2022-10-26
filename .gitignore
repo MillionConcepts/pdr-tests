@@ -153,3 +153,5 @@ pdr_tests/browse
 
 # folder metadata (macOS)
 .DS_Store
+
+/pdr_tests/csv_forconverting/

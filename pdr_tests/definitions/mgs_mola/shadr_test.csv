@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-gtm090aa.LBL,"[""gtm090aa.LBL"", ""GTM090AA.SHA""]",GTM090AA.SHA,http://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-shadr-v1/mgsl_2101/data,"{""SHADR_HEADER_TABLE"": ""7865f3718f3e060012161e040b478680"", ""SHADR_COEFFICIENTS_TABLE"": ""509de2a148c13a0db0b6ae5a476420ea""}"
+gtm090aa.LBL,"[""gtm090aa.LBL"", ""GTM090AA.SHA""]",GTM090AA.SHA,http://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-shadr-v1/mgsl_2101/data,"{""SHADR_HEADER_TABLE"": ""dcbe3fa97b58bfd3d937de6e050c6d34"", ""SHADR_COEFFICIENTS_TABLE"": ""509de2a148c13a0db0b6ae5a476420ea""}"
