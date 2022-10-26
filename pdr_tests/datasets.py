@@ -2,9 +2,11 @@
 
 import json
 import os
+from ast import literal_eval
+from functools import partial
 from importlib import import_module
 from pathlib import Path
-from typing import Mapping, Optional
+from typing import Mapping, Optional, Sequence
 
 import numpy as np
 import pandas as pd
@@ -13,6 +15,7 @@ from pyarrow import parquet
 import warnings
 
 import pdr
+from pdr import check_cases
 from pdr_tests.utilz.ix_utilz import (
     get_product_row,
     console_and_log,
@@ -345,6 +348,8 @@ class ProductChecker(DatasetDefinition):
         dump_browse=False,
         dump_kwargs=None,
         quiet=False,
+        max_size=None,
+        filetypes=None
     ):
         """
         generate and / or compare test hashes for a specified mission and
@@ -372,34 +377,34 @@ class ProductChecker(DatasetDefinition):
                 dump_browse,
                 dump_kwargs,
                 quiet,
+                max_size,
+                filetypes
             )
-        console_and_log(f"Hashing {self.dataset} {product_type}.", quiet=quiet)
+        log = partial(console_and_log, quiet=quiet)
+        log(f"Hashing {self.dataset} {product_type}.")
         index = pd.read_csv(self.test_path(product_type))
         if "hash" not in index.columns:
-            console_and_log(f"no hashes found for {product_type}, writing new", quiet=quiet)
+            log(f"no hashes found for {product_type}, writing new")
         elif regen is True:
-            console_and_log(f"regenerate=True passed, overwriting hashes", quiet=quiet)
+            log(f"regenerate=True passed, overwriting hashes")
         compare = not ((regen is True) or ("hash" not in index.columns))
+        test_args = (compare, debug, quiet, max_size, filetypes)
         # compare/overwrite are redundant rn, but presumably we might want
         # different logic in the future.
         overwrite = (regen is True) or ("hash" not in index.columns)
         data_path = self.product_data_path(product_type)
         self.hash_rows, self.log_rows = {}, {}
         for ix, product in index.iterrows():
-            console_and_log(f"testing {product['product_id']}", quiet=quiet)
+            log(f"testing {product['product_id']}")
             data, self.hash_rows[ix], self.log_rows[ix] = test_product(
-                product, Path(data_path, product["label_file"]), compare, debug, quiet=quiet
+                product, Path(data_path, product["label_file"]), *test_args
             )
             if (dump_browse is True) and (data is not None):
-                console_and_log(
-                    f"dumping browse products for {product['product_id']}", quiet=quiet
-                )
+                log(f"dumping browse products for {product['product_id']}")
                 self.dump_test_browse(data, product_type, dump_kwargs)
-                console_and_log(
-                    f"dumped browse products for {product['product_id']}", quiet=quiet
-                )
+                log(f"dumped browse products for {product['product_id']}")
         if (overwrite is True) and (write is False):
-            console_and_log("write=False passed, not updating hashes in csv", quiet=quiet)
+            log("write=False passed, not updating hashes in csv")
         elif overwrite is True:
             index["hash"] = pd.Series(self.hash_rows)
             index.to_csv(self.test_path(product_type), index=False)
@@ -525,7 +530,13 @@ class CorpusFinalizer(DatasetDefinition):
 # ############## STANDALONE / HANDLER FUNCTIONS ###############
 
 def test_product(
-    product: Mapping[str, str], path: Path, compare: bool, debug: bool, quiet: bool
+    product: Mapping[str, str],
+    path: Path,
+    compare: bool,
+    debug: bool,
+    quiet: bool,
+    max_size: float = None,
+    filetypes: Optional[Sequence[str]] = None
 ) -> tuple[Optional[pdr.Data], str, dict]:
     """
     handler function for testing an individual product: records exceptions
@@ -539,6 +550,12 @@ def test_product(
         "hashtime": None,
         "readtime": None
     }
+    excluded, log_row = check_exclusions(
+        filetypes, log_row, max_size, product, path
+    )
+    if excluded is True:
+        console_and_log(log_row["status"], quiet=quiet)
+        return data, hash_json, log_row
     try:
         data, hashes, runtimes = read_and_hash(path, product, debug, quiet)
         if compare is True:
@@ -557,7 +574,7 @@ def test_product(
             "hash generation process. Pass --regen=True to ignore this error "
             "and populate these values."
         )
-        raise MissingHashError
+        log_row["status"] = "missing hash"
     except KeyboardInterrupt:
         raise
     except Exception as ex:
@@ -566,7 +583,7 @@ def test_product(
     output_string = f"status: {log_row['status']}"
     if log_row["error"] is not None:
         output_string += f"; {log_row['error']}"
-    if log_row['status'] != 'ok' and quiet:
+    if (log_row['status'] != 'ok') and quiet:
         quiet = False
         problem_file = str(path).split('data/')[-1].split('/')
         print(" ".join(problem_file)+':')
@@ -574,7 +591,44 @@ def test_product(
     return data, hash_json, log_row
 
 
-def directory_to_index(target, manifest, output="index.csv", debug=False, filters=None):
+def path_if_found(file):
+    try:
+        return Path(check_cases(file))
+    except FileNotFoundError:
+        return None
+
+
+def check_exclusions(filetypes, log_row, max_size, product, path):
+    if (filetypes is None) and (max_size == 0):
+        return False, log_row
+    checkmap = [
+        path_if_found(Path(path.parent, file))
+        for file in json.loads(product['files'])
+    ]
+    present_files = list(filter(None, checkmap))
+    if len(present_files) == 0:
+        return False, log_row
+    if filetypes is not None:
+        if filetypes.intersection(
+            {f.suffix.lower().strip(".") for f in present_files}
+        ) == set():
+            log_row["status"] = "skipped due to non-matching filetypes"
+            return True, log_row
+    if max_size != 0:
+        sizes = map(
+            lambda p: os.stat(Path(path.parent, p)).st_size, present_files
+        )
+        if (biggest := max(sizes) / 1000 ** 2) > max_size:
+            log_row["status"] = (
+                f"skipped due to filesize ({round(biggest, 2)} > {max_size})"
+            )
+        return True, log_row
+    return False, log_row
+
+
+def directory_to_index(
+    target, manifest, output="index.csv", debug=False, filters=None
+):
     """
     standalone function for producing an index from all labels in a directory.
     does not rely on a dataset definitions module. does require a manifest.
@@ -599,8 +653,11 @@ def pluck_row_from_manifest(file, manifest, product_rows, filters):
     )
     assert len(match) >= 1, f"{file.name} not found in manifest"
     if len(match) > 1:
-        warnings.warn(f'There are multiple matches to {file.name}. '
-                      f'If necessary to differentiate use filters="[("y/n", "substring_in_url")]"')
+        warnings.warn(
+            f'There are multiple matches to {file.name}. '
+            f'If necessary to differentiate use '
+            f'filters="[("y/n", "substring_in_url")]"'
+        )
     if filters: 
         match = filter_by_substring(match, filters)
     else:
@@ -619,6 +676,9 @@ def filter_by_substring(matches, filters):
             n = n + [fil[1]]
     matches = matches.to_pandas()
     for i in range(len(matches)):
-        if all(sub in matches.iloc[i].url for sub in y) and not any(sub in matches.iloc[i].url for sub in n):
+        if (
+            all(sub in matches.iloc[i].url for sub in y)
+            and not any(sub in matches.iloc[i].url for sub in n)
+        ):
             match = matches.iloc[i]
             return match

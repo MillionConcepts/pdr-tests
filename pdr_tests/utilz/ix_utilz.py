@@ -190,8 +190,11 @@ def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
         if not response.ok:
             console_and_log(f"Download of {url} failed.")
             return
-        warnings.warn('File ending was changed to lowercase to complete download. '
-                      'Please update "label" in selection rules to allow index to write and rerun.')
+        warnings.warn(
+            'File ending was changed to lowercase to complete download. '
+            'Please update "label" in selection rules to allow index to write '
+            'and rerun.'
+        )
     with open(Path(temp_path, Path(url).name), "wb+") as fp:
         for chunk in response.iter_content(chunk_size=10**7):
             fp.write(chunk)
@@ -267,14 +270,16 @@ def read_and_hash(
         data.load("all")
         runtimes["readtime"] = watch.peek()
     console_and_log(
-        f"Opened {product['product_id']} ({runtimes['readtime']} s)", quiet=quiet
+        f"Opened {product['product_id']} ({runtimes['readtime']} s)",
+        quiet=quiet
     )
     watch.click()
     hashes = just_hash(data)
     runtimes['hashtime'] = watch.peek()
     console_and_log(
         f"Computed hashes for {product['product_id']} "
-        f"({runtimes['hashtime']} s)", quiet=quiet
+        f"({runtimes['hashtime']} s)",
+        quiet=quiet
     )
     return data, hashes, runtimes
 
