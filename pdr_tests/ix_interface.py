@@ -1,7 +1,6 @@
 from ast import literal_eval
 from itertools import chain
 from pathlib import Path
-from typing import Optional, Sequence
 
 from pdr_tests.datasets import (
     ProductPicker,
@@ -23,7 +22,7 @@ COMMANDS = [
     "finalize",
     "test",
     "index_directory",
-    "test_paths",
+    "test_paths"
 ]
 
 
@@ -74,13 +73,8 @@ def test(
     debug: "g" = True,
     dump_browse: "d" = False,
     dump_kwargs: "k" = None,
-    quiet: "q" = False,
-    max_size=0,
-    filetypes="",
+    quiet: "q" = False
 ):
-    if len(filetypes) > 0:
-        filetypes = {f.lower().strip(".") for f in filetypes.split(" ")}
-    print(filetypes, type(filetypes))
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
     if dataset is None:
@@ -97,15 +91,7 @@ def test(
         hasher = ProductChecker(dataset)
         try:
             test_logs = hasher.compare_test_hashes(
-                product_type,
-                regen,
-                write,
-                debug,
-                dump_browse,
-                dump_kwargs,
-                quiet,
-                max_size,
-                filetypes,
+                product_type, regen, write, debug, dump_browse, dump_kwargs, quiet
             )
             if isinstance(test_logs, list):
                 logs += test_logs
@@ -121,7 +107,9 @@ def test(
     if logs:
         import pandas as pd
 
-        pd.concat(logs).to_csv("combined_test_log_latest.csv", index=False)
+        pd.concat(logs).to_csv(
+            "combined_test_log_latest.csv", index=False
+        )
 
 
 def test_paths(dataset=None, product_type=None):
@@ -141,35 +129,20 @@ def test_paths(dataset=None, product_type=None):
     return tuple(chain.from_iterable(paths))
 
 
-def finalize(
-    dataset=None,
-    product_type=None,
-    product=None,
-    *,
-    regen: "r" = False,
-    local: "l" = False,
-    subset_size: "n" = 1,
-):
-    """
-    Creates a test subset (if necessary) and uploads relevant test files to
-    s3.
-    """
+def finalize(dataset=None, product_type=None, product=None, *,
+             regen: "r" = False,
+             local: "l" = False,
+             subset_size: "n" = 1):
+    """Creates a test subset (if necessary) and uploads relevant test files to s3."""
     if dataset is None:
-        print(
-            "Upload requires a dataset argument. We don't want to re-upload "
-            "all the files in the s3 bucket. "
-        )
+        print("Upload requires a dataset argument. We don't want to re-upload all the files in the s3 bucket.")
         return
     else:
         finalizer = CorpusFinalizer(dataset)
-        finalizer.create_and_upload_test_subset(
-            product_type, product, subset_size, regen, local
-        )
+        finalizer.create_and_upload_test_subset(product_type, product, subset_size, regen, local)
 
 
-def index_directory(
-    target, manifest, output="index.csv", debug=False, filters=None
-):
+def index_directory(target, manifest, output="index.csv", debug=False, filters=None):
     """simple wrapper for datasets.directory_to_index"""
     if filters is not None:
         filters = literal_eval(filters)
