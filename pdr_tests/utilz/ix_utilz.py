@@ -12,15 +12,14 @@ from typing import Mapping, Sequence, MutableMapping, Collection, Callable
 
 import numpy as np
 import pandas as pd
+import pdr
 import pyarrow as pa
 import requests
 from dustgoggles.func import disjoint, intersection
 from multidict import MultiDict
-
-import pdr
-from pdr.utils import check_cases, decompress
 from pdr.parselabel.pds3 import get_pds3_pointers, read_pvl_label
-from pdr.parselabel.utils import trim_label
+from pdr.utils import check_cases
+
 from pdr_tests.settings import headers
 from pdr_tests.utilz.dev_utilz import Stopwatch
 

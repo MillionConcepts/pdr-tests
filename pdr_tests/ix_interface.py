@@ -80,7 +80,6 @@ def test(
 ):
     if len(filetypes) > 0:
         filetypes = {f.lower().strip(".") for f in filetypes.split(" ")}
-    print(filetypes, type(filetypes))
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
     if dataset is None:
