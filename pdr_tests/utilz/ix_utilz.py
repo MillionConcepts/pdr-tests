@@ -50,8 +50,7 @@ def checksum_object(obj, hash_function=md5):
     """
     hasher = hash_function(usedforsecurity=False)
     if isinstance(obj, np.ndarray):
-        for line in obj:
-            hasher.update(line)
+        hasher.update(obj)
     elif isinstance(obj, pd.DataFrame):
         # note that object ('O') dtypes do not, by design, have stable
         # byte-level representations.
