@@ -605,7 +605,7 @@ def check_exclusions(filetypes, log_row, max_size, product, path):
     present_files = list(filter(None, checkmap))
     if len(present_files) == 0:
         return False, log_row
-    if len(filetypes) > 0:
+    if filetypes is not None:
         if filetypes.intersection(
             {f.suffix.lower().strip(".") for f in present_files}
         ) == set():
