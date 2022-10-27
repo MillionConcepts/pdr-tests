@@ -2,7 +2,7 @@
 
 import json
 import os
-from ast import literal_eval
+import warnings
 from functools import partial
 from importlib import import_module
 from pathlib import Path
@@ -10,11 +10,8 @@ from typing import Mapping, Optional, Sequence
 
 import numpy as np
 import pandas as pd
-import pyarrow as pa
-from pyarrow import parquet
-import warnings
-
 import pdr
+import pyarrow as pa
 from pdr import check_cases
 from pdr_tests.utilz.ix_utilz import (
     get_product_row,
@@ -27,7 +24,7 @@ from pdr_tests.utilz.ix_utilz import (
     read_and_hash,
     record_comparison,
 )
-from pdr_tests.utilz.dev_utilz import FakeStopwatch, Stopwatch
+from pyarrow import parquet
 
 
 # ############ INDEX & TESTING CLASSES #############
