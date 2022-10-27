@@ -44,9 +44,9 @@ def console_and_log(message, level="info", do_stamp=True, quiet=False):
 
 def checksum_object(obj, hash_function=md5):
     """
-    make stable byte array from python object. the general case of this is,
-    I think, impossible, or at least implementation-dependent, so I am
-    attempting to cover the specific cases we have...this is a first pass.
+    make stable byte array from python object. the general case of this is
+    impossible, or at least implementation-dependent, so this just
+    attempts to cover the cases we actually have.
     """
     hasher = hash_function(usedforsecurity=False)
     if isinstance(obj, np.ndarray):
