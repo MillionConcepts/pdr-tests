@@ -241,6 +241,7 @@ def read_and_hash(
     product: Mapping[str, str],
     debug: bool,
     quiet: bool,
+    skiphash: bool
 ) -> tuple[pdr.Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
@@ -259,6 +260,8 @@ def read_and_hash(
         f"Opened {product['product_id']} ({runtimes['readtime']} s)", quiet=quiet
     )
     watch.click()
+    if skiphash is True:
+        return data, {}, runtimes
     hashes = just_hash(data)
     runtimes['hashtime'] = watch.peek()
     console_and_log(

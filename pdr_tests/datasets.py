@@ -346,7 +346,8 @@ class ProductChecker(DatasetDefinition):
         dump_kwargs=None,
         quiet=False,
         max_size=0,
-        filetypes=None
+        filetypes=None,
+        skiphash=False
     ):
         """
         generate and / or compare test hashes for a specified mission and
@@ -375,7 +376,8 @@ class ProductChecker(DatasetDefinition):
                 dump_kwargs,
                 quiet,
                 max_size,
-                filetypes
+                filetypes,
+                skiphash
             )
         log = partial(console_and_log, quiet=quiet)
         log(f"Hashing {self.dataset} {product_type}.")
@@ -384,8 +386,10 @@ class ProductChecker(DatasetDefinition):
             log(f"no hashes found for {product_type}, writing new")
         elif regen is True:
             log(f"regenerate=True passed, overwriting hashes")
-        compare = not ((regen is True) or ("hash" not in index.columns))
-        test_args = (compare, debug, quiet, max_size, filetypes)
+        compare = not (
+            (regen is True) or ("hash" not in index.columns)
+        )
+        test_args = (compare, debug, quiet, max_size, filetypes, skiphash)
         # compare/overwrite are redundant rn, but presumably we might want
         # different logic in the future.
         overwrite = (regen is True) or ("hash" not in index.columns)
@@ -402,7 +406,7 @@ class ProductChecker(DatasetDefinition):
                 log(f"dumped browse products for {product['product_id']}")
         if (overwrite is True) and (write is False):
             log("write=False passed, not updating hashes in csv")
-        elif overwrite is True:
+        elif (overwrite is True) and (skiphash is False):
             index["hash"] = pd.Series(self.hash_rows)
             index.to_csv(self.test_path(product_type), index=False)
         return self.write_test_log(product_type)
@@ -533,7 +537,8 @@ def test_product(
     debug: bool,
     quiet: bool,
     max_size: float = 0,
-    filetypes: Optional[Sequence[str]] = None
+    filetypes: Optional[Sequence[str]] = None,
+    skiphash: bool = False
 ) -> tuple[Optional[pdr.Data], str, dict]:
     """
     handler function for testing an individual product: records exceptions
@@ -554,8 +559,10 @@ def test_product(
         console_and_log(log_row["status"], quiet=quiet)
         return data, hash_json, log_row
     try:
-        data, hashes, runtimes = read_and_hash(path, product, debug, quiet)
-        if compare is True:
+        data, hashes, runtimes = read_and_hash(
+            path, product, debug, quiet, skiphash
+        )
+        if (skiphash is False) and (compare is True):
             if isinstance(product["hash"], float):
                 if np.isnan(product["hash"]):
                     raise MissingHashError
@@ -596,7 +603,7 @@ def path_if_found(file):
 
 
 def check_exclusions(filetypes, log_row, max_size, product, path):
-    if (filetypes is None) and (max_size == 0):
+    if (len(filetypes) == 0) and (max_size == 0):
         return False, log_row
     checkmap = [
         path_if_found(Path(path.parent, file))
@@ -605,7 +612,7 @@ def check_exclusions(filetypes, log_row, max_size, product, path):
     present_files = list(filter(None, checkmap))
     if len(present_files) == 0:
         return False, log_row
-    if filetypes is not None:
+    if len(filetypes) > 0:
         if filetypes.intersection(
             {f.suffix.lower().strip(".") for f in present_files}
         ) == set():
