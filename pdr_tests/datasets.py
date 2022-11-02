@@ -345,7 +345,7 @@ class ProductChecker(DatasetDefinition):
         dump_browse=False,
         dump_kwargs=None,
         quiet=False,
-        max_size=None,
+        max_size=0,
         filetypes=None
     ):
         """
@@ -532,7 +532,7 @@ def test_product(
     compare: bool,
     debug: bool,
     quiet: bool,
-    max_size: float = None,
+    max_size: float = 0,
     filetypes: Optional[Sequence[str]] = None
 ) -> tuple[Optional[pdr.Data], str, dict]:
     """
