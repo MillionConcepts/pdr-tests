@@ -45,38 +45,27 @@ def console_and_log(message, level="info", do_stamp=True, quiet=False):
 
 def checksum_object(obj, hash_function=md5):
     """
-    make stable byte array from python object. the general case of this is,
-    I think, impossible, or at least implementation-dependent, so I am
-    attempting to cover the specific cases we have...this is a first pass.
+    make stable byte array from python object. the general case of this is
+    impossible, or at least implementation-dependent, so this just
+    attempts to cover the cases we actually have.
     """
     hasher = hash_function(usedforsecurity=False)
     if isinstance(obj, np.ndarray):
-        for line in obj:
-            hasher.update(line)
+        hasher.update(obj)
     elif isinstance(obj, pd.DataFrame):
-        # TODO: I am not sure why object ('O') dtypes do not appear to
-        #  have stable byte-level representations without first converting to
-        #  python objects. something strange is happening
-        #  behind the numpy API. this plausibly also affects ndarrays, but
-        #  I don't know if we're ever working with ndarrays with object dtypes.
+        # note that object ('O') dtypes do not, by design, have stable
+        # byte-level representations.
         blocks = obj._to_dict_of_blocks(copy=False)
         # sorting to improve consistency between pandas versions
         for dtype in sorted(blocks.keys()):
-            # TODO, maybe: going by row or column is stunningly slow for
-            #  really long or wide tables. trying this and seeing if it takes
-            #  too much memory.
             if dtype == 'object':
-                # for ix in block.index:
-                #     hasher.update(str(block.loc[ix].tolist()).encode('utf-8'))
-                hasher.update(blocks[dtype].to_string().encode('utf-8'))
+                hasher.update(blocks[dtype].to_json().encode('utf-8'))
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
                 #  array is somewhat memory-inefficient. another solution is
                 #  to dump each line as string or bytes -- like we do for
                 #  object dtypes above -- which would be slower but smaller.
-                # for ix in block.index:
-                #     hasher.update(block.loc[ix].values.copy())
                 hasher.update(blocks[dtype].values.copy())
     else:
         # TODO: determine when this is and is not actually stable
@@ -252,6 +241,7 @@ def read_and_hash(
     product: Mapping[str, str],
     debug: bool,
     quiet: bool,
+    skiphash: bool
 ) -> tuple[pdr.Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
@@ -270,6 +260,8 @@ def read_and_hash(
         f"Opened {product['product_id']} ({runtimes['readtime']} s)", quiet=quiet
     )
     watch.click()
+    if skiphash is True:
+        return data, {}, runtimes
     hashes = just_hash(data)
     runtimes['hashtime'] = watch.peek()
     console_and_log(
