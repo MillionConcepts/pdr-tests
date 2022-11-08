@@ -1,0 +1,4 @@
+0,label_file,files,product_id,url_stem,hash
+1,mup_hams2_141114002115.lbl,"[""ham.fmt"", ""mup_hams2_141114002115.lbl"", ""mup_hams2_141114002115.tab""]",mup_hams2_141114002115,http://pdssbn.astro.umd.edu/holdings/rl-c-mupus-2-fss-v1.0/data/hammer,"{""HAM_TABLE"": ""7d1803064bc144e2ce24ccae626257fc""}"
+12,mup_pens2_140416183349.lbl,"[""mup_pens2_140416183349.lbl"", ""pen.fmt"", ""mup_pens2_140416183349.tab""]",mup_pens2_140416183349,http://pdssbn.astro.umd.edu/holdings/rl-cal-mupus-2-phc-v1.0/data/penel,"{""PEN_TABLE"": ""36127cf7381159060e43d09701aef03f""}"
+19,mup_maps2_140422030534.lbl,"[""mup_maps2_140422030534.tab"", ""mup_maps2_140422030534.lbl"", ""map.fmt""]",mup_maps2_140422030534,http://pdssbn.astro.umd.edu/holdings/rl-cal-mupus-2-phc-v1.0/data/map,"{""MAP_TABLE"": ""783adcfa0ac93865ad7f9e1dd418baca""}"
