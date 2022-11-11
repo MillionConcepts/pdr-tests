@@ -15,6 +15,7 @@ import pandas as pd
 import pyarrow as pa
 import requests
 from dustgoggles.func import disjoint, intersection
+from dustgoggles.structures import dig_for_values
 from multidict import MultiDict
 
 import pdr
@@ -110,11 +111,15 @@ def make_pds4_row(xmlfile):
 
 
 def make_pds3_row(local_path):
-    metadata = pdr.Metadata(read_pvl_label(str(local_path)))
-    pointers = get_pds3_pointers(metadata)
+    metadata = pdr.Metadata(read_pvl_label(check_cases(local_path)))
     files = [local_path.name]
-    for pointer in pointers:
-        target = metadata.metaget_(pointer)
+    for target in dig_for_values(
+        metadata,
+        "^",
+        mtypes=(MultiDict, dict),
+        base_pred=lambda a, b: b.startswith(a)
+    ):
+        target = metadata.formatter(target)
         if isinstance(target, str):
             files.append(target)
         elif isinstance(target, Sequence):
