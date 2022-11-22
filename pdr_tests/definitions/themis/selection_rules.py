@@ -79,7 +79,7 @@ These QUBE and CUBE products can be revisited once they are supported:
         "manifest": THEMIS_FILE,
         "fn_must_contain": ['.QUB'],
         "url_must_contain": ['/ODTSDP_v1/', 'odtie'],
-        "label": (".fmt", ".FMT"),
+        "label": "A",
     },
     # calibrated infrared data; three-dimensional spectral image QUBEs
     "ir_RDR": {
@@ -99,7 +99,7 @@ These QUBE and CUBE products can be revisited once they are supported:
     "vis_RDR": {
         "manifest": THEMIS_FILE,
         "fn_must_contain": ['.QUB'],
-        "url_must_contain": ['/ODTSDP_v1/', 'odtvrs'],
+        "url_must_contain": ['/ODTSDP_v1/', 'odtvr'],
         "label": "A",
     },
     # geographically projected products derived from ir_RDR; three-dimensional spectral image CUBEs; version 1
