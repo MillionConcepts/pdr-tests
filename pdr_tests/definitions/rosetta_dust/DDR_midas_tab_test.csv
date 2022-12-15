@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+tgh_0409522_1627308_18.lbl,"[""tgh_structure.fmt"", ""tgh_0409522_1627308_18.lbl"", ""mid_tip_images.pdf"", ""mid_eaicd.pdf"", ""tgh_0409522_1627308_18.tab""]",tgh_0409522_1627308_18,http://pdssbn.astro.umd.edu/holdings/ro-c-midas-5-prl-to-ext3-v2.0/data,"{""EVENT_TABLE"": ""ac630ba43819ac1f3263947c15abd018""}"
+mid_particle_table.lbl,"[""mid_particle_table.lbl"", ""mid_particle_table.tab""]",mid_particle_table,http://pdssbn.astro.umd.edu/holdings/ro-c-midas-5-prl-to-ext3-v2.0/data,"{""PARTICLE_TABLE"": ""8c30a9cfde05534a3a9354ef6f9b6600""}"
+cah_0409522_1627308_08.lbl,"[""cah_structure.fmt"", ""mid_tip_images.pdf"", ""mid_eaicd.pdf"", ""cah_0409522_1627308_08.lbl"", ""cah_0409522_1627308_08.tab""]",cah_0409522_1627308_08,http://pdssbn.astro.umd.edu/holdings/ro-c-midas-5-prl-to-ext3-v2.0/data,"{""EVENT_TABLE"": ""4d45611880a2489b7c3b7b5e1d56c200""}"
