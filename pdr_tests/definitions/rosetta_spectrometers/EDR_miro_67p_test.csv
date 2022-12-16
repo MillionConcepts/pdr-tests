@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+miro_2_mm_20161670000.lbl,"[""miro_2_mm_20161670000.lbl"", ""miro_2_mm_20161670000.dat"", ""cont_level_2_format.fmt"", ""ro_mir_if_0001.asc""]",miro_2_mm_20161670000,http://pdssbn.astro.umd.edu/holdings/ro-c-miro-2-ext2-67p-v1.0/data/continuum,"{""TABLE"": ""785b94e729182207bf10c76103889a4a""}"
+miro_2_submm_20150280000.lbl,"[""ro_mir_if_0001.asc"", ""miro_2_submm_20150280000.dat"", ""cont_level_2_format.fmt"", ""miro_2_submm_20150280000.lbl""]",miro_2_submm_20150280000,http://pdssbn.astro.umd.edu/holdings/ro-c-miro-2-esc1-67p-v1.0/data/continuum,"{""TABLE"": ""7137f672cc35f216bf093588c5e668b2""}"
+miro_2_cts_20152940000.lbl,"[""miro_2_cts_20152940000.lbl"", ""miro_2_cts_20152940000.dat"", ""cts_level_2_format.fmt"", ""ro_mir_if_0001.asc""]",miro_2_cts_20152940000,http://pdssbn.astro.umd.edu/holdings/ro-c-miro-2-esc3-67p-v1.0/data/spectroscopic,"{""TABLE"": ""4f3ca92bfc3179c2f7115e23c81c190e""}"
