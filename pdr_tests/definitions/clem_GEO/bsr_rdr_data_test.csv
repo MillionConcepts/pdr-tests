@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-pf1.LBL,"[""pf1.LBL"", ""PF1.TAB""]",PF1.TAB,http://pds-geosciences.wustl.edu/lunar/clem1-l-rss-5-bsr-v1/cl_2101/data,
+pf1.LBL,"[""pf1.LBL"", ""PF1.TAB""]",PF1.TAB,http://pds-geosciences.wustl.edu/lunar/clem1-l-rss-5-bsr-v1/cl_2101/data,"{""HEADER_TABLE"": ""e998b561e5ee6d7ae7e2f5acc6172bcd"", ""DATA_TABLE"": ""5ce04f9076e918ebcab41c1920d56b97""}"
