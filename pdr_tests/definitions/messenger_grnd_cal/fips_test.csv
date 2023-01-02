@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+20030402_FIPS_M350_960_RTE.LBL,"[""20030402_FIPS_M350_960_RTE.CSV"", ""20030402_FIPS_M350_960_RTE.LBL"", ""FIPS_RTE.FMT""]",20030402_FIPS_M350_960_RTE,http://pds-geosciences.wustl.edu/messenger/ground_cal/messgc_0001/FIPS/DATA/FIPS_Geometric_factor_test,"{""SPREADSHEET"": ""cb096d3e664456985000965bfa7402b0""}"
