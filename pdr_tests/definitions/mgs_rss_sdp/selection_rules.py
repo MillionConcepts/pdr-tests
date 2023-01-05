@@ -36,8 +36,7 @@ file_information = {
     
     # May be missing product types due to the many unique file extensions and an archive layout that makes finding them difficult.
     
-    # ionospheric electron density profile; fix-length tables
-    # header tables have data table appended as additional rows
+    # ionospheric electron density profile; fixed-length tables
     "eds": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.eds'],
@@ -52,36 +51,43 @@ file_information = {
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
+    # same as img but these have a typo in their labels: SAMPLE_TYPE = "IEEE REAL"
+    "img_typo": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.img'],
+        "fn_regex" : [r'jgm|jgd|jod'],
+        "url_must_contain": ['-rss-5-sdp-'],
+        "label": "D",
+    },
     # line of sight acceleration profile; fix-length tables
-    # header tables have data table appended as additional rows
     "los": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.los'],
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
-    # occultation measurements; well-labeled fix-length tables
+    # occultation measurements; well-labeled fixed-length tables
     "ocs": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.ocs'],
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
-    # spherical harmonic model of gravity field; well-labeled fix-length tables
+    # spherical harmonic model of gravity field; well-labeled fixed-length tables
     "sha": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.sha'],
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
-    # spherical harmonic model of gravity field; well-labeled fix-length tables
+    # spherical harmonic model of gravity field
     "shb": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.shb'],
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
-    # viewing geometry for BSR; well-labeled 2-dimensional arrays (images)
+    # viewing geometry for BSR; well-labeled fixed-length tables
     "srg": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.srg'],
@@ -95,8 +101,7 @@ file_information = {
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
-    # radio occultation surface echos; well-labeled fix-length tables
-    # header tables have data table appended as additional rows
+    # radio occultation surface echos; well-labeled fixed-length tables
     "srt": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.srt'],
@@ -104,40 +109,35 @@ file_information = {
         "label": "D",
     },
     # atmospheric temperature-pressure profile; fixed-length tables
-    # header tables have data table appended as additional rows
     "tps": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.tps'],
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
-    # power spectra from BSR; well-labeled fix-length tables
+    # power spectra from BSR; well-labeled fixed-length tables
     "spc": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.spc'],
         "url_must_contain": ['-rss-5-sdp-'],
         "label": "D",
     },
+    # pointing data from HGA; well-labeled fixed-length tables
+    "sra": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.sra'],
+        "url_must_contain": ['-rss-5-sdp-'],
+        "label": "D",
+    },
+    
+    
+#     # Adobe PostScript files; out of scope
+#     "bro": {
+#         "manifest": MANIFEST_FILE,
+#         "fn_must_contain": ['.ps1'],
+#         "url_must_contain": ['-rss-5-sdp-'],
+#         "label": "D",
+#     },
     
 }
 
-"""
-
-    # same as img but these have a typo in their labels: SAMPLE_TYPE                = "IEEE REAL"
-    "img_typo": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "fn_regex" : [r'jgm|jgd|jod'],
-        "url_must_contain": ['-rss-5-sdp-'],
-        "label": "D",
-    },
-
-    # Adobe PostScript files; out of scope
-    "bro": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.ps1'],
-        "url_must_contain": ['-rss-5-sdp-'],
-        "label": "D",
-    },
-
-"""
