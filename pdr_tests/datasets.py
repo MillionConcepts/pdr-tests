@@ -626,7 +626,7 @@ def check_exclusions(filetypes, log_row, max_size, product, path):
             log_row["status"] = (
                 f"skipped due to filesize ({round(biggest, 2)} > {max_size})"
             )
-        return True, log_row
+            return True, log_row
     return False, log_row
 
 
