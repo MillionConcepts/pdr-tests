@@ -86,12 +86,13 @@ def just_hash(data):
         # membership in OBJECTS_IGNORED_BY_DEFAULT (like MODEL_DESC)
         if key not in dir(data):
             continue
-        # ignore text-type objects for now
-        if (
-            isinstance(data[key], (MultiDict, str))
-            # pds4_tools label object
-            or ('_convenient_root' in dir(data[key]))
-        ):
+        # pds4_tools label object
+        if '_convenient_root' in dir(data[key]):
+            continue
+        # ignore text-type objects for now (but not FITS headers)
+        if isinstance(data[key], MultiDict) and ("HEADER" not in key):
+            continue
+        if isinstance(data[key], str):
             continue
         hashes[key] = checksum_object(data[key])
     return hashes
