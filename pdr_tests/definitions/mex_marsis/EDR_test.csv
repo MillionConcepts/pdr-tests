@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-e_16847_ais_m.lbl,"[""E_16847_AIS_M_F.DAT"", ""e_16847_ais_m.lbl"", ""E_16847_AIS_M_G.DAT"", ""E_AIS.FMT""]",E_16847_AIS_M,http://pds-geosciences.wustl.edu/mex/mex-m-marsis-2-edr-ext6-v1/mexme_1007/data/edr1684x,"{""SCIENCE_TELEMETRY_TABLE"": ""fe5303ff4be18538dac1651cd690229e"", ""AUXILIARY_DATA_TABLE"": ""da0c915cf4b8e76a24c13e2a6fbc87d9""}"
+e_16847_ais_m.lbl,"[""E_16847_AIS_M_F.DAT"", ""e_16847_ais_m.lbl"", ""E_16847_AIS_M_G.DAT"", ""E_AIS.FMT""]",E_16847_AIS_M,http://pds-geosciences.wustl.edu/mex/mex-m-marsis-2-edr-ext6-v1/mexme_1007/data/edr1684x,"{""SCIENCE_TELEMETRY_TABLE"": ""942938198ee862ac7719383b8294293a"", ""AUXILIARY_DATA_TABLE"": ""da0c915cf4b8e76a24c13e2a6fbc87d9""}"
