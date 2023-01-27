@@ -1,7 +1,7 @@
 from functools import reduce
 from pyarrow import parquet
+import pyarrow.compute
 import pyarrow as pa
-import os
 from pathlib import Path
 from importlib import import_module
 import pdr_tests
@@ -17,11 +17,13 @@ def the_main_function(input_manifest):
 def load_all_rules():
     """goes into every folder in definitions and pull in the rules for each product type."""
     definitions_dir = Path(Path(pdr_tests.__file__).parent, "definitions")
-    obj = os.scandir(definitions_dir)
     rules_modules = {}
-    for entry in obj:
+    for entry in definitions_dir.iterdir():
         if entry.is_dir():
-            selection_rules = import_module(f'pdr_tests.definitions.{entry.name}.selection_rules')
+            try:
+                selection_rules = import_module(f'pdr_tests.definitions.{entry.name}.selection_rules')
+            except ModuleNotFoundError:
+                continue
             rules_modules[entry.name] = getattr(selection_rules, "file_information")
     return rules_modules
 
@@ -32,14 +34,13 @@ def find_relevant_rules(rules_modules, input_manifest):
     for key in rules_modules.keys():
         for subkey in rules_modules[key].keys():
             if str(rules_modules[key][subkey]["manifest"]).split('/')[-1] == str(input_manifest).split('/')[-1]:
-                relevant_rules[key+'_'+subkey] = rules_modules[key][subkey]
+                relevant_rules[key+'|'+subkey] = rules_modules[key][subkey]
     return relevant_rules
 
 
 def check_coverage_in_chunks(
     input_file,
     relevant_rules,
-    schema=None,
     row_group_size=None,
     use_dictionary=None,
     version="2.6"
@@ -51,10 +52,15 @@ def check_coverage_in_chunks(
     if use_dictionary is not None:
         open_kwargs["use_dictionary"] = use_dictionary
     sort_reader = parquet.ParquetFile(input_file)
-    if schema is None:
-        schema = sort_reader.read_row_group(0).schema
+    schema = sort_reader.read_row_group(0).schema
+    schemadict = {
+        name: type_ for name, type_ in zip(schema.names, schema.types)
+    } | {'covered_by': pa.string()}
     sort_writer = parquet.ParquetWriter(
-        output_file, version=version, schema=schema, **open_kwargs
+        output_file,
+        version=version,
+        schema=pa.schema(schemadict, schema.metadata),
+        **open_kwargs
     )
     try:
         for group_ix in range(sort_reader.num_row_groups):
@@ -98,5 +104,4 @@ def add_rule_labels(relevant_rules, table: pa.Table) -> pa.Table:
         for index, match in enumerate(combined_mask):
             if match.as_py():
                 rule_labels[index] = key
-    table.append_column("covered_by", rule_labels)
-    return table
+    return table.append_column("covered_by", pa.array(rule_labels))
