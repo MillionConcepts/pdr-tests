@@ -132,14 +132,16 @@ def add_rule_labels(relevant_rules, table: pa.Table) -> pa.Table:
             if not match.as_py():
                 continue
             for array, field in zip(
-                (dataset_labels, dataset), (ptype_labels, ptype)
+                (dataset_labels, ptype_labels), (dataset, ptype)
             ):
                 if array[index] != "":
                     array[index] += f",{field}"
                 else:
                     array[index] = field
-    label_table = pa.table(
-        [pa.array(dataset_labels), pa.array(ptype_labels)],
-        ("dataset_ix", "ptype")
-    )
-    return pa.concat_tables([table, label_table])
+    for array, name in zip(
+        (dataset_labels, ptype_labels), ("dataset_ix", "ptype")
+    ):
+        table = table.append_column(
+            pa.field(name, pa.string()), pa.array(array)
+        )
+    return table

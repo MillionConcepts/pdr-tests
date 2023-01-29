@@ -31,7 +31,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .parquet files
-IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl.parquet")
+IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl_hazcam.parquet")
 
 # NOTE: commented-out RDR types are specified in the SIS as valid product
 # categories, but no examples of them are actually present in the online
