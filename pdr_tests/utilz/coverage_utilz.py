@@ -3,6 +3,7 @@ from importlib import import_module
 
 import pyarrow as pa
 import pyarrow.compute as pac
+from more_itertools import chunked
 from pyarrow import parquet
 from pathlib import Path
 
@@ -65,6 +66,7 @@ def check_coverage_in_chunks(
     row_group_size=None,
     use_dictionary=None,
     version="2.6",
+    n_chunks=20
 ):
     output_file = Path(
         str(input_file).split(".parquet")[0] + "_coverage.parquet"
@@ -86,8 +88,12 @@ def check_coverage_in_chunks(
         **open_kwargs,
     )
     try:
-        for group_ix in range(sort_reader.num_row_groups):
-            chunk = sort_reader.read_row_group(group_ix)
+        ix_chunks = tuple(
+            chunked(range(sort_reader.metadata.num_row_groups), 5)
+        )
+        for i, ix_chunk in enumerate(ix_chunks):
+            print(f"{i + 1}/{len(ix_chunks)}")
+            chunk = sort_reader.read_row_groups(ix_chunk)
             sort_writer.write_table(
                 add_rule_labels(relevant_rules, chunk), **write_kwargs
             )
