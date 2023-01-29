@@ -34,18 +34,21 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 GEO_FILE = Path(MANIFEST_DIR, "geomsl.parquet")
 
 file_information = {
-    "CCAM_LIBS_EDR": {
-        "manifest": GEO_FILE,
-        "fn_regex": [r"cl[0-9].*edr.*ccam.*\.dat"],
-        "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
-        "label": "D",
-    },
-    "CCAM_LIBS_EDR_RARE": {
-        "manifest": GEO_FILE,
-        "fn_regex": [r"cl[378].*edr.*ccam.*\.dat"],
-        "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
-        "label": "D",
-    },
+    # the quality of at least the metadata in the LIBS EDR corpus is
+    # extremely spotty. it is not currently supported.
+
+    # "CCAM_LIBS_EDR": {
+    #     "manifest": GEO_FILE,
+    #     "fn_regex": [r"cl[0-9].*edr.*ccam.*\.dat"],
+    #     "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
+    #     "label": "D",
+    # },
+    # "CCAM_LIBS_EDR_RARE": {
+    #     "manifest": GEO_FILE,
+    #     "fn_regex": [r"cl[378].*edr.*ccam.*\.dat"],
+    #     "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
+    #     "label": "D",
+    # },
     "CCAM_RMI_EDR": {
         "manifest": GEO_FILE,
         "fn_regex": [r"cr0.*edr.*ccam.*\.img"],
