@@ -101,9 +101,8 @@ def add_rule_labels(relevant_rules, table: pa.Table) -> pa.Table:
     make a list of boolean masks for each rule in relevant_rules. the masks
     denote whether each row in 'table' meet the individual criteria of the
     rule. Then take the logical intersection of the masks, creating a mask that
-    is only true when a given row meets all of a rule's criteria.
-    Add a column to the input table indicating which rule(s) (if any) match
-    each row.
+    true iff a given row meets all of a rule's criteria. Add columns to the
+    input table indicating which rule(s) (if any) match each row.
     """
     rows = table.num_rows
     dataset_labels, ptype_labels = [""] * rows, [""] * rows
