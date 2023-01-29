@@ -31,7 +31,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .parquet files
-GEO_FILE = Path(MANIFEST_DIR, "img_usgs.parquet")
+GEO_FILE = Path(MANIFEST_DIR, "img_usgs_chandrayaan_1.parquet")
 
 file_information = {
     "M3_L0": {
