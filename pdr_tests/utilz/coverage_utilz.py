@@ -1,3 +1,4 @@
+from collections import defaultdict
 from functools import reduce
 from importlib import import_module
 
@@ -151,3 +152,107 @@ def add_rule_labels(relevant_rules, table: pa.Table) -> pa.Table:
             pa.field(name, pa.string()), pa.array(array)
         )
     return table
+
+
+def get_pa_extensions(filenames: pa.Array):
+    extensions = pac.extract_regex(filenames, r'\.(?P<extension>\w+)$')
+    return pac.struct_field(extensions, [0])
+
+
+# defining these separately from the 'special' label search
+IRRELEVANT_EXTENSIONS = [
+    'backup', 'bak', 'btupd', 'cat', 'cmdlog', 'gif', 'htm', 'html', 'jpg',
+    'log', 'pdf', 'png', 'temp', 'tmp', 'txt'
+]
+
+LABEL_EXTENSIONS = ['fmt', 'lbl', 'xml']
+
+# TODO, maybe: explicitly ignore some 'calib', 'geometry', etc. directories?
+
+
+def pnot(val):
+    return pac.invert(val)
+
+
+def count_coverage(manifest: pa.Table):
+    covered, uncovered = find_covered(manifest)
+    if covered is None:
+        return {}, []
+    uncovered_extensions = pac.unique(
+        get_pa_extensions(uncovered['filename'])
+    ).to_pylist()
+    metrics = defaultdict(list)
+    for field in ("dataset_ix", "ptype"):
+        metrics[field] = get_ix_metrics(covered, field)
+    for field in ("volume", "dataset_pds"):
+        metrics[field] = get_pds_metrics(manifest, covered, uncovered, field)
+    return metrics, uncovered_extensions
+
+
+def find_covered(manifest):
+    preds = {'cover': pac.invert(pac.equal(manifest['dataset_ix'], ''))}
+    if pac.sum(preds['cover']).as_py() == 0:
+        print("none of this manifest is covered.")
+        return None, None
+    extensions = get_pa_extensions(manifest['filename'])
+    preds['label'] = pac.is_in(
+        pac.ascii_lower(extensions), pa.array(LABEL_EXTENSIONS)
+    )
+    if pac.any(pac.and_(preds['cover'], preds['label'])).as_py() is True:
+        print("note: some labels are assigned as top-level covered.")
+    preds['irrelevant'] = pac.is_in(
+        pac.ascii_lower(extensions), pa.array(IRRELEVANT_EXTENSIONS)
+    )
+    preds['good'] = pac.invert(pac.or_(preds['irrelevant'], preds['label']))
+    preds['uncover'] = pac.and_(pnot(preds['cover']), preds['good'])
+    uncovered = manifest.filter(preds['uncover'])
+    covered = manifest.filter(preds['cover'])
+    return covered, uncovered
+
+
+# noinspection PyDictCreation
+def get_ix_metrics(covered, field):
+    recs = []
+    vals = pac.unique(covered[field]).to_pylist()
+    for val in filter(lambda v: v != "", vals):
+        match = covered.filter(pac.equal(covered[field], val))
+        rec = {'value': val, 'count': len(match)}
+        rec['volumes'] = pac.unique(match['volume']).to_pylist()
+        rec['datasets_pds'] = pac.unique(match['dataset_pds']).to_pylist()
+        rec['n_dataset'] = len(rec['datasets_pds'])
+        rec['n_volume'] = len(rec['volumes'])
+        rec['total_mb'] = pac.sum(match['size']).as_py() / 1024 ** 2
+        rec['mean_mb'] = rec['total_mb'] / rec['count']
+        recs.append(rec)
+    return recs
+
+
+def get_pds_metrics(manifest, covered, uncovered, field):
+    recs = []
+    vals = pac.unique(manifest[field]).to_pylist()
+    for val in filter(lambda v: v != "", vals):
+        rec = {
+            'value': val,
+            'count': pac.sum(pac.equal(manifest[field], val)).as_py()
+        }
+        match = covered.filter(pac.equal(covered[field], val))
+        rec['datasets_ix'] = pac.unique(match['dataset_ix']).to_pylist()
+        rec['ptypes'] = pac.unique(match['ptype']).to_pylist()
+        rec['n_datasets_ix'] = len(rec['datasets_ix'])
+        rec['n_ptypes'] = len(rec['ptypes'])
+        rec['n_covered'] = len(match)
+        ucmatch = uncovered.filter(pac.equal(uncovered[field], val))
+        rec['n_uncovered'] = len(ucmatch)
+        if (len(ucmatch) + len(match)) == 0:
+            rec['coverage'] = float('nan')
+        else:
+            rec['coverage'] = (
+                rec['n_covered'] / (rec['n_covered'] + rec['n_uncovered'])
+            )
+        recs.append(rec)
+    return recs
+
+
+def load_and_count(manifest_path):
+    manifest = parquet.read_table(manifest_path)
+    return count_coverage(manifest)
