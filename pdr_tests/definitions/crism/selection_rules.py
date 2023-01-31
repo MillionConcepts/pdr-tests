@@ -30,7 +30,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquet")
+GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro_full.parquet")
 
 file_information = {
     "EDR": {

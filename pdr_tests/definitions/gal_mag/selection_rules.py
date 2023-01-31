@@ -30,7 +30,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-PLASM_FILE = Path(MANIFEST_DIR, "plasm.parquet")
+PLASM_FILE = Path(MANIFEST_DIR, "plasm_full.parquet")
 
 file_information = {
     # EDR officially unsupported.
