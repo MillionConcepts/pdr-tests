@@ -162,12 +162,12 @@ def get_pa_extensions(filenames: pa.Array):
 # defining these separately from the 'special' label search
 IRRELEVANT_EXTENSIONS = [
     'backup', 'bak', 'btupd', 'cat', 'cmdlog', 'gif', 'htm', 'html', 'jpg',
-    'log', 'pdf', 'png', 'temp', 'tmp', 'txt', 'asc'
+    'log', 'pdf', 'png', 'temp', 'tmp', 'txt'
 ]
 
 LABEL_EXTENSIONS = ['fmt', 'lbl', 'xml']
 
-# TODO, maybe: explicitly ignore some 'calib', 'geometry', etc. directories?
+# TODO, maybe: explicitly ignore some 'calib', 'geometry', 'document', 'index' etc. directories?
 
 
 def pnot(val):
