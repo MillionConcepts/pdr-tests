@@ -162,7 +162,7 @@ def get_pa_extensions(filenames: pa.Array):
 # defining these separately from the 'special' label search
 IRRELEVANT_EXTENSIONS = [
     'backup', 'bak', 'btupd', 'cat', 'cmdlog', 'gif', 'htm', 'html', 'jpg',
-    'log', 'pdf', 'png', 'temp', 'tmp', 'txt'
+    'log', 'pdf', 'png', 'temp', 'tmp', 'txt', 'asc'
 ]
 
 LABEL_EXTENSIONS = ['fmt', 'lbl', 'xml']
