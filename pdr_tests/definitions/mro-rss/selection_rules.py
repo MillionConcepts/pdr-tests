@@ -38,8 +38,8 @@ file_information = {
     #         "url_must_contain": ['rss', '/odf'],  # this is probably unnecessary, but it's here anyway
     #         "label": "D"},
     'rsr': {'manifest': GEO_MRO_FILE,
-            "fn_must_contain": ['.1a1'],
             "url_must_contain": ['rss', '/rsr'],
+            "fn_regex": [r'\..*[^lbl]'],
             "label": "D"},
     # 'tnf': {'manifest': GEO_MRO_FILE,
     #         'fn_must_contain': ['.tnf'],

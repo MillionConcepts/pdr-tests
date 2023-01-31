@@ -11,29 +11,20 @@ from pathlib import Path
 
 import pdr_tests
 
+
 # defining these separately from the 'special' label search
 IRRELEVANT_EXTENSIONS = [
-    "backup",
-    "bak",
-    "btupd",
-    "cat",
-    "cmdlog",
-    "gif",
-    "htm",
-    "html",
-    "jpg",
-    "log",
-    "pdf",
-    "png",
-    "temp",
-    "tmp",
-    "txt",
+    'backup', 'bak', 'btupd', 'cat', 'cmdlog', 'gif', 'htm', 'html', 'jpg',
+    'log', 'pdf', 'png', 'temp', 'tmp', 'txt'
 ]
-LABEL_EXTENSIONS = ["fmt", "lbl", "xml", "hdr"]
-# TODO, maybe: explicitly ignore some 'calib', 'geometry', etc. directories?
+
+LABEL_EXTENSIONS = ['fmt', 'lbl', 'xml']
+# TODO, maybe: explicitly ignore some 'calib', 'geometry', 'document',
+#  'index' etc. directories?
 
 
-def the_main_function(input_manifest):
+
+def add_coverage_column(input_manifest):
     input_manifest = Path(
         Path(Path(pdr_tests.__file__).parent, "node_manifests"), input_manifest
     )
@@ -135,7 +126,7 @@ def add_rule_labels(relevant_rules, table: pa.Table) -> pa.Table:
     make a list of boolean masks for each rule in relevant_rules. the masks
     denote whether each row in 'table' meet the individual criteria of the
     rule. Then take the logical intersection of the masks, creating a mask that
-    true iff a given row meets all of a rule's criteria. Add columns to the
+    true if a given row meets all of a rule's criteria. Add columns to the
     input table indicating which rule(s) (if any) match each row.
     """
     rows = table.num_rows
