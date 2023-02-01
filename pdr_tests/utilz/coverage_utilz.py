@@ -1,10 +1,12 @@
 from collections import defaultdict
 from functools import reduce
 from importlib import import_module
+from typing import Optional
 
 import pandas as pd
 import pyarrow as pa
 import pyarrow.compute as pac
+from cytoolz import keyfilter
 from more_itertools import chunked
 from pyarrow import parquet
 from pathlib import Path
@@ -13,15 +15,27 @@ import pdr_tests
 
 
 # defining these separately from the 'special' label search
-IRRELEVANT_EXTENSIONS = [
-    'backup', 'bak', 'btupd', 'cat', 'cmdlog', 'gif', 'htm', 'html', 'jpg',
-    'log', 'pdf', 'png', 'temp', 'tmp', 'txt'
-]
-
-LABEL_EXTENSIONS = ['fmt', 'lbl', 'xml']
-# TODO, maybe: explicitly ignore some 'calib', 'geometry', 'document',
-#  'index' etc. directories?
-
+IRRELEVANT_EXTENSIONS = (
+    "backup",
+    "bak",
+    "btupd",
+    "cat",
+    "cmdlog",
+    "gif",
+    "htm",
+    "html",
+    "jpg",
+    "log",
+    "pdf",
+    "png",
+    "temp",
+    "tmp",
+    "txt",
+)
+LABEL_EXTENSIONS = ("fmt", "lbl", "xml")
+IGNORE_DIRECTORIES = (
+    "calib", "geometry", "document", "index", "catalog", "browse", "extras"
+)
 
 
 def add_coverage_column(input_manifest):
@@ -198,11 +212,18 @@ def get_extensions(filenames: pa.Array):
     return pac.struct_field(extensions, [0])
 
 
-def make_countframe(directories: pa.Array, filenames: pa.Array):
-    parts = pa_split(directories, "/").append_column(
-        "ext", get_extensions(filenames)
-    )
-    parts = pa_extract_constants(parts, drop_constants=True)[1].to_pandas()
+def make_countframe(
+    directories: Optional[pa.Array] = None,
+    filenames: Optional[pa.Array] = None,
+    parts: Optional[pa.Table] = None
+):
+    if (parts is None) and ((directories is None) or (filenames is None)):
+        raise ValueError("directories + filenames, or parts, must be passed")
+    if parts is None:
+        parts = make_part_table(directories, filenames)
+        parts = pa_extract_constants(parts, drop_constants=True)[1].to_pandas()
+    else:
+        parts = parts.to_pandas()
     count_df = parts.value_counts(dropna=False)
     counts = count_df.values
     count_df = count_df.index.to_frame().reset_index(drop=True)
@@ -210,60 +231,132 @@ def make_countframe(directories: pa.Array, filenames: pa.Array):
     return count_df
 
 
-def count_coverage(manifest: pa.Table, ignore_labels=()):
-    original_length = len(manifest)
-    for label in ignore_labels:
-        print(f"excluding {label}")
-        manifest = manifest.filter(
-            pac.invert(pac.match_substring(manifest["label"], label))
+def make_part_table(directories, filenames):
+    parts = pa_split(directories, "/").append_column(
+        "ext", get_extensions(filenames)
+    )
+    return parts
+
+
+def count_coverage(
+    manifest: pa.Table,
+    ignore_labels=(),
+    label_extensions=LABEL_EXTENSIONS,
+    ignore_extensions=IRRELEVANT_EXTENSIONS,
+    ignore_directories=IGNORE_DIRECTORIES,
+):
+    manifest = filter_ignored_labels(ignore_labels, manifest)
+    if ignore_directories is not None:
+        manifest, parts, ignored_parts = filter_ignored_directories(
+            ignore_directories, manifest
         )
-    if len(manifest) < original_length:
-        print(f"{original_length - len(manifest)} files excluded")
+    else:
+        parts, ignored_parts = None, None
     print(f"finding coverage")
-    cov, uncov = find_covered(manifest)
+    cov, ucov, preds = find_covered(
+        manifest, label_extensions, ignore_extensions
+    )
     print("making countframes")
-    frames = {
-        name: make_countframe(tab["url"], tab["filename"])
-        for name, tab in zip(("cov_counts", "ucov_counts"), (cov, uncov))
-        if len(tab) > 0
-    }
+    frames = {}
+    for name, tab in zip(("cov", "ucov"), (cov, ucov)):
+        if len(tab) == 0:
+            continue
+        if parts is None:
+            frames[name] = make_countframe(tab['url'], tab['filename'])
+        else:
+            frames[name] = make_countframe(parts=parts.filter(preds[name]))
+    if ignored_parts is not None:
+        frames["dir_ignore"] = make_countframe(parts=ignored_parts)
+    del parts, ignored_parts
     metrics = defaultdict(list)
     if len(cov) > 0:
         for field in ("dataset_ix", "ptype"):
             metrics[field] = get_ix_metrics(cov, field)
     for field in ("volume", "dataset_pds"):
-        metrics[field] = get_pds_metrics(manifest, cov, uncov, field)
+        metrics[field] = get_pds_metrics(manifest, cov, ucov, field)
     return {k: pd.DataFrame(v) for k, v in metrics.items()} | frames
 
 
-def find_covered(manifest):
-    preds = {"cover": pac.invert(pac.equal(manifest["dataset_ix"], ""))}
-    if pac.sum(preds["cover"]).as_py() == 0:
+def filter_ignored_directories(ignore_directories, manifest):
+    print("making part table for directory exclusion...", end="")
+    parts = make_part_table(manifest["url"], manifest["filename"])
+    original_length = len(manifest)
+    igd_array = pa.array(ignore_directories)
+    exclusions = pac.is_in(pac.ascii_lower(parts[0]), igd_array)
+    for n in parts.schema.names:
+        if n in (0, "ext"):
+            continue
+        exclusions = pac.or_(
+            exclusions, pac.is_in(pac.ascii_lower(parts[n]), igd_array)
+        )
+    manifest = manifest.filter(pac.invert(exclusions))
+    if len(manifest) < original_length:
+        print(f"{original_length - len(manifest)} files excluded")
+    else:
+        print("excluded no files")
+    return (
+        manifest,
+        parts.filter(pac.invert(exclusions)),
+        parts.filter(exclusions)
+    )
+
+
+def filter_ignored_labels(ignore_labels, manifest):
+    for label in ignore_labels:
+        print(f"excluding label '{label}'...", end="")
+        original_length = len(manifest)
+        manifest = manifest.filter(
+            pac.invert(pac.match_substring(manifest["label"], label))
+        )
+        if len(manifest) < original_length:
+            print(f"{original_length - len(manifest)} files excluded")
+        else:
+            print("excluded no files")
+    return manifest
+
+
+def find_covered(
+    manifest,
+    ignore_extensions=IRRELEVANT_EXTENSIONS,
+    label_extensions=LABEL_EXTENSIONS,
+):
+    preds = {"cov": pac.invert(pac.equal(manifest["dataset_ix"], ""))}
+    if pac.sum(preds["cov"]).as_py() == 0:
         print("note: none of this manifest is covered.")
     extensions = get_extensions(manifest["filename"])
     preds["label"] = pac.is_in(
-        pac.ascii_lower(extensions), pa.array(LABEL_EXTENSIONS)
+        pac.ascii_lower(extensions), pa.array(label_extensions)
     )
-    if pac.any(pac.and_(preds["cover"], preds["label"])).as_py() is True:
+    if pac.any(pac.and_(preds["cov"], preds["label"])).as_py() is True:
         print("note: some labels are assigned as top-level covered.")
     preds["irrelevant"] = pac.is_in(
-        pac.ascii_lower(extensions), pa.array(IRRELEVANT_EXTENSIONS)
+        pac.ascii_lower(extensions), pa.array(ignore_extensions)
     )
     preds["good"] = pac.invert(pac.or_(preds["irrelevant"], preds["label"]))
-    preds["uncover"] = pac.and_(pac.invert(preds["cover"]), preds["good"])
-    uncovered = manifest.filter(preds["uncover"])
-    covered = manifest.filter(preds["cover"])
-    return covered, uncovered
+    preds["ucov"] = pac.and_(pac.invert(preds["cov"]), preds["good"])
+    uncovered = manifest.filter(preds["ucov"])
+    covered = manifest.filter(preds["cov"])
+    return covered, uncovered, keyfilter(lambda k: k in ("cov", "ucov"), preds)
 
 
 # noinspection PyDictCreation
 def get_ix_metrics(covered, field):
     print(f"counting {field}")
     recs = []
-    vals = pac.unique(covered[field]).to_pylist()
-    for val in filter(lambda v: v != "", vals):
-        match = covered.filter(pac.equal(covered[field], val))
-        rec = {"value": val, "count": len(match)}
+    if field == "ptype":
+        ref = pac.binary_join_element_wise(
+            covered['dataset_ix'], covered['ptype'], ';'
+        )
+    elif field == "dataset_ix":
+        ref = covered["dataset_ix"]
+    else:
+        raise ValueError(f"unknown field {field}")
+    vals = pac.unique(ref).to_pylist()
+    for val in filter(lambda v: v not in ("", ";"), vals):
+        match = covered.filter(pac.equal(ref, val))
+        rec = {field: val, "count": len(match)}
+        if field == "dataset_ix":
+            rec["ptypes"] = pac.unique(match["ptype"]).to_pylist()
         rec["volumes"] = pac.unique(match["volume"]).to_pylist()
         rec["datasets_pds"] = pac.unique(match["dataset_pds"]).to_pylist()
         rec["n_dataset"] = len(rec["datasets_pds"])
@@ -294,7 +387,7 @@ def get_pds_metrics(manifest, covered, uncovered, field):
     for val in filter(lambda v: v != "", vals):
         match_pred = pac.equal(manifest[field], val)
         rec = {
-            "value": val,
+            field: val,
             "count": pac.sum(match_pred).as_py(),
             "labels": pac.unique(
                 manifest.filter(match_pred)["label"]
@@ -322,7 +415,14 @@ def get_pds_metrics(manifest, covered, uncovered, field):
     return recs
 
 
-def load_and_count(manifest_path, ignore_labels=(), write=False):
+def load_and_count(
+    manifest_path,
+    ignore_labels=(),
+    ignore_extensions=IRRELEVANT_EXTENSIONS,
+    label_extensions=LABEL_EXTENSIONS,
+    ignore_directories=IGNORE_DIRECTORIES,
+    write=False,
+):
     manifest_path = Path(manifest_path)
     if "coverage.parquet" not in manifest_path.name:
         raise ValueError("this does not appear to be a coverage manifest.")
