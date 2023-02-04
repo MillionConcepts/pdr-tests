@@ -10,6 +10,8 @@ from typing import Mapping, Optional, Sequence
 
 import numpy as np
 import pandas as pd
+import requests
+
 import pdr
 import pyarrow as pa
 from pdr import check_cases
@@ -316,9 +318,12 @@ class IndexDownloader(DatasetDefinition):
             index = pd.read_csv(self.test_path(product_type))
         else:
             index = pd.read_csv(self.index_path(product_type))
+        session = requests.Session()
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
-            download_product_row(data_path, temp_path, row, self.skip_files)
+            session = download_product_row(
+                data_path, temp_path, row, self.skip_files, session
+            )
 
 
 class ProductChecker(DatasetDefinition):

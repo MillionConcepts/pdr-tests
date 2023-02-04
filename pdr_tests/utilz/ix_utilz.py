@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import shutil
+import time
 import warnings
 import xml.etree.ElementTree as ET
 from hashlib import md5
@@ -157,8 +158,11 @@ def get_product_row(label_path, url):
     return row
 
 
-def download_product_row(data_path, temp_path, row, skip_files=()):
+def download_product_row(
+    data_path, temp_path, row, skip_files=(), session=None
+):
     files = json.loads(row["files"])
+    session = session if session is not None else requests.Session()
     for file in files:
         if Path(data_path, file).exists():
             console_and_log(f"... {file} present, skipping ...")
@@ -166,39 +170,65 @@ def download_product_row(data_path, temp_path, row, skip_files=()):
         if any((file == skip_file for skip_file in skip_files)):
             continue
         url = f"{row['url_stem']}/{file}"
-        verbose_temp_download(data_path, temp_path, url)
+        session = verbose_temp_download(data_path, temp_path, url, session)
+    return session
 
 
 # TODO / note: this is yet one more download
 #  thing that we should somehow unify and consolidate
-def verbose_temp_download(data_path, temp_path, url, skip_quietly=True):
+def verbose_temp_download(
+    data_path, temp_path, url, skip_quietly=True, session=None
+):
     try:
         check_cases(Path(data_path, Path(url).name))
         if skip_quietly is False:
             console_and_log(
                 f"{Path(url).name} already present, skipping download."
             )
-        return
+        return session
     except FileNotFoundError:
         pass
+    session = session if session is not None else requests.Session()
     console_and_log(f"attempting to download {url}.")
-    response = requests.get(url, stream=True, headers=headers)
+    response, session = get_response(session, url)
+    if response is None:
+        console_and_log(f"Download of {url} timed out.")
+        return
     if not response.ok:
         urlsplit = url.split('.')
         url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
-        response = requests.get(url, stream=True, headers=headers)
+        response = session.get(url, stream=True, headers=headers)
         if not response.ok:
             console_and_log(f"Download of {url} failed.")
-            return
+            return session
+        # TODO: is this still necessary? I think we fixed this.
         warnings.warn('File ending was changed to lowercase to complete download. '
                       'Please update "label" in selection rules to allow index to write and rerun.')
     with open(Path(temp_path, Path(url).name), "wb+") as fp:
-        for chunk in response.iter_content(chunk_size=10**7):
+        for ix, chunk in enumerate(response.iter_content(chunk_size=10**7)):
+            print(f"getting chunk {ix} ({len(chunk)} bytes)")
             fp.write(chunk)
     shutil.move(
         Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
     )
     console_and_log(f"completed download of {url}.")
+    return session
+
+
+def get_response(session, url):
+    for _ in range(5):
+        try:
+            response = session.get(
+                url, stream=True, headers=headers, timeout=4
+            )
+            return response, session
+        except requests.ReadTimeout:
+            console_and_log(
+                f"slow response on {url}; pausing and reestablishing session"
+            )
+            time.sleep(1)
+            session = requests.Session()
+    return None, None
 
 
 # noinspection HttpUrlsUsage
