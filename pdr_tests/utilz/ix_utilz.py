@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 from hashlib import md5
 from pathlib import Path
 from typing import Mapping, Sequence, MutableMapping, Collection, Callable
+from sys import stdout
 
 import numpy as np
 import pandas as pd
@@ -177,7 +178,7 @@ def download_product_row(
 # TODO / note: this is yet one more download
 #  thing that we should somehow unify and consolidate
 def verbose_temp_download(
-    data_path, temp_path, url, skip_quietly=True, session=None
+    data_path, temp_path, url, skip_quietly=True, session=None, size="unknown"
 ):
     try:
         check_cases(Path(data_path, Path(url).name))
@@ -205,8 +206,13 @@ def verbose_temp_download(
         warnings.warn('File ending was changed to lowercase to complete download. '
                       'Please update "label" in selection rules to allow index to write and rerun.')
     with open(Path(temp_path, Path(url).name), "wb+") as fp:
+        size, fetched = response.headers.get('content-length'), 0
+        size = 'unknown' if size is None else size / 1024 ** 2
         for ix, chunk in enumerate(response.iter_content(chunk_size=10**7)):
-            print(f"getting chunk {ix} ({len(chunk)} bytes)")
+            fetched += len(chunk)
+            print_inline(
+                f"getting chunk {ix} ({fetched / 1024 ** 2} / {size} MB)"
+            )
             fp.write(chunk)
     shutil.move(
         Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
@@ -223,10 +229,8 @@ def get_response(session, url):
             )
             return response, session
         except requests.ReadTimeout:
-            console_and_log(
-                f"slow response on {url}; pausing and reestablishing session"
-            )
-            time.sleep(1)
+            console_and_log(f"slow response on {url}; reestablishing session")
+            time.sleep(2)
             session = requests.Session()
     return None, None
 
@@ -326,3 +330,11 @@ def record_comparison(
         log_row["status"] = "hash mismatch"
         log_row["error"] = str(result)
     return log_row
+
+
+def print_inline(text: str, blanks: int = 60):
+    """For updating text in place without a carriage return."""
+    stdout.write(" "*blanks+"\r")
+    stdout.write(str(str(text)+'\r'))
+    stdout.flush()
+    return
