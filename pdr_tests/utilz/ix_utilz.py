@@ -7,6 +7,7 @@ import shutil
 import time
 import warnings
 import xml.etree.ElementTree as ET
+from functools import wraps
 from hashlib import md5
 from pathlib import Path
 from typing import Mapping, Sequence, MutableMapping, Collection, Callable
@@ -121,23 +122,27 @@ def make_pds4_row(xmlfile):
 def make_pds3_row(local_path):
     metadata = pdr.Metadata(read_pvl_label(check_cases(local_path)))
     files = [local_path.name]
-    for target in dig_for_values(
+    # TODO: is there a reason we're not using get_pds3_pointers here?
+    targets = dig_for_values(
         metadata,
         "^",
         mtypes=(MultiDict, dict),
         base_pred=lambda a, b: b.startswith(a)
-    ):
-        target = metadata.formatter(target)
-        if isinstance(target, str):
-            files.append(target)
-        elif isinstance(target, Sequence):
-            files.append(target[0])
-        elif isinstance(target, int):
+    )
+    for target in map(metadata.formatter, targets):
+        if isinstance(target, (int, set)):
             continue
-        elif isinstance(target, set):
-            continue
-        else:
+        if isinstance(target, Sequence):
+            if not isinstance(target, str):
+                target = target[0]
+        if not isinstance(target, str):
             raise TypeError("what is this?")
+        if (
+            "COMPRESSED_FILE" in metadata.keys()
+            and target in metadata["UNCOMPRESSED_FILE"].values()
+        ):
+            target = metadata["COMPRESSED_FILE"]["FILE_NAME"]
+        files.append(target)
     files = list(set(files))
     row = {
         "label_file": local_path.name,
@@ -163,7 +168,7 @@ def download_product_row(
     data_path, temp_path, row, skip_files=(), session=None
 ):
     files = json.loads(row["files"])
-    session = session if session is not None else requests.Session()
+    session = session if session is not None else MaybeSession()
     for file in files:
         if Path(data_path, file).exists():
             console_and_log(f"... {file} present, skipping ...")
@@ -175,11 +180,58 @@ def download_product_row(
     return session
 
 
+class MaybeSession:
+    def __init__(self):
+        self._is_closed = False
+        self.session = requests.Session()
+        self.session_count = 1
+
+    def reset(self):
+        self.session.close()
+        self.session = requests.Session()
+        self.session_count += 1
+
+    def _tryit(self, method, *args, **kwargs):
+        if self._is_closed:
+            self.session = requests.Session()
+        return getattr(self.session, method)(*args, **kwargs)
+
+    @wraps(requests.Session.get)
+    def get(self, *args, **kwargs):
+        return self._tryit("get", *args, **kwargs)
+
+    @wraps(requests.Session.put)
+    def put(self, *args, **kwargs):
+        return self._tryit("put", *args, **kwargs)
+
+    @wraps(requests.Session.head)
+    def head(self, *args, **kwargs):
+        return self._tryit("head", *args, **kwargs)
+
+    @wraps(requests.Session.close)
+    def close(self):
+        self.session.close()
+        self._is_closed = True
+
+    @wraps(requests.Session.__enter__)
+    def __enter__(self):
+        return self._tryit("__enter__")
+
+    @wraps(requests.Session.__exit__)
+    def __exit__(self, *args):
+        return self._tryit("__exit__")
+
+    @property
+    def cookies(self):
+        return self.session.cookies
+
+
 # TODO / note: this is yet one more download
 #  thing that we should somehow unify and consolidate
 def verbose_temp_download(
-    data_path, temp_path, url, skip_quietly=True, session=None, size="unknown"
+    data_path, temp_path, url, skip_quietly=True, session=None
 ):
+    session = session if session is not None else MaybeSession()
     try:
         check_cases(Path(data_path, Path(url).name))
         if skip_quietly is False:
@@ -189,31 +241,39 @@ def verbose_temp_download(
         return session
     except FileNotFoundError:
         pass
-    session = session if session is not None else requests.Session()
     console_and_log(f"attempting to download {url}.")
     response, session = get_response(session, url)
     if response is None:
         console_and_log(f"Download of {url} timed out.")
-        return
+        session.reset()
+        return session
     if not response.ok:
+        response.close()
         urlsplit = url.split('.')
         url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
         response = session.get(url, stream=True, headers=headers)
         if not response.ok:
             console_and_log(f"Download of {url} failed.")
+            response.close()
             return session
         # TODO: is this still necessary? I think we fixed this.
         warnings.warn('File ending was changed to lowercase to complete download. '
                       'Please update "label" in selection rules to allow index to write and rerun.')
-    with open(Path(temp_path, Path(url).name), "wb+") as fp:
-        size, fetched = response.headers.get('content-length'), 0
-        size = 'unknown' if size is None else size / 1024 ** 2
-        for ix, chunk in enumerate(response.iter_content(chunk_size=10**7)):
-            fetched += len(chunk)
-            print_inline(
-                f"getting chunk {ix} ({fetched / 1024 ** 2} / {size} MB)"
+    try:
+        with open(Path(temp_path, Path(url).name), "wb+") as fp:
+            size, fetched = response.headers.get('content-length'), 0
+            size = (
+                'unknown' if size is None else round(int(size) / 1000 ** 2, 2)
             )
-            fp.write(chunk)
+            for ix, chunk in enumerate(response.iter_content(chunk_size=10**7)):
+                fetched += len(chunk)
+                print_inline(
+                    f"getting chunk {ix} "
+                    f"({round(fetched / 1000 ** 2, 2)} / {size} MB)"
+                )
+                fp.write(chunk)
+    finally:
+        response.close()
     shutil.move(
         Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
     )
@@ -221,7 +281,7 @@ def verbose_temp_download(
     return session
 
 
-def get_response(session, url):
+def get_response(session: MaybeSession, url: str):
     for _ in range(5):
         try:
             response = session.get(
@@ -231,7 +291,7 @@ def get_response(session, url):
         except requests.ReadTimeout:
             console_and_log(f"slow response on {url}; reestablishing session")
             time.sleep(2)
-            session = requests.Session()
+            session.reset()
     return None, None
 
 
