@@ -24,7 +24,7 @@ from pdr_tests.utilz.ix_utilz import (
     assemble_urls,
     flip_ends_with,
     read_and_hash,
-    record_comparison,
+    record_comparison, MaybeSession,
 )
 from pyarrow import parquet
 
@@ -307,23 +307,28 @@ class IndexDownloader(DatasetDefinition):
         data_path = self.product_data_path(product_type)
         temp_path = self.temp_data_path(product_type)
         self.data_mkdirs(product_type)
+        session = MaybeSession()
         if self.shared_list_path().exists():
             print(f"Checking shared files for {self.dataset}.")
             shared_index = pd.read_csv(self.shared_list_path())
             for ix, row in shared_index.iterrows():
-                verbose_temp_download(
-                    data_path, temp_path, row["url"], skip_quietly=False
+                session = verbose_temp_download(
+                    data_path,
+                    temp_path,
+                    row["url"],
+                    session=session,
+                    skip_quietly=False
                 )
         if get_test is True:
             index = pd.read_csv(self.test_path(product_type))
         else:
             index = pd.read_csv(self.index_path(product_type))
-        session = requests.Session()
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
             session = download_product_row(
                 data_path, temp_path, row, self.skip_files, session
             )
+        session.close()
 
 
 class ProductChecker(DatasetDefinition):
