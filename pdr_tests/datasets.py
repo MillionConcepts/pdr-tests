@@ -163,20 +163,20 @@ class ProductPicker(DatasetDefinition):
         self,
         product_type: str,
         subset_size: int = 200,
-        max_gb: float = 8,
+        max_size: float = 8000,
     ):
         """
         randomly select a subset of products from a given product type; write
         this subset to disk as a csv file. optionally specify subset size and
-        cap file size in GB.
+        cap file size in MB.
         """
         if product_type is None:
-            return self.across_all_types("random_picks", subset_size, max_gb)
+            return self.across_all_types("random_picks", subset_size, max_size)
         print(
             f"picking test subset for {self.dataset} {product_type} ...... ",
             end="",
         )
-        max_bytes = max_gb * 10**9
+        max_bytes = max_size * 10**6
         complete = self.complete_list_path(product_type)
         subset = self.subset_list_path(product_type)
         total = parquet.read_metadata(complete).num_rows
@@ -186,8 +186,8 @@ class ProductPicker(DatasetDefinition):
                 complete, filters=[("size", "<", max_bytes)]
             )
             print(
-                f"{total} products; {len(small_enough)}/{total} < {max_gb} GB "
-                f"cutoff; taking all {len(small_enough)}"
+                f"{total} products; {len(small_enough)}/{total} < {max_size} "
+                f"MB cutoff; taking all {len(small_enough)}"
             )
             small_enough.to_pandas().to_csv(subset, index=None)
             return
@@ -197,8 +197,8 @@ class ProductPicker(DatasetDefinition):
         small_enough_ix = np.nonzero(sizes < max_bytes)[0]
         pick_ix = np.sort(np.random.choice(small_enough_ix, subset_size))
         print(
-            f"{total} products; {len(small_enough_ix)}/{total} < {max_gb} GB "
-            f"cutoff; randomly picking {subset_size}"
+            f"{total} products; {len(small_enough_ix)}/{total} < {max_size} "
+            f"MB cutoff; randomly picking {subset_size}"
         )
         # TODO: this is not very clever
         ix_base, picks = 0, []
