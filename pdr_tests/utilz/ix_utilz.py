@@ -245,7 +245,6 @@ def verbose_temp_download(
     response, session = get_response(session, url)
     if response is None:
         console_and_log(f"Download of {url} timed out.")
-        session.reset()
         return session
     if not response.ok:
         response.close()
@@ -292,7 +291,8 @@ def get_response(session: MaybeSession, url: str):
             console_and_log(f"slow response on {url}; reestablishing session")
             time.sleep(2)
             session.reset()
-    return None, None
+    session.reset()
+    return None, session
 
 
 # noinspection HttpUrlsUsage
