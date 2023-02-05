@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+global_cumul_avg_cyl_60s50s_002.LBL,"[""global_cumul_avg_cyl_60s50s_002.LBL"", ""DLRE_GCP.FMT"", ""GLOBAL_CUMUL_AVG_CYL_60S50S_002.TAB""]",GLOBAL_CUMUL_AVG_CYL_60S50S_002.TAB,http://pds-geosciences.wustl.edu/lro/lro-l-dlre-4-rdr-v1/lrodlr_1001/data/gcp,"{""TABLE"": ""e89755e5f278ffe8d2c32eed843c75cd""}"
