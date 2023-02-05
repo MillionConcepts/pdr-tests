@@ -10,8 +10,8 @@ import xml.etree.ElementTree as ET
 from functools import wraps
 from hashlib import md5
 from pathlib import Path
-from typing import Mapping, Sequence, MutableMapping, Collection, Callable
 from sys import stdout
+from typing import Mapping, Sequence, MutableMapping, Collection, Callable
 
 import numpy as np
 import pandas as pd
@@ -22,9 +22,8 @@ from dustgoggles.structures import dig_for_values
 from multidict import MultiDict
 
 import pdr
-from pdr.utils import check_cases, decompress
-from pdr.parselabel.pds3 import get_pds3_pointers, read_pvl_label
-from pdr.parselabel.utils import trim_label
+from pdr.parselabel.pds3 import read_pvl_label
+from pdr.utils import check_cases
 from pdr_tests.settings import headers
 from pdr_tests.utilz.dev_utilz import Stopwatch
 
@@ -362,7 +361,8 @@ def read_and_hash(
         data.load("all")
         runtimes["readtime"] = watch.peek()
     console_and_log(
-        f"Opened {product['product_id']} ({runtimes['readtime']} s)", quiet=quiet
+        f"Opened {product['product_id']} ({runtimes['readtime']} s)",
+        quiet=quiet
     )
     watch.click()
     if skiphash is True:
