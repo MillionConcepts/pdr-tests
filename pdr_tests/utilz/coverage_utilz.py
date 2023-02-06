@@ -441,6 +441,9 @@ def load_and_count(
             ],
         ),
         ignore_labels,
+        label_extensions,
+        ignore_extensions,
+        ignore_directories
     )
     if (write is True) and (len(metrics) > 0):
         for k, v in metrics.items():
