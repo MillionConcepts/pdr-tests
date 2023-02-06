@@ -30,7 +30,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .parquet files
-IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl_mrd.parquet")
+IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl_mardi.parquet")
 
 base = {
     "manifest": IMG_FILE,

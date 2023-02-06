@@ -30,7 +30,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-SB_FILE = Path(MANIFEST_DIR, "tiny.parquet")
+SB_FILE = Path(MANIFEST_DIR, "tiny_rosetta.parquet")
 
 # Note about .img vs .fit products:
 # The .img products have attached labels, the .fit products have detached.

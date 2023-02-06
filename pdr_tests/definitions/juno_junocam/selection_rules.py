@@ -30,7 +30,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-IMG_USGS_FILE = Path(MANIFEST_DIR, "img_usgs.parquet")
+IMG_USGS_FILE = Path(MANIFEST_DIR, "img_usgs_juno.parquet")
 
 file_information = {
     "EDR": {

@@ -30,7 +30,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro.parquet")
+GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro_full.parquet")
 
 file_information = {
     # 'odf': {'manifest': GEO_MRO_FILE,
@@ -38,8 +38,8 @@ file_information = {
     #         "url_must_contain": ['rss', '/odf'],  # this is probably unnecessary, but it's here anyway
     #         "label": "D"},
     'rsr': {'manifest': GEO_MRO_FILE,
-            "fn_must_contain": ['.1a1'],
             "url_must_contain": ['rss', '/rsr'],
+            "fn_regex": [r'\..*[^lbl]'],
             "label": "D"},
     # 'tnf': {'manifest': GEO_MRO_FILE,
     #         'fn_must_contain': ['.tnf'],
