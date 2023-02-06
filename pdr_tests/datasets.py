@@ -10,6 +10,8 @@ from typing import Mapping, Optional, Sequence
 
 import numpy as np
 import pandas as pd
+import requests
+
 import pdr
 import pyarrow as pa
 from pdr import check_cases
@@ -22,7 +24,7 @@ from pdr_tests.utilz.ix_utilz import (
     assemble_urls,
     flip_ends_with,
     read_and_hash,
-    record_comparison,
+    record_comparison, MaybeSession,
 )
 from pyarrow import parquet
 
@@ -163,20 +165,20 @@ class ProductPicker(DatasetDefinition):
         self,
         product_type: str,
         subset_size: int = 200,
-        max_gb: float = 8,
+        max_size: float = 8000,
     ):
         """
         randomly select a subset of products from a given product type; write
         this subset to disk as a csv file. optionally specify subset size and
-        cap file size in GB.
+        cap file size in MB.
         """
         if product_type is None:
-            return self.across_all_types("random_picks", subset_size, max_gb)
+            return self.across_all_types("random_picks", subset_size, max_size)
         print(
             f"picking test subset for {self.dataset} {product_type} ...... ",
             end="",
         )
-        max_bytes = max_gb * 10**9
+        max_bytes = max_size * 10**6
         complete = self.complete_list_path(product_type)
         subset = self.subset_list_path(product_type)
         total = parquet.read_metadata(complete).num_rows
@@ -186,8 +188,8 @@ class ProductPicker(DatasetDefinition):
                 complete, filters=[("size", "<", max_bytes)]
             )
             print(
-                f"{total} products; {len(small_enough)}/{total} < {max_gb} GB "
-                f"cutoff; taking all {len(small_enough)}"
+                f"{total} products; {len(small_enough)}/{total} < {max_size} "
+                f"MB cutoff; taking all {len(small_enough)}"
             )
             small_enough.to_pandas().to_csv(subset, index=None)
             return
@@ -197,8 +199,8 @@ class ProductPicker(DatasetDefinition):
         small_enough_ix = np.nonzero(sizes < max_bytes)[0]
         pick_ix = np.sort(np.random.choice(small_enough_ix, subset_size))
         print(
-            f"{total} products; {len(small_enough_ix)}/{total} < {max_gb} GB "
-            f"cutoff; randomly picking {subset_size}"
+            f"{total} products; {len(small_enough_ix)}/{total} < {max_size} "
+            f"MB cutoff; randomly picking {subset_size}"
         )
         # TODO: this is not very clever
         ix_base, picks = 0, []
@@ -305,12 +307,17 @@ class IndexDownloader(DatasetDefinition):
         data_path = self.product_data_path(product_type)
         temp_path = self.temp_data_path(product_type)
         self.data_mkdirs(product_type)
+        session = MaybeSession()
         if self.shared_list_path().exists():
             print(f"Checking shared files for {self.dataset}.")
             shared_index = pd.read_csv(self.shared_list_path())
             for ix, row in shared_index.iterrows():
-                verbose_temp_download(
-                    data_path, temp_path, row["url"], skip_quietly=False
+                session = verbose_temp_download(
+                    data_path,
+                    temp_path,
+                    row["url"],
+                    session=session,
+                    skip_quietly=False
                 )
         if get_test is True:
             index = pd.read_csv(self.test_path(product_type))
@@ -318,7 +325,10 @@ class IndexDownloader(DatasetDefinition):
             index = pd.read_csv(self.index_path(product_type))
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
-            download_product_row(data_path, temp_path, row, self.skip_files)
+            session = download_product_row(
+                data_path, temp_path, row, self.skip_files, session
+            )
+        session.close()
 
 
 class ProductChecker(DatasetDefinition):

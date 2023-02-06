@@ -32,10 +32,10 @@ def sort(dataset, product_type=None):
 
 
 def pick(
-    dataset, product_type=None, *, subset_size: "s" = 200, max_gb: "m" = 8
+    dataset, product_type=None, *, subset_size: "s" = 200, max_size: "m" = 8000
 ):
     picker = ProductPicker(dataset)
-    picker.random_picks(product_type, subset_size, max_gb)
+    picker.random_picks(product_type, subset_size, max_size)
 
 
 def index(dataset, product_type=None, *, dry_run: "d" = False):
