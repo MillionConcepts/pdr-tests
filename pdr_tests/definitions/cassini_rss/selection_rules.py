@@ -38,7 +38,7 @@ file_information = {
     # Gravity experiment 
     "grav": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'.[0-9][^0-9][0-9]'],
+        "fn_regex": [r'\.[0-9][^0-9][0-9]'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'((GR)|(gr)).*((RSR)|(rsr))'],
         "label": "D",
@@ -46,7 +46,7 @@ file_information = {
     # Gravitational wave experiment
     "grav_wave": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'.[0-9][^0-9][0-9]'],
+        "fn_regex": [r'\.[0-9][^0-9][0-9]'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'((GW)|(gw)).*((RSR)|(rsr))'],
         "label": "D",
@@ -54,7 +54,7 @@ file_information = {
     # occultation experiment
     "occul": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'.[0-9][^0-9][0-9]'],
+        "fn_regex": [r'\.[0-9][^0-9][0-9]'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'((OC)|(oc)).*((RSR)|(rsr))'],
         "label": "D",
@@ -62,7 +62,7 @@ file_information = {
     # Solar Conjunction and Solar Characterization Experiments
 	"solar": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'.[0-9][^0-9][0-9]'],
+        "fn_regex": [r'\.[0-9][^0-9][0-9]'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'((SC)|(sc)).*((RSR)|(rsr))'],
         "label": "D",
@@ -70,7 +70,7 @@ file_information = {
     # Bistatic Experiment
 	"bist": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'.[0-9][^0-9][0-9]'],
+        "fn_regex": [r'\.[0-9][^0-9][0-9]'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'((BI)|(bi)).*((RSR)|(rsr))'],
         "label": "D",
@@ -94,7 +94,7 @@ file_information = {
 	# ODF    Orbit Data File
 	"odf": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.ODF)|(.odf)'],
+        "fn_regex": [r'(ODF$)|(odf$)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(ODF)|(odf)'],
         "label": "D",
@@ -102,7 +102,7 @@ file_information = {
 	# TDF    Archival Tracking Data File
 	"tdf": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.TDF)|(.tdf)'],
+        "fn_regex": [r'(TDF$)|(tdf$)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(TDF)|(tdf)'],
         "label": "D",
@@ -110,7 +110,7 @@ file_information = {
 	# TLM    Telemetry File
 	"tlm": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.TLM)|(.tlm)'],
+        "fn_regex": [r'(TLM$)|(tlm$)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(TLM)|(tlm)'],
         "label": "D",
