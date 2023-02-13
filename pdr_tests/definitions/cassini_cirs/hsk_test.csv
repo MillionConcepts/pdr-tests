@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+HSK04062400.LBL,"[""HSK04062400.LBL"", ""HSK.FMT"", ""HSK04062400.DAT""]",CIRS-HSK04062400,http://pds-atmospheres.nmsu.edu/PDS/data/cocirs_0406/DATA/TSDR/HSK_DATA,"{""TABLE"": ""d60965406a2ca388e6225309eac120f3""}"
+OBS16081600.LBL,"[""OBS16081600.DAT"", ""OBS.FMT"", ""OBS16081600.LBL""]",CIRS-OBS16081600,http://pds-atmospheres.nmsu.edu/PDS/data/cocirs_1608/DATA/TSDR/UNCALIBR,"{""TABLE"": ""320b599ba8928f1bae8c4d112dfe7f74""}"
+IHSK10022204.LBL,"[""IHSK.FMT"", ""IHSK10022204.LBL"", ""IHSK10022204.DAT""]",CIRS-IHSK10022204,http://pds-atmospheres.nmsu.edu/PDS/data/cocirs_1002/DATA/TSDR/UNCALIBR,"{""TABLE"": ""a75ff2463b35245a097babc01e396d26""}"
