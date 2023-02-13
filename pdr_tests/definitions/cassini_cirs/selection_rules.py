@@ -57,15 +57,14 @@ file_information = {
         "url_must_contain": ['cocirs', 'DATA/CUBE'],
         "label": ('.tar.gz', '.LBL'),
     },
-    
-    # diagnostic info for raw interferograms; fixed-length (support planned)
-    # grouped with 'hsk' originally, but does not open
-#     "diag": {
-#         "manifest": ATM_FILE,
-#         "fn_must_contain": ['DIAG', '.DAT'],
-#         "url_must_contain": ['cocirs', 'DATA/TSDR/UNCALIBR'],
-#         "label": "D",
-#     },
+    # diagnostic info for raw interferograms; fixed-length
+    # grouped with 'hsk' originally. now a separate product type because additional testing was needed
+    "diag": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['DIAG', '.DAT'],
+        "url_must_contain": ['cocirs', 'DATA/TSDR/UNCALIBR'],
+        "label": "D",
+    },
 	
 # 	# interferometer voltages; variable-length (not supported)
 #     "uncal_frv": {
