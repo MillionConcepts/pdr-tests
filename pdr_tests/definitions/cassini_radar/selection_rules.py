@@ -62,6 +62,7 @@ file_information = {
         "label": "A",
     },
     # Cassini Radar Altimeter Burst Data Record Summary
+    # TODO: read as CSV because these are not true fixed-length tables and the missing data constant causes offsets
     "asum": {
         "manifest": IMG_FILE,
         "fn_regex": [r'\.CSV$'],
