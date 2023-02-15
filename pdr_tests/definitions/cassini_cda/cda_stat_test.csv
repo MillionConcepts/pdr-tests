@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+CDASTAT_12063_12090.LBL,"[""CDASTAT_12063_12090.LBL"", ""CDASTAT_12063_12090.TAB""]",CDA_STAT,http://sbnarchive.psi.edu/pds3/cassini/cda/COCDA_0074/DATA,"{""TABLE"": ""258156ff7245338fa7d33e537eae4646""}"
+CDASTAT_07274_07304.LBL,"[""CDASTAT_07274_07304.TAB"", ""CDASTAT_07274_07304.LBL""]",CDA_STAT,http://sbnarchive.psi.edu/pds3/cassini/cda/COCDA_0040/DATA,"{""TABLE"": ""81c483e73901707740eb411bd2f71814""}"
