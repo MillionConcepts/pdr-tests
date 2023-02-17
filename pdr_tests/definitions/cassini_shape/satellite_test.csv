@@ -1,0 +1,2 @@
+label_file,product_id,files,url_stem,hash
+pandora_30k_plt.xml,urn:nasa:pds:saturn_satellite_shape_models:data:pandora_30k_plt_tab,"[""pandora_30k_plt.tab"", ""pandora_30k_plt.xml""]",http://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data,"{""VERTICES_FACETS_TABLE"": ""9b31501424e056579518c432a6ad25a6"", ""VERTEX_COORDINATE_TABLE"": ""2c02fe9038c81f20138ff16916ae96c7"", ""VERTEX_ORDERING_TABLE"": ""ac94bbbf5b54bc58847ee03c4d8529ee""}"

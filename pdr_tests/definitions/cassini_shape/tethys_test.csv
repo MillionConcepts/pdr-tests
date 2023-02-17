@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+tethys_ver64q.LBL,"[""tethys_ver64q.LBL"", ""tethys_ver64q.tab""]",TETHYS_VER64Q_TAB,http://sbnarchive.psi.edu/pds3/multi_mission/CO_SA_ISSNA_5_TETHYSSHAPE_V1_0/data,"{""VERTEXCOUNT_TABLE"": ""013788454890f1e579e34271b6120d12"", ""VERTEX_TABLE"": ""638e381345907e18121a0d950b8ab00a"", ""PLATECOUNT_TABLE"": ""25c1ac7f12d9a4284257a3c28971e8e9"", ""PLATE_TABLE"": ""8460b547e8f3b327fbee9128b251a769""}"

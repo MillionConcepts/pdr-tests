@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+mimas_quad64q.LBL,"[""mimas_quad64q.tab"", ""mimas_quad64q.LBL""]",MIMAS_QUAD64Q_TAB,http://sbnarchive.psi.edu/pds3/multi_mission/CO_SA_ISSNA_5_MIMASSHAPE_V2_0/data,"{""Q_TABLE"": ""fba951c110ca0a47ea5c0c56264e92b7"", ""VERTEX_TABLE"": ""80d9d6c52766ae56bdf65f1f87b45a63""}"
