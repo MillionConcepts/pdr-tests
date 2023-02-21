@@ -31,6 +31,7 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
 ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
+RMS_FILE = Path(MANIFEST_DIR, "ringvolumes.parquet")
 
 file_information = {
 	
@@ -65,7 +66,26 @@ file_information = {
         "url_must_contain": ['cocirs', 'DATA/TSDR/UNCALIBR'],
         "label": "D",
     },
-	
+    
+# RMS node supplemental data set
+# CIRS re-formated: simplified versions of variable-length files
+    # calibrated and resampled spectra
+    "spectra": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['SPEC', '.DAT'],
+        "url_must_contain": ['DATA'],
+        "url_regex": [r'(COCIRS_5xxx)|(COCIRS_6xxx)'],
+        "label": "D",
+    },
+	# spectra prefixes; parameters describing the calibrated spectra
+    "prefix": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['ISPM', '.TAB'],
+        "url_must_contain": ['DATA'],
+        "url_regex": [r'(COCIRS_5xxx)|(COCIRS_6xxx)'],
+        "label": "D",
+    },
+		
 # 	# interferometer voltages; variable-length (not supported)
 #     "uncal_frv": {
 #         "manifest": ATM_FILE,
@@ -81,7 +101,7 @@ file_information = {
 #         "label": "D",
 #     },
 # 	# calibrated spectra; variable-length (not supported)
-#     "spectra": {
+#     "cal_spectra": {
 #         "manifest": ATM_FILE,
 #         "fn_must_contain": ['ISPM', '.VAR'],
 #         "url_must_contain": ['cocirs', 'DATA/TSDR/APODSPEC'],
