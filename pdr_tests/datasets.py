@@ -251,7 +251,7 @@ class IndexMaker(DatasetDefinition):
                 except KeyError:
                     regex = False
                 subset["filename"] = subset["filename"].str.replace(
-                    *label_rule, regex
+                    *label_rule, regex=True
                 )
             else:
                 subset["filename"] = subset["filename"].map(
