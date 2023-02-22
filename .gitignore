@@ -152,6 +152,9 @@ pdr_tests/browse
 /pdr_tests/definitions/**/*.csv
 !/pdr_tests/definitions/**/*_test.csv
 
+# haunting folders
+/pdr_tests/definitions/rosetta_alice
+
 # folder metadata (macOS)
 .DS_Store
 
