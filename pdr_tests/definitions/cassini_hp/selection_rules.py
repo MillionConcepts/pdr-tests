@@ -94,13 +94,13 @@ file_information = {
         "url_must_contain": ['hpdisr_0001/DATA', 'XDR_FORMAT'],
         "label": "D",
     },
-    # IR spectrometer
-    "ir": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": ['IR', '.TAB'],
-        "url_must_contain": ['hpdisr_0001/DATA/IR_SPECTROMETER'],
-        "label": "D",
-    },    
+    # IR spectrometer (data format is hugely problematic; low priority support planned)
+    # "ir": {
+    #     "manifest": ATM_FILE,
+    #     "fn_must_contain": ['IR', '.TAB'],
+    #     "url_must_contain": ['hpdisr_0001/DATA/IR_SPECTROMETER'],
+    #     "label": "D",
+    # },
     # Side Looking Imager (SLI), sum of 2 strips
     "strip": {
         "manifest": ATM_FILE,
