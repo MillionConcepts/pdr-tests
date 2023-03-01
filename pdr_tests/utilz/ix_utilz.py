@@ -22,7 +22,7 @@ from dustgoggles.structures import dig_for_values
 from multidict import MultiDict
 
 import pdr
-from pdr.parselabel.pds3 import read_pvl_label
+from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
 from pdr_tests.settings import headers
 from pdr_tests.utilz.dev_utilz import Stopwatch
@@ -119,7 +119,7 @@ def make_pds4_row(xmlfile):
 
 
 def make_pds3_row(local_path):
-    metadata = pdr.Metadata(read_pvl_label(check_cases(local_path)))
+    metadata = pdr.Metadata(read_pvl(check_cases(local_path)))
     files = [local_path.name]
     # TODO: use get_pds3_pointers here to decrease fragility
     targets = dig_for_values(
