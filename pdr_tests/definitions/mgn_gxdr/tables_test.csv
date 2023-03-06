@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+palette.LBL,"[""PALETTE.TAB"", ""palette.LBL""]",palette,http://pds-geosciences.wustl.edu/mgn/mgn-v-gxdr-v1/mg_3002/gedr/merc,"{""TABLE"": ""56a1007708d55ace687442db2d3cd6cc""}"
+frame.LBL,"[""frame.LBL"", ""FRAME.TAB""]",frame,http://pds-geosciences.wustl.edu/mgn/mgn-v-gxdr-v1/mg_3002/gedr/sinus,"{""TABLE"": ""e08ad1359bcbaab489887ed20ef04fe8""}"
+hist.LBL,"[""HIST.TAB"", ""hist.LBL""]",hist,http://pds-geosciences.wustl.edu/mgn/mgn-v-gxdr-v1/mg_3002/gsdr/sinus,"{""IMAGE_HISTOGRAM"": ""286dc4838ee766d3a86507c0722b544e""}"
