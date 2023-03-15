@@ -61,14 +61,6 @@ file_information = {
         "url_must_contain": ['CORADR', 'DATA/ABDR'],
         "label": "A",
     },
-    # Cassini Radar Altimeter Burst Data Record Summary
-    # TODO: read as CSV because these are not true fixed-length tables and the missing data constant causes offsets
-    "asum": {
-        "manifest": IMG_FILE,
-        "fn_regex": [r'\.CSV$'],
-        "url_must_contain": ['CORADR', 'DATA/ASUM'],
-        "label": "D",
-    },
     # Basic Image Data Record
     "bidr": {
         "manifest": IMG_FILE,
@@ -83,6 +75,12 @@ file_information = {
         "url_must_contain": ['CORADR', 'DATA/STDR'],
         "label": "D",
     },
-	
-	
+    # Cassini Radar Altimeter Burst Data Record Summary
+    # TODO: read as CSV because these are not true fixed-length tables and the missing data constant causes offsets
+    "asum": {
+        "manifest": IMG_FILE,
+        "fn_regex": [r'\.CSV$'],
+        "url_must_contain": ['CORADR', 'DATA/ASUM'],
+        "label": "D",
+    },
 }
