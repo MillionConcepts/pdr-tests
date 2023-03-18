@@ -129,7 +129,7 @@ def make_pds3_row(local_path):
         base_pred=lambda a, b: b.startswith(a)
     )
     for target in map(metadata.formatter, targets):
-        if isinstance(target, (int, set)):
+        if isinstance(target, (int, set, dict)):
             continue
         if isinstance(target, Sequence):
             if not isinstance(target, str):
