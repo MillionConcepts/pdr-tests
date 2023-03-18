@@ -438,7 +438,12 @@ class ProductChecker(DatasetDefinition):
         return log_df
 
     def check_product_type(
-        self, product_type, dump_browse=True, dump_kwargs=None
+        self,
+        product_type,
+        dump_browse=True,
+        dump_kwargs=None,
+        debug=True,
+        nowarn=False
     ):
         """
         generate browse products for a specified mission and dataset.
@@ -448,32 +453,43 @@ class ProductChecker(DatasetDefinition):
         different path in dump_kwargs
 
         dump_kwargs: kwargs for browse writer
+
+        debug: if True, run pdr in debug mode
+
+        nowarn: if True, suppress warnings from pdr
         """
         if product_type is None:
             return self.across_all_types(
-                "check_product_type", dump_browse, dump_kwargs
+                "check_product_type", dump_browse, dump_kwargs, debug, nowarn
             )
         console_and_log(f"Checking {self.dataset} {product_type}.")
         index = pd.read_csv(self.index_path(product_type))
         for _, product in index.iterrows():
-            self.check_product(dump_browse, dump_kwargs, product, product_type)
+            self.check_product(
+                dump_browse, dump_kwargs, debug, nowarn, product, product_type
+            )
 
-    def check_product(self, dump_browse, dump_kwargs, product, product_type):
+    def check_product(
+        self, dump_browse, dump_kwargs, debug, nowarn, product, product_type
+    ):
         console_and_log(f"checking {product['product_id']}")
         path = Path(
             self.product_data_path(product_type), product["label_file"]
         )
-        data = pdr.read(str(path))
-        data.load("all")
-        console_and_log(f"opened {product['product_id']}")
-        if dump_browse:
-            console_and_log(
-                f"dumping browse products for {product['product_id']}"
-            )
-            self.dump_test_browse(data, product_type, dump_kwargs)
-            console_and_log(
-                f"dumped browse products for {product['product_id']}"
-            )
+        with warnings.catch_warnings():
+            if nowarn is True:
+                warnings.simplefilter("ignore")
+            data = pdr.read(str(path), debug=debug)
+            data.load("all")
+            console_and_log(f"opened {product['product_id']}")
+            if dump_browse:
+                console_and_log(
+                    f"dumping browse products for {product['product_id']}"
+                )
+                self.dump_test_browse(data, product_type, dump_kwargs)
+                console_and_log(
+                    f"dumped browse products for {product['product_id']}"
+                )
 
     def dump_test_browse(self, data, product_type, dump_args):
         kwargs = {} if dump_args is None else dump_args.copy()

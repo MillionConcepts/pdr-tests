@@ -57,11 +57,15 @@ def check(
     *,
     dump_browse: "d" = True,
     dump_kwargs: "k" = None,
+    debug: "b" = True,
+    nowarn: "w" = False
 ):
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
     hasher = ProductChecker(dataset)
-    hasher.check_product_type(product_type, dump_browse, dump_kwargs)
+    hasher.check_product_type(
+        product_type, dump_browse, dump_kwargs, debug, nowarn
+    )
 
 
 def test(
