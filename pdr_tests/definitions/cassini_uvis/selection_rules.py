@@ -42,20 +42,19 @@ file_information = {
         "label": "D",
     },
     # TODO: fix these (SIDEPLANE and BACKPLANE objects are images)
-    # # Far Ultraviolet; QUBE
-    # "fuv": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ['FUV', '.DAT'],
-    #     "url_must_contain": ['couvis', 'DATA'],
-    #     "label": "D",
-    # },
-    # # Extreme Ultraviolet; QUBE
-    # "euv": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ['EUV', '.DAT'],
-    #     "url_must_contain": ['couvis', 'DATA'],
-    #     "label": "D",
-    # },
-    
-	
+    # Far Ultraviolet; QUBE
+    "fuv": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['FUV', '.DAT'],
+        "url_must_contain": ['couvis', 'DATA'],
+        "label": "D",
+    },
+    # Extreme Ultraviolet; QUBE
+    "euv": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['EUV', '.DAT'],
+        "url_must_contain": ['couvis', 'DATA'],
+        "label": "D",
+    },
+
 }
