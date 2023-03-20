@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-V19758009RDR.QUB,"[""V19758009RDR.QUB""]",V19758009RDR,http://static.mars.asu.edu/pds/ODTSDP_v1/data/odtvr1_0018/v197xxrdr
+label_file,files,product_id,url_stem,hash
+V19758009RDR.QUB,"[""V19758009RDR.QUB""]",V19758009RDR,http://static.mars.asu.edu/pds/ODTSDP_v1/data/odtvr1_0018/v197xxrdr,"{""SPECTRAL_QUBE"": ""c16a877fc6df873402763cf4fc93ae68""}"

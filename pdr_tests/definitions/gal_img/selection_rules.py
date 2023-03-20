@@ -30,32 +30,35 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
+IMG_FILE = Path(MANIFEST_DIR, "img_usgs_galileo_coverage.parquet")
 
 file_information = {
-	
-    # Hydrogen-Deuterium Absorption Cell; TIME_SERIES
-    "hdac": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": ['HDAC', '.DAT'],
-        "url_must_contain": ['couvis', 'DATA'],
-        "label": "D",
+    # boring VICAR-style .img files. they do have line prefix tables we
+    # currently just successfully ignore. note that many are subframed by
+    # zeroing parts of the arrays, which can look on casual inspection like
+    # we didn't read part of the array,\ but is actually present as intended
+    # in the file.
+    "REDR": {
+        "manifest": IMG_FILE,
+        "fn_ends_with": ['.img'],
+        "url_regex": [r'.*SSI/go_00\d[2-9]'],
+        "label": (".img", ".lbl"),
+        "force_lowercase_download": True
     },
-    # TODO: fix these
-    # # Far Ultraviolet; QUBE
-    # "fuv": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ['FUV', '.DAT'],
-    #     "url_must_contain": ['couvis', 'DATA'],
-    #     "label": "D",
-    # },
-    # # Extreme Ultraviolet; QUBE
-    # "euv": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ['EUV', '.DAT'],
-    #     "url_must_contain": ['couvis', 'DATA'],
-    #     "label": "D",
-    # },
-    
-	
+    "cal_images": {
+        "manifest": IMG_FILE,
+        "fn_ends_with": ['.img'],
+        "url_regex": [r'.*SSI/go_0001'],
+        "label": (".img", ".lbl"),
+        "force_lowercase_download": True
+    },
+    # they apparently think of them in a distinct way, so i'm organizing them
+    # in a distinct way
+    "cal_dat_images": {
+        "manifest": IMG_FILE,
+        "fn_ends_with": ['.dat'],
+        "url_regex": [r'.*SSI/go_0001'],
+        "label": (".dat", ".lbl"),
+        "force_lowercase_download": True
+    },
 }

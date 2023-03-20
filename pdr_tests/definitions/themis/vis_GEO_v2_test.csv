@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-V54205018EQR.LBL,"[""ODY_ORIENT_POINT.TXT"", ""V54205018EQR.LBL"", ""V54205018EQR.CUB"", ""DSMAP_EQR.CAT""]",V54205018EQR,http://static.mars.asu.edu/pds/ODTGEO_v2/data/odtvg2_0049/v542xxgeo
+label_file,files,product_id,url_stem,hash
+V54205018EQR.LBL,"[""ODY_ORIENT_POINT.TXT"", ""V54205018EQR.LBL"", ""V54205018EQR.CUB"", ""DSMAP_EQR.CAT""]",V54205018EQR,http://static.mars.asu.edu/pds/ODTGEO_v2/data/odtvg2_0049/v542xxgeo,"{""QUBE"": ""f1f22786b0aa10f0d5a6665e4546bf99""}"

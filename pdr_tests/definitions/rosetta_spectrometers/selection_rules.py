@@ -126,14 +126,14 @@ file_information = {
 # start VITRTIS data products
 
 	# Some of these qube products open and may be fully supported, but could use additional testing.
-	
-    # raw data
-    "EDR_virtis": {
-        "manifest": SB_FILE,
-        "fn_must_contain": ['.qub'],
-        "url_must_contain": ['-virtis-2-', '/data'],
-        "label": "A",
-    },
+	# TODO: needs support for BIP
+    # # raw data
+    # "EDR_virtis": {
+    #     "manifest": SB_FILE,
+    #     "fn_must_contain": ['.qub'],
+    #     "url_must_contain": ['-virtis-2-', '/data'],
+    #     "label": "A",
+    # },
 
 #     # geometry corresponding to RDRs below (these do not open at all)
 #     "EDR_virtis_geo": {
@@ -142,14 +142,14 @@ file_information = {
 #         "url_must_contain": ['-virtis-3-', '/data'],
 #         "label": "A",
 #     },
-
-    # calibrated data
-    "RDR_virtis": {
-        "manifest": SB_FILE,
-        "fn_must_contain": ['.cal'],
-        "url_must_contain": ['-virtis-3-', '/data'],
-        "label": "A",
-    },
+    # TODO: multiple axplanes
+    # # calibrated data
+    # "RDR_virtis": {
+    #     "manifest": SB_FILE,
+    #     "fn_must_contain": ['.cal'],
+    #     "url_must_contain": ['-virtis-3-', '/data'],
+    #     "label": "A",
+    # },
 
     # derived data (maps)
     "DDR_virtis": {
