@@ -30,51 +30,61 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
-THEMIS_FILE = Path(MANIFEST_DIR, "img_asu_themis_tes.parquet")
+THEMIS_FILE = Path(MANIFEST_DIR, "img_asu_themis_tes_coverage.parquet")
 
 file_information = {
-    
-    # brightness temperature derived from ir_RDR; well-labeled two-dimensional raster images
-    "BTR": {
+    #
+    # # brightness temperature derived from ir_RDR; well-labeled two-dimensional raster images
+    # "BTR": {
+    #     "manifest": THEMIS_FILE,
+    #     "fn_must_contain": ['.IMG'],
+    #     "url_must_contain": ['/ODTSDP_v1/', 'odtib'],
+    #     "label": "A",
+    # },
+    # # apparent brightness derived from vis_RDR; well-labeled two-dimensional raster images
+    # "ABR": {
+    #     "manifest": THEMIS_FILE,
+    #     "fn_must_contain": ['.IMG'],
+    #     "url_must_contain": ['/ODTSDP_v1/', 'odtvb'],
+    #     "label": "A",
+    # },
+    # # projected brightness temperature derived from ir_GEO; well-labeled two-dimensional raster images; version 1
+    # "PBT_v1": {
+    #     "manifest": THEMIS_FILE,
+    #     "fn_must_contain": ['.IMG'],
+    #     "url_must_contain": ['/ODTGEO_v1/', 'odtip'],
+    #     "label": "A",
+    # },
+    # # projected brightness temperature derived from ir_GEO; well-labeled two-dimensional raster images; version 2
+    # "PBT_v2": {
+    #     "manifest": THEMIS_FILE,
+    #     "fn_must_contain": ['.IMG'],
+    #     "url_must_contain": ['/ODTGEO_v2/', 'odtip'],
+    #     "label": "A",
+    # },
+    # # projected albedo derived from vis_GEO; well-labeled two-dimensional raster images
+    # "ALB_v2": {
+    #     "manifest": THEMIS_FILE,
+    #     "fn_must_contain": ['.IMG'],
+    #     "url_must_contain": ['/ODTGEO_v2/', 'odtva'],
+    #     "label": "A",
+    # },
+    # geographically projected products derived from ir_RDR;
+    # three-dimensional spectral image CUBEs; version 2
+    "ir_GEO_v2": {
         "manifest": THEMIS_FILE,
-        "fn_must_contain": ['.IMG'],
-        "url_must_contain": ['/ODTSDP_v1/', 'odtib'],
-        "label": "A",
+        "fn_must_contain": ['.CUB.gz'],
+        "url_must_contain": ['/ODTGEO_v2/', 'odtig'],
+        "label": (".CUB.gz", ".LBL"),
     },
-    # apparent brightness derived from vis_RDR; well-labeled two-dimensional raster images
-    "ABR": {
+    # geographically projected products derived from vis_RDR;
+    # three-dimensional spectral image CUBEs; version 2
+    "vis_GEO_v2": {
         "manifest": THEMIS_FILE,
-        "fn_must_contain": ['.IMG'],
-        "url_must_contain": ['/ODTSDP_v1/', 'odtvb'],
-        "label": "A",
+        "fn_must_contain": ['.CUB'],
+        "url_must_contain": ['/ODTGEO_v2/', 'odtvg'],
+        "label": "D",
     },
-    # projected brightness temperature derived from ir_GEO; well-labeled two-dimensional raster images; version 1
-    "PBT_v1": {
-        "manifest": THEMIS_FILE,
-        "fn_must_contain": ['.IMG'],
-        "url_must_contain": ['/ODTGEO_v1/', 'odtip'],
-        "label": "A",
-    },
-    # projected brightness temperature derived from ir_GEO; well-labeled two-dimensional raster images; version 2
-    "PBT_v2": {
-        "manifest": THEMIS_FILE,
-        "fn_must_contain": ['.IMG'],
-        "url_must_contain": ['/ODTGEO_v2/', 'odtip'],
-        "label": "A",
-    },
-    # projected albedo derived from vis_GEO; well-labeled two-dimensional raster images
-    "ALB_v2": {
-        "manifest": THEMIS_FILE,
-        "fn_must_contain": ['.IMG'],
-        "url_must_contain": ['/ODTGEO_v2/', 'odtva'],
-        "label": "A",
-    }, 
-}
-
-"""
-These QUBE and CUBE products can be revisited once they are supported:
-
-    # raw infrared data; three-dimensional spectral image QUBEs
     "ir_EDR": {
         "manifest": THEMIS_FILE,
         "fn_must_contain": ['.QUB'],
@@ -102,6 +112,10 @@ These QUBE and CUBE products can be revisited once they are supported:
         "url_must_contain": ['/ODTSDP_v1/', 'odtvr'],
         "label": "A",
     },
+}
+
+"""
+These QUBE and CUBE products can be revisited once they are supported:
     # geographically projected products derived from ir_RDR; three-dimensional spectral image CUBEs; version 1
     "ir_GEO_v1": {
         "manifest": THEMIS_FILE,
@@ -116,19 +130,6 @@ These QUBE and CUBE products can be revisited once they are supported:
         "url_must_contain": ['/ODTGEO_v1/', 'odtvg'],
         "label": "D",
     },
-    # geographically projected products derived from ir_RDR; three-dimensional spectral image CUBEs; version 2
-    "ir_GEO_v2": {
-        "manifest": THEMIS_FILE,
-        "fn_must_contain": ['.CUB.gz'],
-        "url_must_contain": ['/ODTGEO_v2/', 'odtig'],
-        "label": "D",
-    },
-    # geographically projected products derived from vis_RDR; three-dimensional spectral image CUBEs; version 2
-    "vis_GEO_v2": {
-        "manifest": THEMIS_FILE,
-        "fn_must_contain": ['.CUB'],
-        "url_must_contain": ['/ODTGEO_v2/', 'odtvg'],
-        "label": "D",
-    },
+
 
 """
