@@ -41,7 +41,7 @@ file_information = {
         "url_must_contain": ['couvis', 'DATA'],
         "label": "D",
     },
-    # TODO: fix these
+    # TODO: fix these (SIDEPLANE and BACKPLANE objects are images)
     # # Far Ultraviolet; QUBE
     # "fuv": {
     #     "manifest": ATM_FILE,
