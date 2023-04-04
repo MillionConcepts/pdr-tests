@@ -31,16 +31,15 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
 IMG_FILE = Path(MANIFEST_DIR, "img_usgs.parquet")
-
+ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
 
 file_information = {
-	
-	# most products have attached labels. sometimes they ALSO have a detached label.
-	# the detached labels include info on the compressed (.zip) versions of the products.
-	
-	# all have detached PDS4 labels.	
-	
-	# Cassini Radar Long Burst Data Record
+    # Note for IMG node products:
+    # Most products have attached labels. Sometimes they ALSO have a detached label.
+    # The detached labels include info on the compressed (.zip) versions of the products.
+    # All have detached PDS4 labels.	
+    
+    # Cassini Radar Long Burst Data Record
     "lbdr": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.TAB'],
@@ -76,11 +75,20 @@ file_information = {
         "label": "D",
     },
     # Cassini Radar Altimeter Burst Data Record Summary
-    # TODO: read as CSV because these are not true fixed-length tables and the missing data constant causes offsets
-    # "asum": {
-    #     "manifest": IMG_FILE,
-    #     "fn_regex": [r'\.CSV$'],
-    #     "url_must_contain": ['CORADR', 'DATA/ASUM'],
-    #     "label": "D",
-    # },
+    "asum": {
+        "manifest": IMG_FILE,
+        "fn_regex": [r'\.CSV$'],
+        "url_must_contain": ['CORADR', 'DATA/ASUM'],
+        "label": "D",
+    },
+    
+    # ATM node products:
+    # Saturn mapping results; CO-S-RADAR-5-RADIOMETRY-V1.0
+    # "calibrated time-ordered data"
+    "cal_tod": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['coradr_5001/data'],
+        "label": "D",
+    },
 }
