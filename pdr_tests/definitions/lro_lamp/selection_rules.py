@@ -34,24 +34,35 @@ MANIFEST_FILE = Path(MANIFEST_DIR, "img_usgs.parquet")
 
 file_information = {
     # Experiment Data Record; uncalibrated data
-    "edr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.fit'],
-        "url_must_contain": ['LROLAM_0', 'DATA'],
-        "label": 'D',
-    },
+    # Acquisition list table is missing all but 1 row
+    # "door open" image header is a copy of the "door closed" image header
+##    "edr": {
+##        "manifest": MANIFEST_FILE,
+##        "fn_must_contain": ['.fit'],
+##        "url_must_contain": ['LROLAM_0', 'DATA'],
+##        "label": 'D',
+##    },
     # Reduced Data Record; calibrated data
-    "rdr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.fit'],
-        "url_must_contain": ['LROLAM_1', 'DATA'],
-        "label": 'D',
-    },
+    # Acquisition list table is missing all but 1 row
+    # "door open" image header is a copy of the "door closed" image header
+    # Unique histogram image pointers are defined by one non-unique image object
+##    "rdr": {
+##        "manifest": MANIFEST_FILE,
+##        "fn_must_contain": ['.fit'],
+##        "url_must_contain": ['LROLAM_1', 'DATA'],
+##        "label": 'D',
+##    },
     # Gridded Data Record; calibrated LAMP data, gridded into polar
     # stereographic maps
-    "gdr": {
+    "gdr_month": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
+        "fn_regex": [r'[a-z]_[0-9]+_[0-9]+\.img$'],
+        "url_must_contain": ['LROLAM_2', 'DATA'],
+        "label": 'D',
+    },
+    "gdr_year": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'[a-z]_[0-9]+\.img$'],
         "url_must_contain": ['LROLAM_2', 'DATA'],
         "label": 'D',
     },
