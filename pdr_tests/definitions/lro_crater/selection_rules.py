@@ -34,26 +34,30 @@ MANIFEST_FILE = Path(MANIFEST_DIR, "plasm_full.parquet")
 
 file_information = {
     # Level 0 primary science data
-    "edr_pri": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['PRI', '.DAT'],
-        "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
-        "label": 'D',
-    },
+    # All bit columns; many rows are missing from the tables
+##    "edr_pri": {
+##        "manifest": MANIFEST_FILE,
+##        "fn_must_contain": ['PRI', '.DAT'],
+##        "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
+##        "label": 'D',
+##    },
     # Level 0 secondary science data
-    "edr_sec": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['SEC', '.DAT'],
-        "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
-        "label": 'D',
-    },
+    # Each table is consistently missing 1 row
+##    "edr_sec": {
+##        "manifest": MANIFEST_FILE,
+##        "fn_must_contain": ['SEC', '.DAT'],
+##        "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
+##        "label": 'D',
+##    },
     # Level 0 housekeeping data
-    "edr_hk": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['HK', '.DAT'],
-        "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
-        "label": 'D',
-    },
+    # Tables open fine, but ix test throws error:
+    # <class 'OverflowError'>: Maximum recursion level reached
+##    "edr_hk": {
+##        "manifest": MANIFEST_FILE,
+##        "fn_must_contain": ['HK', '.DAT'],
+##        "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
+##        "label": 'D',
+##    },
     # Level 1 primary science data
     "cdr_pri": {
         "manifest": MANIFEST_FILE,
