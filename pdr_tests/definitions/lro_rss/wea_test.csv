@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+ws1s_2016042_2016.LBL,"[""LRO_WEA_REC_WS2.FMT"", ""LRO_WEA_HDR.FMT"", ""ws1s_2016042_2016.LBL"", ""WS1S_2016042_2016.WEA""]",WS1S_2016042_2016,http://pds-geosciences.wustl.edu/lro/lro-l-rss-1-tracking-v1/lrors_0001/data/wea/lro_es_43/2016042,"{""WEAHDR_TABLE"": ""4737e7e55ce8e2475fe595c9c937aca5"", ""WEAREC_TABLE"": ""203700da07542010c6fdd7b6d7fb95ea""}"
