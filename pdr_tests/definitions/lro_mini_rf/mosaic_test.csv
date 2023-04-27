@@ -1,2 +1,3 @@
 label_file,files,product_id,url_stem,hash
-global_cpr_32ppd_simp_0c.LBL,"[""DSMAP.CAT"", ""GLOBAL_CPR_32PPD_SIMP_0C.IMG"", ""global_cpr_32ppd_simp_0c.LBL""]",GLOBAL_CPR_32PPD_SIMP_0C.IMG,http://pds-geosciences.wustl.edu/lro/lro-l-mrflro-5-global-mosaic-v1/lromrf_1001/data/32ppd,"{""IMAGE"": ""6a62c38c1bbd560211c9c8b23d38b437""}"
+global_cpr_32ppd_simp_0c.LBL,"[""global_cpr_32ppd_simp_0c.LBL"", ""DSMAP.CAT"", ""GLOBAL_CPR_32PPD_SIMP_0C.IMG""]",GLOBAL_CPR_32PPD_SIMP_0C.IMG,http://pds-geosciences.wustl.edu/lro/lro-l-mrflro-5-global-mosaic-v1/lromrf_1001/data/32ppd,"{""IMAGE"": ""6a62c38c1bbd560211c9c8b23d38b437""}"
+global_s4_32ppd_simp_0c.LBL,"[""GLOBAL_S4_32PPD_SIMP_0C.IMG"", ""global_s4_32ppd_simp_0c.LBL"", ""DSMAP.CAT""]",GLOBAL_S4_32PPD_SIMP_0C.IMG,http://pds-geosciences.wustl.edu/lro/lro-l-mrflro-5-global-mosaic-v1/lromrf_1001/data/32ppd,"{""IMAGE"": ""0e2327c716f16480711b8b745936a60d""}"
