@@ -14,7 +14,8 @@ import requests
 
 import pdr
 import pyarrow as pa
-from pdr import check_cases
+from pdr.utils import check_cases
+from pdr.pdr import Data
 from pdr_tests.utilz.ix_utilz import (
     get_product_row,
     console_and_log,
@@ -565,7 +566,7 @@ def test_product(
     max_size: float = 0,
     filetypes: Optional[Sequence[str]] = None,
     skiphash: bool = False
-) -> tuple[Optional[pdr.Data], str, dict]:
+) -> tuple[Optional[Data], str, dict]:
     """
     handler function for testing an individual product: records exceptions
     and (when instructed) hash/index comparisons.

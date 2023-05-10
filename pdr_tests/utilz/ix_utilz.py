@@ -26,6 +26,7 @@ from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
 from pdr_tests.settings import headers
 from pdr_tests.utilz.dev_utilz import Stopwatch
+from pdr.pdr import Data
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
@@ -346,7 +347,7 @@ def read_and_hash(
     debug: bool,
     quiet: bool,
     skiphash: bool
-) -> tuple[pdr.Data, dict[str, str], dict[str, str]]:
+) -> tuple[Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
     log appropriately
