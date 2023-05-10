@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+cb0457_d.LBL,"[""cb0457_d.LBL"", ""cb0457_d.tab""]",CB04_CB0457_D_TAB,http://sbnarchive.psi.edu/pds3/msx/MSX_D_SPIRIT3_3_MSXZODY_V1_0/data/cb04,"{""TABLE"": ""8d59b036dd95195fd38ec311f4296e1e""}"
+em10c_dbd.LBL,"[""em10c_dbd.tab"", ""em10c_dbd.LBL""]",EM10_EM10C_DBD_TAB,http://sbnarchive.psi.edu/pds3/msx/MSX_D_SPIRIT3_3_MSXZODY_V1_0/data/em10,"{""TABLE"": ""8cd6484259bb3c89271a03cc1e20aca1""}"
+dc3225e2.LBL,"[""dc3225e2.LBL"", ""dc3225e2.tab""]",DC32_DC3225E2_TAB,http://sbnarchive.psi.edu/pds3/msx/MSX_D_SPIRIT3_3_MSXZODY_V1_0/data/dc32,"{""TABLE"": ""f8c6d5ff74aea7b5f395dfed9f6b271a""}"

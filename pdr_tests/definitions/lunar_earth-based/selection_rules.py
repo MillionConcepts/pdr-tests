@@ -60,14 +60,5 @@ file_information = {
         "url_must_contain": ['arcb_nrao-l-rtls_gbt-5-12.6cm-v1', 'data'],
         "label": "D",
     },
-    # Midcourse Space Experiment (MSX) - infrared images in cube format
-    # ENVI_HEADER does not open
-    # data.show("QUBE") fails; things go wrong at line 82 in browsify.py
-    # QUBE products open fine and look great during manual testing.
-##    "msx": {
-##        "manifest": MANIFEST_FILE,
-##        "fn_must_contain": ['.qub'],
-##        "url_must_contain": ['msx-l-spirit3-2_4-v1/msx_9001/data'],
-##        "label": "D",
-##    },
+
 }
