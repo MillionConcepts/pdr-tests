@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+0202561278rcal_gre.lbl,"[""0202561278rcal_gre.lbl"", ""0202561278rcal_gre.fit""]",FITS_0202561278RCAL_GRE_FIT,http://sbnarchive.psi.edu/pds3/galileo/derived/GO_A_SSI_3_IDA_CALIMAGES_V1_0/data/fits,"{""HEADER"": ""13b847908e41421b0129fdfecc7d5f43"", ""IMAGE"": ""bfa4dc4f588f855f8cbc5a64ae9d6c1f"", ""IMAGE_HEADER"": ""13b847908e41421b0129fdfecc7d5f43""}"

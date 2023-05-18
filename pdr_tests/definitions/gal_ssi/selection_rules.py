@@ -73,8 +73,8 @@ file_information = {
 ##        "label": "D",
 ##    },
     
-    # The SB Node has Ida and Gaspra subsets of SSI data in a different format
-    # (.fit), so they are included here.
+    # The SB Node has Ida and Gaspra subsets of SSI data in different formats
+    # (.fit and .qub), so they are included here.
     "gaspra": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.fit'],
@@ -85,6 +85,18 @@ file_information = {
         "manifest": SB_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['galileo/idagaspra', 'data/galileo_ssi/ida'],
+        "label": "D",
+    },
+    "sb_cal_img": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['galileo/derived', '_SSI_', 'data/fits'],
+        "label": "D",
+    },
+    "sb_cube": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.qub'],
+        "url_must_contain": ['galileo/derived', '_SSI_', 'data/qube'],
         "label": "D",
     },
 }
