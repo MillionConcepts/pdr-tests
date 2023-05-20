@@ -10,12 +10,7 @@ from typing import Mapping, Optional, Sequence
 
 import numpy as np
 import pandas as pd
-import requests
-
-import pdr
 import pyarrow as pa
-from pdr.utils import check_cases
-from pdr.pdr import Data
 from pdr_tests.utilz.ix_utilz import (
     get_product_row,
     console_and_log,
@@ -28,6 +23,11 @@ from pdr_tests.utilz.ix_utilz import (
     record_comparison, MaybeSession,
 )
 from pyarrow import parquet
+
+import pdr
+from pdr.loaders._helpers import Tracker
+from pdr.pdr import Data
+from pdr.utils import check_cases
 
 
 # ############ INDEX & TESTING CLASSES #############
@@ -335,6 +335,7 @@ class IndexDownloader(DatasetDefinition):
 class ProductChecker(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
+        self.tracker = Tracker(name)
     hash_rows, log_rows = {}, {}
 
     def dump_test_paths(self, product_type):
@@ -378,7 +379,7 @@ class ProductChecker(DatasetDefinition):
         dump_kwargs: kwargs for browse writer
         """
         if product_type is None:
-            return self.across_all_types(
+            self.across_all_types(
                 "compare_test_hashes",
                 regen,
                 write,
@@ -390,6 +391,7 @@ class ProductChecker(DatasetDefinition):
                 filetypes,
                 skiphash
             )
+        self.tracker.set_metadata(product_type=product_type)
         log = partial(console_and_log, quiet=quiet)
         log(f"Hashing {self.dataset} {product_type}.")
         index = pd.read_csv(self.test_path(product_type))
@@ -400,7 +402,9 @@ class ProductChecker(DatasetDefinition):
         compare = not (
             (regen is True) or ("hash" not in index.columns)
         )
-        test_args = (compare, debug, quiet, max_size, filetypes, skiphash)
+        test_args = (
+            compare, debug, quiet, max_size, filetypes, skiphash, self.tracker
+        )
         # compare/overwrite are redundant rn, but presumably we might want
         # different logic in the future.
         overwrite = (regen is True) or ("hash" not in index.columns)
@@ -565,7 +569,8 @@ def test_product(
     quiet: bool,
     max_size: float = 0,
     filetypes: Optional[Sequence[str]] = None,
-    skiphash: bool = False
+    skiphash: bool = False,
+    tracker: Optional[Tracker] = None
 ) -> tuple[Optional[Data], str, dict]:
     """
     handler function for testing an individual product: records exceptions
@@ -587,7 +592,7 @@ def test_product(
         return data, hash_json, log_row
     try:
         data, hashes, runtimes = read_and_hash(
-            path, product, debug, quiet, skiphash
+            path, product, debug, quiet, skiphash, tracker
         )
         if (skiphash is False) and (compare is True):
             if isinstance(product["hash"], float):

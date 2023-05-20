@@ -11,7 +11,8 @@ from functools import wraps
 from hashlib import md5
 from pathlib import Path
 from sys import stdout
-from typing import Mapping, Sequence, MutableMapping, Collection, Callable
+from typing import Mapping, Sequence, MutableMapping, Collection, Callable, \
+    Optional
 
 import numpy as np
 import pandas as pd
@@ -22,6 +23,7 @@ from dustgoggles.structures import dig_for_values
 from multidict import MultiDict
 
 import pdr
+from pdr.loaders._helpers import TrivialTracker
 from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
 from pdr_tests.settings import headers
@@ -346,7 +348,8 @@ def read_and_hash(
     product: Mapping[str, str],
     debug: bool,
     quiet: bool,
-    skiphash: bool
+    skiphash: bool,
+    tracker: Optional[TrivialTracker] = None
 ) -> tuple[Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
@@ -358,7 +361,7 @@ def read_and_hash(
         # inside pdr (for things like unsupported object types, etc.)
         warnings.filterwarnings("ignore", category=UserWarning, module="pdr")
         watch.start()
-        data = pdr.read(str(path), debug=debug)
+        data = pdr.read(str(path), debug=debug, tracker=tracker)
         data.load("all")
         runtimes["readtime"] = watch.peek()
     console_and_log(

@@ -122,6 +122,9 @@ def test(
         except KeyboardInterrupt:
             console_and_log("received keyboard interrupt, halting")
             break
+        finally:
+            hasher.tracker.outpath.unlink(missing_ok=True)
+            hasher.tracker.dump()
     if logs:
         import pandas as pd
 
