@@ -8,6 +8,7 @@ from importlib import import_module
 from pathlib import Path
 from typing import Mapping, Optional, Sequence
 
+from dustgoggles.tracker import Tracker
 import numpy as np
 import pandas as pd
 import pyarrow as pa
@@ -25,7 +26,6 @@ from pdr_tests.utilz.ix_utilz import (
 from pyarrow import parquet
 
 import pdr
-from pdr.loaders._helpers import Tracker
 from pdr.pdr import Data
 from pdr.utils import check_cases
 
@@ -335,7 +335,9 @@ class IndexDownloader(DatasetDefinition):
 class ProductChecker(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
-        self.tracker = Tracker(name)
+        self.tracker = Tracker(
+            name, outdir=Path(__file__).parent / ".tracker_logs"
+        )
     hash_rows, log_rows = {}, {}
 
     def dump_test_paths(self, product_type):

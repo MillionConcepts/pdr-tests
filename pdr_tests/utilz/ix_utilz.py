@@ -20,10 +20,10 @@ import pyarrow as pa
 import requests
 from dustgoggles.func import disjoint, intersection
 from dustgoggles.structures import dig_for_values
+from dustgoggles.tracker import TrivialTracker
 from multidict import MultiDict
 
 import pdr
-from pdr.loaders._helpers import TrivialTracker
 from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
 from pdr_tests.settings import headers
