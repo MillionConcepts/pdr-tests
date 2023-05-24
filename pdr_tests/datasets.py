@@ -381,7 +381,7 @@ class ProductChecker(DatasetDefinition):
         dump_kwargs: kwargs for browse writer
         """
         if product_type is None:
-            self.across_all_types(
+            return self.across_all_types(
                 "compare_test_hashes",
                 regen,
                 write,
