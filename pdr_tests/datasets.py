@@ -623,7 +623,7 @@ def test_product(
         output_string += f"; {log_row['error']}"
     if (log_row['status'] != 'ok') and quiet:
         quiet = False
-        problem_file = str(path).split('data/')[-1].split('/')
+        problem_file = str(path).split('/data/')[-1].split('/')
         print(" ".join(problem_file)+':')
     console_and_log(output_string, quiet=quiet)
     return data, hash_json, log_row
