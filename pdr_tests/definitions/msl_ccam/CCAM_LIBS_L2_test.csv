@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-moc_1294_1417.LBL,"[""moc_1294_1417.LBL"", ""MOC_1294_1417.CSV""]",MOC_1294_1417.CSV,http://pds-geosciences.wustl.edu/msl/msl-m-chemcam-libs-4_5-rdr-v1/mslccm_1xxx/data/moc,"{""SPREADSHEET"": ""93d64c442553e37047fb8605988a82f1""}"
-tec_0805_0938.LBL,"[""TEC_0805_0938.CSV"", ""tec_0805_0938.LBL""]",TEC_0805_0938,http://pds-geosciences.wustl.edu/msl/msl-m-chemcam-libs-4_5-rdr-v1/mslccm_1xxx/data/tec,"{""SPREADSHEET"": ""f5816eccccf970f054ae54f54230928b""}"
+moc_1294_1417.LBL,"[""moc_1294_1417.LBL"", ""MOC_1294_1417.CSV""]",MOC_1294_1417.CSV,http://pds-geosciences.wustl.edu/msl/msl-m-chemcam-libs-4_5-rdr-v1/mslccm_1xxx/data/moc,"{""SPREADSHEET"": ""6aa36ebf9c0e9789e310af89fe611249""}"
+tec_0805_0938.LBL,"[""TEC_0805_0938.CSV"", ""tec_0805_0938.LBL""]",TEC_0805_0938,http://pds-geosciences.wustl.edu/msl/msl-m-chemcam-libs-4_5-rdr-v1/mslccm_1xxx/data/tec,"{""SPREADSHEET"": ""f19944b5de8e8d5765cc29943bf19cb2""}"

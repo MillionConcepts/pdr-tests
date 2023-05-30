@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-SBDR_03_D135_V01.TAB,"[""SBDR.FMT"", ""SBDR_03_D135_V01.TAB""]",SBDR_03_D135_V01,http://pdsimage2.wr.usgs.gov/Missions/Cassini/RADAR/CORADR_0135/DATA/SBDR,"{""SBDR_TABLE"": ""77e6a4b5175bfee030681f17118824ca""}"
-SBDR_15_D243_V03.TAB,"[""SBDR.FMT"", ""SBDR_15_D243_V03.TAB""]",SBDR_15_D243_V03,http://pdsimage2.wr.usgs.gov/Missions/Cassini/RADAR/CORADR_0243/DATA/SBDR,"{""SBDR_TABLE"": ""e48393826760b2c53a2a0a20fb9c48c0""}"
+SBDR_03_D135_V01.TAB,"[""SBDR.FMT"", ""SBDR_03_D135_V01.TAB""]",SBDR_03_D135_V01,http://pdsimage2.wr.usgs.gov/Missions/Cassini/RADAR/CORADR_0135/DATA/SBDR,"{""SBDR_TABLE"": ""6e84f54b4a0530e71db41e0d212632b3""}"
+SBDR_15_D243_V03.TAB,"[""SBDR.FMT"", ""SBDR_15_D243_V03.TAB""]",SBDR_15_D243_V03,http://pdsimage2.wr.usgs.gov/Missions/Cassini/RADAR/CORADR_0243/DATA/SBDR,"{""SBDR_TABLE"": ""0529638d1d617d3cc714f439beb13695""}"

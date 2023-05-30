@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-frm_ais_rdr_5367.LBL,"[""frm_ais_rdr_5367.LBL"", ""AIS_FORMAT.FMT"", ""FRM_AIS_RDR_5367.DAT""]",FRM_AIS_RDR_5367.DAT,http://pds-geosciences.wustl.edu/mex/mex-m-marsis-3-rdr-ais-ext2-v1/mexmdi_1003/data/active_ionospheric_sounder/rdr536x,"{""AIS_TABLE"": ""ce14d03626038508d6e8e23937795a5a""}"
+frm_ais_rdr_5367.LBL,"[""frm_ais_rdr_5367.LBL"", ""AIS_FORMAT.FMT"", ""FRM_AIS_RDR_5367.DAT""]",FRM_AIS_RDR_5367.DAT,http://pds-geosciences.wustl.edu/mex/mex-m-marsis-3-rdr-ais-ext2-v1/mexmdi_1003/data/active_ionospheric_sounder/rdr536x,"{""AIS_TABLE"": ""1126cc6177c13438a2cfb1b7b05d9924""}"
