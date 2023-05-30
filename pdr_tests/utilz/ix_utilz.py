@@ -65,12 +65,7 @@ def checksum_object(obj, hash_function=md5):
         # sorting to improve consistency between pandas versions
         for dtype in sorted(blocks.keys()):
             if dtype == 'object':
-                try:
-                    json_repr = blocks[dtype].to_json()
-                except UnicodeDecodeError:
-                    # if there are very weird bytes, to_json will break
-                    json_repr = blocks[dtype].astype(str).to_json()
-                hasher.update(json_repr.encode('utf-8'))
+                hasher.update(blocks[dtype].to_string().encode('utf-8'))
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
