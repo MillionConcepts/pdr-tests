@@ -11,7 +11,8 @@ from functools import wraps
 from hashlib import md5
 from pathlib import Path
 from sys import stdout
-from typing import Mapping, Sequence, MutableMapping, Collection, Callable
+from typing import Mapping, Sequence, MutableMapping, Collection, Callable, \
+    Optional
 
 import numpy as np
 import pandas as pd
@@ -19,6 +20,7 @@ import pyarrow as pa
 import requests
 from dustgoggles.func import disjoint, intersection
 from dustgoggles.structures import dig_for_values
+from dustgoggles.tracker import TrivialTracker
 from multidict import MultiDict
 
 import pdr
@@ -26,6 +28,7 @@ from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
 from pdr_tests.settings import headers
 from pdr_tests.utilz.dev_utilz import Stopwatch
+from pdr.pdr import Data
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
@@ -62,12 +65,7 @@ def checksum_object(obj, hash_function=md5):
         # sorting to improve consistency between pandas versions
         for dtype in sorted(blocks.keys()):
             if dtype == 'object':
-                try:
-                    json_repr = blocks[dtype].to_json()
-                except UnicodeDecodeError:
-                    # if there are very weird bytes, to_json will break
-                    json_repr = blocks[dtype].astype(str).to_json()
-                hasher.update(json_repr.encode('utf-8'))
+                hasher.update(blocks[dtype].to_string().encode('utf-8'))
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
@@ -345,8 +343,9 @@ def read_and_hash(
     product: Mapping[str, str],
     debug: bool,
     quiet: bool,
-    skiphash: bool
-) -> tuple[pdr.Data, dict[str, str], dict[str, str]]:
+    skiphash: bool,
+    tracker: Optional[TrivialTracker] = None
+) -> tuple[Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
     log appropriately
@@ -357,7 +356,7 @@ def read_and_hash(
         # inside pdr (for things like unsupported object types, etc.)
         warnings.filterwarnings("ignore", category=UserWarning, module="pdr")
         watch.start()
-        data = pdr.read(str(path), debug=debug)
+        data = pdr.read(str(path), debug=debug, tracker=tracker)
         data.load("all")
         runtimes["readtime"] = watch.peek()
     console_and_log(

@@ -98,6 +98,7 @@ def test(
     logs = []
     for dataset in datasets:
         hasher = ProductChecker(dataset)
+        hasher.tracker.paused = True
         try:
             test_logs = hasher.compare_test_hashes(
                 product_type,
@@ -122,6 +123,10 @@ def test(
         except KeyboardInterrupt:
             console_and_log("received keyboard interrupt, halting")
             break
+        finally:
+            hasher.tracker.outpath.unlink(missing_ok=True)
+            hasher.tracker.paused = False
+            hasher.tracker.dump()
     if logs:
         import pandas as pd
 
