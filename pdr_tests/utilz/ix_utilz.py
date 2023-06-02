@@ -117,7 +117,7 @@ def make_pds4_row(xmlfile):
 
 
 def make_pds3_row(local_path):
-    metadata = pdr.Metadata(read_pvl(check_cases(local_path)))
+    metadata = pdr.pdr.Metadata(read_pvl(check_cases(local_path)))
     files = [local_path.name]
     # TODO: use get_pds3_pointers here to decrease fragility
     targets = dig_for_values(
