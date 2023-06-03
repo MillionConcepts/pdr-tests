@@ -65,7 +65,10 @@ def checksum_object(obj, hash_function=md5):
         # sorting to improve consistency between pandas versions
         for dtype in sorted(blocks.keys()):
             if dtype == 'object':
-                hasher.update(blocks[dtype].to_string().encode('utf-8'))
+                for c in blocks[dtype].columns:
+                    hasher.update(
+                        blocks[dtype][c].explode().to_string().encode('utf-8')
+                    )
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
