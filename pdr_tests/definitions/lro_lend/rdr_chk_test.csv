@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-lend_rdr_chk_20200531.LBL,"[""lend_rdr_chk_20200531.LBL"", ""LEND_RDR_CHK_20200531.DAT"", ""LEND_RDR_CHK.FMT""]",LEND_RDR_CHK_20200531_DAT,http://pds-geosciences.wustl.edu/lro/lro-l-lend-2-edr-v1/lrolen_0xxx/data/2020/20200531,"{""TABLE"": ""d9dda09d5d47243bfa0dd04a7be9af79""}"
+lend_rdr_chk_20200531.LBL,"[""lend_rdr_chk_20200531.LBL"", ""LEND_RDR_CHK_20200531.DAT"", ""LEND_RDR_CHK.FMT""]",LEND_RDR_CHK_20200531_DAT,http://pds-geosciences.wustl.edu/lro/lro-l-lend-2-edr-v1/lrolen_0xxx/data/2020/20200531,"{""TABLE"": ""68dfd5963543b67b07a661d47eaa082b""}"
