@@ -543,7 +543,7 @@ class CorpusFinalizer(DatasetDefinition):
                           f'Check your spelling and try again using regen=True.')
 
     def upload_to_s3(self, product_type):
-        from killscreen.aws.s3 import put
+        from hostess.aws.s3 import put
         with open(self.test_path(product_type)) as test_f:
             next(test_f)
             for line in test_f:
