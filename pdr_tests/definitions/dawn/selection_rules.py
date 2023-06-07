@@ -33,13 +33,18 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 MANIFEST_FILE = Path(MANIFEST_DIR, "tiny.parquet")
 
 file_information = {
-##    # Framing Camera - calibration images
-##    "fc_cal": {
-##        "manifest": MANIFEST_FILE,
-##        "fn_must_contain": ['.IMG'],
-##        "url_must_contain": ['dawn/fc/DWNCALFC', 'DATA'],
-##        "label": "A",
-##    },
+    # GRaND products have PDS4 versions available: EDR, RDR, maps/mosaics
+    
+    # Framing Camera - calibration images
+    # A few products are known unsupported: 20110925_FC1_VTH_CHKOUT_DARK_V01,
+    # 20120626_FC1_VT2_CHKOUT_DARK_V01, FC1_FLAT_HI_F4_N,
+    # FC2_F7_FLAT_V02_SLR_NORM, and FC2_F8_FLAT_V02_SLR_NORM
+    "fc_cal": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['dawn/fc/DWNCALFC', 'DATA'],
+        "label": "A",
+    },
     # Framing Camera - EDR (IMG version)
     "fc_edr_img": {
         "manifest": MANIFEST_FILE,
@@ -83,21 +88,22 @@ file_information = {
         "label": "D",
     },
     
-    
     # VIR - IR and VIS EDR
-    "vir_edr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.QUB'],
-        "url_must_contain": ['dawn/vir/DWN', '1A/DATA'],
-        "label": "D",
-    },
+    # Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
+##    "vir_edr": {
+##        "manifest": MANIFEST_FILE,
+##        "fn_must_contain": ['.QUB'],
+##        "url_must_contain": ['dawn/vir/DWN', '1A/DATA'],
+##        "label": "D",
+##    },
     # VIR - IR and VIS RDR
-    "vir_rdr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.QUB'],
-        "url_must_contain": ['dawn/vir/DWN', '1B/DATA'],
-        "label": "D",
-    },
+    # Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
+##    "vir_rdr": {
+##        "manifest": MANIFEST_FILE,
+##        "fn_must_contain": ['.QUB'],
+##        "url_must_contain": ['dawn/vir/DWN', '1B/DATA'],
+##        "label": "D",
+##    },
     # VIR - Ceres mosaics
     "vir_mosaic_ceres": {
         "manifest": MANIFEST_FILE,
@@ -105,15 +111,15 @@ file_information = {
         "url_must_contain": ['dawn/vir/DWNCVIR_2/DATA'],
         "label": "D",
     },
-##    # VIR - Vesta mosaics
-##    "vir_mosaic_vesta": {
-##        "manifest": MANIFEST_FILE,
-##        "fn_must_contain": ['.IMG'],
-##        "url_must_contain": ['dawn/vir/DWNVVIR_2/DATA'],
-##        "label": "A",
-##    },
+    # VIR - Vesta mosaics
+    # (4 products in archive. Only 1 has actual data, the rest are just labels.)
+    "vir_mosaic_vesta": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['dawn/vir/DWNVVIR_2/DATA'],
+        "label": "A",
+    },
     
-    # RSS - gravity EDR -> brief manual testing of PDS4 products looks good
     # RSS - gravity models
     "shadr": {
         "manifest": MANIFEST_FILE,
@@ -133,5 +139,5 @@ file_information = {
         "url_must_contain": ['dawn/grav/DWN', 'GRS_2', 'DATA/RSDMAP'],
         "label": "D",
     },
-    
+    # RSS - gravity EDR -> brief manual testing of PDS4 products looks good
 }
