@@ -34,24 +34,22 @@ ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
 
 file_information = {
     # ATMOSPHERIC STRUCTURE INSTRUMENT
-    # Most products open fine but "hk01ad.lbl" miscounts bytes in column 6 of
-    # the table.
-##    "asi": {
-##        "manifest": ATM_FILE,
-##        "fn_must_contain": ['.tab'],
-##        "url_must_contain": ['gp_0001/data/asi'],
-##        "label": "D",
-##    },
+    "asi": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['gp_0001/data/asi'],
+        "label": "D",
+    },
     # DOPPLER WIND EXPERIMENT
     # Most products open fine but orbtrtrj.tab and probetrj.tab appear to have
     # newline characters that aren't being dealt with correctly (possibly a data
     # QA problem with the labels).
-##    "dwe": {
-##        "manifest": ATM_FILE,
-##        "fn_must_contain": ['.tab'],
-##        "url_must_contain": ['gp_0001/data/dwe'],
-##        "label": "D",
-##    },
+    "dwe": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['gp_0001/data/dwe'],
+        "label": "D",
+    },
     # 1 DWE product has a different extension
     "dwe_adj": {
         "manifest": ATM_FILE,
@@ -81,14 +79,13 @@ file_information = {
         "label": "D",
     },
     # GALILEO PROBE MASS SPECTROMETER
-    # Data is missing from the COUNTS column for most/all products; looks like
-    # another byte counting mistakes in the labels.
-##    "nms": {
-##        "manifest": ATM_FILE,
-##        "fn_must_contain": ['.tab'],
-##        "url_must_contain": ['gp_0001/data/nms'],
-##        "label": "D",
-##    },
+    # (A92NO21.TAB and A85JL02.TAB open wrong because of mistakes in the labels)
+    "nms": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['gp_0001/data/nms'],
+        "label": "D",
+    },
     # NET FLUX RADIOMETER - calib array
     "nfr_cal_array": {
         "manifest": ATM_FILE,

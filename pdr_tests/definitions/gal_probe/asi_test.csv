@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+d05t2.lbl,"[""d05t2.tab"", ""d05t2.lbl""]",D05T2.TAB,http://pds-atmospheres.nmsu.edu/PDS/data/gp_0001/data/asi,"{""TABLE"": ""f95ac68fe44e51b4fe7175bd7ab34a41""}"
+hk01ad.lbl,"[""hk01ad.lbl"", ""hk01ad.tab""]",HK01AD.TAB,http://pds-atmospheres.nmsu.edu/PDS/data/gp_0001/data/asi,"{""TABLE"": ""849d77a1c58fe1256e686eb31c8dbceb""}"
