@@ -42,8 +42,6 @@ file_information = {
     },
     
     # ENERGETIC PARTICLES DETECTOR
-    # EPD data from Earth encounters; 1 product opens wrong because of a
-    # formatting error in the data file (E1PAD_7.TAB)
     "epd_samp": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.TAB'],
@@ -51,14 +49,12 @@ file_information = {
         "label": "D",
     },
     # EPD data from Earth encounters; 30 minute averages
-    # The labels use the wrong value for ROW_BYTES, changing it to the value
-    # for RECORD_BYTES fixes the problem.
-##    "epd_summ": {
-##        "manifest": PLASM_FILE,
-##        "fn_must_contain": ['.TAB'],
-##        "url_must_contain": ['GO-E-EPD-4-SUMM-', 'DATA'],
-##        "label": "D",
-##    },
+    "epd_summ": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['GO-E-EPD-4-SUMM-', 'DATA'],
+        "label": "D",
+    },
     # high resolution data from Jupiter and its satellites
     "epd_highres": {
         "manifest": PLASM_FILE,

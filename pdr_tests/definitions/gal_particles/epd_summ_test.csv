@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+E2_RAT_6.LBL,"[""E2_RAT_6.TAB"", ""E2_RAT_6.FMT"", ""E2_RAT_6.LBL""]",E2_RAT_6.TAB,http://pds-ppi.igpp.ucla.edu/data/GO-E-EPD-4-SUMM-EARTH2-15MIN-V1.0/DATA,"{""TIME_SERIES"": ""494a82ba642b755fe385b05e1352e252""}"
+E1_RAT_4.LBL,"[""E1_RAT_4.FMT"", ""E1_RAT_4.LBL"", ""E1_RAT_4.TAB""]",E1_RAT_4.TAB,http://pds-ppi.igpp.ucla.edu/data/GO-E-EPD-4-SUMM-EARTH1-15MIN-V1.0/DATA,"{""TIME_SERIES"": ""3c1d3e2fe16305188398f2256979c077""}"
