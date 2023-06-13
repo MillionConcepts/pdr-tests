@@ -33,7 +33,7 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 GEO_MESSENGER_FILE = Path(MANIFEST_DIR, "geomessenger.parquet")
 
 file_information = {
-# 	#known unsupported; no END_OBJECT for TABLE in the label
+# 	#known unsupported (not planned); no END_OBJECT for TABLE in the label
 #     "ns": {
 #         "manifest": GEO_MESSENGER_FILE,
 #         "fn_must_contain": [".BIN"],

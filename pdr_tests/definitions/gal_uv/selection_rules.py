@@ -50,7 +50,7 @@ file_information = {
     },
     # The UVS products often call for a format file that is missing from the
     # archive (RTS_SUMMATION.FMT). The next 2 product types are a subset that
-    # appear to never use the missing file. The "misssing_fmt" product types
+    # appear to never use the missing file. The "missing_fmt" product types
     # below are a subset of products that often reference the missing file.
     "uvs_dat": {
         "manifest": ATM_FILE,
@@ -66,7 +66,8 @@ file_information = {
         "url_must_contain": ['gouv_00', '/uvs/XDR'],
         "label": "D",
     },
-    
+
+    # TODO: these appear to have pds4 labels, test an example; it should be fine that the fmt doesn't exist
 ##    # Only some of these use the missing format file, but they are intermixed
 ##    # with products that use format files that are available
 ##    "uvs_dat_missing_fmt": {

@@ -83,7 +83,7 @@ file_information = {
         "url_must_contain": ['clem1-gravity-topo', '/images'],
         "label": "D",
     },
-#     # RSS level 1 BSR products have non-compliant labels (missing pointers)
+#     # RSS level 1 BSR products have non-compliant labels (missing pointers; support not planned)
 #     "bsr_edr": {
 #         "manifest": MANIFEST_FILE,
 #         "fn_must_contain": ['.lbl'],

@@ -35,7 +35,7 @@ GEO_FILE = Path(MANIFEST_DIR, "geomsl.parquet")
 
 file_information = {
     # the quality of at least the metadata in the LIBS EDR corpus is
-    # extremely spotty. it is not currently supported.
+    # extremely spotty. it is not currently supported (and not planned).
 
     # "CCAM_LIBS_EDR": {
     #     "manifest": GEO_FILE,
