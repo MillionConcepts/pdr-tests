@@ -300,7 +300,7 @@ class IndexDownloader(DatasetDefinition):
         if hasattr(rules_module, "SKIP_FILES"):
             self.skip_files = getattr(rules_module, "SKIP_FILES")
 
-    def download_index(self, product_type: str, get_test: bool = False):
+    def download_index(self, product_type: str, get_test: bool = False, full_lower: bool = False):
         if product_type is None:
             return self.across_all_types("download_index", get_test)
         ptype = "subset files" if get_test is False else "test files"
@@ -327,7 +327,7 @@ class IndexDownloader(DatasetDefinition):
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
             session = download_product_row(
-                data_path, temp_path, row, self.skip_files, session
+                data_path, temp_path, row, self.skip_files, session, full_lower=full_lower
             )
         session.close()
 

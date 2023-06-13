@@ -46,9 +46,9 @@ def index(dataset, product_type=None, *, dry_run: "d" = False):
     indexer.write_subset_index(product_type)
 
 
-def download(dataset, product_type=None, *, get_test: "t" = False):
+def download(dataset, product_type=None, *, get_test: "t" = False, full_lower: "l" = False):
     downloader = IndexDownloader(dataset)
-    downloader.download_index(product_type, get_test)
+    downloader.download_index(product_type, get_test, full_lower=full_lower)
 
 
 def check(

@@ -165,7 +165,7 @@ def get_product_row(label_path, url):
 
 
 def download_product_row(
-    data_path, temp_path, row, skip_files=(), session=None
+    data_path, temp_path, row, skip_files=(), session=None, full_lower=False
 ):
     files = json.loads(row["files"])
     session = session if session is not None else MaybeSession()
@@ -176,7 +176,7 @@ def download_product_row(
         if any((file == skip_file for skip_file in skip_files)):
             continue
         url = f"{row['url_stem']}/{file}"
-        session = verbose_temp_download(data_path, temp_path, url, session)
+        session = verbose_temp_download(data_path, temp_path, url, session, full_lower=full_lower)
     return session
 
 
@@ -229,7 +229,7 @@ class MaybeSession:
 # TODO / note: this is yet one more download
 #  thing that we should somehow unify and consolidate
 def verbose_temp_download(
-    data_path, temp_path, url, skip_quietly=True, session=None
+    data_path, temp_path, url, skip_quietly=True, session=None, full_lower=False
 ):
     session = session if session is not None else MaybeSession()
     try:
@@ -248,16 +248,16 @@ def verbose_temp_download(
         return session
     if not response.ok:
         response.close()
-        urlsplit = url.split('.')
+        if full_lower:
+            urlsplit = url.split('/')
+        else:
+            urlsplit = url.split('.')
         url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
         response = session.get(url, stream=True, headers=headers)
         if not response.ok:
             console_and_log(f"Download of {url} failed.")
             response.close()
             return session
-        # TODO: is this still necessary? I think we fixed this.
-        warnings.warn('File ending was changed to lowercase to complete download. '
-                      'Please update "label" in selection rules to allow index to write and rerun.')
     try:
         with open(Path(temp_path, Path(url).name), "wb+") as fp:
             size, fetched = response.headers.get('content-length'), 0
