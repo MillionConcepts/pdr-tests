@@ -43,26 +43,26 @@ file_information = {
         "label": "D",
     },
     
-    # These are FITS tables and need additional consideration:
+    # These are FITS arrays labelled as tables:
     
-#     "EDR_alice": {
-#         "manifest": SB_FILE,
-#         "fn_must_contain": ['.fit'],
-#         "url_must_contain": ['holdings/ro-', '-alice-2-', '/data'],
-#         "label": "D",
-#     },
-#     "RDR_alice": {
-#         "manifest": SB_FILE,
-#         "fn_must_contain": ['.fit'],
-#         "url_must_contain": ['holdings/ro-', '-alice-3-', '/data'],
-#         "label": "D",
-#     },
-#     "REFDR_alice": {
-#         "manifest": SB_FILE,
-#         "fn_must_contain": ['.fit'],
-#         "url_must_contain": ['holdings/ro-', '-alice-4-', '/data'],
-#         "label": "D",
-#     },
+    "EDR_alice": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['holdings/ro-', '-alice-2-', '/data'],
+        "label": "D",
+    },
+    "RDR_alice": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['holdings/ro-', '-alice-3-', '/data'],
+        "label": "D",
+    },
+    "REFDR_alice": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['holdings/ro-', '-alice-4-', '/data'],
+        "label": "D",
+    },
     
 # start MIRO data products
 
