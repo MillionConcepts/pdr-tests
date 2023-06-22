@@ -87,23 +87,22 @@ file_information = {
         "url_must_contain": ['dawn/fc/DWNCSPC_4_01/DATA/ICQ'],
         "label": "D",
     },
-    
     # VIR - IR and VIS EDR
-    # Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
-##    "vir_edr": {
-##        "manifest": MANIFEST_FILE,
-##        "fn_must_contain": ['.QUB'],
-##        "url_must_contain": ['dawn/vir/DWN', '1A/DATA'],
-##        "label": "D",
-##    },
+#     Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
+    "vir_edr": {
+       "manifest": MANIFEST_FILE,
+       "fn_must_contain": ['.QUB'],
+       "url_must_contain": ['dawn/vir/DWN', '1A/DATA'],
+       "label": "D",
+     },
     # VIR - IR and VIS RDR
-    # Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
-##    "vir_rdr": {
-##        "manifest": MANIFEST_FILE,
-##        "fn_must_contain": ['.QUB'],
-##        "url_must_contain": ['dawn/vir/DWN', '1B/DATA'],
-##        "label": "D",
-##    },
+#     Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
+    "vir_rdr": {
+       "manifest": MANIFEST_FILE,
+       "fn_must_contain": ['.QUB'],
+       "url_must_contain": ['dawn/vir/DWN', '1B/DATA'],
+       "label": "D",
+    },
     # VIR - Ceres mosaics
     "vir_mosaic_ceres": {
         "manifest": MANIFEST_FILE,
