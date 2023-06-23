@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+nc450504.lbl,"[""nc450504.fit"", ""nc450504.lbl""]",nc450504.fit,http://pdssbn.astro.umd.edu/holdings/stardust-cal-nc-2-preflight-v2.0/data/minus40c/filter5,"{""FITS_HEADER"": ""e30b80c4a9ec06ce625bc1fd0c1c8f76"", ""IMAGE"": ""4768b75aea03841bb4856bcab042bc66"", ""IMAGE_HEADER"": ""e30b80c4a9ec06ce625bc1fd0c1c8f76""}"
