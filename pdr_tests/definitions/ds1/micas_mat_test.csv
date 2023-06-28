@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+usgs_nz_matrix.lbl,"[""usgs_nz_matrix.lbl"", ""usgs_nz_matrix.tab""]",usgs_nz_matrix.tab,http://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/matrices,"{""TABLE"": ""ec024b0dcdf4a51635daed021ff1ffdb""}"
