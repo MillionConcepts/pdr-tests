@@ -48,19 +48,19 @@ file_information = {
         "label": "D",
     },
     # Image product; unsupported because SAMPLE_TYPE = VAX_REAL
-##    "shutter": {
-##        "manifest": IMG_FILE,
-##        "fn_must_contain": ['.img'],
-##        "url_must_contain": ['Galileo/SSI/go_0001', 'shutter'],
-##        "label": "D",
-##    },
+    "shutter": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['Galileo/SSI/go_0001', 'shutter'],
+        "label": "D",
+    },
     # Image products; unsupported because SAMPLE_TYPE = VAX_REAL
-##    "slope": {
-##        "manifest": IMG_FILE,
-##        "fn_must_contain": ['.dat'],
-##        "url_must_contain": ['Galileo/SSI/go_0001', 'slope'],
-##        "label": "D",
-##    },
+    "slope": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['Galileo/SSI/go_0001', 'slope'],
+        "label": "D",
+    },
     # REDR data
     # Image pointer opened fine manually. TELEMETRY_TABLE pointer fails with:
     # TypeError: unsupported operand type(s) for *: 'int' and 'NoneType'.

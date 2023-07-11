@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+calibration_so02.lbl,"[""calibration_so02.img"", ""calib.txt"", ""vicar2.txt"", ""calibration_so02.lbl""]",calibration_so02,http://pdsimage2.wr.usgs.gov/Missions/Galileo/SSI/go_0001/shutter,"{""IMAGE"": ""9a770e0b97c1ba4b66feea7000139893""}"

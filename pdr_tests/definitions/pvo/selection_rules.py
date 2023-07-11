@@ -178,10 +178,10 @@ file_information = {
     # OUVS - Inbound Monochrome Images (IMIDR)
     # The DATA_IMAGE pointer uses VAX_REAL as the DATA_TYPE.
     # BIN_IMAGE and RP_IMAGE are VAX_INTEGER and might be opening fine.
-##    "imidr": {
-##        "manifest": ATM_FILE,
-##        "fn_must_contain": ['.img'],
-##        "url_must_contain": ['pv01_100', 'data'],
-##        "label": "A",
-##    },
+    "imidr": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['pv01_100', 'data'],
+        "label": "A",
+    },
 }
