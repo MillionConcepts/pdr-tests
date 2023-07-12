@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+nixdb.lbl,"[""nixdb.fit"", ""nixdb.lbl""]",NIS-LEVEL2-SPECTRA,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_5_EDR_EROS_ORBIT_V1_0/data,"{""HEADER"": ""e072865ac6b9d47d8623dbe288f2ab8b"", ""TABLE"": ""4ee0b276456f59f7b84998aed7060c55""}"
