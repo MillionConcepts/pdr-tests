@@ -66,9 +66,13 @@ def checksum_object(obj, hash_function=md5):
         for dtype in sorted(blocks.keys()):
             if dtype == 'object':
                 for c in blocks[dtype].columns:
-                    hasher.update(
-                        blocks[dtype][c].explode().to_string().encode('utf-8')
-                    )
+                    exploded = blocks[dtype][c].explode()
+                    stringified = ""
+                    for i, v in exploded.items():
+                        stringified += f"{i} {v}"
+                    encoded = stringified.encode('utf-8')
+                    hasher.update(encoded)
+                    print('did hash')
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
