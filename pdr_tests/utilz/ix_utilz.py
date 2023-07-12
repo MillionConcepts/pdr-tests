@@ -67,7 +67,6 @@ def checksum_object(obj, hash_function=md5):
             if dtype == 'object':
                 for c in blocks[dtype].columns:
                     exploded = blocks[dtype][c].explode()
-                    print(len(exploded))
                     stringified = ""
                     for i, v in exploded.items():
                         # add 分 separator character to reduce chance of hash
@@ -75,7 +74,6 @@ def checksum_object(obj, hash_function=md5):
                         stringified += f"{i} {v}分"
                     stringified = stringified.encode('utf-8')
                     hasher.update(stringified)
-                    print('did hash')
             else:
                 # TODO, maybe: the arrays underlying dataframes are
                 #  typically not stored in C-contiguous order. copying the
