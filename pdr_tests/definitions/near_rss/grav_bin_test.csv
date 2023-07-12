@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+jge15a01_bin.lbl,"[""jge15a01_bin.lbl"", ""jge15a01_bin.shb""]",JGE15A01_BIN.SHB,http://sbnarchive.psi.edu/pds3/near/NEAR_A_RSS_5_EROS_GRAVITY_V1_0/erosgrav,"{""SHBDR_HEADER_TABLE"": ""edf4deaf5795957032194923a4143732"", ""SHBDR_NAMES_TABLE"": ""4a2644e88b8a242ef4687519bc020c0f"", ""SHBDR_COEFFICIENTS_TABLE"": ""2c8c5ad900615acccf5046ab059262e7"", ""SHBDR_COVARIANCE_TABLE"": ""1b6abb1f92c51c25a6eb60c060576353""}"

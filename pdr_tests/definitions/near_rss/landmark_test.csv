@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+landmark.lbl,"[""landmark.tab"", ""landmark.lbl""]",LANDMARK.TAB,http://sbnarchive.psi.edu/pds3/near/NEAR_A_RSS_5_EROS_GRAVITY_V1_0/erosgrav,"{""POLE_RA_TABLE"": ""b779eac7ab280f86eeba4dab250cfb84"", ""POLE_DEC_TABLE"": ""b03c799c12366277f5e6ba464e292ebd"", ""ROTATION_TABLE"": ""af96cade17317119322e843877005343"", ""LANDMARK_TABLE"": ""049439de6de77a75d01759fce51178d5""}"
