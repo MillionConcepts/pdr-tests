@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-VIR_IR_1A_1_366682455_2.LBL,"[""VIR_IR_1A_1_366682455_2.LBL"", ""VIR_IR_1A_1_366682455_2.QUB""]",VIR_IR_1A_1_366682455,http://sbnarchive.psi.edu/pds3/dawn/vir/DWNVVIR_I1A/DATA/20110811_SURVEY/20110814_CYCLE2
+label_file,files,product_id,url_stem,hash
+VIR_IR_1A_1_366682455_2.LBL,"[""VIR_IR_1A_1_366682455_2.LBL"", ""VIR_IR_1A_1_366682455_2.QUB""]",VIR_IR_1A_1_366682455,http://sbnarchive.psi.edu/pds3/dawn/vir/DWNVVIR_I1A/DATA/20110811_SURVEY/20110814_CYCLE2,"{""QUBE"": ""033815596018c5a8315d21a6a3a61f9d""}"
