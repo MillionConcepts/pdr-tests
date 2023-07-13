@@ -47,19 +47,21 @@ file_information = {
         "url_must_contain": ['premgn/mg_1001/pvvenus'],
         "label": "D",
     },
-##    "pi_venus_img": {  # unsupported; SAMPLE_TYPE = VAX_REAL
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['ven', '.img'],
-##        "url_must_contain": ['premgn/mg_1001/pvvenus'],
-##        "label": "D",
-##    },
-    # Earth observations from AIRSAR instrument (unsupported; SAMPLE_TYPE = VAX_REAL)
-##    "airsar": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['eth', '.img'],
-##        "url_must_contain": ['premgn/mg_1001/airsar'],
-##        "label": "D",
-##    },
+    # Most PVO radar images open; pven006r.img does not because RECORD_BYTES
+    # are wrong in the label file.
+    "pi_venus_img": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['ven', '.img'],
+        "url_must_contain": ['premgn/mg_1001/pvvenus'],
+        "label": "D",
+    },
+    # Earth observations from AIRSAR instrument
+    "airsar": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['eth', '.img'],
+        "url_must_contain": ['premgn/mg_1001/airsar'],
+        "label": "D",
+    },
     # Earth-based Mars observations
     "eb_mars_tab": {
         "manifest": GEO_FILE,
