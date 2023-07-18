@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+gamma_spectra_20010613.LBL,"[""gamma_spectra_20010613.LBL"", ""GAMMA_SPECTRA_20010613.DAT"", ""GAMMA_SPECTRA_COLS.FMT""]",GAMMA_SPECTRA_20010613,http://pds-geosciences.wustl.edu/ody/ody-m-grs-2-edr-v1/odge1_xxxx/2001/20010613,"{""TIME_SERIES"": ""d84d325bf0b79103b4b2eb49c418653a""}"
