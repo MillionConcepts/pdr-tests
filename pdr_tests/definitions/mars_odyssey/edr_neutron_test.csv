@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+neutron_spectra_20020524.LBL,"[""NEUTRON_SPECTRA_20020524.DAT"", ""neutron_spectra_20020524.LBL"", ""NEUTRON_SPECTRA_COLS.FMT""]",NEUTRON_SPECTRA_20020524,http://pds-geosciences.wustl.edu/ody/ody-m-grs-2-edr-v1/odge1_xxxx/2002/20020524,"{""TIME_SERIES"": ""94ecc76dd885b28a8d95140e5278d369""}"
