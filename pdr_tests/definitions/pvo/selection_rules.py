@@ -168,12 +168,12 @@ file_information = {
     # POS - supplemental experimenter data records (SEDR)
     # Most format files include "IBM REAL" as a DATA_TYPE
     # SL.FMT uses "EBCDIC CHARACTER" as a DATA_TYPE
-##    "pos_sedr": {
-##        "manifest": PPI_FILE,
-##        "fn_must_contain": ['.DAT'],
-##        "url_must_contain": ['PVO-V-POS-6-SEDR-ORBITATTITUDE--V1.0/DATA'],
-##        "label": "D",
-##    },
+    "pos_sedr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['PVO-V-POS-6-SEDR-ORBITATTITUDE--V1.0/DATA'],
+        "label": "D",
+    },
     
     # OUVS - Inbound Monochrome Images (IMIDR)
     # The DATA_IMAGE pointer uses VAX_REAL as the DATA_TYPE.
