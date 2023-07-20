@@ -43,25 +43,26 @@ file_information = {
 ##     },
     # Altimetry and Radiometry Composite Data Records
     # 3 products per orbit: orbit header (OHF), altimetry (ADF), radiometry (RDF)
-    # known unsupported; support planned --> VAX_REAL data type
-##    "arcdr": {
-##        "manifest": GEO_MANIFEST,
-##        "fn_regex": [r'((ad)|(oh)|(rd))f.*\.([1-9]*)$'],
-##        "url_must_contain": ['mgn-v-rdrs-5-cdr-alt-rad-v1'],
-##        "label": "D",
-##    },
+    # known unsupported; support planned --> VAX_REAL 64 bit data type
+    # "arcdr": {
+    #     "manifest": GEO_MANIFEST,
+    #     "fn_regex": [r'((ad)|(oh)|(rd))f.*\.([1-9]*)$'],
+    #     "url_must_contain": ['mgn-v-rdrs-5-cdr-alt-rad-v1'],
+    #     "label": "D",
+    # },
     
     # Derived products that pull at least some of their data from ALT-EDR and/or ARCDR:
 
     # Surface Characteristics Vector Data Record 
     # 6 products per orbit: altimetry inversion (ANF), emissivity (EDF), alt inversion fit
     # (NFF), orbit header (OHF), oblique sinusoidal image (OIF), sinusoidal image (SIF)
-##    "scvdr": {
-##        "manifest": GEO_MANIFEST,
-##        "fn_regex": [r'\.[1-9]$'],
-##        "url_must_contain": ['mgn-v-rdrs-5-scvdr-v1', '/s'],
-##        "label": "D",
-##    },
+    # known unsupported; support not planned would require format specific parsers
+    # "scvdr": {
+    #     "manifest": GEO_MANIFEST,
+    #     "fn_regex": [r'\.[1-9]$'],
+    #     "url_must_contain": ['mgn-v-rdrs-5-scvdr-v1', '/s'],
+    #     "label": "D",
+    # },
     # Global Vector Data Record
     # Similar archive layout as GxDR with merc, north, south, and sinus subdirectories
     # Data products: GVADF, GVANF, GVRDF, GVXIF (others are ancilllary)

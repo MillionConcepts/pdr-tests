@@ -47,15 +47,12 @@ file_information = {
 #         "url_must_contain": ['ground_cal', '/MASCS'],
 #         "label": "D",
 #     },
-	
-	# in process of being fully supported.
-	# waiting for FITS header update before generating hashes for test case
-#     "mdis": {
-#         "manifest": GEO_MESSENGER_FILE,
-#         "fn_must_contain": [".FIT"],
-#         "url_must_contain": ['ground_cal', 'MDIS/DATA'],
-#         "label": "D",
-#     },
+    "mdis": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".FIT"],
+        "url_must_contain": ['ground_cal', 'MDIS/DATA'],
+        "label": "D",
+    },
 	# most products are supported.
 	# products ending in TIM_BST are known unsupported (format file is missing from archive)
     "mag": {
