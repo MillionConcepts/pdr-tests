@@ -363,6 +363,8 @@ def read_and_hash(
         # We don't want to hear about UserWarnings we're intentionally raising
         # inside pdr (for things like unsupported object types, etc.)
         warnings.filterwarnings("ignore", category=UserWarning, module="pdr")
+        warnings.filterwarnings("ignore", message="non-ASCII characters",
+                                module="astropy.io.fits.util")
         watch.start()
         data = pdr.read(str(path), debug=debug, tracker=tracker)
         data.load("all")
