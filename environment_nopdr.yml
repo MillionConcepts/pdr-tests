@@ -27,6 +27,5 @@ dependencies:
   - flask
   - requests
   - rich
-  - sh
   - pip:
       - git+https://github.com/MillionConcepts/hostess.git
