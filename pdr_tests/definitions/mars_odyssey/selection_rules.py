@@ -110,14 +110,15 @@ file_information = {
         "label": "D",
     },
     # summed gamma spectra
-    # Needs more testing. Some products open with fewer rows than their labels
-    # claim. The labels could be wrong, or data could actually be missing.
-##    "sgs": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['.dat'],
-##        "url_must_contain": ['ody-m-grs-5-sgs-v1/odgs1_xxxx/yr'],
-##        "label": "D",
-##    },
+    # Some products (from year 1 of mapping) have labels that list the wrong
+    # number of rows for the table; they overcount, so the tables open fine.
+    # The SIS suggests each table should have 72 rows of data.
+    "sgs": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['ody-m-grs-5-sgs-v1/odgs1_xxxx/yr'],
+        "label": "D",
+    },
     # averaged neutron data
     "and": {
         "manifest": GEO_FILE,
