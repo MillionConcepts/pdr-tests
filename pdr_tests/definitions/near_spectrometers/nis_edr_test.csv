@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-nis99049.lbl,"[""nis99049.lbl"", ""nis99049.fit""]",NIS99049-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_2_EDR_CRUISE4_V1_0/data,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""9605c52f647532f3ef13c366f84d7256"", ""TABLE"": ""b0dbba8184ca71b59e6b781c57a93925""}"
+nis99049.lbl,"[""nis99049.lbl"", ""nis99049.fit""]",NIS99049-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_2_EDR_CRUISE4_V1_0/data,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""9605c52f647532f3ef13c366f84d7256"", ""TABLE"": ""1009afbf0449aba7f8de14b39ad902ef"", ""TABLE_HEADER"": ""9605c52f647532f3ef13c366f84d7256""}"
