@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-nixdbrev.lbl,"[""nixdbrev.lbl"", ""nixdbrev.fit""]",NIXDBREV.FIT,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_5_EDR_ALL_PHASES_PDSREV_V1_0/data,"{""HEADER"": ""d4d3becca1e8d5dfe9c63d5d56750259"", ""EXTENSION_HEADER"": ""d4d3becca1e8d5dfe9c63d5d56750259"", ""TABLE"": ""4bc0c1e325e70576158ce543d8492175""}"
+nixdbrev.lbl,"[""nixdbrev.lbl"", ""nixdbrev.fit""]",NIXDBREV.FIT,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_5_EDR_ALL_PHASES_PDSREV_V1_0/data,"{""HEADER"": ""d4d3becca1e8d5dfe9c63d5d56750259"", ""EXTENSION_HEADER"": ""d4d3becca1e8d5dfe9c63d5d56750259"", ""TABLE"": ""a779ebe5ae3f3c2ba8e645471fe3c241"", ""TABLE_HEADER"": ""503ff1cc2b09af90f1eb78a961d52299""}"

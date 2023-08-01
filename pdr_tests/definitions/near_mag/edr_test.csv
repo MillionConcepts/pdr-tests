@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-mag98343.lbl,"[""mag98343.lbl"", ""mag98343.fit""]",MAG98343-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_MAG_2_EDR_CRUISE3_V1_0/data,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""ebdefa597281c98f66ca2b3b392eb3c3"", ""TABLE"": ""ee2bb2a609dcba8c1c035e9c9b7a7a86""}"
+mag98343.lbl,"[""mag98343.lbl"", ""mag98343.fit""]",MAG98343-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_MAG_2_EDR_CRUISE3_V1_0/data,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""ebdefa597281c98f66ca2b3b392eb3c3"", ""TABLE"": ""3e3f9bc187186a51696b4b07936fa7d0"", ""TABLE_HEADER"": ""ebdefa597281c98f66ca2b3b392eb3c3""}"
