@@ -9,6 +9,7 @@ import warnings
 import xml.etree.ElementTree as ET
 from functools import wraps
 from hashlib import md5
+from io import StringIO
 from pathlib import Path
 from sys import stdout
 from typing import Mapping, Sequence, MutableMapping, Collection, Callable, \
@@ -67,12 +68,13 @@ def checksum_object(obj, hash_function=md5):
             if dtype == 'object':
                 for c in blocks[dtype].columns:
                     exploded = blocks[dtype][c].explode()
-                    stringified = ""
+                    stringified = StringIO()
                     for i, v in exploded.items():
                         # add 分 separator character to reduce chance of hash
                         # collisions from very unlikely to vanishingly so
-                        stringified += f"{i} {v}分"
-                    stringified = stringified.encode('utf-8')
+                        stringified.write(f"{i} {v}分")
+                    stringified.seek(0)
+                    stringified = stringified.read().encode('utf-8')
                     hasher.update(stringified)
             else:
                 # TODO, maybe: the arrays underlying dataframes are
