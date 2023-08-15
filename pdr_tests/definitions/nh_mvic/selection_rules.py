@@ -91,4 +91,31 @@ file_information = {
         "url_must_contain": ['nh-p-mvic-3-pluto-v3.0/data'],
         "label": "D",
     },
+    
+    # KEM Cruise 1 raw and calibrated data
+    "kem_cruise_raw": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['nh-x-mvic-2-kemcruise1-v2.0/data'],
+        "label": "D",
+    },
+    "kem_cruise_cal": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['nh-x-mvic-3-kemcruise1-v2.0/data'],
+        "label": "D",
+    },
+    # arrokoth encounter raw and calibrated data
+    "arrokoth_raw": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['nh-a-mvic-2-kem1-v','.0/data'],
+        "label": "D",
+    },
+    "arrokoth_cal": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['nh-a-mvic-3-kem1-v','.0/data'],
+        "label": "D",
+    },
 }
