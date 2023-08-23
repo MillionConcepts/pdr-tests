@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+uvi_20170619_130444_365_l2b_v10.LBL,"[""uvi_20170619_130444_365_l2b_v10.fit"", ""uvi_20170619_130444_365_l2b_v10.LBL""]",UVI_20170619_130444_365_L2B_V10.FIT,http://pds-atmospheres.nmsu.edu/PDS/data/vcouvi_1001/data/l2b/r0052,"{""PRIMARY_HEADER"": ""b8182d42e8af23e35ecf35b7dca352e1"", ""UVI_LEVEL2B_HEADER"": ""831ae0bd4690da4f5ce97c802fbf01d9"", ""UVI_LEVEL2B_IMAGE"": ""0057f1d5ecd4a5c52e4728302665c5f1"", ""UVI_LEVEL2B_IMAGE_HEADER"": ""831ae0bd4690da4f5ce97c802fbf01d9""}"

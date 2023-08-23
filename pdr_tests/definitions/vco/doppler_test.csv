@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+rs_20180330_035000_udsc64_l2_v10.LBL,"[""rs_20180330_035000_udsc64_l2_v10.tab"", ""rs_20180330_035000_udsc64_l2_v10.LBL""]",RS_20180330_035000_UDSC64_L2_V10.TAB,http://pds-atmospheres.nmsu.edu/PDS/data/vcors_1002/data/l2,"{""DOPPLER_TABLE"": ""5476a42f5370a004a5b16630a8990648""}"

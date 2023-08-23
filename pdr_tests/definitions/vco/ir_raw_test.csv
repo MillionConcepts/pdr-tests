@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+ir2_20161024_221118_232_l1b_v10.LBL,"[""ir2_20161024_221118_232_l1b_v10.fit"", ""ir2_20161024_221118_232_l1b_v10.LBL""]",IR2_20161024_221118_232_L1B_V10.FIT,http://pds-atmospheres.nmsu.edu/PDS/data/vcoir2_0001/data/r0030,"{""PRIMARY_HEADER"": ""6e7c474162c55dc112ee45a52b555bbe"", ""IR2_LEVEL1B_HEADER"": ""0656df39430bcfce6e0f4621c429d619"", ""IR2_LEVEL1B_IMAGE"": ""d9be7a55cc9c5c6bc3a51c94f6cabbc0"", ""IR2_LEVEL1B_IMAGE_HEADER"": ""0656df39430bcfce6e0f4621c429d619""}"
