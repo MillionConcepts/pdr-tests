@@ -302,7 +302,8 @@ class IndexDownloader(DatasetDefinition):
 
     def download_index(self, product_type: str, get_test: bool = False, full_lower: bool = False):
         if product_type is None:
-            return self.across_all_types("download_index", get_test)
+            return self.across_all_types("download_index", get_test,
+                                         full_lower=full_lower)
         ptype = "subset files" if get_test is False else "test files"
         console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
         data_path = self.product_data_path(product_type)
