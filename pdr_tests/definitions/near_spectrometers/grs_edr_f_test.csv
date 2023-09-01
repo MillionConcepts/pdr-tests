@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-grf98032.lbl,"[""grf98032.lbl"", ""grf98032.fit""]",GRF98032-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_GRS_2_EDR_CRUISE3_V1_0/data/grf,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""2dde8950d83e446a05e140d28306cd4a"", ""TABLE"": ""e20719f4e9a35f72ad759f3ca0851568"", ""TABLE_HEADER"": ""2dde8950d83e446a05e140d28306cd4a""}"
+grf98032.lbl,"[""grf98032.lbl"", ""grf98032.fit""]",GRF98032-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_GRS_2_EDR_CRUISE3_V1_0/data/grf,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""2dde8950d83e446a05e140d28306cd4a"", ""TABLE"": ""c526ba81f442c375c1c5537fe7ef98bb"", ""TABLE_HEADER"": ""2dde8950d83e446a05e140d28306cd4a""}"

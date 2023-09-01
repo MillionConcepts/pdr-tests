@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-xrf00241.lbl,"[""xrf00241.fit"", ""xrf00241.lbl""]",XRF00241-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_XRS_2_EDR_EROS_ORBIT_V1_0/data/xrf,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""96b827498bc6a43da0a5aac4596afc1b"", ""TABLE"": ""3b33f51fae9b0f63378cbc1358f79f83"", ""TABLE_HEADER"": ""96b827498bc6a43da0a5aac4596afc1b""}"
+xrf00241.lbl,"[""xrf00241.fit"", ""xrf00241.lbl""]",XRF00241-200109,http://sbnarchive.psi.edu/pds3/near/NEAR_A_XRS_2_EDR_EROS_ORBIT_V1_0/data/xrf,"{""HEADER"": ""8dc2afdc1555eb6a13b5c260c2d7945f"", ""EXTENSION_HEADER"": ""96b827498bc6a43da0a5aac4596afc1b"", ""TABLE"": ""9a51e794d23fd77807a6fb3e760d8dbc"", ""TABLE_HEADER"": ""96b827498bc6a43da0a5aac4596afc1b""}"
