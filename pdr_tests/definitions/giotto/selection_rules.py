@@ -91,11 +91,10 @@ file_information = {
         "label": "D",
     },
     # Particle Impact Analyzer (PIA)
-    # Unsupported: gross formatting with nested arrays and collections.
-##    "pia": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.dat'],
-##        "url_must_contain": ['gio-c-pia-3-rdr-halley-v1.0/data/mode'],
-##        "label": "D",
-##    },
+    "pia": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.dat'],
+       "url_must_contain": ['gio-c-pia-3-rdr-halley-v1.0/data/mode'],
+       "label": "D",
+    },
 }

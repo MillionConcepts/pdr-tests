@@ -128,14 +128,12 @@ file_information = {
     },
     
     # dust impact mass analyzer
-    # Unsupported; UserWarning: Unable to load ARRAY: 'DATA_TYPE'
-    # The labels define a format with nested ARRAYs and COLLECTIONs.
-##    "puma_mode": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.dat'],
-##        "url_must_contain": ['vega','-c-puma-','-rdr-halley-','/data/mode'],
-##        "label": "D",
-##    },
+    "puma_mode": {
+       "manifest": SBN_FILE,
+       "fn_must_contain": ['.dat'],
+       "url_must_contain": ['vega','-c-puma-','-rdr-halley-','/data/mode'],
+       "label": "D",
+    },
     # Unsupported; missing PDS label files
 ##    "puma_raw": {
 ##        "manifest": SBN_FILE,
