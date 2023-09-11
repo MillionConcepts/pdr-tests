@@ -34,12 +34,6 @@ SB_FILE = Path(MANIFEST_DIR, "tiny.parquet")
 
 file_information = {
     
-    # Known Unsupported: Some calibrated products open fine. Those with a
-    # EXTENSION_CT_RATE_VEC_PXLLST_ARRAY pointer fail because it is a 1-D array
-    # with an OFFSET and/or SCALING_FACTOR. Trying to open them gives:
-    # ValueError: 3-D arrays must have last axis of length = 3
-    
-    
     # post-launch raw and calibrated data
     "launch_raw": {
         "manifest": SB_FILE,
@@ -47,12 +41,12 @@ file_information = {
         "url_must_contain": ['nh-x-alice-2-launch-v2.0/data'],
         "label": "D",
     },
-##    "launch_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-alice-3-launch-v2.0/data'],
-##        "label": "D",
-##    },
+    "launch_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-alice-3-launch-v2.0/data'],
+       "label": "D",
+   },
     # jupiter flyby raw and calibrated data
     "jupiter_raw": {
         "manifest": SB_FILE,
@@ -60,12 +54,12 @@ file_information = {
         "url_must_contain": ['nh-j-alice-2-jupiter-v2.0/data'],
         "label": "D",
     },
-##    "jupiter_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-j-alice-3-jupiter-v2.0/data'],
-##        "label": "D",
-##    },
+    "jupiter_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-j-alice-3-jupiter-v2.0/data'],
+       "label": "D",
+   },
     # pluto cruise raw and calibrated data
     "cruise_raw": {
         "manifest": SB_FILE,
@@ -73,12 +67,12 @@ file_information = {
         "url_must_contain": ['nh-x-alice-2-plutocruise-v2.0/data'],
         "label": "D",
     },
-##    "cruise_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-alice-3-plutocruise-v2.0/data'],
-##        "label": "D",
-##    },
+    "cruise_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-alice-3-plutocruise-v2.0/data'],
+       "label": "D",
+   },
     # pluto encounter raw and calibrated data
     "pluto_raw": {
         "manifest": SB_FILE,
@@ -86,12 +80,12 @@ file_information = {
         "url_must_contain": ['nh-p-alice-2-pluto-v3.0/data'],
         "label": "D",
     },
-##    "pluto_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-p-alice-3-pluto-v3.0/data'],
-##        "label": "D",
-##    },
+    "pluto_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-p-alice-3-pluto-v3.0/data'],
+       "label": "D",
+   },
     
     # extended mission - cruise 1
     "kem_cruise_raw": {
@@ -100,12 +94,12 @@ file_information = {
         "url_must_contain": ['nh-x-alice-2-kemcruise1-v2.0/data'],
         "label": "D",
     },
-##    "kem_cruise_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-alice-3-kemcruise1-v2.0/data'],
-##        "label": "D",
-##    },
+    "kem_cruise_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-alice-3-kemcruise1-v2.0/data'],
+       "label": "D",
+   },
     # extended mission - encounter 1, Arrokoth
     "arrokoth_raw": {
         "manifest": SB_FILE,
@@ -113,10 +107,10 @@ file_information = {
         "url_must_contain": ['nh-a-alice-2-kem1-v4.0/data'],
         "label": "D",
     },
-##    "arrokoth_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-a-alice-3-kem1-v4.0/data'],
-##        "label": "D",
-##    },
+    "arrokoth_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-a-alice-3-kem1-v4.0/data'],
+       "label": "D",
+   },
 }
