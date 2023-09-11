@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-mod2fit2.lbl,"[""mod2fit2.lbl"", ""mod2fit2.dat""]",mod2fit2,http://pdssbn.astro.umd.edu/holdings/vega1-c-puma-2-rdr-halley-v1.0/data/mode
+label_file,files,product_id,url_stem,hash
+mod2fit2.lbl,"[""mod2fit2.lbl"", ""mod2fit2.dat""]",mod2fit2,http://pdssbn.astro.umd.edu/holdings/vega1-c-puma-2-rdr-halley-v1.0/data/mode,"{""ARRAY"": ""6ef5342a502b0de9734f4921460d6dca""}"
