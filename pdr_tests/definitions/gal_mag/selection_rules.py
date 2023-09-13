@@ -58,7 +58,7 @@ file_information = {
         "url_must_contain": ['GO-', '-MAG-', '-RDR-'],
         "label": "D",
     },
-    # Currently not supported due to incorrect format file.
+    # Currently not supported due to incorrect format file, support not planned.
     # "SUMM": {
     #     "manifest": PLASM_FILE,
     #     "fn_must_contain": ['.TAB'],

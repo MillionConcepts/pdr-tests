@@ -34,61 +34,61 @@ SB_FILE = Path(MANIFEST_DIR, "tiny.parquet")
 
 file_information = {
     
-    # Knwon Unsupported: Similar to the ALICE RDRs: SWAP EDRs and RDRs
+    # Known Unsupported: Similar to the ALICE RDRs: SWAP EDRs and RDRs
     # sometimes include 1-D arrays with OFFSET and/or SCALING_FACTORs.
     
-##    # post-launch raw and calibrated data
-##    "launch_raw": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-swap-2-launch-v2.0/data'],
-##        "label": "D",
-##    },
-##    "launch_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-swap-3-launch-v2.0/data'],
-##        "label": "D",
-##    },
-##    # jupiter flyby raw and calibrated data
-##    "jupiter_raw": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-j-swap-2-jupiter-v4.0/data'],
-##        "label": "D",
-##    },
-##    "jupiter_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-j-swap-3-jupiter-v4.0/data'],
-##        "label": "D",
-##    },
-##    # pluto cruise raw and calibrated data
-##    "cruise_raw": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-swap-2-plutocruise-v3.0/data'],
-##        "label": "D",
-##    },
-##    "cruise_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-swap-3-plutocruise-v3.0/data'],
-##        "label": "D",
-##    },
-##    # pluto encounter raw and calibrated data
-##    "pluto_raw": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-p-swap-2-pluto-v3.0/data'],
-##        "label": "D",
-##    },
-##    "pluto_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-p-swap-3-pluto-v3.0/data'],
-##        "label": "D",
-##    },
+   # post-launch raw and calibrated data
+   "launch_raw": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-swap-2-launch-v2.0/data'],
+       "label": "D",
+   },
+   "launch_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-swap-3-launch-v2.0/data'],
+       "label": "D",
+   },
+   # jupiter flyby raw and calibrated data
+   "jupiter_raw": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-j-swap-2-jupiter-v4.0/data'],
+       "label": "D",
+   },
+   "jupiter_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-j-swap-3-jupiter-v4.0/data'],
+       "label": "D",
+   },
+   # pluto cruise raw and calibrated data
+   "cruise_raw": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-swap-2-plutocruise-v3.0/data'],
+       "label": "D",
+   },
+   "cruise_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-swap-3-plutocruise-v3.0/data'],
+       "label": "D",
+   },
+   # pluto encounter raw and calibrated data
+   "pluto_raw": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-p-swap-2-pluto-v3.0/data'],
+       "label": "D",
+   },
+   "pluto_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-p-swap-3-pluto-v3.0/data'],
+       "label": "D",
+   },
     # solar wind derived characteristics
     "solar_wind": {
         "manifest": SB_FILE,
@@ -97,31 +97,31 @@ file_information = {
         "label": "D",
     },
 
-##    # Extended mission products:
-##    # KEM Cruise 1 raw and calibrated data
-##    "kem_cruise_raw": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-swap-2-kemcruise1-v2.0/data'],
-##        "label": "D",
-##    },
-##    "kem_cruise_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-x-swap-3-kemcruise1-v2.0/data'],
-##        "label": "D",
-##    },
-##    # arrokoth encounter raw and calibrated data
-##    "arrokoth_raw": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-a-swap-2-kem1-v','.0/data'],
-##        "label": "D",
-##    },
-##    "arrokoth_cal": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-a-swap-3-kem1-v','.0/data'],
-##        "label": "D",
-##    },
+   # Extended mission products:
+   # KEM Cruise 1 raw and calibrated data
+   "kem_cruise_raw": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-swap-2-kemcruise1-v2.0/data'],
+       "label": "D",
+   },
+   "kem_cruise_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-x-swap-3-kemcruise1-v2.0/data'],
+       "label": "D",
+   },
+   # arrokoth encounter raw and calibrated data
+   "arrokoth_raw": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-a-swap-2-kem1-v','.0/data'],
+       "label": "D",
+   },
+   "arrokoth_cal": {
+       "manifest": SB_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['nh-a-swap-3-kem1-v','.0/data'],
+       "label": "D",
+   },
 }
