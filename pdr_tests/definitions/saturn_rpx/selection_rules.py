@@ -35,49 +35,48 @@ RMS_FILE = Path(MANIFEST_DIR, "ringvolumes.parquet")
 file_information = {
     # Hubble Space Telescope (HST) - raw and calibrated images, and
     # engineering data
-    # These are still running into FITS issues.
-##    "hst_raw_img": {
-##        "manifest": RMS_FILE,
-##        "fn_must_contain": ['.FITS'],
-##        "url_must_contain": ['RAWIMAGE'],
-##        "url_regex": [r'RPX_xxxx/RPX_000./199'],
-##        "label": "D",
-##    },
-##    "hst_raw_mask": {
-##        "manifest": RMS_FILE,
-##        "fn_must_contain": ['.FITS'],
-##        "url_must_contain": ['RAWMASK'],
-##        "url_regex": [r'RPX_xxxx/RPX_000./199'],
-##        "label": "D",
-##    },
-##    "hst_cal_img": {
-##        "manifest": RMS_FILE,
-##        "fn_must_contain": ['.FITS'],
-##        "url_must_contain": ['CALIMAGE'],
-##        "url_regex": [r'RPX_xxxx/RPX_000./199'],
-##        "label": "D",
-##    },
-##    "hst_cal_mask": {
-##        "manifest": RMS_FILE,
-##        "fn_must_contain": ['.FITS'],
-##        "url_must_contain": ['CALMASK'],
-##        "url_regex": [r'RPX_xxxx/RPX_000./199'],
-##        "label": "D",
-##    },
-##    "hst_eng_data": {
-##        "manifest": RMS_FILE,
-##        "fn_must_contain": ['.FITS'],
-##        "url_must_contain": ['ENGDATA'],
-##        "url_regex": [r'RPX_xxxx/RPX_000./199'],
-##        "label": "D",
-##    },
-##    "hst_eng_mask": {
-##        "manifest": RMS_FILE,
-##        "fn_must_contain": ['.FITS'],
-##        "url_must_contain": ['ENGMASK'],
-##        "url_regex": [r'RPX_xxxx/RPX_000./199'],
-##        "label": "D",
-##    },
+    "hst_raw_img": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.FITS'],
+        "url_must_contain": ['RAWIMAGE'],
+        "url_regex": [r'RPX_xxxx/RPX_000./199'],
+        "label": "D",
+    },
+    "hst_raw_mask": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.FITS'],
+        "url_must_contain": ['RAWMASK'],
+        "url_regex": [r'RPX_xxxx/RPX_000./199'],
+        "label": "D",
+    },
+    "hst_cal_img": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.FITS'],
+        "url_must_contain": ['CALIMAGE'],
+        "url_regex": [r'RPX_xxxx/RPX_000./199'],
+        "label": "D",
+    },
+    "hst_cal_mask": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.FITS'],
+        "url_must_contain": ['CALMASK'],
+        "url_regex": [r'RPX_xxxx/RPX_000./199'],
+        "label": "D",
+    },
+    "hst_eng_data": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.FITS'],
+        "url_must_contain": ['ENGDATA'],
+        "url_regex": [r'RPX_xxxx/RPX_000./199'],
+        "label": "D",
+    },
+    "hst_eng_mask": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.FITS'],
+        "url_must_contain": ['ENGMASK'],
+        "url_regex": [r'RPX_xxxx/RPX_000./199'],
+        "label": "D",
+    },
     # William Herschel Telescope (WHT) - images and spectra
     "wht_cal_img": {
         "manifest": RMS_FILE,
