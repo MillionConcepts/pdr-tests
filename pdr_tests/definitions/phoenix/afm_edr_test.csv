@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+fs042em3_00_0208414a80000j1.dat,"[""fs042em3_00_0208414a80000j1.dat"", ""AFM_TIPS.FMT""]",FS042EM3_00_0208414A80000J1,http://pds-geosciences.wustl.edu/phx/phx-m-meca-2-niedr-v1/phxmec_0xxx/data/sol042,"{""AFM_TABLE"": ""87d2139bfc7beb0e0e33b1ad71bf1d8f""}"
+fs046em0_00_00070150c0000j1.dat,"[""AFM_FREQUENCY_SAMPLE.FMT"", ""fs046em0_00_00070150c0000j1.dat""]",FS046EM0_00_00070150C0000J1,http://pds-geosciences.wustl.edu/phx/phx-m-meca-2-niedr-v1/phxmec_0xxx/data/sol046,"{""AFM_TABLE"": ""e14c0a1636b7dcba296a02c8685fd41c""}"
+fs050em2_00_1080015ac0000j1.dat,"[""fs050em2_00_1080015ac0000j1.dat""]",FS050EM2_00_1080015AC0000J1,http://pds-geosciences.wustl.edu/phx/phx-m-meca-2-niedr-v1/phxmec_0xxx/data/sol050,"{""AFM_TABLE"": ""971b0b08873290b7765b071fda25d38f""}"
