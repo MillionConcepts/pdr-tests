@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+thermal_composite_mu.lbl,"[""thermal_composite_mu.lbl"", ""thermal_composite_mu.fit""]",THERMAL_COMPOSITE_MU-200704,http://pdssbn.astro.umd.edu/holdings/dif-c-hrii-5-tempel1-surf-temp-maps-v1.0/data,"{""HEADER"": ""562b635f047620fc993e294bbfe8e733"", ""IMAGE"": ""1cf8c4bb532388288d121f05d776521f"", ""IMAGE_HEADER"": ""562b635f047620fc993e294bbfe8e733""}"
+plate_temp.lbl,"[""plate_temp.tab"", ""plate_temp.lbl""]",PLATE_TEMP-200704,http://pdssbn.astro.umd.edu/holdings/dif-c-hrii-5-tempel1-surf-temp-maps-v1.0/data,"{""TABLE"": ""6b67fafc3a3dae941156f3ec6d6288ff""}"
