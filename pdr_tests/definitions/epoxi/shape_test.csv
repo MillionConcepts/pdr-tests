@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+hartley2_2012_cart.lbl,"[""hartley2_2012_cart.wrl"", ""hartley2_2012_cart.lbl""]",HARTLEY2-CARTESIAN-PLATE-MODEL,http://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data,"{""COUNTS_TABLE"": ""3f10e6d4f165f357e15ec4e4b2732a38"", ""VERTEX_TABLE"": ""072b9f83695d555149f549670e556052"", ""PLATE_TABLE"": ""1d3d95aaa0e8f3fae193be8275ebeaa1""}"
