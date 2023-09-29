@@ -31,6 +31,7 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
 GEO_MRO_FILE = Path(MANIFEST_DIR, "geomro_full.parquet")
+ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
 
 file_information = {
     # 'odf': {'manifest': GEO_MRO_FILE,
@@ -56,5 +57,10 @@ file_information = {
     'shbdr': {'manifest': GEO_MRO_FILE,
               'fn_must_contain': ['.dat'],
               'url_must_contain': ['rss', '/shbdr'],
+              "label": "D"},
+    # temperature-pressure profiles
+    'tps': {'manifest': ATM_FILE,
+              'fn_must_contain': ['.TPS'],
+              'url_must_contain': ['data/mrors_2001/tps'],
               "label": "D"},
 }
