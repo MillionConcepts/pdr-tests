@@ -33,11 +33,7 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 SB_FILE = Path(MANIFEST_DIR, "tiny.parquet")
 
 file_information = {
-    
-    # Note: most of the raw products have an EXTENSION_IMAGE_DESCRIPTOR_IMAGE
-    # pointer that opens correctly through manual testing, but is skipped by ix.
-    # These pointers are being left out of regression testing because of this.
-    
+
     # post-launch raw and calibrated data
     "launch_raw": {
         "manifest": SB_FILE,

@@ -34,9 +34,6 @@ SB_FILE = Path(MANIFEST_DIR, "tiny.parquet")
 
 file_information = {
     
-    # Known Unsupported: Similar to the ALICE RDRs: SWAP EDRs and RDRs
-    # sometimes include 1-D arrays with OFFSET and/or SCALING_FACTORs.
-    
    # post-launch raw and calibrated data
    "launch_raw": {
        "manifest": SB_FILE,

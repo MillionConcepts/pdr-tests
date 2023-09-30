@@ -88,7 +88,6 @@ file_information = {
         "label": "D",
     },
     # VIR - IR and VIS EDR
-#     Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
     "vir_edr": {
        "manifest": MANIFEST_FILE,
        "fn_must_contain": ['.QUB'],
@@ -96,7 +95,6 @@ file_information = {
        "label": "D",
      },
     # VIR - IR and VIS RDR
-#     Support planned --> BAND_STORAGE_TYPE=SAMPLE_INTERLEAVED
     "vir_rdr": {
        "manifest": MANIFEST_FILE,
        "fn_must_contain": ['.QUB'],
