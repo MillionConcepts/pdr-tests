@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+CRUISE.LBL,"[""CRUISE.LBL"", ""CRUISE.TAB""]",CRUISE,http://pds-ppi.igpp.ucla.edu/data/ULY-J-HISCALE-4-SUMM-LEMS120-V1.0/DATA,"{""TABLE"": ""94fc29f3738f9f39da62f2f1e04099ac""}"
+DE.LBL,"[""DE.LBL"", ""DE.TAB""]",DE,http://pds-ppi.igpp.ucla.edu/data/ULY-J-HISCALE-4-SUMM-DE-V1.0/DATA,"{""TABLE"": ""b111d21ee695de61b722c7c0ed17163d""}"
+W.LBL,"[""W.LBL"", ""W.TAB""]",W,http://pds-ppi.igpp.ucla.edu/data/ULY-J-HISCALE-4-SUMM-W-V1.0/DATA,"{""TABLE"": ""4a90dca993250469517d0a1c898f9f6e""}"
