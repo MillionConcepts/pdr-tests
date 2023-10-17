@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import warnings
 from functools import partial
 from importlib import import_module
@@ -584,8 +585,8 @@ def test_product(
         "product_id": product["product_id"],
         "status": "ok",
         "error": None,
-        "hashtime": None,
-        "readtime": None
+        "hashtime": float('nan'),
+        "readtime": float('nan')
     }
     excluded, log_row = check_exclusions(
         filetypes, log_row, max_size, product, path
@@ -618,7 +619,7 @@ def test_product(
         raise
     except Exception as ex:
         log_row["status"] = "read exception"
-        log_row["error"] = f"{type(ex)}: {ex}".replace(",", ";")
+        log_row["error"] = re.sub(r"[\n,]", ";", f"{type(ex)}: {ex}")
     output_string = f"status: {log_row['status']}"
     if log_row["error"] is not None:
         output_string += f"; {log_row['error']}"
