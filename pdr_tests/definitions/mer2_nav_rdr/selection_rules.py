@@ -34,31 +34,33 @@ IMG_FILE = Path(MANIFEST_DIR, "img_jpl_mer_coverage.parquet")
 
 base = {
     "manifest": IMG_FILE,
-    "url_must_contain": ['mer2no_0xxx/data', 'rdr'],
+    "url_must_contain": ["mer2no_0xxx/data", "rdr"],
     "label": "A",
 }
 
 file_information = {
     # inverse LUT
-    "ilut": base | {
-        "fn_regex": [r"2\w[0-9]{9}((ilf)|(isf)|(inn)|(ffl)|(sfl)|(dnl)).*img$"]},
-    "ilut_thumb": base | {
-        "fn_regex": [r"2\w[0-9]{9}((ith)|(thn)).*img$"]},
+    "ilut": base
+    | {
+        "fn_regex": [r"2\w[0-9]{9}((ilf)|(isf)|(inn)|(ffl)|(sfl)|(dnl)).*img$"]
+    },
+    "ilut_thumb": base | {"fn_regex": [r"2\w[0-9]{9}((ith)|(thn)).*img$"]},
 }
 
-ptypes = ("mr", # radiometric; specifically the MIPLRAD correction
-          "rs", # radiometric; also MIPLRAD but not mentioned in the camera SIS
-          "di", # disparity
-          "xy", # XYZ
-          "rn", # range
-          "uv", # UVW (XYZ) surface normal
-          "ru", # surface roughness
-          "sl", # slope
-          "sr", # slope rover direction
-          "sh", # slope heading
-          "sm", # slope magnitude
-          "se", # solar energy product
-          )
+ptypes = (
+    "mr",  # radiometric; specifically the MIPLRAD correction
+    "rs",  # radiometric; also MIPLRAD but not mentioned in the camera SIS
+    "di",  # disparity
+    "xy",  # XYZ
+    "rn",  # range
+    "uv",  # UVW (XYZ) surface normal
+    "ru",  # surface roughness
+    "sl",  # slope
+    "sr",  # slope rover direction
+    "sh",  # slope heading
+    "sm",  # slope magnitude
+    "se",  # solar energy product
+)
 # Product types in the MER Camera SIS that I couldn't find, most are variations
 # or components of the ptypes above:
 # radiometric: "ra", "rf", "io", "if", "cc", "cf"
@@ -67,13 +69,13 @@ ptypes = ("mr", # radiometric; specifically the MIPLRAD correction
 # surface normal: "uu", "vv", "ww"
 # terrain: "vi", "as"
 # IDD reachability: "id"
-image_size = ("[tn]", "[a-mo-su-z]") # thumnails vs. larger images
+image_size = ("[tn]", "[a-mo-su-z]")  # thumnails vs. larger images
 
 for ptype, size in product(ptypes, image_size):
     if ptype == "ru" and size == "[tn]":
         # did not find thumnails of surface roughness products
         continue
-    pattern = f"2\w[0-9]{{9}}{ptype}{size}.*img$"
+    pattern = rf"2\w[0-9]{{9}}{ptype}{size}.*img$"
     info = base | {"fn_regex": [pattern]}
     if size == "[tn]":
         file_information[f"{ptype}_thumb"] = info

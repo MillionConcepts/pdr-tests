@@ -73,7 +73,7 @@ for ptype, size in product(ptypes, image_size):
     if (ptype == "ru" or ptype == "id") and size == "[tn]":
         # did not find thumnails of reachability and surface roughness products
         continue
-    pattern = f"1\w[0-9]{{9}}{ptype}{size}.*img$"
+    pattern = rf"1\w[0-9]{{9}}{ptype}{size}.*img$"
     info = base | {"fn_regex": [pattern]}
     if size == "[tn]":
         file_information[f"{ptype}_thumb"] = info

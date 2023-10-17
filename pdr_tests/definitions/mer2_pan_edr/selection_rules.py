@@ -45,7 +45,7 @@ ptypes = (
 
 file_information = {}
 for ptype in ptypes:
-    pattern = f"2\w\d*{ptype}.*img$"
+    pattern = rf"2\w\d*{ptype}.*img$"
     info = base | {"fn_regex": [pattern]}
     file_information[
         f"{ptype}"

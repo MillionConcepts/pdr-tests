@@ -40,12 +40,12 @@ base = {
 
 # Commented out ptypes are in the MER Camera SIS but ix sort couldn't find them
 ptypes = (
-    "eff", "esf", "edn", "eth", "erp"#, "ers", "ecs", "ehg"
+    "eff", "esf", "edn", "eth", "erp"  # , "ers", "ecs", "ehg"
 )
 
 file_information = {}
 for ptype in ptypes:
-    pattern = f"1\w\d*{ptype}.*img$"
+    pattern = rf"1\w\d*{ptype}.*img$"
     info = base | {"fn_regex": [pattern]}
     file_information[
         f"{ptype}"
