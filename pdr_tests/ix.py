@@ -1,6 +1,6 @@
 import sys
 
-from clize import run
+import fire
 
 import ix_interface
 
@@ -21,8 +21,8 @@ def handle_call():
     except (IndexError, AttributeError, AssertionError) as ex:
         print(ex)
         return ix_interface.ix_help()
-    run(getattr(ix_interface, command), args=sys.argv[1:])
-
+    sys.argv = sys.argv[1:]
+    fire.Fire(getattr(ix_interface, command))
 
 
 if __name__ == "__main__":
