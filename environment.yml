@@ -2,7 +2,7 @@ name: pdrtests
 channels:
   - conda-forge
 dependencies:
-  - python>=3.9,<3.12
+  - python>=3.9
   # mostly hostess dependencies
   - boto3
   - dill
