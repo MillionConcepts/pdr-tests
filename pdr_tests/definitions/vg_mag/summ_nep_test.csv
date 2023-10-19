@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+MAG_NEP_HG_48S.LBL,"[""MAG_NEP_HG_48S.LBL"", ""MAG_NEP_HG_48S.TAB""]",VG2_MAG_NEP_HG_48SEC,http://pds-ppi.igpp.ucla.edu/data/VG2-N-MAG-4-SUMM-HGCOORDS-48SEC-V1.0/DATA,"{""TABLE"": ""d86b9e0ea360a19fcf448cf476821b7d""}"
+COMPREHE.LBL,"[""COMPREHE.LBL"", ""COMPREHE.ASC""]",COMPREHE,http://pds-ppi.igpp.ucla.edu/data/VG2-N-MAG-4-SUMM-NLSCOORDS-12SEC-V1.0/DATA/ASCII,"{""TABLE"": ""f6926c18141ff4d86d1020451fce98b2""}"
