@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+T860124.LBL,"[""T860124.LBL"", ""T860124.DAT"", ""PLSDATA.FMT""]",T860124.DAT,http://pds-ppi.igpp.ucla.edu/data/VG2-U-PLS-5-SUMM-IONBR-48SEC-V1.0/DATA/ORIGINAL_BINARY,"{""TIME_SERIES"": ""fbe5546d0604ecb0db5ef88ab0556464""}"
+SUMRY.LBL,"[""SUMRY.LBL"", ""PLSDATA.FMT"", ""SUMRY.DAT""]",SUMRY.DAT,http://pds-ppi.igpp.ucla.edu/data/VG2-U-PLS-5-SUMM-IONBR-48SEC-V1.0/DATA/ORIGINAL_BINARY,"{""TIME_SERIES"": ""27a7278faf34e22e18f3d0616444b88b""}"
