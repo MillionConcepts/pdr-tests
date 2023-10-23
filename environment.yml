@@ -2,16 +2,24 @@ name: pdrtests
 channels:
   - conda-forge
 dependencies:
-  - python=3.9
+  - python>=3.9
+  # mostly hostess dependencies
   - boto3
-  - clize
+  - dill
+  - fabric
   - fire
-  - flask
+  - invoke
+  - pandas>=2.0.0
   - pdr
   - pip
-  - pyarrow >= 9.0.0
-  - pytest
+  - pyarrow>=9.0.0
+  - protobuf
+  - psutil
+  - pympler
+  - python-magic
+  - pyyaml
   - requests
   - rich
+  - textual
   - pip:
-      - git+https://github.com/MillionConcepts/killscreen.git
+      - git+https://github.com/MillionConcepts/hostess.git

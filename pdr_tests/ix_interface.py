@@ -127,7 +127,7 @@ def test(
             hasher.tracker.outpath.unlink(missing_ok=True)
             hasher.tracker.paused = False
             hasher.tracker.dump()
-    if logs:
+    if len(logs) > 0:
         import pandas as pd
 
         pd.concat(logs).to_csv(

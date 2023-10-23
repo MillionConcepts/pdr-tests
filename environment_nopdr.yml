@@ -2,30 +2,35 @@ name: pdrtests
 channels:
   - conda-forge
 dependencies:
-  - python=3.9
-  - clize
+  - python>=3.9
+  - astropy
+  - boto3
   - cytoolz
-  - numpy
-  - pandas
-  - git
+  - dill
   - dustgoggles
+  - fabric
+  - fire
+  - git
+  - invoke
+  - jupyter
+  - matplotlib
+  - more-itertools
+  - multidict
+  - numpy
+  - pandas>=2.0.0
   - pds4_tools
+  - pillow
   - pip
-  - pyarrow >= 9.0.0
+  - protobuf
+  - psutil
+  - pvl
+  - pympler
   - pytest
   - python-Levenshtein
-  - multidict
-  - more-itertools
-  - pvl
-  - astropy
-  - jupyter
-  - pillow
-  - matplotlib
-  - boto3
-  - clize
-  - fire
-  - flask
+  - python-magic
+  - pyyaml
   - requests
   - rich
+  - textual
   - pip:
       - git+https://github.com/MillionConcepts/hostess.git

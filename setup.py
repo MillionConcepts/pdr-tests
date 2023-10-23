@@ -18,6 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.8",
-    install_requires=["pdr", "pyarrow", "requests", "clize", "pytest"],
+    python_requires=">=3.9",
+    install_requires=["hostess", "pdr", "pyarrow>=9.0.0", "pytest"],
 )
