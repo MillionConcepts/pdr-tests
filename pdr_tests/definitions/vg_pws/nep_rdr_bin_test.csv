@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+PWS89231.LBL,"[""PWS89231.DAT"", ""PWS89231.LBL""]",PWS89231.DAT,http://pds-ppi.igpp.ucla.edu/data/VG2-N-PWS-2-RDR-SA-4SEC-V1.0/DATA/IOWA,"{""TIME_SERIES"": ""d9141a0007069c60ef2a09b7982be110""}"
+T890824.LBL,"[""PWSDATA.FMT"", ""T890824.DAT"", ""T890824.LBL""]",T890824.DAT,http://pds-ppi.igpp.ucla.edu/data/VG2-N-PWS-2-RDR-SA-4SEC-V1.0/DATA/ORIGINAL_PDS_BINARY,"{""TIME_SERIES"": ""b487bf04330d5cc69b72844be840deed""}"
