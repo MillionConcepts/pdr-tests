@@ -52,9 +52,10 @@ def compare_values(r, t):
             pass
         if not val_mismatch.any():
             continue
-        value_mismatches[i] = {
+        value_mismatches[r.columns[i]] = {
             "ref": rv[val_mismatch],
             "test": tv[val_mismatch],
+            "indices": np.nonzero(val_mismatch)
         }
     return value_mismatches
 
