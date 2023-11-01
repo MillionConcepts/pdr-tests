@@ -78,10 +78,10 @@ def compare_outputs(r, r_dt, t, t_dt):
     comparison["issues"] = list(comparison.keys())
     if len(comparison["issues"]) == 0:
         print(
-            "No differences found, hash mismatch likely in-memory...", end=""
+            "No differences found, hash mismatch likely in-memory"
         )
     else:
-        print(f"Issues found: {comparison['issues']}...", end="")
+        print(f"\nIssues found: {comparison['issues']}")
     return comparison
 
 
@@ -90,6 +90,8 @@ def get_table(rec, output_path, objname, pre):
     matches = [f for f in output_path.iterdir() if f.name == refname + ".csv"]
     if len(matches) > 1:
         raise OSError("Too many matches found.")
+    if len(matches) == 0:
+        raise NotATableError(f"object created for {pre} of wrong type")
     if not matches[0].name.endswith(".csv"):
         raise NotATableError("Not a table, skipping.")
     dtype_path = output_path / (refname + "_dtypes.csv")
@@ -102,7 +104,7 @@ class NotATableError(ValueError):
 
 def check_mismatch(rec):
     checkout = make_checkout_cmds()
-    print(f"checking {rec['filename']}...", end="")
+    print(f"*****checking {rec['filename']}*****")
     output_path = (SETTINGS["ROOT"] / rec["dataset"] / rec["product_type"])
     output_path.mkdir(exist_ok=True, parents=True)
     print("dumping ref...", end="")
@@ -111,16 +113,17 @@ def check_mismatch(rec):
     print("dumping test...", end="")
     run(checkout["test"])
     dump_data_subprocessed(rec, output_path, "test")
-    print("loading outputs...", end="")
     comparisons = {}
     for objname in rec["mismatches"]:
         try:
-            print(f"comparing outputs for {objname}...", end="")
+            print(f"\ncomparing outputs for {objname}...", end="")
+            print("loading outputs...", end="")
             r, r_dt, t, t_dt = get_outputs(rec, output_path, objname)
+            print("analyzing...", end="")
             comparisons["objname"] = compare_outputs(r, r_dt, t, t_dt)
-        except NotATableError:
-            print("skipping non-table object...", end="")
-    print("...done")
+        except NotATableError as nte:
+            print(f"not analyzing: {nte}...", end="")
+    print("\n")
     return comparisons
 
 
