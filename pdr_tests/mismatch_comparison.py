@@ -34,25 +34,22 @@ def dump_data_subprocessed(rec, output_path, prefix):
 
 
 def get_outputs(rec, output_path, objname):
-    ref_table, ref_dt = get_table(rec, output_path, objname, "ref")
-    test_table, test_dt = get_table(rec, output_path, objname, "test")
-    return ref_table, ref_dt, test_table, test_dt
+    ref_table, ref_dt, ref_fmt = get_table(rec, output_path, objname, "ref")
+    test_table, test_dt, test_fmt = get_table(rec, output_path, objname, "test")
+    return ref_table, ref_dt, ref_fmt, test_table, test_dt, test_fmt
 
 
 def compare_values(r, t):
     value_mismatches = {}
     maxlen = min(len(r), len(t))
-    for i in range(min(len(r.columns), len(t.columns))):
-        rcol, tcol = r.iloc[:, i], t.iloc[:, i]
-        rv, tv = rcol.values[:maxlen], tcol.values[:maxlen]
-        val_mismatch = ~(rv == tv)
-        try:
-            val_mismatch = val_mismatch | (np.isnan(rv) & np.isnan(tv))
-        except TypeError:
-            pass
+    for c in r.columns:
+        if c not in t.columns:
+            continue
+        rv, tv = r[c].values[:maxlen], t[c].values[:maxlen]
+        val_mismatch = ~(rv == tv) & ~(pd.isnull(rv) & pd.isnull(tv))
         if not val_mismatch.any():
             continue
-        value_mismatches[r.columns[i]] = {
+        value_mismatches[c] = {
             "ref": rv[val_mismatch],
             "test": tv[val_mismatch],
             "indices": np.nonzero(val_mismatch)
@@ -60,7 +57,7 @@ def compare_values(r, t):
     return value_mismatches
 
 
-def compare_outputs(r, r_dt, t, t_dt):
+def compare_outputs(r, r_dt, r_fmt, t, t_dt, t_fmt):
     comparison = {}
     if len(r) != len(t):
         comparison["row_count"] = {"ref": len(r), "test": len(t)}
@@ -76,6 +73,9 @@ def compare_outputs(r, r_dt, t, t_dt):
     dtype_mismatches = compare_values(r_dt, t_dt)
     if len(dtype_mismatches) > 0:
         comparison["in_memory_dtypes"] = dtype_mismatches
+    fmtdef_mismatches = compare_values(r_fmt, t_fmt)
+    if len(fmtdef_mismatches) > 0:
+        comparison["fmtdef"] = fmtdef_mismatches
     comparison["issues"] = list(comparison.keys())
     if len(comparison["issues"]) == 0:
         print(
@@ -96,7 +96,8 @@ def get_table(rec, output_path, objname, pre):
     if not matches[0].name.endswith(".csv"):
         raise NotATableError("Not a table, skipping.")
     dtype_path = output_path / (refname + "_dtypes.csv")
-    return pd.read_csv(matches[0]), pd.read_csv(dtype_path)
+    fmtdef_path = output_path / (refname + "_fmtdef.csv")
+    return tuple(map(pd.read_csv, (matches[0], dtype_path, fmtdef_path)))
 
 
 class NotATableError(ValueError):
@@ -119,9 +120,13 @@ def check_mismatch(rec):
         try:
             print(f"\ncomparing outputs for {objname}...", end="")
             print("loading outputs...", end="")
-            r, r_dt, t, t_dt = get_outputs(rec, output_path, objname)
+            r,r_dt, r_fmt, t, t_dt, t_fmt = get_outputs(
+                rec, output_path, objname
+            )
             print("analyzing...", end="")
-            comparisons[objname] = compare_outputs(r, r_dt, t, t_dt)
+            comparisons[objname] = compare_outputs(
+                r, r_dt, r_fmt, t, t_dt, t_fmt
+            )
         except NotATableError as nte:
             print(f"not analyzing: {nte}...", end="")
     print("\n")
