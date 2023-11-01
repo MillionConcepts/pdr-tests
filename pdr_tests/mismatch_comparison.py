@@ -120,7 +120,7 @@ def check_mismatch(rec):
             print("loading outputs...", end="")
             r, r_dt, t, t_dt = get_outputs(rec, output_path, objname)
             print("analyzing...", end="")
-            comparisons["objname"] = compare_outputs(r, r_dt, t, t_dt)
+            comparisons[objname] = compare_outputs(r, r_dt, t, t_dt)
         except NotATableError as nte:
             print(f"not analyzing: {nte}...", end="")
     print("\n")
