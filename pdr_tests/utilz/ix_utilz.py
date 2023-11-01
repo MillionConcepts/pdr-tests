@@ -34,9 +34,11 @@ from pdr.pdr import Data
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
 
-pdrtestlog = logging.getLogger()
-pdrtestlog.addHandler(logging.FileHandler("pdrtests.log"))
-pdrtestlog.setLevel("INFO")
+PDRTESTLOG = logging.getLogger()
+if len(PDRTESTLOG.handlers) == 0:
+    PDRTESTLOG.addHandler(logging.FileHandler("pdrtests.log"))
+PDRTESTLOG.setLevel("INFO")
+print(PDRTESTLOG.handlers)
 
 
 def stamp() -> str:
@@ -45,7 +47,7 @@ def stamp() -> str:
 
 def console_and_log(message, level="info", do_stamp=True, quiet=False):
     stamp_txt = stamp() if do_stamp is True else ""
-    getattr(pdrtestlog, level)(f"{stamp_txt}{message}")
+    getattr(PDRTESTLOG, level)(f"{stamp_txt}{message}")
     if not quiet:
         print(f"{stamp_txt}{message}")
 
