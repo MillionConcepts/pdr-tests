@@ -585,6 +585,7 @@ def test_product(
         "product_id": product["product_id"],
         "status": "ok",
         "error": None,
+        "filename": path,
         "hashtime": float('nan'),
         "readtime": float('nan')
     }

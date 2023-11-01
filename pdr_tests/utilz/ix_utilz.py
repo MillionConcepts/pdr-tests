@@ -38,7 +38,6 @@ PDRTESTLOG = logging.getLogger()
 if len(PDRTESTLOG.handlers) == 0:
     PDRTESTLOG.addHandler(logging.FileHandler("pdrtests.log"))
 PDRTESTLOG.setLevel("INFO")
-print(PDRTESTLOG.handlers)
 
 
 def stamp() -> str:

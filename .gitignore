@@ -152,6 +152,7 @@ pdr_tests/browse
 /pdr_tests/definitions/**/*.csv
 !/pdr_tests/definitions/**/*_test.csv
 */.tracker_logs
+**/comparisons/
 
 # haunting folders
 /pdr_tests/definitions/rosetta_alice
