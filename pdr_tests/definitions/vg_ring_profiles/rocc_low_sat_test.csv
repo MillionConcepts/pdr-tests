@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+RS1R1BDP.LBL,"[""RS1R1BDP.LBL"", ""RS1R1BDP.DAT""]",RS1R1BDP.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2803/S_RINGS/LOWDATA,"{""SERIES"": ""aacb7a8e403b27ee6e63f693c56481ce""}"
+RS1R1BFI.LBL,"[""RS_R1BFI.FMT"", ""RS1R1BFI.DAT"", ""RS1R1BFI.LBL""]",RS1R1BFI.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2803/S_RINGS/LOWDATA,"{""TABLE"": ""6dc4c68798dee8a0cf5a0f830fa4c585""}"
