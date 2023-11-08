@@ -36,21 +36,21 @@ file_information = {
     "edn": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['edn', '.img'],
-        "url_must_contain": ['mer2do_0xxx/data', 'edr'],
+        "url_must_contain": ['mer','do_0xxx/data', 'edr'],
         "label": "A",
     },
     # reference pixels
     "erp": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['erp', '.img'],
-        "url_must_contain": ['mer2do_0xxx/data', 'edr'],
+        "url_must_contain": ['mer','do_0xxx/data', 'edr'],
         "label": "A",
     },
     # thumbnails
     "eth": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['eth', '.img'],
-        "url_must_contain": ['mer2do_0xxx/data', 'edr'],
+        "url_must_contain": ['mer','do_0xxx/data', 'edr'],
         "label": "A",
     },
 }
