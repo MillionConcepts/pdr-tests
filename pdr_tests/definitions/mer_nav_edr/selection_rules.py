@@ -34,7 +34,7 @@ IMG_FILE = Path(MANIFEST_DIR, "img_jpl_mer_coverage.parquet")
 
 base = {
         "manifest": IMG_FILE,
-        "url_must_contain": ['mer2no_0xxx/data', 'edr'],
+        "url_must_contain": ['mer','no_0xxx/data', 'edr'],
         "label": "A",
     }
 
@@ -44,7 +44,7 @@ ptypes = (
 
 file_information = {}
 for ptype in ptypes:
-    pattern = rf"2\w\d*{ptype}.*img$"
+    pattern = rf"\w[0-9]{{9}}{ptype}.*img$"
     info = base | {"fn_regex": [pattern]}
     file_information[
         f"{ptype}"
