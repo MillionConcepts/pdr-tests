@@ -36,39 +36,39 @@ file_information = {
     "ilut_thumb": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['mer1mo_0xxx/data', '/rdr'],
-        "fn_regex": [r"1\w[0-9]{9}((ith)|(thn)).*img$"],
+        "url_must_contain": ['mer','mo_0xxx/data', '/rdr'],
+        "fn_regex": [r"\w[0-9]{9}((ith)|(thn)).*img$"],
         "label": "A",
     },
     # Inverse LUT RDR - larger images
     "ilut": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['mer1mo_0xxx/data', '/rdr'],
-        "fn_regex": [r"1\w[0-9]{9}((ilf)|(isf)|(inn)|(ffl)|(sfl)|(dnl)).*img$"],
+        "url_must_contain": ['mer','mo_0xxx/data', '/rdr'],
+        "fn_regex": [r"\w[0-9]{9}((ilf)|(isf)|(inn)|(ffl)|(sfl)|(dnl)).*img$"],
         "label": "A",
     },
     # Radiometric RDR - thumbnails
     "rad_thumb": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['mer1mo_0xxx/data', '/rdr'],
-        "fn_regex": [r"1\w[0-9]{9}((mr)|(rs))[tn].*img$"],
+        "url_must_contain": ['mer','mo_0xxx/data', '/rdr'],
+        "fn_regex": [r"\w[0-9]{9}((mr)|(rs))[tn].*img$"],
         "label": "A",
     },
     # Radiometric RDR - larger images
     "rad": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['mer1mo_0xxx/data', '/rdr'],
-        "fn_regex": [r"1\w[0-9]{9}((mr)|(rs))[dl].*img$"],
+        "url_must_contain": ['mer','mo_0xxx/data', '/rdr'],
+        "fn_regex": [r"\w[0-9]{9}((mr)|(rs))[dl].*img$"],
         "label": "A",
     },
 }
 
 base = {
         "manifest": IMG_FILE,
-        "url_must_contain": ['mer1mo_0xxx/data', '/edr'],
+        "url_must_contain": ['mer','mo_0xxx/data', '/edr'],
         "label": "A",
     }
 # EDR product types
@@ -77,7 +77,7 @@ ptypes = (
 )
 
 for ptype in ptypes:
-    pattern = rf"1\w[0-9]{{9}}{ptype}.*img$"
+    pattern = rf"\w[0-9]{{9}}{ptype}.*img$"
     info = base | {"fn_regex": [pattern]}
     file_information[f"{ptype}"] = info
 
