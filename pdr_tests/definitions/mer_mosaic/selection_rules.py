@@ -36,14 +36,22 @@ file_information = {
     "haz": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['mer2om_0xxx/data/hazcam'],
+        "url_must_contain": ['mer','om_0xxx/data/hazcam'],
         "label": "A",
     },
-    # microscopic imager mosaics
+    # microscopic imager mosaics / anaglyphs
     "mi": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['mer2om_0xxx/data/mi'],
+        "fn_regex": [r'.{21}[lrmn]'],
+        "url_must_contain": ['mer','om_0xxx/data/mi'],
+        "label": "A",
+    },
+    "mi_anaglyph": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.img'],
+        "fn_regex": [r'.{21}[a]'],
+        "url_must_contain": ['mer','om_0xxx/data/mi'],
         "label": "A",
     },
     # navcam mosaics / anaglyphs
@@ -51,14 +59,14 @@ file_information = {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
         "fn_regex": [r'.{21}[lrmn]'],
-        "url_must_contain": ['mer2om_0xxx/data/navcam'],
+        "url_must_contain": ['mer','om_0xxx/data/navcam'],
         "label": "A",
     },
     "nav_anaglyph": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
         "fn_regex": [r'.{21}[a]'],
-        "url_must_contain": ['mer2om_0xxx/data/navcam'],
+        "url_must_contain": ['mer','om_0xxx/data/navcam'],
         "label": "A",
     },
     # pancam mosaics / anaglyphs
@@ -66,14 +74,14 @@ file_information = {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
         "fn_regex": [r'.{21}[lrmn]'],
-        "url_must_contain": ['mer2om_0xxx/data/pancam'],
+        "url_must_contain": ['mer','om_0xxx/data/pancam'],
         "label": "A",
     },
     "pan_anaglyph": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
         "fn_regex": [r'.{21}[a]'],
-        "url_must_contain": ['mer2om_0xxx/data/pancam'],
+        "url_must_contain": ['mer','om_0xxx/data/pancam'],
         "label": "A",
     },
 }
