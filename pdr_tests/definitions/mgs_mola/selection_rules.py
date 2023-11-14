@@ -31,6 +31,7 @@ MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 # shorthand variables for specific .csv files
 MANIFEST_FILE = Path(MANIFEST_DIR, "geomgs.parquet")
+IMG_FILE = Path(MANIFEST_DIR, "img_usgs.parquet")
 
 file_information = {
     
@@ -71,6 +72,13 @@ file_information = {
         "label": "D",
     },
     
+    # ascii PEDR products in the "science sampler" dataset at IMG node
+    "pedr_ascii": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['mgs_0001/mola/pedr_asc'],
+        "label": "D",
+    },
 }
 
 """
