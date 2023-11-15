@@ -135,5 +135,8 @@ def scan_headers(
             for metadata in metadatas
         ])
         for c in flat.columns:
-            flat[c] = flat[c].str.strip('"')
+            try:
+                flat[c] = flat[c].str.strip('"')
+            except AttributeError:
+                continue
         return flat.copy(), manifest, pd.DataFrame(glitched)
