@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+mr9_iris.LBL,"[""mr9_iris.LBL"", ""mr9_iris.dat""]",mr9_iris,http://pds-atmospheres.nmsu.edu/PDS/data/mr9_1001/data,"{""TABLE"": ""a357c580dff7258c4ba2ba92d37f8f47"", ""SPECTRAL_SERIES"": ""a1d61fb06daf998273ff89bf296498c2""}"
