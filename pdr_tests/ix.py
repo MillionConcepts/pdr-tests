@@ -3,6 +3,7 @@ import sys
 import fire
 
 import ix_interface
+from utilz.ix_utilz import console_and_log
 
 
 def execute_command(command, dataset, product_type=None):
@@ -22,7 +23,12 @@ def handle_call():
         print(ex)
         return ix_interface.ix_help()
     sys.argv = sys.argv[1:]
-    fire.Fire(getattr(ix_interface, command))
+    console_and_log(f'----INITIATING IX {command}----', quiet=True)
+    try:
+        fire.Fire(getattr(ix_interface, command))
+    except Exception as ex:
+        console_and_log(f'unrecoverable exception: ({type(ex)}: {ex})')
+        raise
 
 
 if __name__ == "__main__":
