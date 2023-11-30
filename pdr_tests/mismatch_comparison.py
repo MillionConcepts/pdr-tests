@@ -27,7 +27,7 @@ def dump_data_subprocessed(rec, output_path, prefix):
         module="pdr_tests.comparison_hook",
         func="dump_to_output",
         payload=(rec, str(output_path.absolute()), prefix),
-        argument_unpacking="*",
+        splat="*",
         interpreter=sys.executable,
     )
     run(script)
@@ -35,7 +35,9 @@ def dump_data_subprocessed(rec, output_path, prefix):
 
 def get_outputs(rec, output_path, objname):
     ref_table, ref_dt, ref_fmt = get_table(rec, output_path, objname, "ref")
-    test_table, test_dt, test_fmt = get_table(rec, output_path, objname, "test")
+    test_table, test_dt, test_fmt = get_table(
+        rec, output_path, objname, "test"
+    )
     return ref_table, ref_dt, ref_fmt, test_table, test_dt, test_fmt
 
 
@@ -75,12 +77,16 @@ def compare_outputs(r, r_dt, r_fmt, t, t_dt, t_fmt):
         comparison["in_memory_dtypes"] = dtype_mismatches
     fmtdef_mismatches = compare_values(r_fmt, t_fmt)
     if len(fmtdef_mismatches) > 0:
-        comparison["fmtdef"] = fmtdef_mismatches
+        comparison["fmtdef_values"] = fmtdef_mismatches
+    missing_fmtdef_cols = set(r_fmt.columns).difference(t_fmt.columns)
+    new_fmtdef_cols = set(t_fmt.columns.difference(r_fmt.columns))
+    if len(missing_fmtdef_cols) + len(new_fmtdef_cols) > 0:
+        comparison[
+            "fmtdef_column_names"
+        ] = {"new": new_fmtdef_cols, "missing": missing_fmtdef_cols}
     comparison["issues"] = list(comparison.keys())
     if len(comparison["issues"]) == 0:
-        print(
-            "No differences found, hash mismatch likely in-memory"
-        )
+        print("No differences found, hash mismatch likely in-memory")
     else:
         print(f"\nIssues found: {comparison['issues']}")
     return comparison
