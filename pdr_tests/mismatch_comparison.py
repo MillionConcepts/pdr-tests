@@ -1,10 +1,11 @@
 from ast import literal_eval
 from pathlib import Path
 import sys
+from typing import Literal, Union
 
 from hostess.caller import generic_python_endpoint
 from hostess.shortcuts import chain
-from hostess.subutils import run
+from hostess.subutils import run, Viewer
 import numpy as np
 import pandas as pd
 
@@ -30,7 +31,13 @@ def dump_data_subprocessed(rec, output_path, prefix):
         splat="*",
         interpreter=sys.executable,
     )
-    run(script)
+    viewer = Viewer.from_command(script)
+    viewer.wait()
+    if viewer.returncode() != 0:
+        return OSError(
+            f"dump failed: {';'.join(viewer.stderr)} (exit code "
+            f"{viewer.returncode()})")
+    return "ok"
 
 
 def get_outputs(rec, output_path, objname):
@@ -111,17 +118,28 @@ class NotATableError(ValueError):
 
 
 def check_mismatch(rec):
+    comparisons, failures = {}, {}
     checkout = make_checkout_cmds()
     print(f"*****checking {rec['filename']}*****")
     output_path = (SETTINGS["ROOT"] / rec["dataset"] / rec["product_type"])
     output_path.mkdir(exist_ok=True, parents=True)
     print("dumping ref...", end="")
     run(checkout["ref"])
-    dump_data_subprocessed(rec, output_path, "ref")
+    refres: Union[OSError, Literal["ok"]]
+    refres = dump_data_subprocessed(rec, output_path, "ref")
+    if refres != "ok":
+        print("////ref dump failed////")
+        failures['ref'] = refres
     print("dumping test...", end="")
     run(checkout["test"])
-    dump_data_subprocessed(rec, output_path, "test")
-    comparisons = {}
+    testres: Union[OSError, Literal["ok"]]
+    testres = dump_data_subprocessed(rec, output_path, "test")
+    if testres != "ok":
+        print("////test dump failed////")
+        failures['ref'] = testres
+    if not testres == refres == "ok":
+        print("////skipping comparison due to failed dump(s)////")
+        return comparisons, failures
     for objname in rec["mismatches"]:
         try:
             print(f"\ncomparing outputs for {objname}...", end="")
@@ -136,7 +154,7 @@ def check_mismatch(rec):
         except NotATableError as nte:
             print(f"not analyzing: {nte}...", end="")
     print("\n")
-    return comparisons
+    return comparisons, failures
 
 
 def get_mismatches():
