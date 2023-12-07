@@ -80,11 +80,12 @@ file_information = {
         "url_must_contain": ['MROM_1', '/DATA'],
         "label": "D",
     },
-    # MCS DDR
-    "mcs_ddr": {
-        "manifest": ATM_FILE,
-        "fn_must_contain": ['DDR.TAB'],
-        "url_must_contain": ['MROM_2', '/DATA'],
-        "label": "D",
-    },
+    # Format issues, alerting node
+    # # MCS DDR
+    # "mcs_ddr": {
+    #     "manifest": ATM_FILE,
+    #     "fn_must_contain": ['DDR.TAB'],
+    #     "url_must_contain": ['MROM_2', '/DATA'],
+    #     "label": "D",
+    # },
 }
