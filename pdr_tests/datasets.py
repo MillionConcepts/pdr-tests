@@ -545,18 +545,20 @@ class CorpusFinalizer(DatasetDefinition):
                           f'Check your spelling and try again using regen=True.')
 
     def upload_to_s3(self, product_type):
-        from hostess.aws.s3 import put
+        from hostess.aws.s3 import Bucket
+        corpus = Bucket('mc-pdr-permanent-test-corpus')
         with open(self.test_path(product_type)) as test_f:
             next(test_f)
             for line in test_f:
                 file_list = line.replace(']', '[').split('[')[1].replace('"', '').split(',')
                 for file in file_list:
                     try:
-                        file = file.split('/')[-1]
-                        file = file.strip()
-                        put(bucket='mc-pdr-permanent-test-corpus',
-                            obj=Path(self.product_data_path(product_type), file),
-                            key=f'{self.dataset}/{product_type}/{file}')
+                        file = file.split('/')[-1].strip()
+                        corpus.put(
+                            Path(
+                                self.product_data_path(product_type), file),
+                                f'{self.dataset}/{product_type}/{file}'
+                            )
                         print(f'{self.dataset} {product_type}: {file} uploaded to s3.')
                     except FileNotFoundError:
                         print(f'{file} not present in subset folder. '
