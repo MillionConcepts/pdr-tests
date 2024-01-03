@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+T860124.LBL,"[""T860124.LBL"", ""T860124.DAT"", ""LECPDATA.FMT""]",T860124,http://pds-ppi.igpp.ucla.edu/data/VG2-U-LECP-4-RDR-STEP-12.8MIN-V1.0/DATA/ORIGINAL_BINARY,"{""TIME_SERIES"": ""36452adaf7f4b9378a27f5e6324234f7""}"
+RDR_STEP.LBL,"[""RDR_STEP.LBL"", ""RDR_STEP.TAB""]",RDR_STEP,http://pds-ppi.igpp.ucla.edu/data/VG2-U-LECP-4-RDR-STEP-12.8MIN-V1.0/DATA,"{""TABLE"": ""0ff938f34d8b1503979da15816d15464""}"

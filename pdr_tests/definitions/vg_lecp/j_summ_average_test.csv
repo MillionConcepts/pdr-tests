@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+T790228.LBL,"[""T790228.TAB"", ""T790228.LBL"", ""LECPDATA.FMT""]",T790228,http://pds-ppi.igpp.ucla.edu/data/VG1-J-LECP-4-SUMM-AVERAGE-15MIN-V1.1/DATA,"{""TABLE"": ""95214745d7fbf355d1b7c02c1efe6953""}"
+AVERAGE.LBL,"[""AVERAGE.TAB"", ""AVERAGE.LBL""]",AVERAGE,http://pds-ppi.igpp.ucla.edu/data/VG2-J-LECP-4-SUMM-AVERAGE-15MIN-V1.1/DATA,"{""TABLE"": ""73a56b0b2f016dad699dedd04504aca6""}"
