@@ -24,13 +24,8 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .csv files
-LUNAR_FILE = Path(MANIFEST_DIR, "geolunar.parquet")
+# variables naming specific parquet files in node_manifests
+LUNAR_FILE = "geolunar"
 
 # note: most of these tables are not easy to validate -- technically L1 but
 # lots of mysterious numbers read straight off cybernetic-era instrumentation.

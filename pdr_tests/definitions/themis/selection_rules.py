@@ -24,13 +24,8 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .csv files
-THEMIS_FILE = Path(MANIFEST_DIR, "img_asu_themis_tes_coverage.parquet")
+# variables naming specific parquet files in node_manifests
+THEMIS_FILE = "img_asu_themis_tes_coverage"
 
 file_information = {
     # brightness temperature derived from ir_RDR; well-labeled two-dimensional

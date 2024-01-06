@@ -24,15 +24,10 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .csv files
-ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
-IMG_FILE = Path(MANIFEST_DIR, "img_usgs.parquet")
-IMG_HIRISE_FILE = Path(MANIFEST_DIR, "img_hirise.parquet")
+# variables naming specific parquet files in node_manifests
+ATM_FILE = "atm"
+IMG_FILE = "img_usgs"
+IMG_HIRISE_FILE = "img_hirise"
 
 file_information = {
     # HiRISE RDRs are notionally supported (JP2 with detached labels)

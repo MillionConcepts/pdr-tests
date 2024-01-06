@@ -24,14 +24,8 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .parquet files
-GEO_FILE = Path(MANIFEST_DIR, "img_usgs_chandrayaan_1.parquet")
+# variables naming specific parquet files in node_manifests
+GEO_FILE = "img_usgs_chandrayaan_1"
 
 file_information = {
     "M3_L0": {

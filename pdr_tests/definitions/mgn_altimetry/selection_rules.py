@@ -27,9 +27,8 @@ are detached.
 from pathlib import Path
 import pdr_tests
 
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
-GEO_MANIFEST = Path(MANIFEST_DIR, "geomgn.parquet")
+GEO_MANIFEST = "geomgn"
 
 file_information = {
     

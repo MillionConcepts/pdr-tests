@@ -24,13 +24,8 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .csv files
-IMG_FILE = Path(MANIFEST_DIR, "img_usgs.parquet")
+# variables naming specific parquet files in node_manifests
+IMG_FILE = "img_usgs"
 
 # Note: this is another dataset that uses multiple format files with the same name but 
 # slightly different contents: tlmtab.fmt. calib, edr_evj, and edr_sat each have their own.

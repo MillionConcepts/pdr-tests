@@ -23,16 +23,10 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .csv files
-PPI_FILE = Path(MANIFEST_DIR, "plasm_full.parquet")
-ATM_FILE = Path(MANIFEST_DIR, "atm.parquet")
-GEO_FILE = Path(MANIFEST_DIR, "geomariner.parquet")
+# variables naming specific parquet files in node_manifests
+PPI_FILE = "plasm_full"
+ATM_FILE = "atm"
+GEO_FILE = "geomariner"
 
 file_information = {
     

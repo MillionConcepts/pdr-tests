@@ -24,13 +24,8 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .csv files
-SB_FILE = Path(MANIFEST_DIR, "tiny.parquet")
+# variables naming specific parquet files in node_manifests
+SB_FILE = "tiny"
 
 file_information = {
     # Sample Return Capsule (SRC) - temperature

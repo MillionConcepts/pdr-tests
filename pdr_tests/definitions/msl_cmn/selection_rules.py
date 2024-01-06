@@ -24,14 +24,8 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .parquet files
-GEO_FILE = Path(MANIFEST_DIR, "geomsl.parquet")
+# variables naming specific parquet files in node_manifests
+GEO_FILE = "geomsl"
 
 # NOTE: commented-out RDR types are specified in the SIS as valid product
 # categories, but no examples of them are actually present in the online

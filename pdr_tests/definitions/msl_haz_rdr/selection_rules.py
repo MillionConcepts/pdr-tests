@@ -25,14 +25,8 @@ are detached.
 """
 import re
 from itertools import product
-from pathlib import Path
-
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .parquet files
-IMG_FILE = Path(MANIFEST_DIR, "img_jpl_msl_hazcam.parquet")
+# variables naming specific parquet files in node_manifests
+IMG_FILE = "img_jpl_msl_hazcam"
 
 base = {
     "manifest": IMG_FILE,

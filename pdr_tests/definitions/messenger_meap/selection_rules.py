@@ -5,13 +5,8 @@ an example was chosen to make sure the byte order changes made to support this d
 with later iterations and changes
 """
 
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
-# shorthand variables for specific .csv files
-GEO_MESSENGER_FILE = Path(MANIFEST_DIR, "geomessenger.parquet")
+# variables naming specific parquet files in node_manifests
+GEO_MESSENGER_FILE = "geomessenger"
 
 file_information = {
     "enh_grs_spec": {

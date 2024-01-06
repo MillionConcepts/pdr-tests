@@ -27,9 +27,8 @@ are detached.
 from pathlib import Path
 import pdr_tests
 
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
-RMS_FILE = Path(MANIFEST_DIR, "ringvolumes.parquet")
+RMS_FILE = "ringvolumes"
 
 file_information = {
 	
