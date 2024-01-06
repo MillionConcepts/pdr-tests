@@ -42,14 +42,24 @@ IGNORE_DIRECTORIES = (
 
 
 def add_coverage_column(fn):
-    if not (path := Path(fn)).exists():
-        path = MANIFEST_DIR / fn
-    if not path.exists():
+    path = Path(fn).with_suffix(".parquet")
+    options = [path, MANIFEST_DIR / path]
+    if "_coverage" not in path.name:
+        covered = path.with_name(
+            path.name.replace(".parquet", "_coverage.parquet")
+        )
+        options += [covered, MANIFEST_DIR / covered]
+    manifest = None
+    for option in options:
+        if option.exists():
+            manifest = option
+            break
+    if manifest is None:
         raise FileNotFoundError(f"No manifest found with name/path {fn}")
     rules_modules = load_all_rules()
-    relevant_rules = find_relevant_rules(rules_modules, path)
+    relevant_rules = find_relevant_rules(rules_modules, manifest)
     check_coverage_in_chunks(
-        path,
+        manifest,
         relevant_rules,
         row_group_size=100000,
         use_dictionary=[
@@ -84,14 +94,18 @@ def load_all_rules():
     return rules_modules
 
 
+def uncov(fn):
+    return Path(fn).stem.replace("_coverage", "")
+
+
 def find_relevant_rules(rules_modules, input_manifest):
     """select definition modules that use the specified manifest."""
     relevant_rules = {}
     for key in rules_modules.keys():
         for subkey in rules_modules[key].keys():
             if (
-                Path(rules_modules[key][subkey]["manifest"]).name
-                == input_manifest.name
+                uncov(rules_modules[key][subkey]["manifest"])
+                == uncov(input_manifest)
             ):
                 relevant_rules[(key, subkey)] = rules_modules[key][subkey]
     return relevant_rules
