@@ -22,7 +22,9 @@ from pdr_tests.utilz.ix_utilz import (
     assemble_urls,
     flip_ends_with,
     read_and_hash,
-    record_comparison, MaybeSession,
+    record_comparison,
+    MaybeSession,
+    find_manifest,
 )
 from pyarrow import parquet
 
@@ -113,7 +115,7 @@ class ProductPicker(DatasetDefinition):
         )
         print(f"Making product list for {product_type} ...... ", end="")
         self.complete_list_path(product_type).unlink(missing_ok=True)
-        manifest = self.rules[product_type]["manifest"]
+        manifest = find_manifest(self.rules[product_type]["manifest"])
         manifest_parquet = parquet.ParquetFile(manifest)
         results = []
         for group_ix in range(manifest_parquet.num_row_groups):

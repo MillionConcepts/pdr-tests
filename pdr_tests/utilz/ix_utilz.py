@@ -27,7 +27,7 @@ from multidict import MultiDict
 import pdr
 from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
-from pdr_tests.settings import headers
+from pdr_tests.settings import headers, MANIFEST_DIR
 from pdr_tests.utilz.dev_utilz import Stopwatch
 from pdr.pdr import Data
 
@@ -49,6 +49,19 @@ def console_and_log(message, level="info", do_stamp=True, quiet=False):
     getattr(PDRTESTLOG, level)(f"{stamp_txt}{message}")
     if not quiet:
         print(f"{stamp_txt}{message}")
+
+
+def find_manifest(fn):
+    path = Path(fn).with_suffix(".parquet")
+    if (MANIFEST_DIR / path.name).exists():
+        return MANIFEST_DIR / path
+    if (op := MANIFEST_DIR / path.name.replace("_coverage", "")).exists():
+        return op
+    if (
+        op := MANIFEST_DIR / path.name.replace(".parquet", "_coverage.parquet")
+    ).exists():
+        return op
+    raise FileNotFoundError(f"no file matching {fn} found in {MANIFEST_DIR}")
 
 
 def checksum_object(obj, hash_function=md5):
