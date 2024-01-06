@@ -1,3 +1,4 @@
+import shutil
 from collections import defaultdict
 from functools import reduce
 from importlib import import_module
@@ -12,6 +13,8 @@ from pyarrow import parquet
 from pathlib import Path
 
 import pdr_tests
+
+MANIFEST_DIR = Path(pdr_tests.__file__).parent / "node_manifests"
 
 
 # defining these separately from the 'special' label search
@@ -38,14 +41,15 @@ IGNORE_DIRECTORIES = (
 )
 
 
-def add_coverage_column(input_manifest):
-    input_manifest = Path(
-        Path(Path(pdr_tests.__file__).parent, "node_manifests"), input_manifest
-    )
+def add_coverage_column(fn):
+    if not (path := Path(fn)).exists():
+        path = MANIFEST_DIR / fn
+    if not path.exists():
+        raise FileNotFoundError(f"No manifest found with name/path {fn}")
     rules_modules = load_all_rules()
-    relevant_rules = find_relevant_rules(rules_modules, input_manifest)
+    relevant_rules = find_relevant_rules(rules_modules, path)
     check_coverage_in_chunks(
-        input_manifest,
+        path,
         relevant_rules,
         row_group_size=100000,
         use_dictionary=[
@@ -86,23 +90,23 @@ def find_relevant_rules(rules_modules, input_manifest):
     for key in rules_modules.keys():
         for subkey in rules_modules[key].keys():
             if (
-                str(rules_modules[key][subkey]["manifest"]).split("/")[-1]
-                == str(input_manifest).split("/")[-1]
+                Path(rules_modules[key][subkey]["manifest"]).name
+                == input_manifest.name
             ):
                 relevant_rules[(key, subkey)] = rules_modules[key][subkey]
     return relevant_rules
 
 
 def check_coverage_in_chunks(
-    input_file,
+    input_file: Path,
     relevant_rules,
     row_group_size=None,
     use_dictionary=None,
     version="2.6",
     n_chunks=5,
 ):
-    output_file = Path(
-        str(input_file).split(".parquet")[0] + "_coverage.parquet"
+    scratch_file = (
+        input_file.parent / (input_file.stem + "_temp.parquet")
     )
     write_kwargs, open_kwargs = {}, {}
     if row_group_size is not None:
@@ -115,7 +119,7 @@ def check_coverage_in_chunks(
         name: type_ for name, type_ in zip(schema.names, schema.types)
     } | {"dataset_ix": pa.string(), "ptype": pa.string()}
     sort_writer = parquet.ParquetWriter(
-        output_file,
+        scratch_file,
         version=version,
         schema=pa.schema(schemadict, schema.metadata),
         **open_kwargs,
@@ -133,6 +137,11 @@ def check_coverage_in_chunks(
             del chunk
     finally:
         sort_writer.close()
+    shutil.move(
+        scratch_file,
+        MANIFEST_DIR
+        / (input_file.stem.replace("_coverage", "") + "_coverage.parquet")
+    )
 
 
 def add_rule_labels(relevant_rules, table: pa.Table) -> pa.Table:
@@ -180,9 +189,13 @@ def add_rule_labels(relevant_rules, table: pa.Table) -> pa.Table:
     for array, name in zip(
         (dataset_labels, ptype_labels), ("dataset_ix", "ptype")
     ):
-        table = table.append_column(
-            pa.field(name, pa.string()), pa.array(array)
-        )
+        field, array = pa.field(name, pa.string()), pa.array(array)
+        if name in table.column_names:
+            table = table.set_column(
+                table.column_names.index(name), field, array
+            )
+        else:
+            table = table.append_column(field, array)
     return table
 
 
