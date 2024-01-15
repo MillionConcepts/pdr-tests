@@ -66,7 +66,7 @@ def add_coverage_column(fn):
             "domain",
             "url",
             "volume",
-            "dataset_pds3",
+            "dataset_pds",
             "dataset_ix",
             "ptype",
         ],

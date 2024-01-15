@@ -23,13 +23,8 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-from pathlib import Path
-import pdr_tests
-
-
-# shorthand variables for specific .parquet files
-IMG_FILE = "img_jpl_mer_coverage"
-
+# variables for specific .parquet files
+IMG_FILE = "img_jpl_mer_pan"
 
 base = {
         "manifest": IMG_FILE,
@@ -39,7 +34,7 @@ base = {
 
 # Commented out ptypes are in the MER Camera SIS but ix sort couldn't find them
 ptypes = (
-    "eff", "esf", "edn", "eth", "erp", "ers", #"ecs", "ehg"
+    "eff", "esf", "edn", "eth", "erp", "ers",  # "ecs", "ehg"
 )
 
 file_information = {}

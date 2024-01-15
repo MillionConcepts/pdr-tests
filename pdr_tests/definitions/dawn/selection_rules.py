@@ -25,7 +25,7 @@ are detached.
 """
 
 # variables naming specific parquet files in node_manifests
-MANIFEST_FILE = "tiny"
+MANIFEST_FILE = "tiny_other"
 
 file_information = {
     # GRaND products have PDS4 versions available: EDR, RDR, maps/mosaics

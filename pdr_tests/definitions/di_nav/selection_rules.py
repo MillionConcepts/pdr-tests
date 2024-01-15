@@ -25,7 +25,7 @@ are detached.
 """
 
 # variables naming specific parquet files in node_manifests
-SBN_FILE = "tiny"
+SBN_FILE = "tiny_other"
 
 file_information = {    
     # HRI-VIS raw navigation images

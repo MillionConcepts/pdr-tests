@@ -29,7 +29,7 @@ import pdr_tests
 
 
 GEO_MANIFEST = "geomgn"
-IMG_MANIFEST = "img_usgs"
+IMG_MANIFEST = "img_usgs_magellan"
 
 file_information = {
 	

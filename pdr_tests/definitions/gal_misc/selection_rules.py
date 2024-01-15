@@ -27,7 +27,7 @@ are detached.
 # variables naming specific parquet files in node_manifests
 PLASM_FILE = "plasm_full"
 ATM_FILE = "atm"
-SBN_FILE = "tiny"
+SBN_FILE = "tiny_other"
 
 file_information = {
     # PHOTOPOLARIMETER RADIOMETER

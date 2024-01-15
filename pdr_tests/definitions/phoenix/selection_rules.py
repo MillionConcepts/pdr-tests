@@ -26,7 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 GEO_FILE = "geophx"
-IMG_FILE = "img_usgs"
+IMG_FILE = "img_usgs_phoenix"
 
 file_information = {
     # TEGA edr and rdr

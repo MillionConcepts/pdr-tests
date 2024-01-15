@@ -24,12 +24,9 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 from itertools import product
-from pathlib import Path
-import pdr_tests
-
 
 # shorthand variables for specific .parquet files
-IMG_FILE = "img_jpl_mer_coverage"
+IMG_FILE = "img_jpl_mer_nav"
 
 base = {
     "manifest": IMG_FILE,
@@ -40,9 +37,9 @@ base = {
 file_information = {
     # inverse LUT
     "ilut": base | {
-        "fn_regex": [r"\w[0-9]{9}((ilf)|(isf)|(inn)|(ffl)|(sfl)|(dnl)).*img$"]},
-    "ilut_thumb": base | {
-        "fn_regex": [r"\w[0-9]{9}((ith)|(thn)).*img$"]},
+        "fn_regex": [r"\w[0-9]{9}((ilf)|(isf)|(inn)|(ffl)|(sfl)|(dnl)).*img$"]
+    },
+    "ilut_thumb": base | {"fn_regex": [r"\w[0-9]{9}((ith)|(thn)).*img$"]},
 }
 
 ptypes = ("mr", # radiometric; specifically the MIPLRAD correction

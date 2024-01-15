@@ -23,12 +23,8 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-from pathlib import Path
-import pdr_tests
-
-
-# shorthand variables for specific .parquet files
-IMG_FILE = "img_jpl_mer_coverage"
+# variables for specific .parquet files
+IMG_FILE = "img_jpl_mer_mi"
 
 file_information = {
     # Inverse LUT RDR - thumbnails

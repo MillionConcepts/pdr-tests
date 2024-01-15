@@ -23,19 +23,14 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-from pathlib import Path
-import pdr_tests
-
-
-# shorthand variables for specific .parquet files
-IMG_FILE = "img_jpl_mer_coverage"
-
+# variables for specific .parquet files
+IMG_FILE = "img_jpl_mer_nav"
 
 base = {
-        "manifest": IMG_FILE,
-        "url_must_contain": ['mer','no_0xxx/data', 'edr'],
-        "label": "A",
-    }
+    "manifest": IMG_FILE,
+    "url_must_contain": ['mer','no_0xxx/data', 'edr'],
+    "label": "A",
+}
 
 ptypes = (
     "eff", "esf", "edn", "eth", "erp", "ers", "ecs", "ehg"

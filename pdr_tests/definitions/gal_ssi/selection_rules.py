@@ -25,8 +25,8 @@ are detached.
 """
 
 # variables naming specific parquet files in node_manifests
-IMG_FILE = "img_usgs"
-SB_FILE = "tiny"
+IMG_FILE = "img_usgs_galileo"
+SB_FILE = "tiny_other"
 
 file_information = {
     # Calibration product types:

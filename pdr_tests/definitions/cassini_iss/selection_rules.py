@@ -25,7 +25,7 @@ are detached.
 """
 
 # variables naming specific parquet files in node_manifests
-IMG_FILE = "img_usgs"
+IMG_FILE = "img_usgs_cassini"
 
 # Note: this is another dataset that uses multiple format files with the same name but 
 # slightly different contents: tlmtab.fmt. calib, edr_evj, and edr_sat each have their own.

@@ -26,7 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 MANIFEST_FILE = "geomgs"
-IMG_FILE = "img_usgs"
+IMG_FILE = "img_usgs_mars_global_surveyor"
 
 file_information = {
     

@@ -24,7 +24,7 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 # variables naming specific parquet files in node_manifests
-IMG_FILE = "img_jpl_msl_mardi"
+IMG_FILE = "img_jpl_msl_mrd"
 
 base = {
     "manifest": IMG_FILE,
