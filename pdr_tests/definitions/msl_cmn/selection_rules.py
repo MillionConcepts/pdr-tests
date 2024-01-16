@@ -46,7 +46,7 @@ file_information = {
     # },
     "DIFFRACTION_ALL_RDR": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*rda.*"],
+        "fn_regex": [r"cm.*rda.*\.csv"],
         "url_must_contain": ["msl-m-chemin-4-rdr-v1"],
         "label": "D",
     },
@@ -70,7 +70,7 @@ file_information = {
     # },
     "ENERGY_SINGLE_RDR": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*re1.*"],
+        "fn_regex": [r"cm.*re1.*\.csv"],
         "url_must_contain": ["msl-m-chemin-4-rdr-v1"],
         "label": "D",
     },
@@ -82,49 +82,49 @@ file_information = {
     # },
     "MINERAL_TABLES": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*min.*"],
+        "fn_regex": [r"cm.*min.*\.csv"],
         "url_must_contain": ["msl-m-chemin-4-rdr-v1"],
         "label": "D",
     },
     "CCD_FRAME": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*ecc.*"],
+        "fn_regex": [r"cm.*ecc.*\.img"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
     "DIFFRACTION_SINGLE": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*ed1.*"],
+        "fn_regex": [r"cm.*ed1.*\.img"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
     "DIFFRACTION_SPLIT": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*eds.*"],
+        "fn_regex": [r"cm.*eds.*\.img"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
     "DIFFRACTION_ALL": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*eda.*"],
+        "fn_regex": [r"cm.*eda.*\.img"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
     "ENERGY_ALL": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*eea.*"],
+        "fn_regex": [r"cm.*eea.*\.dat"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
     "ENERGY_SINGLE": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*ee1.*"],
+        "fn_regex": [r"cm.*ee1.*\.dat"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
     "ENERGY_SPLIT": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*ees.*"],
+        "fn_regex": [r"cm.*ees.*\.dat"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
@@ -137,13 +137,13 @@ file_information = {
     # },
     "HOUSEKEEPING": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*ehk.*"],
+        "fn_regex": [r"cm.*ehk.*\.dat"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
     "TRANSMIT_RAW": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*etr.*"],
+        "fn_regex": [r"cm.*etr.*\.dat"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D"
     }

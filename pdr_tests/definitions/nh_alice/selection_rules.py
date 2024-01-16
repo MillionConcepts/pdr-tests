@@ -28,7 +28,6 @@ are detached.
 SB_FILE = "tiny_new_horizons"
 
 file_information = {
-    
     # post-launch raw and calibrated data
     "launch_raw": {
         "manifest": SB_FILE,
@@ -81,7 +80,6 @@ file_information = {
        "url_must_contain": ['nh-p-alice-3-pluto-v3.0/data'],
        "label": "D",
    },
-    
     # extended mission - cruise 1
     "kem_cruise_raw": {
         "manifest": SB_FILE,
