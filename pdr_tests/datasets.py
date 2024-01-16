@@ -138,12 +138,7 @@ class ProductPicker(DatasetDefinition):
             return products
         parquet.write_table(products, self.complete_list_path(product_type))
 
-    def filter_table(self, product_type: str, table: pa.Table) -> pa.Table:
-        """
-        construct list of filter functions -- methods of pa.compute --
-        based on selection rules for dataset and product type. apply them
-        to select examples of specified product type from manifest table.
-        """
+    def make_filters(self, product_type):
         info = self.rules[product_type]
         filts = []
         if "url_must_contain" in info.keys():
@@ -166,6 +161,15 @@ class ProductPicker(DatasetDefinition):
                 )
         if len(filts) == 0:
             raise ValueError("filters must be specified for product types.")
+        return filts
+
+    def filter_table(self, product_type: str, table: pa.Table) -> pa.Table:
+        """
+        construct list of filter functions -- methods of pa.compute --
+        based on selection rules for dataset and product type. apply them
+        to select examples of specified product type from manifest table.
+        """
+        filts = self.make_filters(product_type)
         for method, column, substring in filts:
             table = table.filter(method(table[column], substring))
         return table
