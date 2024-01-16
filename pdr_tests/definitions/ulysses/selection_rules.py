@@ -26,7 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 PPI_FILE = "plasm_full"
-SBN_FILE = "tiny_other"
+SBN_FILE = "tiny_sbnarchive"
 
 file_information = {
     # dust detector subsystem

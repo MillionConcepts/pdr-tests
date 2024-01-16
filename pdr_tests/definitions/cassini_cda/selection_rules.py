@@ -25,7 +25,7 @@ are detached.
 """
 
 # variables naming specific parquet files in node_manifests
-SB_FILE = "tiny_other"
+SB_FILE = "tiny_sbnarchive"
 
 
 file_information = {

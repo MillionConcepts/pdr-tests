@@ -106,9 +106,10 @@ class ProductPicker(DatasetDefinition):
     #  the manifest a bunch of times, although it's very
     #  memory-efficient. idk. it might not be as bad as i think,
     #  though, unless we did clever segmentation of results on each group.
-    def make_product_list(self, product_type: str):
+    def make_product_list(self, product_type: str, write: bool = True):
         """
-        construct and write full-set parquet file for a given product type.
+        construct full-set pyarrow table for a given product type, and
+        optionally write it as a parquet file.
         """
         if product_type is None:
             return self.across_all_types("make_product_list")
@@ -133,6 +134,8 @@ class ProductPicker(DatasetDefinition):
             raise ValueError('No matches found, please check selection_rules and try again.')
         # TODO: this estimate is bad for products with several large files
         print(f"{len(products)} products found, {size_gb} estimated GB")
+        if write is False:
+            return products
         parquet.write_table(products, self.complete_list_path(product_type))
 
     def filter_table(self, product_type: str, table: pa.Table) -> pa.Table:

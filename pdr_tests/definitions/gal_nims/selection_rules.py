@@ -26,7 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 IMG_FILE = "img_usgs_galileo"
-SB_FILE = "tiny_other"
+SB_FILE = "tiny_sbnarchive"
 
 file_information = {
     # EDRs (go_1001-go_1004) - cruise phase, calibrations, Gaspra and Ida

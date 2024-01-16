@@ -112,14 +112,14 @@ file_information = {
     # raw engineering data
     "eng_edr": {
         "manifest": IMG_FILE,
-        "fn_must_contain": ['dn.tab'],
+        "fn_must_contain": ['dn.zip'],
         "url_must_contain": ['mprv_0001/rvr_eng'],
         "label": "D",
     },
     # calibrated engineering data
     "eng_rdr": {
         "manifest": IMG_FILE,
-        "fn_must_contain": ['eu.tab'],
+        "fn_must_contain": ['eu.zip'],
         "url_must_contain": ['mprv_0001/rvr_eng'],
         "label": "D",
     },

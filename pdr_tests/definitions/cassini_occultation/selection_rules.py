@@ -24,10 +24,6 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
-
 RMS_FILE = "ringvolumes"
 
 file_information = {
