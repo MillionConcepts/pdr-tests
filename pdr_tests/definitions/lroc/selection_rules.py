@@ -29,32 +29,32 @@ MANIFEST_FILE = "img_lroc"
 file_information = {
     "NAC_CDR_if": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ["M", ".IMG"],
-        "url_must_contain": ["NAC"],
+        "fn_regex": [r"^M.*\.IMG"],
+        "url_must_contain": ["CDR", "NAC"],
         "label": "A",
     },
     "NAC_CDR_rad": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ["S", ".IMG"],
-        "url_must_contain": ["NAC"],
+        "fn_regex": [r"^S.*\.IMG"],
+        "url_must_contain": ["CDR", "NAC"],
         "label": "A",
     },
     "WAC_CDR": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": [".IMG"],
-        "url_must_contain": ["WAC"],
+        "url_must_contain": ["CDR", "WAC"],
         "label": "A",
     },
     "NAC_EDR": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": [".IMG"],
-        "url_must_contain": ["NAC"],
+        "url_must_contain": ["EDR", "NAC"],
         "label": "A",
     },
     "WAC_EDR": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": [".IMG"],
-        "url_must_contain": ["WAC"],
+        "url_must_contain": ["EDR", "WAC"],
         "label": "A",
     },
     "NAC_DTM": {
@@ -70,7 +70,7 @@ file_information = {
     },
     "NAC_POLE": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ["NAC_POLE", ".IMG"],
+        "fn_must_contain": ["NAC_POLE_P8", ".IMG"],
         "label": "A",
     },
     "NAC_POLE_PSR": {
@@ -101,7 +101,8 @@ file_information = {
     },
     "WAC_HAPKE": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ["WAC_HAPKE", ".IMG"],
+        "url_must_contain": ["MDR/WAC_HAPKE"], 
+        "fn_must_contain": [".IMG", "WAC_HAPKE_"],
         "label": "A",
     },
     "WAC_HAPKE_tl": {
