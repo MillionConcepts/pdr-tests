@@ -27,7 +27,8 @@ are detached.
 # variables naming specific parquet files in node_manifests
 ATM_FILE = "atm"
 PPI_FILE = "plasm_full"
-SBN_FILE = "tiny_sbnarchive"
+SBNARCHIVE_FILE = "tiny_sbnarchive"
+SBN_HOLDINGS_FILE = "tiny_other"
 
 
 file_information = {
@@ -63,60 +64,60 @@ file_information = {
     },
     # Television System raw, processed, and transform data
     "tvs_raw": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.img'],
         "url_must_contain": ['vega','-c-tvs-2-rdr-halley-v1.0/data'],
         "label": "D",
     },
     "tvs_proc": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.img'],
         "url_must_contain": ['vega','-c-tvs-3-rdr-halley-processed-v1.0/data'],
         "label": "D",
     },
     "tvs_tran": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.img'],
         "url_must_contain": ['vega2-c-tvs-5-rdr-halley-transform-v1.0/data'],
         "label": "D",
     },
     # infrared spectrometer raw and processed data; Vega 1
     "iks_raw": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['vega1-c-iks-2-rdr-halley-v1.0/data'],
         "label": "D",
     },
     "iks_proc": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['vega1-c-iks-3-rdr-halley-processed-v1.0/data'],
         "label": "D",
     },
     # dust-particle counter and mass analyzer; Vega 1 and 2
     "ducma": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['vega','-c-ducma-3-rdr-halley-v1.0/data'],
         "label": "D",
     },
     # dust-particle impact detector 1 - electrode collector; Vega 1 & 2
     "sp1": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['vega','-c-sp1-2-rdr-halley-v1.0/data'],
         "label": "D",
     },
     # dust-particle impact detector 2 - acoustic sensor; Vega 1 & 2
     "sp2": {
-        "manifest": SBN_FILE,
+        "manifest": SBN_HOLDINGS_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['vega','-c-sp2-2-rdr-halley-v1.0/data'],
         "label": "D",
     },
     # stooke shape models
     "shape": {
-        "manifest": SBN_FILE,
+        "manifest": SBNARCHIVE_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['EAR_A_5_DDR_STOOKE_SHAPE_MODELS_V2_0/data'],
         "label": "D",
@@ -124,7 +125,7 @@ file_information = {
     
     # dust impact mass analyzer
     "puma_mode": {
-       "manifest": SBN_FILE,
+       "manifest": SBN_HOLDINGS_FILE,
        "fn_must_contain": ['.dat'],
        "url_must_contain": ['vega','-c-puma-','-rdr-halley-','/data/mode'],
        "label": "D",

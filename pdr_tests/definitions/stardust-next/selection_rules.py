@@ -42,13 +42,6 @@ file_information = {
         "url_must_contain": ['sdu-c_cal-navcam-3-next-tempel1-v1.0/data'],
         "label": "D",
     },
-    # Derived Shape Model
-    "shape": {
-        "manifest": SB_FILE,
-        "fn_regex": ['(tab$)|(wrl$)'],
-        "url_must_contain": ['dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data'],
-        "label": "D",
-    },
     # DFMI
     "dfmi": {
         "manifest": SB_FILE,
@@ -63,5 +56,12 @@ file_information = {
         "url_must_contain": ['sdu-c_d-cida-2_3-next-tempel1-v1.0/data'],
         "label": "A",
     },
-    
+    # This is already covered by the di_science selection rules.
+    # # Derived Shape Model
+    # "shape": {
+    #     "manifest": SB_FILE,
+    #     "fn_regex": ['(tab$)|(wrl$)'],
+    #     "url_must_contain": ['dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data'],
+    #     "label": "D",
+    # },
 }

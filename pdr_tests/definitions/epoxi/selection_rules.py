@@ -32,7 +32,8 @@ file_information = {
     "hrii_raw": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
-        "url_must_contain": ['dif-', 'hrii-2-epoxi', '/data'],
+        "url_must_contain": ['/data'],
+        "url_regex": [r'dif-[ecm]-hrii-2-epoxi'],
         "label": "D",
     },
     # HRI-IR calibrated spectra
@@ -46,7 +47,8 @@ file_information = {
     "hriv_raw": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
-        "url_must_contain": ['dif-', 'hriv-2-epoxi', '/data'],
+        "url_must_contain": ['/data'],
+        "url_regex": [r'dif-[ecmx]-hriv-2-epoxi'],
         "label": "D",
     },
     # HRI-VIS calibrated images
@@ -81,7 +83,8 @@ file_information = {
     "mri_raw": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
-        "url_must_contain": ['dif-', 'mri-2-epoxi', '/data'],
+        "url_must_contain": ['/data'],
+        "url_regex": [r'dif-[ecm]-mri-2-epoxi'],
         "label": "D",
     },
     # MRI-VIS calibrated images
