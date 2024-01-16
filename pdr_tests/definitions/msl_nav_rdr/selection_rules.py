@@ -45,9 +45,9 @@ ptypes = (
 samps = ("D", "F", "S", "T")
 
 # see: MSL Camera SIS, pp. 88+
-file_information = {"ANAGLYPH": base | {"fn_regex": [r"NA.*"]}}
+file_information = {"ANAGLYPH": base | {"fn_regex": [r"^NA.*\.IMG"]}}
 for ptype, samp in product(ptypes, samps):
-    info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}"]}
+    info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}.*\.IMG"]}
     file_information[f"{ptype}_{samp}"] = info
 
 # range maps persistently reference first, don't know where it is;

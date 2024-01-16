@@ -30,6 +30,7 @@ base = {
     "manifest": IMG_FILE,
     "url_must_contain": ["MSLNAV_0XXX/DATA"],
     "label": "D",
+    "fn_ends_with": [".IMG"]
 }
 
 # see: MSL Camera SIS, pp. 88+
