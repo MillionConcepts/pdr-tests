@@ -46,7 +46,7 @@ for ptype, samp in product(
     if (ptype == "ERP") and (samp != "S"):
         continue
     # underscore between ptype and samp because these are never linearized (I think)
-    pattern = f"[FR][LR].*{ptype}_{samp}.*"
+    pattern = fr"[FR][LR].*{ptype}_{samp}.*\.IMG"
     info = base | {"fn_regex": [pattern]}
     file_information[
         f"{ptype}_{samp}"

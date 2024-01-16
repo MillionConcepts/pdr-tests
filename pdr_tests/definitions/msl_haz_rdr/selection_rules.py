@@ -39,12 +39,12 @@ base = {
 SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT"]
 
 # see: MSL Camera SIS, pp. 88+
-file_information = {"ANAGLYPH": base | {"fn_regex": [r"[FR]A[AB].*"]}}
+file_information = {"ANAGLYPH": base | {"fn_regex": [r"^[FR]A[AB].*\.IMG"]}}
 for ptype, samp in product(
     ("XYZ", r"RA\w", r"D\w\w", r"RN\w", r"UV\w", r"RU\w", r"S[LRHMN]\w", r"AR\w"),
     ("F", "S", "D", "T")
 ):
-    pattern = rf"{ptype}(_|\w){samp}.*"
+    pattern = rf"^[FR][RL].*{ptype}(_|\w){samp}.*\.IMG"
     info = base | {"fn_regex": [pattern]}
     ptype_name = re.sub(r"(\\w|\[|])", "", ptype)
     file_information[
