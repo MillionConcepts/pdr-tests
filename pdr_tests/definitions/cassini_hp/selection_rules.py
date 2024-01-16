@@ -188,7 +188,7 @@ file_information = {
     # Temperature sensors
     "hasi_tem": {
         "manifest": ATM_FILE,
-        "fn_must_contain": ['_TEM', '.TAB'],
+        "fn_regex": [r'_TEM[DS_].*\.TAB'],
         "url_must_contain": ['hphasi', 'DATA'],
         "label": "D",
     },
