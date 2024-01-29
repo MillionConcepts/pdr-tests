@@ -27,9 +27,21 @@ are detached.
 PPI_FILE = "plasm_full"
 ATM_FILE = "atm"
 GEO_FILE = "geomariner"
+IMG_FILE = "img_usgs"
 
 file_information = {
     
+    # Mariner 10
+    # MAG, PLS, and POS are pre-peer review at PPI, and appears supported
+    # NAC/WAC is pre-peer review at IMG, but in an unsupported format
+    
+    # Mariner 9 Imaging Science Subsystem (pre-peer review dataset)
+    "iss": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['Mariner_09/mr9iss_'],
+        "label": "D",
+    },
     # Mariner 9 electron density profiles
     "ele_density": {
         "manifest": PPI_FILE,
@@ -68,3 +80,5 @@ file_information = {
         "label": ('.img', '.xml'),
     },
 """
+
+SKIP_FILES = ["VICAR2.TXT"]
