@@ -24,16 +24,42 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 # variables naming specific parquet files in node_manifests
-MANIFEST_FILE = "atm"
+ATM_FILE = "atm"
+GEOLAB_FILE = "geolab"
 
 file_information = {
     # Ground-based spectrophotometry of the Jovian planets and Titan.
     # Methane absorption and albedos
     "gbat": {
-        "manifest": MANIFEST_FILE,
+        "manifest": ATM_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['gbat_0001/data'],
         "label": "D",
     },
+    # Bloomsburg University Goniometer Mars soil analogs
+    # Analogs: AREF_235, AREF_236, AREF_237, AREF_238, and JSC_Mars1
+    "bug_dist_funct": {
+        "manifest": GEOLAB_FILE,
+        "fn_must_contain": ['0.tab'],
+        "url_must_contain": ['bug_9001/data'],
+        "label": "D",
+    },
+    "bug_spectra": {
+        "manifest": GEOLAB_FILE,
+        "fn_must_contain": ['spectrum.tab'],
+        "url_must_contain": ['bug_9001/data'],
+        "label": "D",
+    },
     
 }
+
+"""
+    # Mars Analog Handlens-Scale Image Data Base
+    # Not supported: "The DOCUMENT pointer is not yet fully supported."
+    "mahl": {
+        "manifest": GEOLAB_FILE,
+        "fn_must_contain": ['.jpg'],
+        "url_must_contain": ['mahl_0001/data'],
+        "label": "D",
+    },
+"""
