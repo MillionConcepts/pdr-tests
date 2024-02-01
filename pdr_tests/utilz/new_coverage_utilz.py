@@ -1,10 +1,9 @@
 from ast import literal_eval
-from collections import UserDict
-from pathlib import Path
 import re
 
 from dustgoggles.structures import listify
 import pandas as pd
+from pyarrow import parquet as pq
 
 MPIVOTS = ("dataset_pds", "dataset_ix", "ptype", "volume")
 MFILTERS = ("cov", "ucov", "inc", "all") 
@@ -16,6 +15,19 @@ METRIC_FN_PATTERN = re.compile(
 )
 
 
+def get_domain(manifest_fn):
+    domains = set()
+    meta = pq.read_metadata(manifest_fn)
+    for n in range(meta.num_row_groups):
+        rg = meta.row_group(n)
+        domains.update(
+            [rg.column(0).statistics.min, rg.column(0).statistics.max]
+        )
+    if len(domains) > 1:
+        raise ValueError("multiple domains in this manifest.")
+    return domains.pop()
+
+
 def _maybeeval(x):
     try:
         return literal_eval(x)
@@ -25,7 +37,8 @@ def _maybeeval(x):
 
 class MetricLoader:
     def __init__(self, path):
-        self.path = path
+        self.metric_path = path / "coverage_metrics"
+        self.manifest_path = path / "coverage_manifests"
 
     @staticmethod
     def _compatible(match, filt, pivot, mtype):
@@ -34,7 +47,23 @@ class MetricLoader:
             match[t] == v 
             for t, v in zip(("pivot", "filt", "mtype"), (pivot, filt, mtype))
         )
-    
+
+    def make_urls(self, pathtable):
+        domains = {}
+        for manifest_name in pathtable['manifest'].unique():
+            mpaths = [
+                m for m in self.manifest_path.iterdir()
+                if m.name.startswith(manifest_name)
+            ]
+            if len(mpaths) == 0:
+                raise FileNotFoundError("no matching manifest found")
+            domains[manifest_name] = get_domain(mpaths[0])
+        wheredf = pathtable[['path', 'manifest']].copy()
+        wheredf['domain'] = None
+        for manifest, group in wheredf.groupby('manifest'):
+            wheredf.loc[group.index, 'domain'] = domains[manifest]
+        return "https://" + wheredf['domain'] + "/" + wheredf["path"]
+
     def load(self, names, pivot="dataset_pds", mtype="stats", filt="all"):
         if filt != "all" and mtype == "stats":
             raise ValueError(
@@ -51,7 +80,7 @@ class MetricLoader:
                 continue
             raise ValueError(f"invalid option: {name} must be one of {opt}.")
         dfs, unmatched = {}, set(names)
-        for p in self.path.iterdir():
+        for p in self.metric_path.iterdir():
             if (match := re.match(METRIC_FN_PATTERN, p.name)) is None:
                 continue
             pmatch = {n for n in names if re.match(n, match['name'])}
@@ -68,6 +97,7 @@ class MetricLoader:
             )
         if len(dfs) == 1:
             df = tuple(dfs.values())[0]
+            df['manifest'] = tuple(dfs.keys())[0]
         else:
             for k, v in dfs.items():
                 v['manifest'] = k
@@ -75,7 +105,7 @@ class MetricLoader:
         for k, v in df.items():
             if isinstance((sv := v.iloc[0]), str) and sv.startswith("["):
                 df[k] = v.map(_maybeeval)
-        return df.copy()
+        return df.reset_index(drop=True).copy()
 
 
 def pathtable_to_treeframe(pathtable):
@@ -87,7 +117,8 @@ def pathtable_to_treeframe(pathtable):
     tf['extension'] = pathtable['extension']
     return tf
 
-def tf_pathcounts(tf):
+
+def tf_pathcounts(tf, dropna=False):
     return tf.loc[
         :, [c for c in tf.columns if isinstance(c, int)]
-    ].value_counts()
+    ].value_counts(dropna=dropna)
