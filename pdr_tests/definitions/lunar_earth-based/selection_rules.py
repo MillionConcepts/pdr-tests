@@ -54,5 +54,12 @@ file_information = {
         "url_must_contain": ['arcb_nrao-l-rtls_gbt-5-12.6cm-v1', 'data'],
         "label": "D",
     },
+    # DEM of lunar south pole
+    "south_dem": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['gdscc-l-dss14_dss13_dss15_dss25-5-v1', 'data'],
+        "label": "D",
+    },
 
 }
