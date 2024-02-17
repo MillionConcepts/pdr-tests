@@ -24,42 +24,43 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 # variables naming specific parquet files in node_manifests
-MANIFEST_FILE = "geolunar"
+MANIFEST_FILE = "img_usgs"
 
 file_information = {
-    # Lunar Spectroscopy
-    "spectra": {
+    
+    # Lunar Orbiter Image Recovery Project (LOIRP)
+    # (These are large files (600+ mb). A handful of the larger files have been
+    # manually tested; products <=200 mb have been tested with ix.)
+    # medium-resolution image frames
+    "med_res": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.tab'],
-        "url_must_contain": ['mk88-l-120cvf-3-rdr-120color-v1/', 'data'],
-        "label": "D",
+        "fn_must_contain": ['M.IMG'],
+        "url_must_contain": ['LO_1001/DATA'],
+        "label": 'D',
     },
-    # 70 cm Lunar Radar
-    "70cm_l1": {
+    # high-resolution image frames
+    "high_res": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['arcb_nrao-l-rtls_gbt-4_5-70cm-v1', 'data/level1'],
-        "label": "D",
+        "fn_regex": [r'H[123]\.IMG$'],
+        "url_must_contain": ['LO_1001/DATA'],
+        "label": 'D',
     },
-    "70cm_l2": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['arcb_nrao-l-rtls_gbt-4_5-70cm-v1', 'data/level2'],
-        "label": "D",
-    },
-    # 12.6 cm (S-band) Lunar Radar
-    "s-band": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['arcb_nrao-l-rtls_gbt-5-12.6cm-v1', 'data'],
-        "label": "D",
-    },
-    # DEM of lunar south pole
-    "south_dem": {
+    
+    # Older versions of the LO3/4/5 datasets
+    # primary products
+    "lo_primary": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['gdscc-l-dss14_dss13_dss15_dss25-5-v1', 'data'],
-        "label": "D",
+        "url_must_contain": ['primary'],
+        "url_regex": [r'LO[345]_0001/constructed_frames'],
+        "label": 'A',
     },
-
+    # cosmetic versions
+    "lo_cosmetic": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['cosmetic'],
+        "url_regex": [r'LO[345]_0001/constructed_frames'],
+        "label": 'A',
+    },
 }

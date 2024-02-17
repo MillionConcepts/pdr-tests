@@ -26,6 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 LUNAR_FILE = "geolunar"
+IMG_FILE = "img_usgs"
 
 # note: most of these tables are not easy to validate -- technically L1 but
 # lots of mysterious numbers read straight off cybernetic-era instrumentation.
@@ -107,5 +108,29 @@ file_information = {
         "fn_must_contain": [".tab"],
         "url_must_contain": ['sm_000', 'data'],
         "label": "D",
-    }
+    },
+    # High-res scans of usable A15, A16, and A17 metric camera frames.
+    # Large tif images (~1.3 gb); only tested a dozen or so.
+    # Headers open wrong (as copies of the IMAGE pointer)
+    "metric_camera": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": [".tif"],
+        "url_must_contain": ['Metric_Camera', 'DATA'],
+        "label": "D",
+    },
 }
+
+"""
+    # Scans of the original film photos of returned lunar rock/soil/core samples.
+    # Pointers and object names don't match.
+    # These are partially supported. data["DOCUMENT"] outputs array data but
+    # data.show() fails. Changing the TIFF_DOCUMENT object to match the DOCUMENT
+    # pointer fixes it, but a first attempt at a check_special_block() special
+    # case didn't work.
+    "sample_photos": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": [".TIF"],
+        "url_must_contain": ['Lunar_Sample_Photographs', 'DATA'],
+        "label": "D",
+    },
+"""

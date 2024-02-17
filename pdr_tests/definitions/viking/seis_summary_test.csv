@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+event_wind_summary.LBL,"[""EVENT_WIND_SUMMARY.TAB"", ""event_wind_summary.LBL""]",EVENT_WIND_SUMMARY,http://pds-geosciences.wustl.edu/viking/vl2-m-seis-5-rdr-v1/vl_9020/data,"{""TABLE"": ""e014a5fac5977471449385f3e2e95cd2""}"
+high_wind_summary.LBL,"[""high_wind_summary.LBL"", ""HIGH_WIND_SUMMARY.TAB""]",HIGH_WIND_SUMMARY,http://pds-geosciences.wustl.edu/viking/vl2-m-seis-5-rdr-v1/vl_9020/data,"{""TABLE"": ""3cf73fb5c5d2fb5b08e171554375b629""}"
