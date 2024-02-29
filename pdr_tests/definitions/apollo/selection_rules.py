@@ -45,6 +45,13 @@ file_information = {
         "url_must_contain": ['a12sw_0001', 'data'],
         "label": "D",
     },
+    # 1-hour resolution version of A12_SWS
+    "A12_SWS_1h": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['a12sw_0002', 'data'],
+        "label": "D",
+    },
     # A15 ALSEP 1-hour-resolution Solar Wind Spectrometer 
     # Plasma data. same basic format as A12_SWS. '71-'72.
     "A15_SWS_1h": {
@@ -107,6 +114,14 @@ file_information = {
         "manifest": LUNAR_FILE,
         "fn_must_contain": [".tab"],
         "url_must_contain": ['sm_000', 'data'],
+        "label": "D",
+    },
+    # A17 Traverse Gravimeter Experiment data. There is only one product, an
+    # ascii table.
+    "A17_TG": {
+        "manifest": LUNAR_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['a17tg_0001', 'data'],
         "label": "D",
     },
     # High-res scans of usable A15, A16, and A17 metric camera frames.
