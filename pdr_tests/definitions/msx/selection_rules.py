@@ -30,15 +30,14 @@ GEO_FILE = "geolunar"
 
 file_information = {    
     # Infrared images in cube format
-    # ENVI_HEADER does not open
-    # data.show("QUBE") fails; things go wrong at line 82 in browsify.py
-    # QUBE products open fine and look great during manual testing.
-##    "cubes": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['.qub'],
-##        "url_must_contain": ['msx-l-spirit3-2_4-v1/msx_9001/data'],
-##        "label": "D",
-##    },
+    # ENVI_HEADERs do not open, FITS_HEADERs open fine
+    # QUBE products open fine (although data.show and browsify don't like them)
+    "cubes": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.qub'],
+        "url_must_contain": ['msx-l-spirit3-2_4-v1/msx_9001/data'],
+        "label": "D",
+    },
     # Infrared Minor Planet Survey; MSX-A-SPIRIT3-5-SBN0003-MIMPS-V1.0
     "ir_survey": {
         "manifest": SBN_FILE,
