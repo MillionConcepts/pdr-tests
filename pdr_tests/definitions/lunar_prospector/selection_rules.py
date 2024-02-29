@@ -114,3 +114,24 @@ file_information = {
         "label": "D",
     },
 }
+"""
+    # level 0 data: merged telemetry files
+    # They do not open (UserWarning: Unable to load TABLE: "('BIT_STRING',
+    # nan, 2) is not a currently-supported data type.")
+    "telemetry": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.B'],
+        "url_must_contain": ['LP-L-ENG_GRS_NS_APS_MAG_ER-1-MDR-V1.0/DATA/MERGED'],
+        "label": "D",
+    },
+    # level 0 data: sun pulse data
+    # They open but incorrectly (The time columns look like nonsense)
+    "sunpulse": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.B'],
+        "url_must_contain": ['LP-L-ENG-6-SUNPULSE-V1.0/DATA/SUNPULSE'],
+        "label": "D",
+    },
+
+Other known unsupported products: ephemeris and position (no pointers in the labels)
+"""
