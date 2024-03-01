@@ -57,7 +57,7 @@ file_information = {
     },
     "CCAM_LIBS_L1B": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cl[0-9].*(ccs|rdr).*ccam.*\.(tab|csv)"],
+        "fn_regex": [r"cl[0-9].*(psv|ccs|rdr).*ccam.*\.(tab|csv)"],
         "url_must_contain": ["msl-m-chemcam-libs-4_5-rdr-v1"],
         "label": "D",
     },
