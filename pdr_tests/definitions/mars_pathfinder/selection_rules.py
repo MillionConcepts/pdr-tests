@@ -37,20 +37,20 @@ file_information = {
         "url_must_contain": ['mpfl-m-imp-5-3dposition-v1/mpim_2xxx/data'],
         "label": "A",
     },
-##    # Radio science: ODF (probably don't need to include these in the test corpus)
-##    "rss_odf": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['.odf'],
-##        "url_must_contain": ['mpf-m-rss-1-5-radiotrack-v1', 'odf'],
-##        "label": "D",
-##    },
-##    # Radio science: TDF (probably don't need to include these in the test corpus)
-##    "rss_tdf": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['.tdf'],
-##        "url_must_contain": ['mpf-m-rss-1-5-radiotrack-v1', 'tdf'],
-##        "label": "D",
-##    },
+    # Radio science - ODF
+    "rss_odf": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.odf'],
+        "url_must_contain": ['mpf-m-rss-1-5-radiotrack-v1', 'odf'],
+        "label": "D",
+    },
+    # Radio science - TDF
+    "rss_tdf": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tdf'],
+        "url_must_contain": ['mpf-m-rss-1-5-radiotrack-v1', 'tdf'],
+        "label": "D",
+    },
     # Radio science - reduced range and doppler data
     "rss_reduced": {
         "manifest": GEO_FILE,
