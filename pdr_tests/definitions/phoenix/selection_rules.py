@@ -29,23 +29,9 @@ GEO_FILE = "geophx"
 IMG_FILE = "img_usgs"
 
 file_information = {
-    # TEGA edr and rdr
-    "tega_edr": {
-        "manifest": GEO_FILE,
-        "fn_must_contain": ['edr','.dat'],
-        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008'],
-        "url_regex": [r'(/egaedr)|(/eghedr)|(/msgedr)|(/lededr)|(/scedr)'],
-        "label": "D",
-    },
-##    # The "EGS' and "EGH" products looks fine, the "SC" products have 
-##    # potential problems in the time columns.
-##    "tega_rdr": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['rdr','.dat'],
-##        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008'],
-##        "url_regex": [r'(/eghrdr)|(/egsrdr)|(/scrdr)'],
-##        "label": "D",
-##    },
+    
+    # Moved the TEGA product types to the phoenix_tega selection rules.
+    
     # MECA TECP edr and rdr
     "tecp_edr": {
         "manifest": GEO_FILE,
