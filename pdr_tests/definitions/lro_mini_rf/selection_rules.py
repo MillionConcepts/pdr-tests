@@ -58,25 +58,36 @@ file_information = {
         "url_must_contain": ['lro-l-mrflro-5-global-mosaic-v1', 'data'],
         "label": 'D',
     },
-    # Raw Packetized Data Records; raw binary telemetry
-    "raw": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.dat'],
-        "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'raw'],
-        "label": 'D',
-    },
-    # Level 1; Calibrated Data Record
+    # SAR Level 1; Calibrated Data Record
     "cdr": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.img'],
         "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'level1'],
         "label": 'D',
     },
-    # Level 2; Map-Projected Calibrated
+    # SAR Level 2; Map-Projected Calibrated
     "projected": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.img'],
         "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'level2'],
         "label": 'D',
     },
+    # SAR Polar Mosaics
+    "polar_mosaic": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'mosaics'],
+        "label": 'D',
+    },
 }
+"""
+    # SAR Raw Packetized Data Records; raw binary telemetry
+    # Support not planned --> The parameter files (.txt) open, but there are 
+    # no pointers to the data files (.dat).
+    "raw": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'(dat$)|(DAT$)'],
+        "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'raw'],
+        "label": 'D',
+    },
+"""

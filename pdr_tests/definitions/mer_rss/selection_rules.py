@@ -23,52 +23,31 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-
 from pathlib import Path
 import pdr_tests
 
 
-MANIFEST_FILE = "geomgn"
-
+# shorthand variables for specific .parquet files
+GEO_FILE = "geomer"
 
 file_information = {
-	
-	# GEDR (merc, north, sinus, and south)
-    "gedr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['mgn-v-gxdr', 'gedr'],
+    # MER 1 and 2 uhfd (ultra-high frequency doppler) products; ascii tables
+    "uhfd": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.csv'],
+        "url_must_contain": ['/uhf'],
+        "url_regex": [r'mer[12]-m-rss-1-edr-v1'],
         "label": "D",
     },
-    # GREDR (merc, north, sinus, and south)
-    "gredr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['mgn-v-gxdr', 'gredr'],
-        "label": "D",
-    },
-    # GSDR (merc, north, sinus, and south)
-    "gsdr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['mgn-v-gxdr', 'gsdr'],
-        "label": "D",
-    },
-    # GTDR (merc, north, sinus, and south)
-    "gtdr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['mgn-v-gxdr', 'gtdr'],
-        "label": "D",
-    },
-
-	# tables: frame, histogram, palette
-    "tables": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.tab'],
-        "url_must_contain": ['mgn-v-gxdr'],
-        "url_regex": [r'g[erst]e?dr'],
-        "label": "D",
-    },
-	
 }
+"""
+    # MER 1 and 2 odf products; binary tables
+    # (mer2rs_0002 ODF4B tables appear to be opening wrong, others are okay)
+    "odf": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['/odf'],
+        "url_regex": [r'mer[12]-m-rss-1-edr-v1'],
+        "label": "D",
+    },
+"""

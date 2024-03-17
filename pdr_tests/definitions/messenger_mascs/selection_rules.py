@@ -85,6 +85,13 @@ file_information = {
         "url_must_contain": ['mascs-3-virs-cdr-caldata-', '/ddr', '/uvvs_virs_combined'],
         "label": "D",
     },
+    # derived uvvs atmosphere models; fixed-length ascii tables
+    "models": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['mascs-3-virs-cdr-caldata-', '/ddr', 'models'],
+        "label": "D",
+    },
     
     # There are multiple files per product/label for this product type.
     # It's easiest to select the label files here to avoid filename issues.

@@ -38,31 +38,35 @@ file_information = {
         "label": "D",
     },
     # CDR - level 2 / topo (SBN and GEO)
+    # NEAR_A_NLR_5_CDR_EROS_ORBIT at SBN
     "cdr_topo": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.tab'],
-        "url_must_contain": ['near-a-nlr-5-cdr-', 'level2/topo'],
+        "url_must_contain": ['nleros_2', 'level2/topo'],
         "label": "D",
     },
     # CDR - level 3 / ascii (SBN and GEO)
+    # NEAR_A_NLR_6_EROS_MAPS_MODELS at SBN
     "cdr_asc": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.tab'],
-        "url_must_contain": ['near-a-nlr-5-cdr-', 'level3/ascii'],
+        "url_must_contain": ['nleros_2', 'level3/ascii'],
         "label": "D",
     },
     # CDR - level 3 / img (SBN and GEO)
+    # NEAR_A_NLR_6_EROS_MAPS_MODELS at SBN
     "cdr_img": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['near-a-nlr-5-cdr-', 'level3/img'],
+        "url_must_contain": ['nleros_2', 'level3/img'],
         "label": "D",
     },
     # CDR - level 3 / shape models (SBN and GEO)
+    # NEAR_A_NLR_6_EROS_MAPS_MODELS at SBN
     "cdr_sha": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.sha'],
-        "url_must_contain": ['near-a-nlr-5-cdr-', 'level3/sha'],
+        "url_must_contain": ['nleros_2', 'level3/sha'],
         "label": "D",
     },
     # Another Eros shape model dataset

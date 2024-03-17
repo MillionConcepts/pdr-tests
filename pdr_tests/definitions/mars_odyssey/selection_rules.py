@@ -94,7 +94,7 @@ file_information = {
     "dnd": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.dat'],
-        "url_must_contain": ['/ody-m-grs-4-dnd-v2/odgd2_xxxx/2'],
+        "url_regex": [r'ody-m-grs-4-dnd-v[12]/odgd[12]_xxxx/2'],
         "label": "D",
     },
     # derived hend data
@@ -118,7 +118,7 @@ file_information = {
     "and": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.dat'],
-        "url_must_contain": ['ody-m-grs-5-and-v2/odgn2_xxxx/yr'],
+        "url_regex": [r'ody-m-grs-5-and-v[12]/odgn[12]_xxxx/yr'],
         "label": "D",
     },
     # averaged hend data

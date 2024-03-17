@@ -29,23 +29,9 @@ GEO_FILE = "geophx"
 IMG_FILE = "img_usgs_phoenix"
 
 file_information = {
-    # TEGA edr and rdr
-    "tega_edr": {
-        "manifest": GEO_FILE,
-        "fn_must_contain": ['edr','.dat'],
-        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008'],
-        "url_regex": [r'(/egaedr)|(/eghedr)|(/msgedr)|(/lededr)|(/scedr)'],
-        "label": "D",
-    },
-##    # The "EGS' and "EGH" products looks fine, the "SC" products have 
-##    # potential problems in the time columns.
-##    "tega_rdr": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['rdr','.dat'],
-##        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008'],
-##        "url_regex": [r'(/eghrdr)|(/egsrdr)|(/scrdr)'],
-##        "label": "D",
-##    },
+    
+    # Moved the TEGA product types to the phoenix_tega selection rules.
+    
     # MECA TECP edr and rdr
     "tecp_edr": {
         "manifest": GEO_FILE,
@@ -83,15 +69,20 @@ file_information = {
         "url_must_contain": ['phx-m-meca-2-niedr-v1/phxmec_0xxx/data'],
         "label": "A",
     },
-##    # The HEADER_TABLE pointers do not open. The ERROR_TABLE and HEIGHT_TABLE
-##    # pointers usually look right, but sometimes the data extends into an
-##    # extra row at the bottom of the table.
-##    "afm_rdr": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['.tab'],
-##        "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/af'],
-##        "label": "D",
-##    },
+    # (there are 2 special cases for the rdrs)
+    "afm_rdr": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/af'],
+        "label": "D",
+    },
+    # MECA ELEC edr (there is a special case for a subset of the em6 tables)
+    "elec_edr": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['xs', '.dat'],
+        "url_must_contain": ['phx-m-meca-2-niedr-v1/phxmec_0xxx/data'],
+        "label": "A",
+    },
     
     # MECA OM edr
     "om_edr": {
