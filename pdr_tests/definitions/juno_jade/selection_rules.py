@@ -61,25 +61,25 @@ file_information = {
     "V4_cal_electrons": {
         "manifest": PLASM_FILE,
         "fn_must_contain": [".DAT"],
-        "url_must_contain": ['JNO-J_SW-JAD', "CALIBRATED", 'ELECTRONS'],
+        "url_must_contain": ['JNO-J_SW-JAD', "-CALIBRATED", 'ELECTRONS'],
         "label": "D",
     },
     "V4_cal_il": {
         "manifest": PLASM_FILE,
         "fn_must_contain": [".DAT"],
-        "url_must_contain": ['JNO-J_SW-JAD', "CALIBRATED", 'ION_LOGICALS'],
+        "url_must_contain": ['JNO-J_SW-JAD', "-CALIBRATED", 'ION_LOGICALS'],
         "label": "D",
     },
     "V4_cal_is": {
         "manifest": PLASM_FILE,
         "fn_must_contain": [".DAT"],
-        "url_must_contain": ['JNO-J_SW-JAD', "CALIBRATED", 'ION_SPECIES'],
+        "url_must_contain": ['JNO-J_SW-JAD', "-CALIBRATED", 'ION_SPECIES'],
         "label": "D",
     },
     "V4_cal_itof": {
         "manifest": PLASM_FILE,
         "fn_must_contain": [".DAT"],
-        "url_must_contain": ['JNO-J_SW-JAD', "CALIBRATED", 'ION_TOF'],
+        "url_must_contain": ['JNO-J_SW-JAD', "-CALIBRATED", 'ION_TOF'],
         "label": "D",
     },
     "V3_uncal_electrons": {

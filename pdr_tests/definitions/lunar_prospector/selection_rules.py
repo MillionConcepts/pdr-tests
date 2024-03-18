@@ -40,21 +40,21 @@ file_information = {
     "er_rdr": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
-        "url_must_contain": ['LP-L-ER-3-RDR-HIGHRESFLUX-V1.0', 'ER_HI_TS'],
+        "url_must_contain": ['LP-L-ER-3-RDR-HIGHRESFLUX-V1.1', 'ER_HI_TS'],
         "label": "D",
     },
     # ER low resolution data
     "er_summ": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
-        "url_must_contain": ['LP-L-ER-4-SUMM-OMNIDIRELEFLUX-V1.0', 'ER_LO_TS'],
+        "url_must_contain": ['LP-L-ER-4-SUMM-OMNIDIRELEFLUX-V1.1', 'ER_LO_TS'],
         "label": "D",
     },
     # ER omni-directional 3-D electron flux data
     "er_3d": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
-        "url_must_contain": ['LP-L-ER-3-RDR-3DELEFLUX-80SEC-V1.0', 'ER_3D'],
+        "url_must_contain": ['LP-L-ER-3-RDR-3DELEFLUX-80SEC-V1.1', 'ER_3D'],
         "label": "D",
     },
     # ER level 2 data
