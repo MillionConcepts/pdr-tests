@@ -35,6 +35,20 @@ def _maybeeval(x):
         return x
 
 
+def metric_catalog(path):
+    cat = []
+    for p in path.iterdir():
+        try:
+            cat.append(METRIC_FN_PATTERN.match(p.name).groupdict())
+        except AttributeError:
+            continue
+    return cat
+
+
+def measured_manifest_names(path):
+    return {p['name'] for p in metric_catalog(path)}
+
+
 class MetricLoader:
     def __init__(self, path):
         self.metric_path = path / "coverage_metrics"
