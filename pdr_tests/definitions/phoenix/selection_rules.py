@@ -46,14 +46,13 @@ file_information = {
         "label": "D",
     },
     # MECA WCL edr and rdr
-##    # Some products have offsets in the tables and a row missing from the
-##    # end of the table.
-##    "wcl_edr": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['ws','.dat'],
-##        "url_must_contain": ['phx-m-meca-2-niedr-v1/phxmec_0xxx/data'],
-##        "label": "A",
-##    },
+    # (there is a special case for the ema, emb, and amc tables)
+    "wcl_edr": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['ws','.dat'],
+        "url_must_contain": ['phx-m-meca-2-niedr-v1/phxmec_0xxx/data'],
+        "label": "A",
+    },
 ##    # The "PT", "ISES", and "COND" products open fine. The "CT" and "CV" 
 ##    # products have multiple pointers opening wrong. (Wrong starting byte)
 ##    "wcl_rdr": {
