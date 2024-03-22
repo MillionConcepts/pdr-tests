@@ -44,7 +44,6 @@ file_information = {
         "label": "D",
     },
     # ELS high and low range RDRs
-    # (missing from geomex.parquet)
     "els_rdr_high": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['ELSSCIH', '.CSV'],
@@ -64,6 +63,14 @@ file_information = {
         "url_must_contain": ['MEX-M-ASPERA3-2-EDR-IMA', 'DATA'],
         "label": "D",
     },
+    # Solar wind data derived from IMA
+    # (This dataset is at GEO but not PPI)
+    "ima_ddr": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['mex-sun-aspera3-4-swm', 'data'],
+        "label": "D",
+    },
     # NPI counts/accumulation EDRs
     "npi_acc": {
         "manifest": PPI_FILE,
@@ -72,8 +79,7 @@ file_information = {
         "label": "D",
     },
     # NPI counts/second combined EDR/RDRs
-    # (ix sort finds fewer of these products at GEO than PPI, but extended
-    # mission 5 products at PPI have broken links)
+    # (Extended mission 5 products at PPI have broken links)
     "npi_sec": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.csv'],
@@ -81,16 +87,3 @@ file_information = {
         "label": "D",
     },
 }
-
-"""
-    # Solar wind data derived from IMA
-    # The dataset is at GEO but not PPI. geomex.parquet lists some of the files,
-    # but is missing the data folder.
-    # There is only 1 product in this dataset. It opens fine in manual testing.
-    "ima_ddr": {
-        "manifest": GEO_FILE,
-        "fn_must_contain": ['.tab'],
-        "url_must_contain": ['mex-sun-aspera3-4-swm', 'data'],
-        "label": "D",
-    },
-"""
