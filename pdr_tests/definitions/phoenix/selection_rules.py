@@ -53,14 +53,22 @@ file_information = {
         "url_must_contain": ['phx-m-meca-2-niedr-v1/phxmec_0xxx/data'],
         "label": "A",
     },
-##    # The "PT", "ISES", and "COND" products open fine. The "CT" and "CV" 
-##    # products have multiple pointers opening wrong. (Wrong starting byte)
-##    "wcl_rdr": {
-##        "manifest": GEO_FILE,
-##        "fn_must_contain": ['.tab'],
-##        "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/wcl'],
-##        "label": "D",
-##    },
+    # The "PT", "ISES", and "COND" rdr products open fine
+    "wcl_rdr": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tab'],
+        "fn_regex": [r'(pt_)|(ise_)|(cnd_)'],
+        "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/wcl'],
+        "label": "D",
+    },
+#    # The "CP" and "CV" products are unsupported (wrong start bytes/offsets)
+#    "wcl_rdr_broken": {
+#        "manifest": GEO_FILE,
+#        "fn_must_contain": ['.tab'],
+#        "fn_regex": [r'(cp_)|(cv_)'],
+#        "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/wcl'],
+#        "label": "D",
+#    },
     # MECA AFM edr and rdr
     "afm_edr": {
         "manifest": GEO_FILE,
