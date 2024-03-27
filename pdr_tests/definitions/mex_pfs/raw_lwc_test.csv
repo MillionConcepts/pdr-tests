@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+pfs_5059_meas_raw_lw.LBL,"[""pfs_5059_meas_raw_lw.LBL"", ""MEX_ORIENTATION_DESC.TXT"", ""PFS_5059_MEAS_RAW_LW.DAT""]",PFS_5059_MEAS_RAW_LW,http://pds-geosciences.wustl.edu/mex/mex-m-pfs-2-edr-ext2-v1/mexpfs_1003/data/mars/lwc/orb505x,"{""TABLE"": ""8ee2e80abe86980cdf5eefe5a565aad6""}"
+pfs_14027_meas_raw_lw.LBL,"[""PFS_14027_MEAS_RAW_LW.DAT"", ""pfs_14027_meas_raw_lw.LBL"", ""MEX_ORIENTATION_DESC.TXT""]",PFS_14027_MEAS_RAW_LW,http://pds-geosciences.wustl.edu/mex/mex-m-pfs-2-edr-ext5-v1/mexpfs_1006/data/mars/lwc/orb1402x,"{""TABLE"": ""c35f1397a4cf82c3e536d63aa5117c7f""}"
