@@ -96,7 +96,7 @@ def test(
     else:
         datasets = [dataset]
     logs = []
-    for dataset in datasets:
+    for dataset in sorted(datasets):
         hasher = ProductChecker(dataset)
         hasher.tracker.paused = True
         try:
