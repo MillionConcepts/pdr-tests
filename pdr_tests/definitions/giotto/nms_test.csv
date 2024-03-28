@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-nmsm_rdr_m24_n.tab,"[""nmsm_rdr_m24_n.tab"", ""nms_data1.fmt""]",nmsm_rdr_m24_n,http://pdssbn.astro.umd.edu/holdings/gio-c-nms-4-halley-v1.0/data/neutrals/n_unpub,"{""NMS_TABLE"": ""8d0842c8d8b57375ff7f5d2b57a85ca7""}"
-nmse_pub_m15_i.tab,"[""nmse_pub_m15_i.tab"", ""nms_data2.fmt""]",nmse_pub_m15_i,http://pdssbn.astro.umd.edu/holdings/gio-c-nms-4-halley-v1.0/data/ions/i_pub,"{""NMS_TABLE"": ""b6897b8bd5c00d9dc3337379559cef4d""}"
+nmsm_rdr_m24_n.tab,"[""nmsm_rdr_m24_n.tab"", ""nms_data1.fmt""]",nmsm_rdr_m24_n,http://pdssbn.astro.umd.edu/holdings/gio-c-nms-4-halley-v1.0/data/neutrals/n_unpub,"{""NMS_TABLE"": ""52fd19af12aca5d2bb3d2562fd8e8aac""}"
+nmse_pub_m15_i.tab,"[""nmse_pub_m15_i.tab"", ""nms_data2.fmt""]",nmse_pub_m15_i,http://pdssbn.astro.umd.edu/holdings/gio-c-nms-4-halley-v1.0/data/ions/i_pub,"{""NMS_TABLE"": ""ade8bd335aa092b99ddac0442c4b9c53""}"
