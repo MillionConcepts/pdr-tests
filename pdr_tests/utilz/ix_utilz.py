@@ -76,7 +76,7 @@ def checksum_object(obj, hash_function=md5):
     elif isinstance(obj, pd.DataFrame):
         # note that object ('O') dtypes do not, by design, have stable
         # byte-level representations.
-        blocks = obj._to_dict_of_blocks(copy=False)
+        blocks = obj._to_dict_of_blocks()
         # sorting to improve consistency between pandas versions
         for dtype in sorted(blocks.keys()):
             if dtype == 'object':
