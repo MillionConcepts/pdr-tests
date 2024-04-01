@@ -326,22 +326,32 @@ class IndexDownloader(DatasetDefinition):
             print(f"Checking shared files for {self.dataset}.")
             shared_index = pd.read_csv(self.shared_list_path())
             for ix, row in shared_index.iterrows():
-                session = verbose_temp_download(
-                    data_path,
-                    temp_path,
-                    row["url"],
-                    session=session,
-                    skip_quietly=False
-                )
+                try:
+                    session = verbose_temp_download(
+                        data_path,
+                        temp_path,
+                        row["url"],
+                        session=session,
+                        skip_quietly=False
+                    )
+                except KeyboardInterrupt:
+                    raise
+                except Exception as ex:
+                    console_and_log(f"download failed: {type(ex)}: {ex}")
         if get_test is True:
             index = pd.read_csv(self.test_path(product_type))
         else:
             index = pd.read_csv(self.index_path(product_type))
         for ix, row in index.iterrows():
             console_and_log(f"Downloading product id: {row['product_id']}")
-            session = download_product_row(
-                data_path, temp_path, row, self.skip_files, session, full_lower=full_lower
-            )
+            try:
+                session = download_product_row(
+                    data_path, temp_path, row, self.skip_files, session, full_lower=full_lower
+                )
+            except KeyboardInterrupt:
+                raise
+            except Exception as ex:
+                console_and_log(f"Download failed: {type(ex)}: {ex}")
         session.close()
 
 

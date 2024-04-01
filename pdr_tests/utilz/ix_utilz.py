@@ -293,6 +293,7 @@ def verbose_temp_download(
                 )
                 fp.write(chunk)
     finally:
+        session.close()
         response.close()
     shutil.move(
         Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
