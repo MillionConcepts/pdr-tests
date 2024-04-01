@@ -46,9 +46,35 @@ def index(dataset, product_type=None, *, dry_run: "d" = False):
     indexer.write_subset_index(product_type)
 
 
-def download(dataset, product_type=None, *, get_test: "t" = False, full_lower: "l" = False):
-    downloader = IndexDownloader(dataset)
-    downloader.download_index(product_type, get_test, full_lower=full_lower)
+def download(
+    dataset=None,
+    product_type=None,
+    *,
+    get_test: "t" = False,
+    full_lower: "l" = False
+):
+    if dataset is None:
+        if get_test is False:
+            raise ValueError(
+                "Refusing to download full versions of all datasets. Specify a "
+                "dataset or run with --get-test to get test subsets."
+            )
+        print(
+            "No dataset argument provided; downloading all defined dataset "
+            "test subsets."
+        )
+        datasets = [
+            d.name
+            for d in Path("definitions").iterdir()
+            if (d.is_dir() and ("cache" not in d.name))
+        ]
+    else:
+        datasets = [dataset]
+    for dataset in sorted(datasets):
+        downloader = IndexDownloader(dataset)
+        downloader.download_index(
+            product_type, get_test, full_lower=full_lower
+        )
 
 
 def check(
