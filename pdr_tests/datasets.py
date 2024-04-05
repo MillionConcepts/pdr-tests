@@ -92,7 +92,7 @@ class DatasetDefinition:
 
     def across_all_types(self, method_name, *args, **kwargs):
         output = []
-        for product_type in self.rules:
+        for product_type in sorted(self.rules.keys()):
             result = getattr(self, method_name)(product_type, *args, **kwargs)
             output.append(result)
         return output
