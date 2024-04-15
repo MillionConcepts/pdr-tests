@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+albedo_r1080_equ_map.LBL,"[""albedo_r1080_equ_map.LBL"", ""ODY_JGR2012_EDR_DESC.TXT"", ""DSMAP.CAT"", ""ALBEDO_R1080_EQU_MAP.IMG""]",ALBEDO_R1080_EQU_MAP,http://pds-geosciences.wustl.edu/mex/mex-m-omega-5-ddr-global-maps-v1/mexomg_2000/data/albedo,"{""IMAGE"": ""3d61d54a2fda024cb27fb837694bd552""}"
