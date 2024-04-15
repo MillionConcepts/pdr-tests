@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+m15odfxl02_dpx_111061915_00.LBL,"[""MEX_POINTING_MODE_DESC.TXT"", ""M15ODFXL02_DPX_111061915_00.TAB"", ""m15odfxl02_dpx_111061915_00.LBL""]",M15ODFXL02_DPX_111061915_00.TAB,http://pds-geosciences.wustl.edu/mex/mex-m-mrs-1_2_3-ext2-v1/mexmrs_2862/data/level02/closed_loop/dsn/dpx,"{""DOPPLER_TABLE"": ""7e9c5e4a17fd8cb75ab6e35381d04296""}"
+m63odf0l02_rgx_131161157_00.LBL,"[""MEX_POINTING_MODE_DESC.TXT"", ""m63odf0l02_rgx_131161157_00.LBL"", ""M63ODF0L02_RGX_131161157_00.TAB""]",M63ODF0L02_RGX_131161157_00.TAB,http://pds-geosciences.wustl.edu/mex/mex-m-mrs-1_2_3-ext4-v1/mexmrs_3565/data/level02/closed_loop/dsn/rng,"{""RANGING_TABLE"": ""1badaf585cdaa0772297e4357dd249bd""}"
