@@ -57,6 +57,7 @@ file_information = {
     # REDR data
     # Image pointer opened fine manually. TELEMETRY_TABLE pointer fails with:
     # TypeError: unsupported operand type(s) for *: 'int' and 'NoneType'.
+    # (A bit column has multiple ITEMS but its ITEM_BITS is mislabeled as BITS)
     # LINE_PREFIX_TABLE also not yet supported.
 ##    "redr": {
 ##        "manifest": IMG_FILE,
