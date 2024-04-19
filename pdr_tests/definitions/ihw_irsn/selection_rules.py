@@ -119,5 +119,11 @@ file_information = {
         "url_must_contain": ['ihw-c-irspec-3-edr-gz', 'data'],
         "label": "D",
     },
+    "mag_gz": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['ihw-c-irimag-3-edr-gz', 'data'],
+        "label": "D",
+    },
 
 """

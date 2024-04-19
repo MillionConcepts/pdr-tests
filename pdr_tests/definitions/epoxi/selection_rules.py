@@ -55,7 +55,8 @@ file_information = {
     "hriv_cal": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
-        "url_must_contain": ['dif-', 'hriv-3-epoxi', '/data'],
+        "url_must_contain": ['dif-', '/data'],
+        "url_regex": [r'(hriv-3-epoxi)|(hriv-3_4-epoxi)'],
         "label": "D",
     },
     # HRI-VIS photometry (data available in 2 formats: .tab and .fit)

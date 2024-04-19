@@ -81,11 +81,12 @@ file_information = {
        "url_must_contain": ['nh-p-swap-3-pluto-v3.0/data'],
        "label": "D",
    },
-    # solar wind derived characteristics
+   # solar wind derived characteristics
+   # V2.0 of the dataset is missing from tiny_new_horizons (as of 4/16/24)
     "solar_wind": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.csv'],
-        "url_must_contain": ['nh-p-swap-5-derived-solarwind-v1.0/data'],
+        "url_must_contain": ['nh-','-swap-5-derived-solarwind','data'],
         "label": "D",
     },
 
