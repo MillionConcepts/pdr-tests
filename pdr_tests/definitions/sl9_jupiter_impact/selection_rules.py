@@ -25,6 +25,7 @@ are detached.
 """
 # variables naming specific parquet files in node_manifests
 SBN_FILE = "tiny_other"
+ATM_FILE = "atm"
 
 file_information = {
     
@@ -47,6 +48,20 @@ file_information = {
         "url_must_contain": ['ear-j_c-hsccd-3-rdr-sl9-v1.0/data/gic'],
         "label": "D",
     },
+    
+    # Anglo-Australian Observatory - imaging, spectroscopy, and spectral mapping
+    # FITS cubes
+    "aao": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['/aat/frag'],
+        "url_regex": [r'(sl9_000[89])|(sl9_001[012])'],
+        "label": "D",
+    },
+    # Four additional ground-based observatory datasets are archived at the
+    # ATM node pending peer review. They open fine during manual spot checks
+    # of a handful of products, and are notionally supported.
+    # (https://atmos.nmsu.edu/PDS/review/sl9_0007/)
     
     # Io and Europa Photometry during impact flashes
     "flash": {
@@ -101,7 +116,7 @@ file_information = {
     },
     
     # Hubble Space Telescope - WFPC2 images
-    # Mirrored at ATM, and already covered by jup_sl9_impact in the hst 
+    # Mirrored at SBN and ATM, and already covered by jup_sl9_impact in the hst 
     # selection rules.
     
     # International Ultraviolet Explorer - spectra
