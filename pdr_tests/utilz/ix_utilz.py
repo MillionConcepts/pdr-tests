@@ -321,7 +321,7 @@ def get_response(session: MaybeSession, url: str):
 
 # noinspection HttpUrlsUsage
 def assemble_urls(subset: pd.DataFrame):
-    return f"http://{subset.domain}/{subset.url}/{subset.filename}"
+    return 'http://' + subset.domain + '/' + subset.url + '/' + subset.filename
 
 
 def record_mismatches(results, absent, novel):
