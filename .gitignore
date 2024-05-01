@@ -164,3 +164,6 @@ pdr_tests/browse
 /pdr_tests/csv_forconverting/
 /pdr_tests/temp.pkl
 /pdr_tests/*.csv
+
+# user settings
+/pdr_tests/settings/user.py
