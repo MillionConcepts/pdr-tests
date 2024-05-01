@@ -2,9 +2,11 @@
 from pathlib import Path
 import sys
 
-from pdr_tests.settings._patcher import monkeypatch_literals
+if not (usersettings := Path(__file__).parent / "user.py").exists():
+    usersettings.touch()
 
 import pdr_tests.settings.user
+from pdr_tests.settings._patcher import monkeypatch_literals
 
 HEADERS = None
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
