@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+vg1_jup.lbl,"[""vg1_jup.lbl"", ""vg1_jup.dat"", ""vg1nesr.dat"", ""irishedr.fmt""]",vg1_jup,http://pds-atmospheres.nmsu.edu/PDS/data/vg_2001/jupiter,"{""TABLE"": ""fb256c7a530abb49c7906fbcd50d32b6"", ""SPECTRAL_SERIES"": ""5cc1035b6b4d7e15ba410b1d84847654"", ""SPECTRUM"": ""4d7e1d2f6f655ea19bc70ed148b1e7c8""}"
