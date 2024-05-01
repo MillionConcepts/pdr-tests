@@ -27,7 +27,7 @@ from multidict import MultiDict
 import pdr
 from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
-from pdr_tests.settings import headers, MANIFEST_DIR
+from pdr_tests.settings.base import HEADERS, MANIFEST_DIR
 from pdr_tests.utilz.dev_utilz import Stopwatch
 from pdr.pdr import Data
 
@@ -197,7 +197,9 @@ def download_product_row(
         if any((file == skip_file for skip_file in skip_files)):
             continue
         url = f"{row['url_stem']}/{file}"
-        session = verbose_temp_download(data_path, temp_path, url, session, full_lower=full_lower)
+        session = verbose_temp_download(
+            data_path, temp_path, url, session, full_lower=full_lower
+        )
     return session
 
 
@@ -274,7 +276,7 @@ def verbose_temp_download(
         else:
             urlsplit = url.split('.')
         url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
-        response = session.get(url, stream=True, headers=headers)
+        response = session.get(url, stream=True, headers=HEADERS)
         if not response.ok:
             console_and_log(f"Download of {url} failed.")
             response.close()
@@ -306,7 +308,7 @@ def get_response(session: MaybeSession, url: str):
     for _ in range(5):
         try:
             response = session.get(
-                url, stream=True, headers=headers, timeout=4
+                url, stream=True, headers=HEADERS, timeout=4
             )
             return response, session
         except requests.ReadTimeout:
@@ -319,7 +321,7 @@ def get_response(session: MaybeSession, url: str):
 
 # noinspection HttpUrlsUsage
 def assemble_urls(subset: pd.DataFrame):
-    return "http://" + subset.domain + "/" + subset.url + "/" + subset.filename
+    return f"http://{subset.domain}/{subset.url}/{subset.filename}"
 
 
 def record_mismatches(results, absent, novel):
@@ -380,8 +382,11 @@ def read_and_hash(
         # We don't want to hear about UserWarnings we're intentionally raising
         # inside pdr (for things like unsupported object types, etc.)
         warnings.filterwarnings("ignore", category=UserWarning, module="pdr")
-        warnings.filterwarnings("ignore", message="non-ASCII characters",
-                                module="astropy.io.fits.util")
+        warnings.filterwarnings(
+            "ignore",
+            message="non-ASCII characters",
+            module="astropy.io.fits.util"
+        )
         watch.start()
         data = pdr.read(str(path), debug=debug, tracker=tracker)
         data.load("all")

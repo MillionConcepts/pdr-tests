@@ -32,6 +32,8 @@ import pdr
 from pdr.pdr import Data
 from pdr.utils import check_cases
 
+from settings.base import TEST_CORPUS_BUCKET
+
 
 # ############ INDEX & TESTING CLASSES #############
 
@@ -131,7 +133,9 @@ class ProductPicker(DatasetDefinition):
         try:
             size_gb = round(pa.compute.sum(products["size"]).as_py() / 10**9, 2)
         except TypeError:
-            raise ValueError('No matches found, please check selection_rules and try again.')
+            raise ValueError(
+                'No matches found, please check selection_rules and try again.'
+            )
         # TODO: this estimate is bad for products with several large files
         print(f"{len(products)} products found, {size_gb} estimated GB")
         if write is False:
@@ -537,7 +541,14 @@ class CorpusFinalizer(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def create_and_upload_test_subset(self, product_type, product=None, subset_size=1, regen=False, local=False):
+    def create_and_upload_test_subset(
+        self,
+        product_type,
+        product=None,
+        subset_size=1,
+        regen=False,
+        local=False
+    ):
         if product_type is None:
             return self.across_all_types("create_and_upload_test_subset")
         if not self.test_path(product_type).is_file() or regen:
@@ -547,10 +558,15 @@ class CorpusFinalizer(DatasetDefinition):
         self.upload_to_s3(product_type)
 
     def create_test_subset_csv(self, product_type, product, subset_size):
-        with open(self.index_path(product_type)) as index_f, open(self.test_path(product_type), 'w+') as test_f:
-            if not product:
+        with (
+            open(self.index_path(product_type)) as index_f,
+            open(self.test_path(product_type), 'w+') as test_f
+        ):
+            if not product:  # TODO: what is the actual 'falsy' case here
                 index_length = sum(1 for _ in index_f)
-                integer_choice = np.random.choice(np.arange(1, index_length-1), size=subset_size)
+                integer_choice = np.random.choice(
+                    np.arange(1, index_length-1), size=subset_size
+                )
                 index_f.seek(0)
                 for pos, line in enumerate(index_f):
                     if pos == 0 or any(pos == integer_choice):
@@ -562,16 +578,29 @@ class CorpusFinalizer(DatasetDefinition):
                 test_f.seek(0)
                 test_length = sum(1 for _ in test_f)
                 if test_length < 2:
-                    print(f'{product} not found in {self.dataset} {product_type} index. '
-                          f'Check your spelling and try again using regen=True.')
+                    print(
+                        f'{product} not found in {self.dataset} {product_type} '
+                        f'index. Check your spelling and try again using '
+                        f'regen=True.'
+                    )
 
     def upload_to_s3(self, product_type):
         from hostess.aws.s3 import Bucket
-        corpus = Bucket('mc-pdr-permanent-test-corpus')
+        if TEST_CORPUS_BUCKET is None:
+            raise EnvironmentError(
+                "Define settings.user.TEST_CORPUS_BUCKET before running ix"
+                "finalize."
+            )
+        corpus = Bucket(TEST_CORPUS_BUCKET)
         with open(self.test_path(product_type)) as test_f:
             next(test_f)
             for line in test_f:
-                file_list = line.replace(']', '[').split('[')[1].replace('"', '').split(',')
+                file_list = (
+                    line.replace(']', '[')
+                    .split('[')[1]
+                    .replace('"', '')
+                    .split(',')
+                )
                 for file in file_list:
                     try:
                         file = file.split('/')[-1].strip()
@@ -580,10 +609,16 @@ class CorpusFinalizer(DatasetDefinition):
                                 self.product_data_path(product_type), file),
                                 f'{self.dataset}/{product_type}/{file}'
                             )
-                        print(f'{self.dataset} {product_type}: {file} uploaded to s3.')
+                        print(
+                            f'{self.dataset} {product_type}: {file} '
+                            f'uploaded to s3.'
+                        )
                     except FileNotFoundError:
-                        print(f'{file} not present in subset folder. '
-                              f'Please put it in data/{self.dataset}/{product_type} and retry.')
+                        print(
+                            f'{file} not present in subset folder. '
+                            f'Please put it in data/{self.dataset}/'
+                            f'{product_type} and retry.'
+                        )
 
 
 # ############## STANDALONE / HANDLER FUNCTIONS ###############
