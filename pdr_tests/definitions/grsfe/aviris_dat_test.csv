@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-avrcm05c.LBL,"[""VICAR2.TXT"", ""avrcm05c.LBL"", ""AVRCM05C.DAT""]",AVRCM05C,http://pds-geosciences.wustl.edu/earth/grsfe/gr_0008/aviris/avrcm05
+label_file,files,product_id,url_stem,hash
+avrcm05c.LBL,"[""VICAR2.TXT"", ""avrcm05c.LBL"", ""AVRCM05C.DAT""]",AVRCM05C,http://pds-geosciences.wustl.edu/earth/grsfe/gr_0008/aviris/avrcm05,"{""TABLE"": ""d8871f7c842a6abe632054fca427467b""}"

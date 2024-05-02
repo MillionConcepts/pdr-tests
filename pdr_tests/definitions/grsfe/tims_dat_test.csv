@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-timkl02b.LBL,"[""VICAR2.TXT"", ""timkl02b.LBL"", ""TIMKL02B.DAT""]",TIMKL02B,http://pds-geosciences.wustl.edu/earth/grsfe/gr_0008/tims
+label_file,files,product_id,url_stem,hash
+timkl02b.LBL,"[""VICAR2.TXT"", ""timkl02b.LBL"", ""TIMKL02B.DAT""]",TIMKL02B,http://pds-geosciences.wustl.edu/earth/grsfe/gr_0008/tims,"{""TABLE"": ""209faa3417d3b2c52191424b41e4160a""}"
