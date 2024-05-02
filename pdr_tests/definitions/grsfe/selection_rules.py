@@ -108,10 +108,7 @@ file_information = {
         "url_must_contain": ['earth/grsfe', 'wthrsta'],
         "label": "D",
     },
-}
-
-"""
-VAX_REAL tables:
+    # VAX_REAL tables:
     "aviris_dat": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.dat'],
@@ -124,7 +121,9 @@ VAX_REAL tables:
         "url_must_contain": ['earth/grsfe', 'tims'],
         "label": "D",
     },
+}
 
+"""
 Products missing/incomplete/wrong labels:
     # airborne data locator maps (appear to be ancillary)
     # SAMPLE_TYPE = BYTE should probably be VAX_INTEGER
