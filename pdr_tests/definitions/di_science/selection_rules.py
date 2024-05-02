@@ -114,4 +114,35 @@ file_information = {
 ##        "url_must_contain": ['di-c-hriv_its_mri-5-movie-coll', '/data'],
 ##        "label": "D",
 ##    },
+    
+    # IRAS images derived from sky survey atlas scans and pointed observations
+    "iras_img_survey": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['di_iras-c-fpa-5-9p-images-v1.0/data/survey'],
+        "label": "D",
+    },
+    # These products are supported and open fine. But they give an
+    # astropy "VerifyWarning" when opened, including during ix test runs.
+    # TO-DO: confirm the warning can be supressed with minimal risk
+##    "iras_img_pointed": {
+##        "manifest": SBN_FILE,
+##        "fn_must_contain": ['.fit'],
+##        "url_must_contain": ['di_iras-c-fpa-5-9p-images-v1.0/data/ao'],
+##        "label": "D",
+##    },
+    # IRAS beam size tables for pointed images
+    "iras_beamsize": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['di_iras-c-fpa-5-9p-images-v1.0/data'],
+        "label": "D",
+    },
+    # IRAS photometry tables derived from reconstructed survey/pointed images
+    "iras_photometry": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['di_iras-c-fpa-5-9p-phot-v1.0/data'],
+        "label": "D",
+    },
 }
