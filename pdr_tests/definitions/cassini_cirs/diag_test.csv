@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-DIAG06101808.LBL,"[""DIAG.FMT"", ""DIAG06101808.LBL"", ""DIAG06101808.DAT""]",CIRS-DIAG06101808,http://pds-atmospheres.nmsu.edu/PDS/data/cocirs_0610/DATA/TSDR/UNCALIBR,"{""TABLE"": ""d8f1d8162779fba0ca16f55ad8b30ae0""}"
+DIAG06092312.LBL,"[""DIAG06092312.DAT"", ""DIAG.FMT"", ""DIAG06092312.LBL""]",CIRS-DIAG06092312,http://pds-atmospheres.nmsu.edu/PDS/data/cocirs_0609/DATA/TSDR/UNCALIBR,"{""TABLE"": ""6ffd39ac9790119a6b1ec6651c9ad2b0""}"
