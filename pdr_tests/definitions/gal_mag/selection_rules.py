@@ -26,6 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 PLASM_FILE = "plasm_full"
+SB_FILE = "tiny_sbnarchive"
 
 file_information = {
     # EDR officially unsupported.
@@ -60,4 +61,12 @@ file_information = {
     #     "url_must_contain": ['GO-', '-MAG-', '-SUMM-'],
     #     "label": "D",
     # }
+    
+    # SBN's Ida and Gaspra specific subset of mag data
+    "small_bodies": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['galileo/idagaspra', 'data/galileo_mag'],
+        "label": "D",
+    },
 }

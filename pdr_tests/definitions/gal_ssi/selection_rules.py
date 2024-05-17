@@ -93,4 +93,11 @@ file_information = {
         "url_must_contain": ['galileo/derived', '_SSI_', 'data/qube'],
         "label": "D",
     },
+    # Ancillary tables: image indices and known bad pixels
+    "sb_ancillary": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['galileo/idagaspra', 'data/galileo_ssi'],
+        "label": "D",
+    },
 }
