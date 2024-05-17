@@ -26,6 +26,7 @@ are detached.
 # variables naming specific parquet files in node_manifests
 ATM_FILE = "atm"
 GEOLAB_FILE = "geolab"
+RMS_FILE = "ringvolumes"
 
 file_information = {
     # Ground-based spectrophotometry of the Jovian planets and Titan.
@@ -48,6 +49,13 @@ file_information = {
         "manifest": GEOLAB_FILE,
         "fn_must_contain": ['spectrum.tab'],
         "url_must_contain": ['bug_9001/data'],
+        "label": "D",
+    },
+    # 1989 Saturn ring occultation of 28 Sagittarii
+    "ring_occ_1989": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['EBROCC_0001/DATA'],
         "label": "D",
     },
     
