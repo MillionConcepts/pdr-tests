@@ -50,5 +50,11 @@ file_information = {
         "url_must_contain": ['couvis', 'DATA'],
         "label": "D",
     },
-
+    # high-speed photometer; TIME_SERIES
+    "hsp": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['HSP', '.DAT'],
+        "url_must_contain": ['couvis', 'DATA'],
+        "label": "D",
+    },
 }

@@ -32,13 +32,17 @@ RMS_PDS4 = "ringpds4"
 
 file_information = {
 	
-	# spectral cube EDRs - pds3 fails to open, pds4 opens fine
+    # spectral cube EDRs - pds3 fails to open, pds4 opens fine
     "cube": {
         "manifest": RMS_PDS4,
         "fn_must_contain": ['.qub'],
         "url_must_contain": ['cassini_vims_saturn/data_raw'],
         "label": ('.qub', '.xml'),
     },
-    
-	
+    "cruise_cube": {
+        "manifest": RMS_PDS4,
+        "fn_must_contain": ['.qub'],
+        "url_must_contain": ['cassini_vims_cruise/data_raw'],
+        "label": ('.qub', '.xml'),
+    },
 }
