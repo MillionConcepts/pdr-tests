@@ -82,19 +82,35 @@ file_information = {
         "url_must_contain": ['dawn/fc/DWNCSPC_4_01/DATA/ICQ'],
         "label": "D",
     },
+    # Framing Camera - shape models ancillary tables
+    "fc_shape_anc": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['dawn/fc/DWNCSPC_4_01/DATA'],
+        "label": "D",
+    },
     # VIR - IR and VIS EDR
     "vir_edr": {
        "manifest": MANIFEST_FILE,
        "fn_must_contain": ['.QUB'],
-       "url_must_contain": ['dawn/vir/DWN', '1A/DATA'],
+       "url_must_contain": ['dawn/vir/DWN', 'DATA'],
+       "url_regex": [r'(VIR_V1A)|(VIR_I1A)'],
        "label": "D",
      },
     # VIR - IR and VIS RDR
     "vir_rdr": {
        "manifest": MANIFEST_FILE,
        "fn_must_contain": ['.QUB'],
-       "url_must_contain": ['dawn/vir/DWN', '1B/DATA'],
+       "url_must_contain": ['dawn/vir/DWN', 'DATA'],
+       "url_regex": [r'(VIR_V1B)|(VIR_I1B)'],
        "label": "D",
+    },
+    # VIR - housekeeping data
+    "vir_hk": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['dawn/vir/DWN','DATA'],
+        "label": "D",
     },
     # VIR - Ceres mosaics
     "vir_mosaic_ceres": {
