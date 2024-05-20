@@ -36,6 +36,13 @@ file_information = {
         "url_must_contain": ['NEAR_A_MSI_2_EDR_', '/data', '/raw'],
         "label": "D",
     },
+    # EDR - parameter tables (ancillary)
+    "param": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['NEAR_A_MSI_2_EDR_', '/data', '/raw'],
+        "label": "D",
+    },
     # EDR - iof
     "iof": {
         "manifest": SBN_FILE,
@@ -48,6 +55,13 @@ file_information = {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['NEAR_A_MSI_3_EDR_', '/data', '/rad'],
+        "label": "D",
+    },
+    # EDR - cif, cleaned i/f images
+    "cif": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['NEAR_A_MSI_3_EDR_', '/data', '/cif'],
         "label": "D",
     },
     # RDR filter bandpass info
