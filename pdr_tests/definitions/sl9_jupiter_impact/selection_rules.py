@@ -30,15 +30,12 @@ ATM_FILE = "atm"
 file_information = {
     
     # NASA Infra Red Telescope Facility - NSFCAM Near-IR images
-    # These products are supported and open fine, but they give an
-    # AstropyUserWarning that creates confusion/clutter when running ix test.
-    # TO-DO: confirm the warning can be supressed with minimal risk
-##    "irtf": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['irtf-j_c-nsfcam-3-rdr-sl9-v1.0/irtf'],
-##        "label": "D",
-##    },
+    "irtf": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['irtf-j_c-nsfcam-3-rdr-sl9-v1.0/irtf'],
+        "label": "D",
+    },
     
     # Global Imaging Campaign - high-speed optical CCD imaging from 5
     # observatories during the impact
