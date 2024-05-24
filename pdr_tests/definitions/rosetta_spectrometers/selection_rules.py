@@ -61,8 +61,8 @@ file_information = {
     
 # start MIRO data products
 
-	# data acquired prior to arrival at comet 67P/CHURYUMOV-GERASIMENKO use a different 
-	# format file than data acquired at the comet, so they are separated here.
+    # data acquired prior to arrival at comet 67P/CHURYUMOV-GERASIMENKO use a different 
+    # format file than data acquired at the comet, so they are separated here.
     "EDR_miro_prior": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.dat'],

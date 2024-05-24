@@ -30,9 +30,10 @@ SBN_FILE = "tiny_sbnarchive"
 
 file_information = {
     # Eros and Mathilde ODF data
+    # (eop, ion, tro, and txt are not supported. The labels have no pointers)
     "odf": {
         "manifest": SBN_FILE,
-        "fn_must_contain": ['.'],
+        "fn_must_contain": ['.odf'],
         "url_must_contain": ['NEAR_A_RSS_1_5', '/odf'],
         "label": "D",
     },

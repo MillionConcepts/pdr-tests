@@ -51,5 +51,4 @@ file_information = {
         "url_must_contain": ['CORSS_8xxx/CORSS_8001/data'],
         "label": 'D',
     },
-	
 }

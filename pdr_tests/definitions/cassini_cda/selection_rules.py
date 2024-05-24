@@ -31,7 +31,7 @@ SB_FILE = "tiny_sbnarchive"
 file_information = {
 
 # Cosmic Dust Analyzer (CDA)
-	# Area Table: sensitive area of detector and analyzer
+    # Area Table: sensitive area of detector and analyzer
     "cda_area": {
         "manifest": SB_FILE,
         "fn_must_contain": ['AREA', '.TAB'],
