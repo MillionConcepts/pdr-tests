@@ -28,24 +28,126 @@ are detached.
 SB_FILE = "tiny_rosetta"
 
 file_information = {
-    
-
-    "REFDR": {
+    # image data
+    "image": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.fit'],
-        "url_must_contain": ['-cosima-3-', '/data'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
         "label": "D",
     },
-    "Features": {
+    # grain list
+    "grain": {
         "manifest": SB_FILE,
         "fn_must_contain": ['gr__.tab'],
-        "url_must_contain": ['-cosima-3-', '/data'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
         "label": "A",
     },
-    "HK": {
+    # housekeeping
+    "hk": {
         "manifest": SB_FILE,
-        "fn_must_contain": ['g_hk.tab'],
-        "url_must_contain": ['-cosima-3-', '/data'],
+        "fn_must_contain": ['hk.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    # history product
+    "history": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['hist.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    # named positions (Several products are just the attached label and an 
+    # empty table. They fail to open, which is expected.)
+    "position": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['position.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    # spectrum
+    "spectrum": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['sp_','.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    # peak list
+    "peak": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['pk_','.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    # scan data
+    "scan": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['scan.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    # heating data
+    "heat": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['heat.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    # cleaning data
+    "clean": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['clea.tab'],
+        "url_must_contain": ['ro-c-cosima-3-v6.0/data'],
+        "label": "A",
+    },
+    
+    # ground calibration data (similar to above ptypes, but with different 
+    # format files)
+    "ground_image": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
+        "label": "D",
+    },
+    "ground_grain": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['gr__.tab'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
+        "label": "A",
+    },
+    "ground_hk": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['hk.tab'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
+        "label": "A",
+    },
+    "ground_history": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['hist.tab'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
+        "label": "A",
+    },
+    "ground_spectrum": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['sp_','.tab'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
+        "label": "A",
+    },
+    "ground_peak": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['pk_','.tab'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
+        "label": "A",
+    },
+    "ground_scan": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['scan.tab'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
+        "label": "A",
+    },
+    "ground_heat": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['heat.tab'],
+        "url_must_contain": ['ro-cal-cosima-3-v3.0/data'],
         "label": "A",
     },
 }
