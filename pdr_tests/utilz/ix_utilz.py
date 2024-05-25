@@ -150,7 +150,7 @@ def make_pds3_row(local_path):
         mtypes=(MultiDict, dict),
         base_pred=lambda a, b: b.startswith(a)
     )
-    for target in map(metadata.formatter, targets):
+    for target in targets:
         if isinstance(target, (int, set, dict)):
             continue
         if isinstance(target, Sequence):
