@@ -32,7 +32,7 @@ import pdr
 from pdr.pdr import Data
 from pdr.utils import check_cases
 
-from settings.base import TEST_CORPUS_BUCKET
+from pdr_tests.settings.base import TEST_CORPUS_BUCKET
 
 
 # ############ INDEX & TESTING CLASSES #############
