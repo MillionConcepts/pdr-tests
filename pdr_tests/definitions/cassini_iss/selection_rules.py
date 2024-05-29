@@ -32,10 +32,10 @@ IMG_FILE = "img_usgs_cassini"
 
 file_information = {
 	
-	# telemetry_tables are currently unsupported because of bit column issues
-	# line_prefix_tables are unsupported with eventual support planned
+    # telemetry_tables are currently unsupported because of bit column issues
+    # line_prefix_tables are unsupported with eventual support planned
 	
-	# Calibration files
+    # Calibration files
     "calib": {
         "manifest": IMG_FILE,
         "fn_regex": [r'(.img)|(.IMG)'],
@@ -63,8 +63,6 @@ file_information = {
         "url_must_contain": ['coiss_3', 'data/images'],
         "label": "A",
     },
-	# the MIDR directory includes 'maps' in addition to the 'images' product above. they
-	# are publication/presentation quality versions of the images in PDF format.
-	
-	
+    # the MIDR directory includes 'maps' in addition to the 'images' product above. they
+    # are publication/presentation quality versions of the images in PDF format.
 }

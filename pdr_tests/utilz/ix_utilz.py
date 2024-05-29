@@ -150,7 +150,7 @@ def make_pds3_row(local_path):
         mtypes=(MultiDict, dict),
         base_pred=lambda a, b: b.startswith(a)
     )
-    for target in map(metadata.formatter, targets):
+    for target in targets:
         if isinstance(target, (int, set, dict)):
             continue
         if isinstance(target, Sequence):
@@ -377,6 +377,7 @@ def read_and_hash(
     read a product at a specified path, compute hashes from its data objects,
     log appropriately
     """
+    import astropy.io.fits.verify
     watch, runtimes = Stopwatch(digits=3, silent=True), {}
     with warnings.catch_warnings():
         # We don't want to hear about UserWarnings we're intentionally raising
@@ -386,6 +387,15 @@ def read_and_hash(
             "ignore",
             message="non-ASCII characters",
             module="astropy.io.fits.util"
+        )
+        warnings.filterwarnings(
+            "ignore",
+            category=astropy.io.fits.verify.VerifyWarning
+        )
+        warnings.filterwarnings(
+            "ignore",
+            message="Unexpected bytes",
+            module="astropy.io.fits.header"
         )
         watch.start()
         data = pdr.read(str(path), debug=debug, tracker=tracker)

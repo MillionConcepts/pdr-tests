@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+cs_1c2_20020628t110554_schk.tab,"[""COSIMA_SPECTRUM_TDC_CALIB.FMT"", ""COSIMA_SPECTRUM_TDC_TIMING.FMT"", ""COSIMA_SPECTRUM_HK.FMT"", ""cs_1c2_20020628t110554_schk.tab""]",CS_1C2_20020628T110554_SCHK,http://pdssbn.astro.umd.edu/holdings/ro-cal-cosima-3-v3.0/data/sub_1c2,"{""HK_TABLE"": ""de180cc745177461197e04474f4d0ac8"", ""TDC_TIMING_TABLE"": ""e0065cdc45c5bb8eec697a69b0559dce"", ""TDC_CALIBRATION_TABLE"": ""0074601bdffefe86e56a1fba4c427729""}"

@@ -37,9 +37,15 @@ file_information = {
         "url_must_contain": ['holdings/ro-', '-alice-2-', '/data'],
         "label": "D",
     },
+    # supplementary tables
+    "alice_sup": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ro-x-alice-6-supplementary-v1.0/data'],
+        "label": "D",
+    },
     
     # These are FITS arrays labelled as tables:
-    
     "EDR_alice": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.fit'],
@@ -61,8 +67,8 @@ file_information = {
     
 # start MIRO data products
 
-	# data acquired prior to arrival at comet 67P/CHURYUMOV-GERASIMENKO use a different 
-	# format file than data acquired at the comet, so they are separated here.
+    # data acquired prior to arrival at comet 67P/CHURYUMOV-GERASIMENKO use a different 
+    # format file than data acquired at the comet, so they are separated here.
     "EDR_miro_prior": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.dat'],

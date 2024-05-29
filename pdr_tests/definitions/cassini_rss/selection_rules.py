@@ -55,7 +55,7 @@ file_information = {
         "label": "D",
     },
     # Solar Conjunction and Solar Characterization Experiments
-	"solar": {
+    "solar": {
         "manifest": ATM_FILE,
         "fn_regex": [r'\.[0-9][^0-9][0-9]'],
         "url_must_contain": ['cors_'],
@@ -63,7 +63,7 @@ file_information = {
         "label": "D",
     },
     # Bistatic Experiment
-	"bist": {
+    "bist": {
         "manifest": ATM_FILE,
         "fn_regex": [r'\.[0-9][^0-9][0-9]'],
         "url_must_contain": ['cors_'],
@@ -86,24 +86,24 @@ file_information = {
         "url_must_contain": ['cors_', '515'],
         "label": "D",
     },
-	# ODF    Orbit Data File
-	"odf": {
+    # ODF    Orbit Data File
+    "odf": {
         "manifest": ATM_FILE,
         "fn_regex": [r'(ODF$)|(odf$)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(ODF)|(odf)'],
         "label": "D",
     },
-	# TDF    Archival Tracking Data File
-	"tdf": {
+    # TDF    Archival Tracking Data File
+    "tdf": {
         "manifest": ATM_FILE,
         "fn_regex": [r'(TDF$)|(tdf$)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(TDF)|(tdf)'],
         "label": "D",
     },
-	# TLM    Telemetry File
-	"tlm": {
+    # TLM    Telemetry File
+    "tlm": {
         "manifest": ATM_FILE,
         "fn_regex": [r'(TLM$)|(tlm$)'],
         "url_must_contain": ['cors_'],
@@ -111,62 +111,63 @@ file_information = {
         "label": "D",
     },
     
-# products with labels lacking pointer to 'data' file:
-# 
-# 	# LOG	log file 
-# 	"log": {
-#         "manifest": ATM_FILE,
-#         "url_must_contain": ['cors_'],
-#         "url_regex": [r'(/LOG)|(/log)'],
-#         "label": "D",
-#     },
-# 	# PD1    Path Delay Data File from AWVR1
-# 	"pd1": {
-#         "manifest": ATM_FILE,
-#         "fn_regex": [r'(.PD1)|(.pd1)'],
-#         "url_must_contain": ['cors_'],
-#         "url_regex": [r'(PD1)|(pd1)'],
-#         "label": "D",
-#     },
-#     # PD2    Path Delay Data File from AWVR2
-#     "pd2": {
-#         "manifest": ATM_FILE,
-#         "fn_regex": [r'(.PD2)|(.pd2)'],
-#         "url_must_contain": ['cors_'],
-#         "url_regex": [r'(PD2)|(pd2)'],
-#         "label": "D",
-#     },
-#     # TNF
-# 	"tnf": {
-#         "manifest": ATM_FILE,
-#         "fn_regex": [r'(.TNF)|(.tnf)'],
-#         "url_must_contain": ['cors_'],
-#         "url_regex": [r'(TNF)|(tnf)'],
-#         "label": "D",
-#     },
-# 	# EOP    Earth Orientation Parameters File
-# 	"eop": {
-#         "manifest": ATM_FILE,
-#         "fn_regex": [r'(.EOP)|(.eop)'],
-#         "url_must_contain": ['cors_'],
-#         "url_regex": [r'(EOP)|(eop)'],
-#         "label": "D",
-#     },
-# 	# ION    Ionosphere Calibration File
-# 	"ion": {
-#         "manifest": ATM_FILE,
-#         "fn_regex": [r'(.ION)|(.ion)'],
-#         "url_must_contain": ['cors_'],
-#         "url_regex": [r'(ION)|(ion)'],
-#         "label": "D",
-#     },
-# 	# TRO    Troposphere Calibration File
-# 	"tro": {
-#         "manifest": ATM_FILE,
-#         "fn_regex": [r'(.TRO)|(.tro)'],
-#         "url_must_contain": ['cors_'],
-#         "url_regex": [r'(TRO)|(tro)'],
-#         "label": "D",
-#     },
-	
 }
+"""
+# products with labels lacking pointer to 'data' file:
+ 
+    # LOG   log file 
+    "log": {
+        "manifest": ATM_FILE,
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(/LOG)|(/log)'],
+        "label": "D",
+    },
+    # PD1   Path Delay Data File from AWVR1
+    "pd1": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(.PD1)|(.pd1)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(PD1)|(pd1)'],
+        "label": "D",
+    },
+    # PD2   Path Delay Data File from AWVR2
+    "pd2": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(.PD2)|(.pd2)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(PD2)|(pd2)'],
+        "label": "D",
+    },
+    # TNF
+    "tnf": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(.TNF)|(.tnf)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(TNF)|(tnf)'],
+        "label": "D",
+    },
+    # EOP   Earth Orientation Parameters File
+    "eop": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(.EOP)|(.eop)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(EOP)|(eop)'],
+        "label": "D",
+    },
+    # ION   Ionosphere Calibration File
+    "ion": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(.ION)|(.ion)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(ION)|(ion)'],
+        "label": "D",
+    },
+    # TRO   Troposphere Calibration File
+    "tro": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(.TRO)|(.tro)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(TRO)|(tro)'],
+        "label": "D",
+    },
+"""

@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+cs_1d1_20150408t225401_heat.tab,"[""COSIMA_HEATING_SETUP.FMT"", ""COSIMA_HEATING_DATA.FMT"", ""cs_1d1_20150408t225401_heat.tab""]",CS_1D1_20150408T225401_HEAT,http://pdssbn.astro.umd.edu/holdings/ro-c-cosima-3-v6.0/data/sub_1d1,"{""HEATING_SETUP_TABLE"": ""09c706add4677e726bc205e811ff2f46"", ""HEATING_TABLE"": ""997cad6f3d0a1b08e554c5a3cf3d7050""}"
