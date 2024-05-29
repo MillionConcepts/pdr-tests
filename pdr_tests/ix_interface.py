@@ -1,6 +1,7 @@
 from ast import literal_eval
 from itertools import chain
 from pathlib import Path
+from importlib import import_module
 
 from pdr_tests.datasets import (
     ProductPicker,
@@ -22,7 +23,8 @@ COMMANDS = [
     "finalize",
     "test",
     "index_directory",
-    "test_paths"
+    "test_paths",
+    "count"
 ]
 
 
@@ -200,3 +202,23 @@ def index_directory(target, manifest, output="index.csv", debug=False, filters=N
 
 def ix_help(*_, **__):
     print(f"Usage: valid subcommands are: {', '.join(COMMANDS)}.")
+
+
+def count(dataset=None):
+    if dataset is None:
+        print("no dataset argument provided; listing all defined datasets")
+        datasets = [
+            d.name
+            for d in Path(Path(__file__).parent, "definitions").iterdir()
+            if (d.is_dir() and ("cache" not in d.name))
+        ]
+    else:
+        datasets = [dataset]
+    cnt = 0
+    for dataset in datasets:
+        rules_module = import_module(
+            f"pdr_tests.definitions.{dataset}.selection_rules"
+        )
+        rules = getattr(rules_module, "file_information")
+        cnt += len(rules)
+    print(f"There are {cnt} total product types.")
