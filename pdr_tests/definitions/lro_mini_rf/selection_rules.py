@@ -79,6 +79,13 @@ file_information = {
         "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'mosaics'],
         "label": 'D',
     },
+    # SAR housekeeping data
+    "housekeeping": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.csv'],
+        "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'housekeeping'],
+        "label": 'D',
+    },
 }
 """
     # SAR Raw Packetized Data Records; raw binary telemetry
