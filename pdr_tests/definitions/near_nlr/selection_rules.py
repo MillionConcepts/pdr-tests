@@ -45,6 +45,15 @@ file_information = {
         "url_must_contain": ['nleros_2', 'level2/topo'],
         "label": "D",
     },
+    # CDR - level 2 / log (SBN and GEO)
+    # NEAR_A_NLR_5_CDR_EROS_ORBIT at SBN
+    # The log files share a filename but they are all copies of the same table
+    "cdr_log": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['nleros_2', 'level2/log'],
+        "label": "D",
+    },
     # CDR - level 3 / ascii (SBN and GEO)
     # NEAR_A_NLR_6_EROS_MAPS_MODELS at SBN
     "cdr_asc": {
