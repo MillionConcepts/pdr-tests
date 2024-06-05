@@ -154,10 +154,19 @@ Mistakes in data files:
         "label": "D",
     },
 
-Compressed images:
-    "airsar": {
+AIRSAR images:
+    # support not planned
+    "airsar_compressed": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.imq'],
+        "url_must_contain": ['earth/grsfe', 'airsar'],
+        "label": "D",
+    },
+    # Does not open because SAMPLE_TYPE = BYTE. According to vicar2.txt
+    # BYTE is an 8-bit "VAX byte"
+    "airsar_img": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.img'],
         "url_must_contain": ['earth/grsfe', 'airsar'],
         "label": "D",
     },
