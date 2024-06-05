@@ -140,29 +140,37 @@ file_information = {
         "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
         "label": "D",
     },
-##    # SPECTRAL_IMAGE_QUBE pointer does not open
-##    "spec_hal_raw_dat": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.dat'],
-##        "url_must_contain": ['ihw-c-spec-2-edr-halley', 'data'],
-##        "label": "D",
-##    },
-##    # SPECTRAL_IMAGE_QUBE pointer does not open.
-##    # Products with a SPECTRUM pointer do open.
-##    "spec_hal_didr_dat": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.dat'],
-##        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
-##        "label": "D",
-##    },
-##    # The filename extensions do not match the pointers in their labels.
-##    "spec_hal_didr_typo": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.img'],
-##        "fn_regex": [r'spec[12]'],
-##        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
-##        "label": "D",
-##    },
+#    # SPECTRAL_IMAGE_QUBE pointer does not open
+#    "spec_hal_raw_dat": {
+#        "manifest": SBN_FILE,
+#        "fn_must_contain": ['.dat'],
+#        "url_must_contain": ['ihw-c-spec-2-edr-halley', 'data'],
+#        "label": "D",
+#    },
+#    # SPECTRAL_IMAGE_QUBE pointer does not open.
+#    # Products with a SPECTRUM pointer do open.
+#    "spec_hal_didr_dat": {
+#        "manifest": SBN_FILE,
+#        "fn_must_contain": ['.dat'],
+#        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
+#        "label": "D",
+#    },
+#    # The filename extensions do not match the pointers in their labels.
+#    "spec_hal_didr_typo": {
+#        "manifest": SBN_FILE,
+#        "fn_must_contain": ['.img'],
+#        "fn_regex": [r'spec[12]'],
+#        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
+#        "label": "D",
+#    },
+
+    # Earth-based CCD observations of Halley outburst
+    "ccd_outburst": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['ear-c-ccd-3-edr-halley-outburst', 'data'],
+        "label": "D",
+    },
 }
 
 """
