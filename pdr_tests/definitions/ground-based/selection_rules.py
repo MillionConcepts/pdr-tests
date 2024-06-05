@@ -27,6 +27,7 @@ are detached.
 ATM_FILE = "atm"
 GEOLAB_FILE = "geolab"
 RMS_FILE = "ringvolumes"
+SBN_FILE = "tiny_other"
 
 file_information = {
     # Ground-based spectrophotometry of the Jovian planets and Titan.
@@ -56,6 +57,26 @@ file_information = {
         "manifest": RMS_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['EBROCC_0001/DATA'],
+        "label": "D",
+    },
+    # Lowell Observatory Cometary Database and Production Rates
+    "lowell_comet": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ear-c-phot-3-rdr-lowell-comet-db-v1.0/data'],
+        "label": "D",
+    },
+    "lowell_comet_pr": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ear-c-phot-5-rdr-lowell-comet-db-pr-v1.0/data'],
+        "label": "D",
+    },
+    # Northern Arizona University - Lab CH3D Ice Absorption Coefficients
+    "nau_lab_ice": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ear-x-i2041-5-ch3dicespec-v1.0/data'],
         "label": "D",
     },
     
