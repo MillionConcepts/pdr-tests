@@ -100,6 +100,28 @@ file_information = {
         "label": "D",
     },
 
+    # Earth-based observations supporting Stardust; Keck Observatory
+    "keck_raw": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['ear-c-i0039-2-sbn0007_keckiiesi-v1.0/data',
+                             'raw'],
+        "label": "D",
+    },
+    "keck_processed": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['ear-c-i0039-2-sbn0007_keckiiesi-v1.0/data',
+                             'processed'],
+        "label": "D",
+    },
+    "keck_ancil": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ear-c-i0039-2-sbn0007_keckiiesi-v1.0/data'],
+        "label": "D",
+    },
+
     # SAFED datasets that are being skipped for testing:
     # STARDUST-C/E/L-DFMI-2-EDR-V1.0 - early cruise phase DFMI data
     # STARDUST-C/E/L-NC-2-EDR-V1.0 - early cruise phase NAVCAM images
