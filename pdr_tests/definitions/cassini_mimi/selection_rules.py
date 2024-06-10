@@ -54,14 +54,20 @@ file_information = {
 	# calibrated CHEMS data
     "rdr_chems_avg": {
         "manifest": PPI_FILE,
-        "fn_must_contain": ['.CSV', 'AVG'],
-        "url_must_contain": ['CO-S-MIMI-4-CHEMS-CALIB', 'DATA/C'],
+        "fn_must_contain": ['.CSV'],
+        "url_must_contain": ['CO-S-MIMI-4-CHEMS-CALIB', 'DATA/CMAVG0'],
+        "label": "D",
+	},
+    "rdr_chems_pha": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.CSV'],
+        "url_must_contain": ['CO-S-MIMI-4-CHEMS-CALIB', 'DATA/CPAVG0'],
         "label": "D",
 	},
     "rdr_chems_fullres": {
         "manifest": PPI_FILE,
-        "fn_must_contain": ['.csv', 'FULL'],
-        "url_must_contain": ['CO-S-MIMI-4-CHEMS-CALIB', 'DATA/C'],
+        "fn_must_contain": ['.csv'],
+        "url_must_contain": ['CO-S-MIMI-4-CHEMS-CALIB', 'DATA/CMFULL0'],
         "label": "D",
 	},
 	
