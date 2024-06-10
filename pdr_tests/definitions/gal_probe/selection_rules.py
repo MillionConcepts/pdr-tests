@@ -116,4 +116,11 @@ file_information = {
         "url_must_contain": ['gp_0001/data/nfr/raw'],
         "label": "A",
     },
+    # NET FLUX RADIOMETER - flux data
+    "nfr_flux": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['gp_0001/data/nfr/fluxes'],
+        "label": "A",
+    },
 }
