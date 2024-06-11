@@ -92,12 +92,13 @@ class DatasetDefinition:
         os.makedirs(self.product_data_path(product_type), exist_ok=True)
         os.makedirs(self.temp_data_path(product_type), exist_ok=True)
 
-    def across_all_types(self, method_name, *args, **kwargs):
-        output = []
-        for product_type in sorted(self.rules.keys()):
-            result = getattr(self, method_name)(product_type, *args, **kwargs)
-            output.append(result)
-        return output
+    def expand_product_types(self, product_type: Optional[str]) -> Sequence[str]:
+        """
+        Expand product_type=None to a list of all product types.
+        """
+        if product_type is None:
+            return sorted(self.rules.keys())
+        return [product_type]
 
 
 class ProductPicker(DatasetDefinition):
@@ -108,39 +109,40 @@ class ProductPicker(DatasetDefinition):
     #  the manifest a bunch of times, although it's very
     #  memory-efficient. idk. it might not be as bad as i think,
     #  though, unless we did clever segmentation of results on each group.
-    def make_product_list(self, product_type: str, write: bool = True):
+    def make_product_list(self, product_types: Optional[str], write: bool = True):
         """
         construct full-set pyarrow table for a given product type, and
         optionally write it as a parquet file.
         """
-        if product_type is None:
-            return self.across_all_types("make_product_list", write=write)
-        os.makedirs(
-            self.complete_list_path(product_type).parent, exist_ok=True
-        )
-        print(f"Making product list for {product_type} ...... ", end="")
-        self.complete_list_path(product_type).unlink(missing_ok=True)
-        manifest = find_manifest(self.rules[product_type]["manifest"])
-        manifest_parquet = parquet.ParquetFile(manifest)
-        results = []
-        for group_ix in range(manifest_parquet.num_row_groups):
-            results.append(
-                self.filter_table(
-                    product_type, manifest_parquet.read_row_group(group_ix)
+        result = []
+        for product_type in self.expand_product_types(product_types):
+            os.makedirs(
+                self.complete_list_path(product_type).parent, exist_ok=True
+            )
+            print(f"Making product list for {product_type} ...... ", end="")
+            self.complete_list_path(product_type).unlink(missing_ok=True)
+            manifest = find_manifest(self.rules[product_type]["manifest"])
+            manifest_parquet = parquet.ParquetFile(manifest)
+            results = []
+            for group_ix in range(manifest_parquet.num_row_groups):
+                results.append(
+                    self.filter_table(
+                        product_type, manifest_parquet.read_row_group(group_ix)
+                    )
                 )
-            )
-        products = pa.concat_tables(results)
-        try:
-            size_gb = round(pa.compute.sum(products["size"]).as_py() / 10**9, 2)
-        except TypeError:
-            raise ValueError(
-                'No matches found, please check selection_rules and try again.'
-            )
-        # TODO: this estimate is bad for products with several large files
-        print(f"{len(products)} products found, {size_gb} estimated GB")
-        if write is False:
-            return products
-        parquet.write_table(products, self.complete_list_path(product_type))
+            products = pa.concat_tables(results)
+            try:
+                size_gb = round(pa.compute.sum(products["size"]).as_py() / 10**9, 2)
+            except TypeError:
+                raise ValueError(
+                    'No matches found, please check selection_rules and try again.'
+                )
+            # TODO: this estimate is bad for products with several large files
+            print(f"{len(products)} products found, {size_gb} estimated GB")
+            result.append(products)
+            if write:
+                parquet.write_table(products, self.complete_list_path(product_type))
+        return result
 
     def make_filters(self, product_type):
         info = self.rules[product_type]
@@ -180,7 +182,7 @@ class ProductPicker(DatasetDefinition):
 
     def random_picks(
         self,
-        product_type: str,
+        product_types: Optional[str],
         subset_size: int = 200,
         max_size: float = 8000,
     ):
@@ -189,68 +191,66 @@ class ProductPicker(DatasetDefinition):
         this subset to disk as a csv file. optionally specify subset size and
         cap file size in MB.
         """
-        if product_type is None:
-            return self.across_all_types("random_picks", subset_size, max_size)
-        print(
-            f"picking test subset for {self.dataset} {product_type} ...... ",
-            end="",
-        )
-        max_bytes = max_size * 10**6
-        complete = self.complete_list_path(product_type)
-        subset = self.subset_list_path(product_type)
-        total = parquet.read_metadata(complete).num_rows
-        if total < subset_size:
-            # pick them all (if not too big)
-            small_enough = parquet.read_table(
-                complete, filters=[("size", "<", max_bytes)]
-            )
+        for product_type in self.expand_product_types(product_types):
             print(
-                f"{total} products; {len(small_enough)}/{total} < {max_size} "
-                f"MB cutoff; taking all {len(small_enough)}"
+                f"picking test subset for {self.dataset} {product_type} ...... ",
+                end="",
             )
-            small_enough.to_pandas().to_csv(subset, index=None)
-            return
-        sizes = parquet.read_table(complete, columns=["size"])[
-            "size"
-        ].to_numpy()
-        small_enough_ix = np.nonzero(sizes < max_bytes)[0]
-        pick_ix = np.sort(np.random.choice(small_enough_ix, subset_size))
-        print(
-            f"{total} products; {len(small_enough_ix)}/{total} < {max_size} "
-            f"MB cutoff; randomly picking {subset_size}"
-        )
-        # TODO: this is not very clever
-        ix_base, picks = 0, []
-        complete_parquet = parquet.ParquetFile(complete)
-        for group_ix in range(complete_parquet.num_row_groups):
-            group = complete_parquet.read_row_group(group_ix)
-            available = [
-                ix - ix_base for ix in pick_ix if ix - ix_base < len(group)
-            ]
-            if len(available) != 0:
-                picks.append(group.take(available))
-        pa.concat_tables(picks).to_pandas().to_csv(subset, index=None)
+            max_bytes = max_size * 10**6
+            complete = self.complete_list_path(product_type)
+            subset = self.subset_list_path(product_type)
+            total = parquet.read_metadata(complete).num_rows
+            if total < subset_size:
+                # pick them all (if not too big)
+                small_enough = parquet.read_table(
+                    complete, filters=[("size", "<", max_bytes)]
+                )
+                print(
+                    f"{total} products; {len(small_enough)}/{total} < {max_size} "
+                    f"MB cutoff; taking all {len(small_enough)}"
+                )
+                small_enough.to_pandas().to_csv(subset, index=None)
+                continue
+            sizes = parquet.read_table(complete, columns=["size"])[
+                "size"
+            ].to_numpy()
+            small_enough_ix = np.nonzero(sizes < max_bytes)[0]
+            pick_ix = np.sort(np.random.choice(small_enough_ix, subset_size))
+            print(
+                f"{total} products; {len(small_enough_ix)}/{total} < {max_size} "
+                f"MB cutoff; randomly picking {subset_size}"
+            )
+            # TODO: this is not very clever
+            ix_base, picks = 0, []
+            complete_parquet = parquet.ParquetFile(complete)
+            for group_ix in range(complete_parquet.num_row_groups):
+                group = complete_parquet.read_row_group(group_ix)
+                available = [
+                    ix - ix_base for ix in pick_ix if ix - ix_base < len(group)
+                ]
+                if len(available) != 0:
+                    picks.append(group.take(available))
+            pa.concat_tables(picks).to_pandas().to_csv(subset, index=None)
 
 
 class IndexMaker(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def get_labels(self, product_type: str, dry_run: bool = False):
-        if product_type is None:
-            return self.across_all_types("get_labels", dry_run)
-        self.data_mkdirs(product_type)
-        dry = "" if dry_run is False else "(dry run)"
-        print(f"Downloading labels for {self.dataset} {product_type} {dry}")
-        subset = self.load_subset_table(product_type)
-        if dry_run is True:
-            return
-        for url in subset["url"]:
-            verbose_temp_download(
-                self.product_data_path(product_type),
-                self.temp_data_path(product_type),
-                url,
-            )
+    def get_labels(self, product_types: Optional[str], dry_run: bool = False):
+        for product_type in self.expand_product_types(product_types):
+            self.data_mkdirs(product_type)
+            dry = "" if dry_run is False else "(dry run)"
+            print(f"Downloading labels for {self.dataset} {product_type} {dry}")
+            subset = self.load_subset_table(product_type)
+            if dry_run is True:
+                return
+            for url in subset["url"]:
+                verbose_temp_download(
+                    self.product_data_path(product_type),
+                    self.temp_data_path(product_type),
+                    url,
+                )
 
     def load_subset_table(self, product_type: str, verbose: bool = True):
         subset = pd.read_csv(self.subset_list_path(product_type))
@@ -291,21 +291,20 @@ class IndexMaker(DatasetDefinition):
             )
         return subset
 
-    def write_subset_index(self, product_type: str):
-        if product_type is None:
-            return self.across_all_types("write_subset_index")
-        print(f"Writing index for {self.dataset} {product_type}")
-        subset = self.load_subset_table(product_type, verbose=False)
-        product_rows = []
-        for ix, product in subset.iterrows():
-            product_row = get_product_row(product["path"], product["url"])
-            print(product_row)
-            product_rows.append(product_row)
-        # noinspection PyTypeChecker
-        pd.DataFrame(product_rows).to_csv(
-            self.index_path(product_type), index=None
-        )
-        print(f"Wrote index for {self.dataset} {product_type} subset.")
+    def write_subset_index(self, product_types: Optional[str]):
+        for product_type in self.expand_product_types(product_types):
+            print(f"Writing index for {self.dataset} {product_type}")
+            subset = self.load_subset_table(product_type, verbose=False)
+            product_rows = []
+            for ix, product in subset.iterrows():
+                product_row = get_product_row(product["path"], product["url"])
+                print(product_row)
+                product_rows.append(product_row)
+            # noinspection PyTypeChecker
+            pd.DataFrame(product_rows).to_csv(
+                self.index_path(product_type), index=None
+            )
+            print(f"Wrote index for {self.dataset} {product_type} subset.")
 
 
 class IndexDownloader(DatasetDefinition):
@@ -316,47 +315,45 @@ class IndexDownloader(DatasetDefinition):
         if hasattr(rules_module, "SKIP_FILES"):
             self.skip_files = getattr(rules_module, "SKIP_FILES")
 
-    def download_index(self, product_type: str, get_test: bool = False, full_lower: bool = False):
-        if product_type is None:
-            return self.across_all_types("download_index", get_test,
-                                         full_lower=full_lower)
-        ptype = "subset files" if get_test is False else "test files"
-        console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
-        data_path = self.product_data_path(product_type)
-        temp_path = self.temp_data_path(product_type)
-        self.data_mkdirs(product_type)
-        session = MaybeSession()
-        if self.shared_list_path().exists():
-            print(f"Checking shared files for {self.dataset}.")
-            shared_index = pd.read_csv(self.shared_list_path())
-            for ix, row in shared_index.iterrows():
+    def download_index(self, product_types: Optional[str], get_test: bool = False, full_lower: bool = False):
+        for product_type in self.expand_product_types(product_types):
+            ptype = "subset files" if get_test is False else "test files"
+            console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
+            data_path = self.product_data_path(product_type)
+            temp_path = self.temp_data_path(product_type)
+            self.data_mkdirs(product_type)
+            session = MaybeSession()
+            if self.shared_list_path().exists():
+                print(f"Checking shared files for {self.dataset}.")
+                shared_index = pd.read_csv(self.shared_list_path())
+                for ix, row in shared_index.iterrows():
+                    try:
+                        session = verbose_temp_download(
+                            data_path,
+                            temp_path,
+                            row["url"],
+                            session=session,
+                            skip_quietly=False
+                        )
+                    except KeyboardInterrupt:
+                        raise
+                    except Exception as ex:
+                        console_and_log(f"download failed: {type(ex)}: {ex}")
+            if get_test is True:
+                index = pd.read_csv(self.test_path(product_type))
+            else:
+                index = pd.read_csv(self.index_path(product_type))
+            for ix, row in index.iterrows():
+                console_and_log(f"Downloading product id: {row['product_id']}")
                 try:
-                    session = verbose_temp_download(
-                        data_path,
-                        temp_path,
-                        row["url"],
-                        session=session,
-                        skip_quietly=False
+                    session = download_product_row(
+                        data_path, temp_path, row, self.skip_files, session, full_lower=full_lower
                     )
                 except KeyboardInterrupt:
                     raise
                 except Exception as ex:
-                    console_and_log(f"download failed: {type(ex)}: {ex}")
-        if get_test is True:
-            index = pd.read_csv(self.test_path(product_type))
-        else:
-            index = pd.read_csv(self.index_path(product_type))
-        for ix, row in index.iterrows():
-            console_and_log(f"Downloading product id: {row['product_id']}")
-            try:
-                session = download_product_row(
-                    data_path, temp_path, row, self.skip_files, session, full_lower=full_lower
-                )
-            except KeyboardInterrupt:
-                raise
-            except Exception as ex:
-                console_and_log(f"Download failed: {type(ex)}: {ex}")
-        session.close()
+                    console_and_log(f"Download failed: {type(ex)}: {ex}")
+            session.close()
 
 
 class ProductChecker(DatasetDefinition):
@@ -367,19 +364,20 @@ class ProductChecker(DatasetDefinition):
         )
     hash_rows, log_rows = {}, {}
 
-    def dump_test_paths(self, product_type):
-        if product_type is None:
-            return self.across_all_types("dump_test_paths")
-        index = pd.read_csv(self.test_path(product_type))
-        data_path = self.product_data_path(product_type)
-        return [
-            str(Path(data_path, product["label_file"]))
-            for ix, product in index.iterrows()
-        ]
+    def dump_test_paths(self, product_types):
+        result = []
+        for product_type in self.expand_product_types(product_types):
+            index = pd.read_csv(self.test_path(product_type))
+            data_path = self.product_data_path(product_type)
+            result.append([
+                str(Path(data_path, product["label_file"]))
+                for ix, product in index.iterrows()
+            ])
+        return result
 
     def compare_test_hashes(
         self,
-        product_type,
+        product_types,
         regen=False,
         write=True,
         debug=True,
@@ -407,53 +405,43 @@ class ProductChecker(DatasetDefinition):
 
         dump_kwargs: kwargs for browse writer
         """
-        if product_type is None:
-            return self.across_all_types(
-                "compare_test_hashes",
-                regen,
-                write,
-                debug,
-                dump_browse,
-                dump_kwargs,
-                quiet,
-                max_size,
-                filetypes,
-                skiphash
+        result = []
+        for product_type in self.expand_product_types(product_types):
+            self.tracker.set_metadata(product_type=product_type)
+            log = partial(console_and_log, quiet=quiet)
+            log(f"Hashing {self.dataset} {product_type}.")
+            index = pd.read_csv(self.test_path(product_type))
+            if "hash" not in index.columns:
+                log(f"no hashes found for {product_type}, writing new")
+            elif regen is True:
+                log(f"regenerate=True passed, overwriting hashes")
+            compare = not (
+                (regen is True) or ("hash" not in index.columns)
             )
-        self.tracker.set_metadata(product_type=product_type)
-        log = partial(console_and_log, quiet=quiet)
-        log(f"Hashing {self.dataset} {product_type}.")
-        index = pd.read_csv(self.test_path(product_type))
-        if "hash" not in index.columns:
-            log(f"no hashes found for {product_type}, writing new")
-        elif regen is True:
-            log(f"regenerate=True passed, overwriting hashes")
-        compare = not (
-            (regen is True) or ("hash" not in index.columns)
-        )
-        test_args = (
-            compare, debug, quiet, max_size, filetypes, skiphash, self.tracker
-        )
-        # compare/overwrite are redundant rn, but presumably we might want
-        # different logic in the future.
-        overwrite = (regen is True) or ("hash" not in index.columns)
-        data_path = self.product_data_path(product_type)
-        self.hash_rows, self.log_rows = {}, {}
-        for ix, product in index.iterrows():
-            log(f"testing {product['product_id']}")
-            data, self.hash_rows[ix], self.log_rows[ix] = test_product(
-                product, Path(data_path, product["label_file"]), *test_args
+            test_args = (
+                compare, debug, quiet, max_size, filetypes, skiphash, self.tracker
             )
-            if (dump_browse is True) and (data is not None):
-                log(f"dumping browse products for {product['product_id']}")
-                self.dump_test_browse(data, product_type, dump_kwargs)
-                log(f"dumped browse products for {product['product_id']}")
-        if (overwrite is True) and (write is False):
-            log("write=False passed, not updating hashes in csv")
-        elif (overwrite is True) and (skiphash is False):
-            index["hash"] = pd.Series(self.hash_rows)
-            index.to_csv(self.test_path(product_type), index=False)
-        return self.write_test_log(product_type)
+            # compare/overwrite are redundant rn, but presumably we might want
+            # different logic in the future.
+            overwrite = (regen is True) or ("hash" not in index.columns)
+            data_path = self.product_data_path(product_type)
+            self.hash_rows, self.log_rows = {}, {}
+            for ix, product in index.iterrows():
+                log(f"testing {product['product_id']}")
+                data, self.hash_rows[ix], self.log_rows[ix] = test_product(
+                    product, Path(data_path, product["label_file"]), *test_args
+                )
+                if (dump_browse is True) and (data is not None):
+                    log(f"dumping browse products for {product['product_id']}")
+                    self.dump_test_browse(data, product_type, dump_kwargs)
+                    log(f"dumped browse products for {product['product_id']}")
+            if (overwrite is True) and (write is False):
+                log("write=False passed, not updating hashes in csv")
+            elif (overwrite is True) and (skiphash is False):
+                index["hash"] = pd.Series(self.hash_rows)
+                index.to_csv(self.test_path(product_type), index=False)
+            result.append(self.write_test_log(product_type))
+        return result
 
     def write_test_log(self, product_type):
         log_df = pd.DataFrame.from_dict(self.log_rows, orient="index")
@@ -473,7 +461,7 @@ class ProductChecker(DatasetDefinition):
 
     def check_product_type(
         self,
-        product_type,
+        product_types,
         dump_browse=True,
         dump_kwargs=None,
         debug=True,
@@ -492,16 +480,13 @@ class ProductChecker(DatasetDefinition):
 
         nowarn: if True, suppress warnings from pdr
         """
-        if product_type is None:
-            return self.across_all_types(
-                "check_product_type", dump_browse, dump_kwargs, debug, nowarn
-            )
-        console_and_log(f"Checking {self.dataset} {product_type}.")
-        index = pd.read_csv(self.index_path(product_type))
-        for _, product in index.iterrows():
-            self.check_product(
-                dump_browse, dump_kwargs, debug, nowarn, product, product_type
-            )
+        for product_type in self.expand_product_types(product_types):
+            console_and_log(f"Checking {self.dataset} {product_type}.")
+            index = pd.read_csv(self.index_path(product_type))
+            for _, product in index.iterrows():
+                self.check_product(
+                    dump_browse, dump_kwargs, debug, nowarn, product, product_type
+                )
 
     def check_product(
         self, dump_browse, dump_kwargs, debug, nowarn, product, product_type
@@ -543,24 +528,17 @@ class CorpusFinalizer(DatasetDefinition):
 
     def create_and_upload_test_subset(
         self,
-        product_type,
+        product_types,
         product=None,
         subset_size=1,
         regen=False,
         local=False
     ):
-        if product_type is None:
-            return self.across_all_types(
-                "create_and_upload_test_subset",
-                local=local,
-                subset_size=subset_size,
-                regen=regen
-            )
-        if not self.test_path(product_type).is_file() or regen:
-            self.create_test_subset_csv(product_type, product, subset_size)
-        if local:
-            return
-        self.upload_to_s3(product_type)
+        for product_type in self.expand_product_types(product_types):
+            if regen or not self.test_path(product_type).is_file():
+                self.create_test_subset_csv(product_type, product, subset_size)
+            if not local:
+                self.upload_to_s3(product_type)
 
     def create_test_subset_csv(self, product_type, product, subset_size):
         with (

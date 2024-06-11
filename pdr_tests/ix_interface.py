@@ -140,10 +140,7 @@ def test(
                 filetypes,
                 skiphash
             )
-            if isinstance(test_logs, list):
-                logs += test_logs
-            else:
-                logs += [test_logs]
+            logs += test_logs
         except MissingHashError:
             return
         except FileNotFoundError as fnf:
