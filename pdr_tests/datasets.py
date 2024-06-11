@@ -565,7 +565,7 @@ class CorpusFinalizer(DatasetDefinition):
             if not product:  # TODO: what is the actual 'falsy' case here
                 index_length = sum(1 for _ in index_f)
                 integer_choice = np.random.choice(
-                    np.arange(1, index_length-1), size=subset_size
+                    np.arange(1, index_length), size=subset_size
                 )
                 index_f.seek(0)
                 for pos, line in enumerate(index_f):
