@@ -114,7 +114,7 @@ class ProductPicker(DatasetDefinition):
         optionally write it as a parquet file.
         """
         if product_type is None:
-            return self.across_all_types("make_product_list")
+            return self.across_all_types("make_product_list", write=write)
         os.makedirs(
             self.complete_list_path(product_type).parent, exist_ok=True
         )
@@ -550,7 +550,12 @@ class CorpusFinalizer(DatasetDefinition):
         local=False
     ):
         if product_type is None:
-            return self.across_all_types("create_and_upload_test_subset")
+            return self.across_all_types(
+                "create_and_upload_test_subset",
+                local=local,
+                subset_size=subset_size,
+                regen=regen
+            )
         if not self.test_path(product_type).is_file() or regen:
             self.create_test_subset_csv(product_type, product, subset_size)
         if local:
