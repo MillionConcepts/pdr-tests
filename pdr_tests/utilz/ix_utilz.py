@@ -27,9 +27,11 @@ from multidict import MultiDict
 import pdr
 from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
-from pdr_tests.settings.base import HEADERS, MANIFEST_DIR
-from pdr_tests.utilz.dev_utilz import Stopwatch
 from pdr.pdr import Data
+
+from ..settings.base import HEADERS, MANIFEST_DIR
+from .dev_utilz import Stopwatch
+
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")

@@ -2,7 +2,7 @@ from ast import literal_eval
 from itertools import chain
 from pathlib import Path
 
-from pdr_tests.datasets import (
+from .datasets import (
     ProductPicker,
     IndexMaker,
     IndexDownloader,

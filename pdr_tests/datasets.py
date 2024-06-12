@@ -33,13 +33,6 @@ from .utilz.ix_utilz import (
     MaybeSession,
     find_manifest,
 )
-from pyarrow import parquet
-
-import pdr
-from pdr.pdr import Data
-from pdr.utils import check_cases
-
-from pdr_tests.settings.base import TEST_CORPUS_BUCKET
 
 
 # ############ INDEX & TESTING CLASSES #############
