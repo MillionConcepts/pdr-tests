@@ -11,7 +11,7 @@ def execute_command(command, dataset, product_type=None):
     method(dataset, product_type)
 
 
-def handle_call():
+def cli_main():
     if len(sys.argv) < 2:
         return ix_interface.ix_help()
     try:
@@ -32,4 +32,4 @@ def handle_call():
 
 
 if __name__ == "__main__":
-    handle_call()
+    cli_main()
