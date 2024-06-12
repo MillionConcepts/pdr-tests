@@ -19,5 +19,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.9",
-    install_requires=["hostess", "pdr", "pyarrow>=9.0.0", "pytest"],
+    install_requires=["hostess", "pdr", "pyarrow>=9.0.0"],
 )

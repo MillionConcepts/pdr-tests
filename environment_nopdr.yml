@@ -25,7 +25,6 @@ dependencies:
   - psutil
   - pvl
   - pympler
-  - pytest
   - python-Levenshtein
   - python-magic
   - pyyaml
