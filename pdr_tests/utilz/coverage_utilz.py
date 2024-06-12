@@ -1,7 +1,6 @@
 import shutil
 from collections import defaultdict
 from functools import reduce
-from importlib import import_module
 from typing import Optional
 
 import pandas as pd
@@ -12,9 +11,9 @@ from more_itertools import chunked
 from pyarrow import parquet
 from pathlib import Path
 
-import pdr_tests
-
-MANIFEST_DIR = Path(pdr_tests.__file__).parent / "node_manifests"
+from pdr_tests.definitions import RULES_MODULES
+from pdr_tests import __file__ as pdr_tests_fname
+MANIFEST_DIR = Path(pdr_tests_fname).parent / "node_manifests"
 
 
 # defining these separately from the 'special' label search
@@ -78,20 +77,10 @@ def load_all_rules():
     loads rules for each product type in each dataset submodule of the
     pdr_tests.definitions module.
     """
-    definitions_dir = Path(Path(pdr_tests.__file__).parent, "definitions")
-    rules_modules = {}
-    for entry in definitions_dir.iterdir():
-        if entry.is_dir():
-            try:
-                selection_rules = import_module(
-                    f"pdr_tests.definitions.{entry.name}.selection_rules"
-                )
-            except ModuleNotFoundError:
-                continue
-            rules_modules[entry.name] = getattr(
-                selection_rules, "file_information"
-            )
-    return rules_modules
+    return {
+        name: mod.file_information
+        for name, mod in RULES_MODULES.items()
+    }
 
 
 def uncov(fn):
