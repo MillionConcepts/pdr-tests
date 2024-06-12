@@ -5,7 +5,6 @@ import os
 import re
 import warnings
 from functools import partial
-from importlib import import_module
 from pathlib import Path
 from typing import Mapping, Optional, Sequence
 
@@ -13,7 +12,15 @@ from dustgoggles.tracker import Tracker
 import numpy as np
 import pandas as pd
 import pyarrow as pa
-from pdr_tests.utilz.ix_utilz import (
+from pyarrow import parquet
+
+import pdr
+from pdr.pdr import Data
+from pdr.utils import check_cases
+
+from .definitions import RULES_MODULES
+from .settings.base import TEST_CORPUS_BUCKET
+from .utilz.ix_utilz import (
     get_product_row,
     console_and_log,
     stamp,
@@ -48,11 +55,9 @@ class DatasetDefinition:
     """
 
     def __init__(self, name):
-        rules_module = import_module(
-            f"pdr_tests.definitions.{name}.selection_rules"
-        )
-        self.rules = getattr(rules_module, "file_information")
-        self.def_path = Path(rules_module.__file__).parent
+        self.rules_module = RULES_MODULES[name]
+        self.rules = self.rules_module.file_information
+        self.def_path = Path(self.rules_module.__file__).parent
         self.data_path = Path(self.def_path.parent.parent, "data", name)
         self.browse_path = Path(self.def_path.parent.parent, "browse", name)
         self.temp_path = Path(Path.home(), "pdr_test_temp")
@@ -310,10 +315,7 @@ class IndexMaker(DatasetDefinition):
 class IndexDownloader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
-        rules_module = import_module(f"definitions.{name}.selection_rules")
-        self.skip_files = ()
-        if hasattr(rules_module, "SKIP_FILES"):
-            self.skip_files = getattr(rules_module, "SKIP_FILES")
+        self.skip_files = getattr(self.rules_module, "SKIP_FILES", [])
 
     def download_index(self, product_types: Optional[str], get_test: bool = False, full_lower: bool = False):
         for product_type in self.expand_product_types(product_types):
