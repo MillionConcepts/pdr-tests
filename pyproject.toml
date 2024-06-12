@@ -27,6 +27,9 @@ tests = [
 #    "pytest",
 ]
 
+[project.scripts]
+ix = "pdr_tests:ix.cli_main"
+
 [project.urls]
 Repository = "https://github.com/MillionConcepts/pdr-tests"
 
