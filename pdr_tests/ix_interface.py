@@ -1,7 +1,6 @@
 from ast import literal_eval
 from itertools import chain
 from pathlib import Path
-from importlib import import_module
 
 from pdr_tests.datasets import (
     ProductPicker,
@@ -12,7 +11,9 @@ from pdr_tests.datasets import (
     directory_to_index,
     MissingHashError,
 )
+from pdr_tests.definitions import RULES_MODULES
 from pdr_tests.utilz.ix_utilz import console_and_log
+
 
 COMMANDS = [
     "sort",
@@ -65,14 +66,10 @@ def download(
             "No dataset argument provided; downloading all defined dataset "
             "test subsets."
         )
-        datasets = [
-            d.name
-            for d in Path("definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        datasets = sorted(RULES_MODULES.keys())
     else:
         datasets = [dataset]
-    for dataset in sorted(datasets):
+    for dataset in datasets:
         downloader = IndexDownloader(dataset)
         downloader.download_index(
             product_type, get_test, full_lower=full_lower
@@ -116,15 +113,11 @@ def test(
         dump_kwargs = literal_eval(dump_kwargs)
     if dataset is None:
         print("no dataset argument provided; testing all defined datasets")
-        datasets = [
-            d.name
-            for d in Path("definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        datasets = sorted(RULES_MODULES.keys())
     else:
         datasets = [dataset]
     logs = []
-    for dataset in sorted(datasets):
+    for dataset in datasets:
         hasher = ProductChecker(dataset)
         hasher.tracker.paused = True
         try:
@@ -163,11 +156,7 @@ def test(
 def test_paths(dataset=None, product_type=None):
     if dataset is None:
         print("no dataset argument provided; listing all defined datasets")
-        datasets = [
-            d.name
-            for d in Path(Path(__file__).parent, "definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        datasets = sorted(RULES_MODULES.keys())
     else:
         datasets = [dataset]
     paths = []
@@ -204,18 +193,7 @@ def ix_help(*_, **__):
 def count(dataset=None):
     if dataset is None:
         print("no dataset argument provided; listing all defined datasets")
-        datasets = [
-            d.name
-            for d in Path(Path(__file__).parent, "definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        cnt = sum(len(s.file_information) for s in RULES_MODULES.values())
     else:
-        datasets = [dataset]
-    cnt = 0
-    for dataset in datasets:
-        rules_module = import_module(
-            f"pdr_tests.definitions.{dataset}.selection_rules"
-        )
-        rules = getattr(rules_module, "file_information")
-        cnt += len(rules)
+        cnt = len(RULES_MODULES[dataset].file_information)
     print(f"There are {cnt} total product types.")
