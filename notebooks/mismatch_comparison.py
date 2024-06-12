@@ -25,7 +25,7 @@ def make_checkout_cmds():
 
 def dump_data_subprocessed(rec, output_path, prefix):
     script = generic_python_endpoint(
-        module="pdr_tests.comparison_hook",
+        module="comparison_hook",
         func="dump_to_output",
         payload=(rec, str(output_path.absolute()), prefix),
         splat="*",
