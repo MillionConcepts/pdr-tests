@@ -42,8 +42,6 @@ class MockData:
     def data_start_byte(*_, **__):
         return 0
 
-    read_image = pdr.Data.read_image
-
     def __getattr__(self, attr):
         try:
             attr = self.__getattribute__(attr)
