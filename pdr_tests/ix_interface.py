@@ -1,6 +1,6 @@
 from ast import literal_eval
-from importlib import import_module
 from itertools import chain
+from pathlib import Path
 
 from pdr_tests.datasets import (
     ProductPicker,
@@ -11,8 +11,14 @@ from pdr_tests.datasets import (
     directory_to_index,
     MissingHashError,
 )
-from pdr_tests.utilz.ix_utilz import console_and_log, list_datasets, \
-    download_datasets, clean_logs
+from pdr_tests.definitions import RULES_MODULES
+from pdr_tests.utilz.ix_utilz import (
+    clean_logs,
+    console_and_log,
+    download_datasets,
+    list_datasets,
+)
+
 
 COMMANDS = [
     "sort",
@@ -70,7 +76,7 @@ def download(
         datasets = list_datasets()
     else:
         datasets = [dataset]
-    for dataset in sorted(datasets):
+    for dataset in datasets:
         downloader = IndexDownloader(dataset)
         downloader.download_index(
             product_type, get_test, full_lower=full_lower
@@ -118,7 +124,7 @@ def test(
     else:
         datasets = [dataset]
     logs = []
-    for dataset in sorted(datasets):
+    for dataset in datasets:
         hasher = ProductChecker(dataset)
         hasher.tracker.paused = True
         try:
@@ -214,11 +220,7 @@ def count(dataset=None):
         datasets = [dataset]
     cnt = 0
     for dataset in datasets:
-        rules_module = import_module(
-            f"pdr_tests.definitions.{dataset}.selection_rules"
-        )
-        rules = getattr(rules_module, "file_information")
-        cnt += len(rules)
+        cnt += len(RULES_MODULES[dataset].file_information)
     print(f"There are {cnt} total product types.")
 
 

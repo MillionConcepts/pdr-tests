@@ -37,6 +37,7 @@ from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
 
 import pdr_tests
+from pdr_tests.definitions import RULES_MODULES
 from pdr_tests.settings.base import HEADERS, MANIFEST_DIR
 from pdr_tests.utilz.dev_utilz import Stopwatch
 
@@ -585,11 +586,7 @@ def _casecheck_wrap(path):
 
 
 def list_datasets() -> list[str]:
-    return [
-        d.name
-        for d in (Path(pdr_tests.__file__).parent / "definitions").iterdir()
-        if (d.is_dir() and (d / "selection_rules.py").exists())
-    ]
+    return sorted(RULES_MODULES.keys())
 
 
 def _sync_chunks(bucket, tofetch, data_path):
@@ -631,7 +628,7 @@ def download_datasets(
         console_and_log(
             f"WARNING: The following requested datasets do not exist as "
             f"prefixes under the bucket root: {', '.join(missing_datasets)}. "
-            # TODO, maybe: check these cases 
+            # TODO, maybe: check these cases
             f"Possibly unfinalized or have no defined ptypes."
         )
     # TODO, maybe: actually check against the test product indices
