@@ -1,0 +1,44 @@
+[project]
+name        = "pdr-tests"
+version     = "0.0.1a0"
+description = "Planetary Data Reader test suite"
+readme      = "README.md"
+authors     = [ { name = "Million Concepts" } ]
+license     = { file = "LICENSE" }
+
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+
+requires-python = ">=3.9"
+dependencies = [
+    "fire",
+    "hostess[aws]",
+    "pdr",
+    "pyarrow>=9.0.0",
+]
+
+[project.optional-dependencies]
+tests = [
+# Placeholder.  pdr-tests currently has no self-tests.
+#    "pytest",
+]
+
+[project.urls]
+Repository = "https://github.com/MillionConcepts/pdr-tests"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["pdr_tests"]
+
+# Recommended for new projects by pytest manual.
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib"
+]
