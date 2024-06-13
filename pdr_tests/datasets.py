@@ -50,7 +50,6 @@ class DatasetDefinition:
         self.def_path = Path(self.rules_module.__file__).parent
         self.data_path = Path(self.def_path.parent.parent, "data", name)
         self.browse_path = Path(self.def_path.parent.parent, "browse", name)
-        self.temp_path = Path(Path.home(), "pdr_test_temp")
         self.dataset = name
 
     def complete_list_path(self, product_type):
@@ -71,9 +70,6 @@ class DatasetDefinition:
     def product_data_path(self, product_type):
         return Path(self.data_path, product_type)
 
-    def temp_data_path(self, product_type):
-        return Path(self.temp_path, product_type)
-
     def index_path(self, product_type):
         return Path(self.def_path, f"{product_type}.csv")
 
@@ -85,7 +81,6 @@ class DatasetDefinition:
 
     def data_mkdirs(self, product_type):
         os.makedirs(self.product_data_path(product_type), exist_ok=True)
-        os.makedirs(self.temp_data_path(product_type), exist_ok=True)
 
     def expand_product_types(
         self, product_type: Optional[str], ignore_support_np: bool = True
@@ -266,7 +261,6 @@ class IndexMaker(DatasetDefinition):
             verbose_temp_download(
                 needed,
                 self.product_data_path(product_type),
-                self.temp_data_path(product_type),
                 add_req_headers,
             )
 
@@ -343,21 +337,20 @@ class IndexDownloader(DatasetDefinition):
         for product_type in self.expand_product_types(product_types):
             console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
             data_path = self.product_data_path(product_type)
-            temp_path = self.temp_data_path(product_type)
             self.data_mkdirs(product_type)
             # TODO: re-add file skipping
             if self.shared_list_path().exists():
                 print(f"Checking shared files for {self.dataset}.")
                 shared_index = pd.read_csv(self.shared_list_path())
                 verbose_temp_download(
-                    shared_index, data_path, temp_path, add_req_headers
+                    shared_index, data_path, add_req_headers
                 )
             if get_test is True:
                 index = pd.read_csv(self.test_path(product_type))
             else:
                 index = pd.read_csv(self.index_path(product_type))
             verbose_temp_download(
-                index, data_path, temp_path, full_lower, add_req_headers
+                index, data_path, full_lower, add_req_headers
             )
 
 

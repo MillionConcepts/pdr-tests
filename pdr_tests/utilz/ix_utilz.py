@@ -3,7 +3,7 @@ import datetime as dt
 import json
 import logging
 import os
-import shutil
+import tempfile
 import time
 import warnings
 import xml.etree.ElementTree as ET
@@ -259,7 +259,7 @@ def _expand_index_table(filelist, data_path):
     return filelist.loc[~filelist.exists].reset_index(drop=True).copy()
 
 
-def verbose_temp_download(filelist, data_path, temp_path, full_lower=False,
+def verbose_temp_download(filelist, data_path, full_lower=False,
                           add_req_headers={}):
     if 'url_stem' in filelist.columns:
         filelist = _expand_index_table(filelist, data_path)
@@ -277,7 +277,7 @@ def verbose_temp_download(filelist, data_path, temp_path, full_lower=False,
         )
     else:
         _verbose_web_temp_download_filelist(
-            filelist, data_path, temp_path, full_lower, add_req_headers
+            filelist, data_path, full_lower, add_req_headers
         )
 
 
@@ -343,7 +343,6 @@ def _s3_download_chunk(bucket, filelist, ixchunk, extlower=False):
 
 def _verbose_web_temp_download_file(
     data_path,
-    temp_path,
     url,
     session,
     skip_quietly=True,
@@ -381,39 +380,44 @@ def _verbose_web_temp_download_file(
             console_and_log(f"Download of {url} failed: {response.status_code} {response.reason}")
             return
 
-        _download_chunk(response, temp_path, url)
-        shutil.move(
-            Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
-        )
+        _download_chunk(response, Path(data_path), Path(url).name)
         console_and_log(f"completed download of {url}.")
     finally:
         response.close()
 
 
-def _download_chunk(response, temp_path, url):
-    with open(Path(temp_path, Path(url).name), "wb+") as fp:
-        size, fetched = response.headers.get('content-length'), 0
-        size = (
-            'unknown' if size is None else round(int(size) / 1000 ** 2, 2)
-        )
-        for ix, chunk in enumerate(response.iter_content(chunk_size=10 ** 7)):
-            fetched += len(chunk)
-            print_inline(
-                f"getting chunk {ix} "
-                f"({round(fetched / 1000 ** 2, 2)} / {size} MB)"
+def _download_chunk(response, data_path, data_name):
+    tempfd, temp_name = tempfile.mkstemp(
+        dir=data_path,
+        prefix=data_name + "-part."
+    )
+    try:
+        with os.fdopen(tempfd, "wb") as fp:
+            size, fetched = response.headers.get('content-length'), 0
+            size = (
+                'unknown' if size is None else round(int(size) / 1000 ** 2, 2)
             )
-            fp.write(chunk)
+            for ix, chunk in enumerate(response.iter_content(chunk_size=10 ** 7)):
+                fetched += len(chunk)
+                print_inline(
+                    f"getting chunk {ix} "
+                    f"({round(fetched / 1000 ** 2, 2)} / {size} MB)"
+                )
+                fp.write(chunk)
+    except:
+        os.remove(temp_name)
+        raise
+    os.rename(temp_name, data_path / data_name)
 
 
 def _verbose_web_temp_download_filelist(
-    filelist, data_path, temp_path, full_lower=False, add_req_headers={}
+    filelist, data_path, full_lower=False, add_req_headers={}
 ):
     session = HTTPSessionWrapper(add_req_headers)
     for ix, row in filelist.iterrows():
         try:
             _verbose_web_temp_download_file(
                 data_path,
-                temp_path,
                 row["url"],
                 session,
                 skip_quietly=False,
