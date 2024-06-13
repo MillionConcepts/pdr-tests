@@ -24,9 +24,6 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
 # shorthand variables for specific .csv files
 ATM_FILE = "atm"
 
