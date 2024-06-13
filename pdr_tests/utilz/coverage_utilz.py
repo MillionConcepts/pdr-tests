@@ -12,7 +12,6 @@ from pyarrow import parquet
 from pathlib import Path
 
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests.settings.base import MANIFEST_DIR
 
 
 # defining these separately from the 'special' label search
@@ -39,14 +38,14 @@ IGNORE_DIRECTORIES = (
 )
 
 
-def add_coverage_column(fn):
+def add_coverage_column(manifest_dir, fn):
     path = Path(fn).with_suffix(".parquet")
-    options = [path, MANIFEST_DIR / path]
+    options = [path, manifest_dir / path]
     if "_coverage" not in path.name:
         covered = path.with_name(
             path.name.replace(".parquet", "_coverage.parquet")
         )
-        options += [covered, MANIFEST_DIR / covered]
+        options += [covered, manifest_dir / covered]
     manifest = None
     for option in options:
         if option.exists():
@@ -57,6 +56,7 @@ def add_coverage_column(fn):
     rules_modules = load_all_rules()
     relevant_rules = find_relevant_rules(rules_modules, manifest)
     check_coverage_in_chunks(
+        manifest_dir,
         manifest,
         relevant_rules,
         row_group_size=100000,
@@ -100,6 +100,7 @@ def find_relevant_rules(rules_modules, input_manifest):
 
 
 def check_coverage_in_chunks(
+    manifest_dir: Path,
     input_file: Path,
     relevant_rules,
     row_group_size=None,
@@ -141,7 +142,7 @@ def check_coverage_in_chunks(
         sort_writer.close()
     shutil.move(
         scratch_file,
-        MANIFEST_DIR
+        manifest_dir
         / (input_file.stem.replace("_coverage", "") + "_coverage.parquet")
     )
 
