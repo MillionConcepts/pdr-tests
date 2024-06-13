@@ -28,69 +28,76 @@ are detached.
 PPI_FILE = "plasm_full"
 
 file_information = {
-	
-	# RPWS Langmuir Probe continuous current data
-	"cont_current": {
+    
+    # RPWS Langmuir Probe continuous current data
+    "cont_current": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['CO-SS_S-RPWS-3-LPCNTCUR', 'DATA'],
         "label": "D",
-	},
-	# RPWS Langmuir Probe sweep voltage-current data
-	"volt_current": {
+    },
+    # RPWS Langmuir Probe sweep voltage-current data
+    "volt_current": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['CO-SS_S-RPWS-3-LPUI', 'DATA'],
         "label": "D",
-	},
-	# RPWS Langmuir Probe Sweep data
-	"sweep": {
+    },
+    # RPWS Langmuir Probe Sweep data
+    "sweep": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['CO-SS_S-RPWS-5-LPSWEEP', 'DATA'],
         "label": "D",
-	},
-	# RPWS Langmuir Probe proxy electron density data
-	"proxy": {
+    },
+    # RPWS Langmuir Probe proxy electron density data
+    "proxy": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['CO-SS_S-RPWS-5-NEPROXY', 'DATA'],
         "label": "D",
-	},
-	# telemetry data -- out of scope
-	# from documentation: reformatted telemetry packets are not fixed length and are not well-suited to description by PDS labeling standards
+    },
+    # telemetry data -- out of scope
+    # from documentation: reformatted telemetry packets are not fixed length and are not well-suited to description by PDS labeling standards
 #     "refdr_telemetry": {
 #         "manifest": PPI_FILE,
 #         "fn_must_contain": ['.PKT'],
 #         "url_must_contain": ['CO-V_E_J_S_SS-RPWS-2-REFDR-ALL', 'DATA', 'RPWS_RAW_COMPLETE'],
 #         "label": "D",
-# 	},
-	# full resolution wideband standard data products
+#     },
+    # full resolution wideband standard data products
     "refdr_wbr": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.DAT'],
         "url_must_contain": ['CO-V_E_J_S_SS-RPWS-2-REFDR-WBRFULL', 'DATA', 'RPWS_WIDEBAND_FULL'],
         "label": "D",
-	},
-	# full resolution waveform standard data products
+    },
+    # full resolution waveform standard data products
     "refdr_wfr": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.DAT'],
         "url_must_contain": ['CO-V_E_J_S_SS-RPWS-2-REFDR-WFRFULL', 'DATA', 'RPWS_WAVEFORM_FULL'],
         "label": "D",
-	},
-	# calibrated low rate full resolution standard data products
-	"rdr": {
+    },
+    # calibrated low rate full resolution standard data products
+    "rdr": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.DAT'],
         "url_must_contain": ['CO-V_E_J_S_SS-RPWS-3-RDR-LRFULL', 'DATA', 'RPWS_LOW_RATE_FULL'],
         "label": "D",
-	},
-	# reduced temporal and spectral resolution spectral data
-	"summ": {
+    },
+    # rdr calibration tables
+    "rdr_cal": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['CO-V_E_J_S_SS-RPWS-3-RDR-LRFULL', 'DATA', 'RPWS_LOW_RATE_FULL'],
+        "label": "D",
+    },
+    # reduced temporal and spectral resolution spectral data
+    "summ": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['CO-V_E_J_S_SS-RPWS-4-SUMM-KEY60S', 'DATA', 'KEY_PARAMS'],
         "label": "D",
-	},
+    },
 }
