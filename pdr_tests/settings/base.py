@@ -10,7 +10,7 @@ if not user_settings_path.exists():
 from pdr_tests.settings._patcher import monkeypatch_literals
 from pdr_tests.settings import user as user_settings_mod
 
-HEADERS = None
+HEADERS = {}
 MANIFEST_DIR = self_path.parent.parent / "node_manifests"
 TEST_CORPUS_BUCKET = None
 
