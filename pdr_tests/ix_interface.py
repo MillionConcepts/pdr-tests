@@ -12,6 +12,7 @@ from pdr_tests.datasets import (
     MissingHashError,
 )
 from pdr_tests.definitions import RULES_MODULES
+from pdr_tests.settings.base import MANIFEST_DIR, TEST_CORPUS_BUCKET
 from pdr_tests.utilz.ix_utilz import (
     clean_logs,
     console_and_log,
@@ -36,9 +37,13 @@ COMMANDS = [
 ]
 
 
-def sort(dataset, product_type=None):
+def sort(dataset, product_type=None, manifest_dir=None):
+    if manifest_dir is not None:
+        manifest_dir = Path(manifest_dir)
+    else:
+        manifest_dir = MANIFEST_DIR
     picker = ProductPicker(dataset)
-    picker.make_product_list(product_type)
+    picker.make_product_list(manifest_dir, product_type)
 
 
 def pick(
@@ -180,23 +185,25 @@ def finalize(
     *,
     regen: "r" = False,
     local: "l" = False,
-    subset_size: "n" = 1
+    subset_size: "n" = 1,
+    bucket: "b" = None,
 ):
     """
     Creates a test subset (if necessary) and uploads relevant test files to
     s3.
     """
     if dataset is None:
-        print(
-            "Upload requires a dataset argument. We don't want to re-upload "
+        raise ValueError(
+            "finalize requires a dataset argument. We don't want to re-upload "
             "all the files in the s3 bucket."
         )
-        return
-    else:
-        finalizer = CorpusFinalizer(dataset)
-        finalizer.create_and_upload_test_subset(
-            product_type, product, subset_size, regen, local
-        )
+    if bucket is None:
+        bucket = TEST_CORPUS_BUCKET
+
+    finalizer = CorpusFinalizer(dataset)
+    finalizer.create_and_upload_test_subset(
+        product_type, product, subset_size, regen, local, bucket,
+    )
 
 
 def index_directory(
@@ -232,8 +239,6 @@ def sync(
     replace_offsize=True,
     dry_run=False
 ):
-    from pdr_tests.settings.base import TEST_CORPUS_BUCKET
-
     if TEST_CORPUS_BUCKET is None:
         print(
             "The name of the bucket you would like to sync with must be "

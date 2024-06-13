@@ -19,7 +19,6 @@ from pdr.pdr import Data
 from pdr.utils import check_cases
 
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests.settings.base import TEST_CORPUS_BUCKET
 from pdr_tests.utilz.ix_utilz import (
     get_product_row,
     console_and_log,
@@ -116,7 +115,12 @@ class ProductPicker(DatasetDefinition):
     #  the manifest a bunch of times, although it's very
     #  memory-efficient. idk. it might not be as bad as i think,
     #  though, unless we did clever segmentation of results on each group.
-    def make_product_list(self, product_types: Optional[str], write: bool = True):
+    def make_product_list(
+        self,
+        manifest_dir: Path,
+        product_types: Optional[str] = None,
+        write: bool = True
+    ):
         """
         construct full-set pyarrow table for a given product type, and
         optionally write it as a parquet file. Note that this method does not
@@ -129,7 +133,10 @@ class ProductPicker(DatasetDefinition):
             )
             print(f"Making product list for {product_type} ...... ", end="")
             self.complete_list_path(product_type).unlink(missing_ok=True)
-            manifest = find_manifest(self.rules[product_type]["manifest"])
+            manifest = find_manifest(
+                self.rules[product_type]["manifest"],
+                manifest_dir
+            )
             manifest_parquet = parquet.ParquetFile(manifest)
             results = []
             for group_ix in range(manifest_parquet.num_row_groups):
@@ -525,13 +532,24 @@ class CorpusFinalizer(DatasetDefinition):
         product=None,
         subset_size=1,
         regen=False,
-        local=False
+        local=False,
+        bucket=None,
     ):
+        from hostess.aws.s3 import Bucket
+        if local:
+            bucket = None
+        elif bucket is not None:
+            bucket = Bucket(bucket)
+        else:
+            raise ValueError(
+                "must specify a bucket to upload to, or use local mode"
+            )
+
         for product_type in self.expand_product_types(product_types):
             if regen or not self.test_path(product_type).is_file():
                 self.create_test_subset_csv(product_type, product, subset_size)
-            if not local:
-                self.upload_to_s3(product_type)
+            if bucket is not None:
+                self.upload_to_s3(product_type, bucket)
 
     def create_test_subset_csv(self, product_type, product, subset_size):
         with (
@@ -560,14 +578,7 @@ class CorpusFinalizer(DatasetDefinition):
                         f'regen=True.'
                     )
 
-    def upload_to_s3(self, product_type):
-        from hostess.aws.s3 import Bucket
-        if TEST_CORPUS_BUCKET is None:
-            raise EnvironmentError(
-                "Define settings.user.TEST_CORPUS_BUCKET before running ix"
-                "finalize."
-            )
-        corpus = Bucket(TEST_CORPUS_BUCKET)
+    def upload_to_s3(self, product_type, corpus):
         with open(self.test_path(product_type)) as test_f:
             next(test_f)
             for line in test_f:

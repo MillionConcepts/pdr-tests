@@ -38,7 +38,7 @@ from pdr.utils import check_cases
 
 import pdr_tests
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests.settings.base import HEADERS, MANIFEST_DIR
+from pdr_tests.settings.base import HEADERS
 from pdr_tests.utilz.dev_utilz import Stopwatch
 
 
@@ -62,17 +62,17 @@ def console_and_log(message, level="info", do_stamp=True, quiet=False):
         print(f"{stamp_txt}{message}")
 
 
-def find_manifest(fn):
-    path = Path(fn).with_suffix(".parquet")
-    if (MANIFEST_DIR / path.name).exists():
-        return MANIFEST_DIR / path
-    if (op := MANIFEST_DIR / path.name.replace("_coverage", "")).exists():
+def find_manifest(fn: str, manifest_dir: Path):
+    name = Path(fn).with_suffix(".parquet").name
+    if (op := manifest_dir / name).exists():
+        return op
+    if (op := manifest_dir / name.replace("_coverage", "")).exists():
         return op
     if (
-        op := MANIFEST_DIR / path.name.replace(".parquet", "_coverage.parquet")
+        op := manifest_dir / name.replace(".parquet", "_coverage.parquet")
     ).exists():
         return op
-    raise FileNotFoundError(f"no file matching {fn} found in {MANIFEST_DIR}")
+    raise FileNotFoundError(f"no file matching {fn} found in {manifest_dir}")
 
 
 def checksum_object(obj, hash_function=md5):
