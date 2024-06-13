@@ -12,7 +12,14 @@ from .datasets import (
     MissingHashError,
 )
 from .definitions import RULES_MODULES
-from .settings.base import HEADERS, MANIFEST_DIR, TEST_CORPUS_BUCKET
+from .settings.base import (
+    BROWSE_ROOT,
+    DATA_ROOT,
+    HEADERS,
+    MANIFEST_DIR,
+    TEST_CORPUS_BUCKET,
+    TRACKER_LOG_DIR,
+)
 from .utilz.ix_utilz import console_and_log
 
 
@@ -35,19 +42,19 @@ def sort(dataset, product_type=None, manifest_dir=None):
         manifest_dir = Path(manifest_dir)
     else:
         manifest_dir = MANIFEST_DIR
-    picker = ProductPicker(dataset)
+    picker = ProductPicker(dataset, DATA_ROOT, BROWSE_ROOT)
     picker.make_product_list(manifest_dir, product_type)
 
 
 def pick(
     dataset, product_type=None, *, subset_size: "s" = 200, max_size: "m" = 8000
 ):
-    picker = ProductPicker(dataset)
+    picker = ProductPicker(dataset, DATA_ROOT, BROWSE_ROOT)
     picker.random_picks(product_type, subset_size, max_size)
 
 
 def index(dataset, product_type=None, *, dry_run: "d" = False):
-    indexer = IndexMaker(dataset)
+    indexer = IndexMaker(dataset, DATA_ROOT, BROWSE_ROOT)
     indexer.get_labels(product_type, dry_run, add_req_headers=HEADERS)
     if dry_run:
         return
@@ -75,7 +82,7 @@ def download(
     else:
         datasets = [dataset]
     for dataset in datasets:
-        downloader = IndexDownloader(dataset)
+        downloader = IndexDownloader(dataset, DATA_ROOT, BROWSE_ROOT)
         downloader.download_index(
             product_type, get_test, full_lower=full_lower,
             add_req_headers=HEADERS,
@@ -93,7 +100,7 @@ def check(
 ):
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
-    hasher = ProductChecker(dataset)
+    hasher = ProductChecker(dataset, DATA_ROOT, BROWSE_ROOT, TRACKER_LOG_DIR)
     hasher.check_product_type(
         product_type, dump_browse, dump_kwargs, debug, nowarn
     )
@@ -124,7 +131,7 @@ def test(
         datasets = [dataset]
     logs = []
     for dataset in datasets:
-        hasher = ProductChecker(dataset)
+        hasher = ProductChecker(dataset, DATA_ROOT, BROWSE_ROOT, TRACKER_LOG_DIR)
         hasher.tracker.paused = True
         try:
             test_logs = hasher.compare_test_hashes(
@@ -167,7 +174,7 @@ def test_paths(dataset=None, product_type=None):
         datasets = [dataset]
     paths = []
     for dataset in datasets:
-        lister = ProductChecker(dataset)
+        lister = ProductChecker(dataset, DATA_ROOT, BROWSE_ROOT)
         paths += lister.dump_test_paths(product_type)
     return tuple(chain.from_iterable(paths))
 
@@ -185,7 +192,7 @@ def finalize(dataset, product_type=None, product=None, *,
              "finalize requires a dataset argument."
          )
 
-    finalizer = CorpusFinalizer(dataset)
+    finalizer = CorpusFinalizer(dataset, DATA_ROOT, BROWSE_ROOT)
     finalizer.create_and_upload_test_subset(
         product_type,
         product,
