@@ -1,5 +1,6 @@
 """handler functions and classes for ix workflow"""
 
+import importlib.resources
 import json
 import os
 import re
@@ -44,12 +45,13 @@ class DatasetDefinition:
     structure for the ix workflow.
     """
 
-    def __init__(self, name):
+    def __init__(self, name: str, data_root: Path, browse_root: Path):
         self.rules_module = RULES_MODULES[name]
         self.rules = self.rules_module.file_information
-        self.def_path = Path(self.rules_module.__file__).parent
-        self.data_path = Path(self.def_path.parent.parent, "data", name)
-        self.browse_path = Path(self.def_path.parent.parent, "browse", name)
+        # in 3.12 and later we could just use self.rules_module
+        self.def_path = importlib.resources.files(self.rules_module.__package__)
+        self.data_path = data_root / name
+        self.browse_path = browse_root / name
         self.dataset = name
 
     def complete_list_path(self, product_type):
@@ -103,8 +105,8 @@ class DatasetDefinition:
 
 
 class ProductPicker(DatasetDefinition):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name: str, data_root: Path, browse_root: Path):
+        super().__init__(name, data_root, browse_root)
 
     # TODO, maybe: it is possibly time-inefficient to iterate through
     #  the manifest a bunch of times, although it's very
@@ -244,8 +246,8 @@ class ProductPicker(DatasetDefinition):
 
 
 class IndexMaker(DatasetDefinition):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name: str, data_root: Path, browse_root: Path):
+        super().__init__(name, data_root, browse_root)
 
     def get_labels(self, product_types: Optional[str], dry_run: bool = False,
                    add_req_headers={}):
@@ -322,8 +324,8 @@ class IndexMaker(DatasetDefinition):
 
 
 class IndexDownloader(DatasetDefinition):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name: str, data_root: Path, browse_root: Path):
+        super().__init__(name, data_root, browse_root)
         self.skip_files = getattr(self.rules_module, "SKIP_FILES", [])
 
     def download_index(
@@ -355,11 +357,10 @@ class IndexDownloader(DatasetDefinition):
 
 
 class ProductChecker(DatasetDefinition):
-    def __init__(self, name):
-        super().__init__(name)
-        self.tracker = Tracker(
-            name, outdir=Path(__file__).parent / ".tracker_logs"
-        )
+    def __init__(self, name: str, data_root: Path, browse_root: Path,
+                 tracker_log_dir: Path):
+        super().__init__(name, data_root, browse_root)
+        self.tracker = Tracker(name, outdir=tracker_log_dir)
     hash_rows, log_rows = {}, {}
 
     def dump_test_paths(self, product_types):
@@ -521,8 +522,8 @@ class ProductChecker(DatasetDefinition):
 
 
 class CorpusFinalizer(DatasetDefinition):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name: str, data_root: Path, browse_root: Path):
+        super().__init__(name, data_root, browse_root)
 
     def create_and_upload_test_subset(
         self,

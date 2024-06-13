@@ -41,9 +41,6 @@ from pdr_tests.definitions import RULES_MODULES
 from pdr_tests.utilz.dev_utilz import Stopwatch
 
 
-REF_ROOT = Path(Path(__file__).parent.parent, "reference")
-DATA_ROOT = Path(Path(__file__).parent.parent, "data")
-
 PDRTESTLOG = logging.getLogger()
 if len(PDRTESTLOG.handlers) == 0:
     PDRTESTLOG.addHandler(logging.FileHandler("pdrtests.log"))
