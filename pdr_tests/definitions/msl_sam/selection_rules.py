@@ -24,8 +24,6 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from itertools import product
-
 # variables naming specific parquet files in node_manifests
 GEO_FILE = "geomsl"
 

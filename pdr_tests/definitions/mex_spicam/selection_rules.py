@@ -23,16 +23,10 @@ manifest file. useful for specifying directories.
 label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
-
-from pathlib import Path
-import pdr_tests
-
-MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
-
+# variables naming specific parquet files in node_manifests
 GEO_FILE = "geomex"
 
 file_information = {
-    
     # IR level 0B data
     # The FREQUENCY_ARRAY pointer appears to be opening fine at first glance.
     # The RECORD_ARRAY pointer does not open: "UserWarning: Unable to load
