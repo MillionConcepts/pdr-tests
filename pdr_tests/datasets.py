@@ -20,16 +20,14 @@ from pdr.utils import check_cases
 
 from pdr_tests.definitions import RULES_MODULES
 from pdr_tests.utilz.ix_utilz import (
+    Downloader,
     get_product_row,
     console_and_log,
     stamp,
-    download_product_row,
-    verbose_temp_download,
     assemble_urls,
     flip_ends_with,
     read_and_hash,
     record_comparison,
-    MaybeSession,
     find_manifest,
 )
 
@@ -242,7 +240,8 @@ class IndexMaker(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def get_labels(self, product_types: Optional[str], dry_run: bool = False):
+    def get_labels(self, product_types: Optional[str], dry_run: bool = False,
+                   add_req_headers={}):
         for product_type in self.expand_product_types(product_types):
             self.data_mkdirs(product_type)
             dry = "" if dry_run is False else "(dry run)"
@@ -250,8 +249,9 @@ class IndexMaker(DatasetDefinition):
             subset = self.load_subset_table(product_type)
             if dry_run is True:
                 return
+            session = Downloader(add_req_headers)
             for url in subset["url"]:
-                verbose_temp_download(
+                session.verbose_temp_download(
                     self.product_data_path(product_type),
                     self.temp_data_path(product_type),
                     url,
@@ -317,24 +317,23 @@ class IndexDownloader(DatasetDefinition):
         super().__init__(name)
         self.skip_files = getattr(self.rules_module, "SKIP_FILES", [])
 
-    def download_index(self, product_types: Optional[str], get_test: bool = False, full_lower: bool = False):
+    def download_index(self, product_types: Optional[str], get_test: bool = False, full_lower: bool = False, add_req_headers={}):
+        session = Downloader(add_req_headers)
+        ptype = "subset files" if get_test is False else "test files"
         for product_type in self.expand_product_types(product_types):
-            ptype = "subset files" if get_test is False else "test files"
             console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
             data_path = self.product_data_path(product_type)
             temp_path = self.temp_data_path(product_type)
             self.data_mkdirs(product_type)
-            session = MaybeSession()
             if self.shared_list_path().exists():
                 print(f"Checking shared files for {self.dataset}.")
                 shared_index = pd.read_csv(self.shared_list_path())
                 for ix, row in shared_index.iterrows():
                     try:
-                        session = verbose_temp_download(
+                        session.verbose_temp_download(
                             data_path,
                             temp_path,
                             row["url"],
-                            session=session,
                             skip_quietly=False
                         )
                     except KeyboardInterrupt:
@@ -348,11 +347,9 @@ class IndexDownloader(DatasetDefinition):
             for ix, row in index.iterrows():
                 console_and_log(f"Downloading product id: {row['product_id']}")
                 try:
-                    session = download_product_row(
-                        data_path, temp_path, row, self.skip_files, session, full_lower=full_lower
+                    session.download_product_row(
+                        data_path, temp_path, row, self.skip_files, full_lower=full_lower
                     )
-                except KeyboardInterrupt:
-                    raise
                 except Exception as ex:
                     console_and_log(f"Download failed: {type(ex)}: {ex}")
             session.close()
