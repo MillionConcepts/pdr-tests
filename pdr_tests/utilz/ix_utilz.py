@@ -3,7 +3,7 @@ import datetime as dt
 import json
 import logging
 import os
-import shutil
+import tempfile
 import time
 import warnings
 import xml.etree.ElementTree as ET
@@ -233,7 +233,6 @@ class Downloader:
     def download_product_row(
         self,
         data_path,
-        temp_path,
         row,
         skip_files=(),
         full_lower=False
@@ -246,14 +245,13 @@ class Downloader:
             if any((file == skip_file for skip_file in skip_files)):
                 continue
             url = f"{row['url_stem']}/{file}"
-            self.verbose_temp_download(
-                data_path, temp_path, url, full_lower=full_lower
+            self.verbose_download(
+                data_path, url, full_lower=full_lower
             )
 
-    def verbose_temp_download(
+    def verbose_download(
         self,
         data_path,
-        temp_path,
         url,
         skip_quietly=True,
         full_lower=False,
@@ -286,8 +284,13 @@ class Downloader:
                 response.close()
                 return
 
+        data_name = Path(url).name
+        tempfd, temp_name = tempfile.mkstemp(
+            dir=data_path,
+            prefix=data_name + "-part."
+        )
         try:
-            with open(Path(temp_path, Path(url).name), "wb+") as fp:
+            with os.fdopen(tempfd, "wb") as fp:
                 size, fetched = response.headers.get('content-length'), 0
                 size = (
                     'unknown' if size is None else round(int(size) / 1000 ** 2, 2)
@@ -299,11 +302,13 @@ class Downloader:
                         f"({round(fetched / 1000 ** 2, 2)} / {size} MB)"
                     )
                     fp.write(chunk)
+        except:
+            os.remove(temp_name)
+            raise
         finally:
             response.close()
-        shutil.move(
-            Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
-        )
+
+        os.rename(temp_name, data_path / data_name)
         console_and_log(f"completed download of {url}.")
 
     def get_response(self, url: str):
