@@ -12,7 +12,7 @@ from pdr_tests.datasets import (
     MissingHashError,
 )
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests.settings.base import MANIFEST_DIR, TEST_CORPUS_BUCKET
+from pdr_tests.settings.base import HEADERS, MANIFEST_DIR, TEST_CORPUS_BUCKET
 from pdr_tests.utilz.ix_utilz import (
     clean_logs,
     console_and_log,
@@ -55,7 +55,7 @@ def pick(
 
 def index(dataset, product_type=None, *, dry_run: "d" = False):
     indexer = IndexMaker(dataset)
-    indexer.get_labels(product_type, dry_run)
+    indexer.get_labels(product_type, dry_run, add_req_headers=HEADERS)
     if dry_run:
         return
     indexer.write_subset_index(product_type)
@@ -84,7 +84,8 @@ def download(
     for dataset in datasets:
         downloader = IndexDownloader(dataset)
         downloader.download_index(
-            product_type, get_test, full_lower=full_lower
+            product_type, get_test, full_lower=full_lower,
+            add_req_headers=HEADERS,
         )
 
 

@@ -252,7 +252,8 @@ class IndexMaker(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
 
-    def get_labels(self, product_types: Optional[str], dry_run: bool = False):
+    def get_labels(self, product_types: Optional[str], dry_run: bool = False,
+                   add_req_headers={}):
         for product_type in self.expand_product_types(product_types):
             self.data_mkdirs(product_type)
             dry = "" if dry_run is False else "(dry run)"
@@ -266,6 +267,7 @@ class IndexMaker(DatasetDefinition):
                 needed,
                 self.product_data_path(product_type),
                 self.temp_data_path(product_type),
+                add_req_headers,
             )
 
     def load_subset_table(self, product_type: str, verbose: bool = True):
@@ -334,10 +336,11 @@ class IndexDownloader(DatasetDefinition):
         self,
         product_types: Optional[str],
         get_test: bool = False,
-        full_lower: bool = False
+        full_lower: bool = False,
+        add_req_headers = {}
     ):
+        ptype = "subset files" if get_test is False else "test files"
         for product_type in self.expand_product_types(product_types):
-            ptype = "subset files" if get_test is False else "test files"
             console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
             data_path = self.product_data_path(product_type)
             temp_path = self.temp_data_path(product_type)
@@ -347,13 +350,15 @@ class IndexDownloader(DatasetDefinition):
                 print(f"Checking shared files for {self.dataset}.")
                 shared_index = pd.read_csv(self.shared_list_path())
                 verbose_temp_download(
-                    shared_index, data_path, temp_path
+                    shared_index, data_path, temp_path, add_req_headers
                 )
             if get_test is True:
                 index = pd.read_csv(self.test_path(product_type))
             else:
                 index = pd.read_csv(self.index_path(product_type))
-            verbose_temp_download(index, data_path, temp_path, full_lower)
+            verbose_temp_download(
+                index, data_path, temp_path, full_lower, add_req_headers
+            )
 
 
 class ProductChecker(DatasetDefinition):

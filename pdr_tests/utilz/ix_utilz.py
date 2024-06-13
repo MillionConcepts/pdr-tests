@@ -38,7 +38,6 @@ from pdr.utils import check_cases
 
 import pdr_tests
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests.settings.base import HEADERS
 from pdr_tests.utilz.dev_utilz import Stopwatch
 
 
@@ -196,62 +195,42 @@ def get_product_row(label_path, url):
     return row
 
 
-def download_product_row(
-    data_path, temp_path, row, skip_files=(), session=None, full_lower=False
-):
-    files = json.loads(row["files"])
-    session = session if session is not None else MaybeSession()
-    for file in files:
-        if Path(data_path, file).exists():
-            console_and_log(f"... {file} present, skipping ...")
-            continue
-        if any((file == skip_file for skip_file in skip_files)):
-            continue
-        url = f"{row['url_stem']}/{file}"
-        verbose_temp_download(data_path, temp_path, url, full_lower)
-    return session
-
-
-class MaybeSession:
-    def __init__(self):
-        self._is_closed = False
-        self.session = requests.Session()
-        self.session_count = 1
+class HTTPSessionWrapper:
+    def __init__(self, add_req_headers={}, retries=5, timeout=4, backoff=2):
+        self.session = None
+        self.session_count = 0
+        self.add_req_headers = add_req_headers
+        self.retries = retries
+        self.timeout = timeout
+        self.backoff = backoff
 
     def reset(self):
-        self.session.close()
+        if self.session is not None:
+            self.session.close()
         self.session = requests.Session()
+        self.session.headers.update(self.add_req_headers)
         self.session_count += 1
-
-    def _tryit(self, method, *args, **kwargs):
-        if self._is_closed:
-            self.session = requests.Session()
-        return getattr(self.session, method)(*args, **kwargs)
-
-    @wraps(requests.Session.get)
-    def get(self, *args, **kwargs):
-        return self._tryit("get", *args, **kwargs)
-
-    @wraps(requests.Session.put)
-    def put(self, *args, **kwargs):
-        return self._tryit("put", *args, **kwargs)
-
-    @wraps(requests.Session.head)
-    def head(self, *args, **kwargs):
-        return self._tryit("head", *args, **kwargs)
 
     @wraps(requests.Session.close)
     def close(self):
         self.session.close()
-        self._is_closed = True
+        self.session = None
 
-    @wraps(requests.Session.__enter__)
-    def __enter__(self):
-        return self._tryit("__enter__")
-
-    @wraps(requests.Session.__exit__)
-    def __exit__(self, *args):
-        return self._tryit("__exit__")
+    def get_with_retries(self, url: str):
+        if self.session is None:
+            self.reset()
+        for _ in range(self.retries):
+            try:
+                return self.session.get(
+                    url, stream=True, timeout=self.timeout
+                )
+            except requests.ReadTimeout:
+                console_and_log(
+                    f"slow response on {url}; reestablishing session"
+                )
+                time.sleep(self.backoff)
+                self.reset()
+        return None
 
     @property
     def cookies(self):
@@ -280,7 +259,8 @@ def _expand_index_table(filelist, data_path):
     return filelist.loc[~filelist.exists].reset_index(drop=True).copy()
 
 
-def verbose_temp_download(filelist, data_path, temp_path, full_lower=False):
+def verbose_temp_download(filelist, data_path, temp_path, full_lower=False,
+                          add_req_headers={}):
     if 'url_stem' in filelist.columns:
         filelist = _expand_index_table(filelist, data_path)
         isbucket_target = 'url'
@@ -293,11 +273,11 @@ def verbose_temp_download(filelist, data_path, temp_path, full_lower=False):
             filelist[isbucket_target].iloc[0]
         ).groupdict()['name']
         _verbose_s3_download_filelist(
-            filelist, data_path, bucketname, full_lower
+            filelist, data_path, bucketname, full_lower,
         )
     else:
         _verbose_web_temp_download_filelist(
-            filelist, data_path, temp_path, full_lower
+            filelist, data_path, temp_path, full_lower, add_req_headers
         )
 
 
@@ -365,38 +345,42 @@ def _verbose_web_temp_download_file(
     data_path,
     temp_path,
     url,
+    session,
     skip_quietly=True,
-    session=None,
-    full_lower=False
+    full_lower=False,
 ):
-    session = session if session is not None else MaybeSession()
     try:
         check_cases(Path(data_path, Path(url).name))
         if skip_quietly is False:
             console_and_log(
                 f"{Path(url).name} already present, skipping download."
             )
-        return session
+            return
     except FileNotFoundError:
         pass
     console_and_log(f"attempting to download {url}.")
-    response, session = get_response(session, url)
     try:
+        response = session.get_with_retries(url)
         if response is None:
             console_and_log(f"Download of {url} timed out.")
-            return session
+            return
         if not response.ok:
+            console_and_log(f"Download of {url} failed: {response.status_code} {response.reason}")
             response.close()
             if full_lower is True:
                 urlsplit = url.split('/')
             else:
                 urlsplit = url.split('.')
             url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
-            response = session.get(url, stream=True, headers=HEADERS)
-            if not response.ok:
-                console_and_log(f"Download of {url} failed.")
-                response.close()
-                return session
+            response = session.get_with_retries(url)
+
+        if response is None:
+            console_and_log(f"Download of {url} timed out.")
+            return
+        if not response.ok:
+            console_and_log(f"Download of {url} failed: {response.status_code} {response.reason}")
+            return
+
         _download_chunk(response, temp_path, url)
         shutil.move(
             Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
@@ -422,37 +406,23 @@ def _download_chunk(response, temp_path, url):
 
 
 def _verbose_web_temp_download_filelist(
-    filelist, data_path, temp_path, full_lower=False
+    filelist, data_path, temp_path, full_lower=False, add_req_headers={}
 ):
-    session = MaybeSession()
+    session = HTTPSessionWrapper(add_req_headers)
     for ix, row in filelist.iterrows():
         try:
-            session = _verbose_web_temp_download_file(
+            _verbose_web_temp_download_file(
                 data_path,
                 temp_path,
                 row["url"],
+                session,
                 skip_quietly=False,
-                session=session,
                 full_lower=full_lower
             )
         except KeyboardInterrupt:
             raise
         except Exception as ex:
             console_and_log(f"download failed: {type(ex)}: {ex}")
-
-
-def get_response(session: MaybeSession, url: str):
-    for _ in range(5):
-        try:
-            response = session.get(
-                url, stream=True, headers=HEADERS, timeout=4
-            )
-            return response, session
-        except requests.ReadTimeout:
-            console_and_log(f"slow response on {url}; reestablishing session")
-            time.sleep(2)
-            session.reset()
-    return None, session
 
 
 # noinspection HttpUrlsUsage
