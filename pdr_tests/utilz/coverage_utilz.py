@@ -12,8 +12,7 @@ from pyarrow import parquet
 from pathlib import Path
 
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests import __file__ as pdr_tests_fname
-MANIFEST_DIR = Path(pdr_tests_fname).parent / "node_manifests"
+from pdr_tests.settings.base import MANIFEST_DIR
 
 
 # defining these separately from the 'special' label search
