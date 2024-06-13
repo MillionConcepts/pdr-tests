@@ -24,10 +24,7 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 
-from pathlib import Path
-import pdr_tests
-
-
+# variables naming specific parquet files in node_manifests
 GEO_MANIFEST = "geomgn"
 IMG_MANIFEST = "img_usgs_magellan"
 
