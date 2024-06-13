@@ -25,7 +25,15 @@ def cli_main():
     sys.argv = sys.argv[1:]
     console_and_log(f'----INITIATING IX {command}----', quiet=True)
     try:
-        fire.Fire(getattr(ix_interface, command))
+        try:
+            fire.Fire(getattr(ix_interface, command))
+        except KeyError as ex:
+            cause = getattr(ex, '__cause__', None)
+            if isinstance(cause, (ModuleNotFoundError, AttributeError)):
+                console_and_log(f'Invalid dataset: {cause}', level='error')
+                sys.exit(1)
+            else:
+                raise
     except Exception as ex:
         console_and_log(f'unrecoverable exception: ({type(ex)}: {ex})')
         raise
