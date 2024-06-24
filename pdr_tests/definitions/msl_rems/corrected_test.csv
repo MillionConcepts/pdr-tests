@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+REMS_UVS_0215_0300.LBL,"[""REMS_UVS_0215_0300.TAB"", ""REMS_UVS_0215_0300.LBL""]",REMS_UVS_0215_0300,http://pds-atmospheres.nmsu.edu/PDS/data/mslrem_1001/DATA_UV_CORRECTED,"{""UVS_SCIENCE_TABLE"": ""d21be227051906eac402c325fe63b0cc""}"
