@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+albedo.LBL,"[""albedo.LBL"", ""ALBEDO.DAT""]",albedo,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""61d78f23f29c6bc6d9ffd0751a020f08""}"
+inertia.LBL,"[""INERTIA.DAT"", ""inertia.LBL""]",inertia,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""907104fab0e6b32bd92a7f2fd000910b""}"
+topo.LBL,"[""TOPO.DAT"", ""topo.LBL""]",topo,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""a5af9c4cf744ebb1e71fb5d83292f156""}"
