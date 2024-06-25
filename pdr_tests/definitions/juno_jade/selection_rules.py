@@ -113,4 +113,11 @@ file_information = {
         "url_must_contain": ['JNO-SW-JAD', "UNCALIBRATED", 'ION_TOF'],
         "label": "D",
     },
+    # Derived Moments
+    "moments": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": [".CSV"],
+        "url_must_contain": ['JNO-J-JAD-5-MOMENTS-V1.0/DATA'],
+        "label": "D",
+    },
 }
