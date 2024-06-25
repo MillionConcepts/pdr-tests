@@ -26,6 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 SBN_FILE = "tiny_other"
+PPI_FILE = "plasm_full"
 
 file_information = {
     # Energetic Particle Anisotropy Spectrometer
@@ -76,6 +77,22 @@ file_information = {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ice-c-uleca-3-rdr-giacobini-zin-v1.0/data'],
+        "label": "D",
+    },
+
+    # Ephemeris data
+    # (There are only 3 unique products, but it looks like 18 because each 
+    # volume has a copy.)
+    "ephem_tab": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['ICE-', 'DATA', 'EPHEM'],
+        "label": "D",
+    },
+    "ephem_tbl": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TBL'],
+        "url_must_contain": ['ICE-', 'DATA', 'EPHEM'],
         "label": "D",
     },
 }

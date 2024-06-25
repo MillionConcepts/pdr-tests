@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+TRAJ_ICE.LBL,"[""TRAJ_ICE.LBL"", ""TRAJ_ICE.TBL""]",TRAJ_ICE,http://pds-ppi.igpp.ucla.edu/data/ICE-C-EPAS-3-RDR-GIACOBIN-ZIN-V1.0/DATA/ICE-EPHEMRIS,"{""TABLE"": ""3cd0f4946d443d7aec2f89184840d5a3""}"
