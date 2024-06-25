@@ -42,6 +42,13 @@ file_information = {
         "url_must_contain": ['GO-', '-MAG-', '-REDR-'],
         "label": "D",
     },
+    # ancillary(?) table - raw engineering data
+    "REDR_eng": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.CSV'],
+        "url_must_contain": ['GO-', '-MAG-', '-REDR-', 'DATA/ENG'],
+        "label": "D",
+    },
     "RDR_tab": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.TAB'],
