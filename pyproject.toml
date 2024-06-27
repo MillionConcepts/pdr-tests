@@ -22,8 +22,9 @@ dependencies = [
 
 [project.optional-dependencies]
 tests = [
-    "hypothesis",
-    "pytest",
+# Placeholder.  Project currently has no unit tests.
+#    "hypothesis",
+#    "pytest",
 ]
 
 [project.scripts]
@@ -39,6 +40,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = ["pdr_tests"]
 
+# Recommended for new projects by pytest manual.
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib"
