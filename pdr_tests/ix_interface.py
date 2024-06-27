@@ -236,7 +236,7 @@ def check(
     },
     skip_hash = {
         "short": "s",
-        "help": "???",
+        "help": "Don't check any hashes, just load each test input (like 'ix check')",
     },
     max_size = {
         "help": "Maximum size of file to process, in *decimal* megabytes",
