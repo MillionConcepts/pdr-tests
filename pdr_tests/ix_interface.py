@@ -95,14 +95,14 @@ def check(
     *,
     dump_browse: "d" = True,
     dump_kwargs: "k" = None,
-    debug: "b" = True,
+    pdr_debug = True,
     nowarn: "w" = False
 ):
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
     hasher = ProductChecker(dataset, DATA_ROOT, BROWSE_ROOT, TRACKER_LOG_DIR)
     hasher.check_product_type(
-        product_type, dump_browse, dump_kwargs, debug, nowarn
+        product_type, dump_browse, dump_kwargs, pdr_debug, nowarn
     )
 
 
@@ -112,7 +112,7 @@ def test(
     *,
     regen: "r" = False,
     write: "w" = True,
-    debug: "g" = True,
+    pdr_debug = True,
     dump_browse: "d" = False,
     dump_kwargs: "k" = None,
     quiet: "q" = False,
@@ -138,7 +138,7 @@ def test(
                 product_type,
                 regen,
                 write,
-                debug,
+                pdr_debug,
                 dump_browse,
                 dump_kwargs,
                 quiet,
@@ -203,11 +203,12 @@ def finalize(dataset, product_type=None, product=None, *,
     )
 
 
-def index_directory(target, manifest, output="index.csv", debug=False, filters=None):
+def index_directory(target, manifest, output="index.csv",
+                    stop_on_first_error=False, filters=None):
     """simple wrapper for datasets.directory_to_index"""
     if filters is not None:
         filters = literal_eval(filters)
-    directory_to_index(target, manifest, output, debug, filters)
+    directory_to_index(target, manifest, output, stop_on_first_error, filters)
 
 
 def ix_help(*_, **__):
