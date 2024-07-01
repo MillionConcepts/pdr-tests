@@ -475,7 +475,7 @@ def flip_ends_with(strings: Collection[str], ending: str) -> Callable:
 def read_and_hash(
     path: Path,
     product: Mapping[str, str],
-    debug: bool,
+    pdr_debug: bool,
     quiet: bool,
     skiphash: bool,
     tracker: Optional[TrivialTracker] = None
@@ -505,7 +505,7 @@ def read_and_hash(
             module="astropy.io.fits.header"
         )
         watch.start()
-        data = pdr.read(str(path), debug=debug, tracker=tracker)
+        data = pdr.read(str(path), debug=pdr_debug, tracker=tracker)
         data.load("all")
         runtimes["readtime"] = watch.peek()
     console_and_log(

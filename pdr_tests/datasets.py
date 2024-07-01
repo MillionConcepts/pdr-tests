@@ -379,7 +379,7 @@ class ProductChecker(DatasetDefinition):
         product_types,
         regen=False,
         write=True,
-        debug=True,
+        pdr_debug=True,
         dump_browse=False,
         dump_kwargs=None,
         quiet=False,
@@ -398,7 +398,7 @@ class ProductChecker(DatasetDefinition):
         write: if False, do a 'dry run' -- don't write anything besides logs
         regardless of other settings/results
 
-        debug: should we open products in debug mode?
+        pdr_debug: should we open products in debug mode?
 
         dump_browse: if True, also write browse products
 
@@ -418,7 +418,7 @@ class ProductChecker(DatasetDefinition):
                 (regen is True) or ("hash" not in index.columns)
             )
             test_args = (
-                compare, debug, quiet, max_size, filetypes, skiphash, self.tracker
+                compare, pdr_debug, quiet, max_size, filetypes, skiphash, self.tracker
             )
             # compare/overwrite are redundant rn, but presumably we might want
             # different logic in the future.
@@ -463,7 +463,7 @@ class ProductChecker(DatasetDefinition):
         product_types,
         dump_browse=True,
         dump_kwargs=None,
-        debug=True,
+        pdr_debug=True,
         nowarn=False
     ):
         """
@@ -475,7 +475,7 @@ class ProductChecker(DatasetDefinition):
 
         dump_kwargs: kwargs for browse writer
 
-        debug: if True, run pdr in debug mode
+        pdr_debug: if True, run pdr in debug mode
 
         nowarn: if True, suppress warnings from pdr
         """
@@ -484,11 +484,11 @@ class ProductChecker(DatasetDefinition):
             index = pd.read_csv(self.index_path(product_type))
             for _, product in index.iterrows():
                 self.check_product(
-                    dump_browse, dump_kwargs, debug, nowarn, product, product_type
+                    dump_browse, dump_kwargs, pdr_debug, nowarn, product, product_type
                 )
 
     def check_product(
-        self, dump_browse, dump_kwargs, debug, nowarn, product, product_type
+        self, dump_browse, dump_kwargs, pdr_debug, nowarn, product, product_type
     ):
         console_and_log(f"checking {product['product_id']}")
         path = Path(
@@ -497,7 +497,7 @@ class ProductChecker(DatasetDefinition):
         with warnings.catch_warnings():
             if nowarn is True:
                 warnings.simplefilter("ignore")
-            data = pdr.read(str(path), debug=debug)
+            data = pdr.read(str(path), debug=pdr_debug)
             data.load("all")
             console_and_log(f"opened {product['product_id']}")
             if dump_browse:
@@ -613,7 +613,7 @@ def test_product(
     product: Mapping[str, str],
     path: Path,
     compare: bool,
-    debug: bool,
+    pdr_debug: bool,
     quiet: bool,
     max_size: float = 0,
     filetypes: Optional[Sequence[str]] = None,
@@ -641,7 +641,7 @@ def test_product(
         return data, hash_json, log_row
     try:
         data, hashes, runtimes = read_and_hash(
-            path, product, debug, quiet, skiphash, tracker
+            path, product, pdr_debug, quiet, skiphash, tracker
         )
         if (skiphash is False) and (compare is True):
             if isinstance(product["hash"], float):
@@ -712,7 +712,8 @@ def check_exclusions(filetypes, log_row, max_size, product, path):
 
 
 def directory_to_index(
-    target, manifest, output="index.csv", debug=False, filters=None
+    target, manifest, output="index.csv", stop_on_first_error=False,
+    filters=None
 ):
     """
     standalone function for producing an index from all labels in a directory.
@@ -722,12 +723,12 @@ def directory_to_index(
     for file in Path(target).iterdir():
         try:
             pluck_row_from_manifest(file, manifest, product_rows, filters)
-        except KeyboardInterrupt:
-            raise
         except Exception as ex:
-            if debug is True:
-                raise ex
+            if stop_on_first_error:
+                raise
             console_and_log(f"failed on {file.name}: {type(ex)}: {ex}")
+            continue
+
     pd.DataFrame(product_rows).to_csv(output, index=False)
 
 
