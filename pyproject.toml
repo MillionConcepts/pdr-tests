@@ -15,7 +15,6 @@ classifiers = [
 
 requires-python = ">=3.9"
 dependencies = [
-    "fire",
     "hostess[aws]",
     "pdr",
     "pyarrow>=9.0.0",
