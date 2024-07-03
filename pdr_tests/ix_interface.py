@@ -13,7 +13,7 @@ from pdr_tests.datasets import (
     MissingHashError,
 )
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests.settings.base import (
+from pdr_tests.settings import (
     BROWSE_ROOT,
     DATA_ROOT,
     HEADERS,
