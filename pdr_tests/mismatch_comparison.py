@@ -71,7 +71,7 @@ def compare_outputs(r, r_dt, r_fmt, t, t_dt, t_fmt):
     if len(r) != len(t):
         comparison["row_count"] = {"ref": len(r), "test": len(t)}
     if len(r.columns) != len(t.columns):
-        comparison["column_count"] = {"ref": len(r), "test": len(t)}
+        comparison["column_count"] = {"ref": len(r.columns), "test": len(t.columns)}
     missing_cols = set(r.columns).difference(t.columns)
     new_cols = set(t.columns.difference(r.columns))
     if len(missing_cols) + len(new_cols) > 0:
