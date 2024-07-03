@@ -36,15 +36,14 @@ file_information = {
                              'DATA/ORIGINAL_BINARY'],
         "label": "D",
     },
-##    # SCCOORDS HIRES ascii version
-##    # manifest is out of date and ix can't find these files
-##    "sc_hires_asc": {
-##        "manifest": PPI_FILE,
-##        "fn_must_contain": ['.TAB'],
-##        "url_must_contain": ['PVO-V-OMAG-3--SCCOORDS-HIRES',
-##                             'DATA/ASCII'],
-##        "label": "D",
-##    },
+   # SCCOORDS HIRES ascii version
+   "sc_hires_asc": {
+       "manifest": PPI_FILE,
+       "fn_must_contain": ['.TAB'],
+       "url_must_contain": ['PVO-V-OMAG-3--SCCOORDS-HIRES',
+                            'DATA/ASCII'],
+       "label": "D",
+   },
     # P-SENSOR HIRES original binary files
     "ps_hires_bi": {
         "manifest": PPI_FILE,
@@ -69,15 +68,14 @@ file_information = {
                              'DATA/ORIGINAL_BINARY'],
         "label": "D",
     },
-##    # SCCOORDS 24 second averages ascii version
-##    # manifest is out of date and ix can't find these files
-##    "sc_24s_asc": {
-##        "manifest": PPI_FILE,
-##        "fn_must_contain": ['.TAB'],
-##        "url_must_contain": ['PVO-V-OMAG-4--SCCOORDS-24SEC',
-##                             'DATA/ASCII'],
-##        "label": "D",
-##    },
+   # SCCOORDS 24 second averages ascii version
+   "sc_24s_asc": {
+       "manifest": PPI_FILE,
+       "fn_must_contain": ['.TAB'],
+       "url_must_contain": ['PVO-V-OMAG-4--SCCOORDS-24SEC',
+                            'DATA/ASCII'],
+       "label": "D",
+   },
     # P-SENSOR 24 second averages original binary files
     "ps_24s_bi": {
         "manifest": PPI_FILE,
