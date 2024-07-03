@@ -47,15 +47,15 @@ file_information = {
 ##        "label": "A",
 ##    },
     # Cubes (go_1101-go_1120)
-    # QUBEs do not open becuase they are VAX_REAL
+    # QUBEs do not open because they are VAX_REAL
     # HISTOGRAM_IMAGEs also don't open. ValueError: This table's byte sizes are underspecified.
-##    "cube": {
-##        "manifest": IMG_FILE,
-##        "fn_regex": [r'qu[bt]$'],
-##        "url_must_contain": ['Galileo/NIMS'],
-##        "url_regex": [r'go_11..'],
-##        "label": "A",
-##    },
+    # "cube": {
+    #    "manifest": IMG_FILE,
+    #    "fn_regex": [r'qu[bt]$'],
+    #    "url_must_contain": ['Galileo/NIMS'],
+    #    "url_regex": [r'go_11..'],
+    #    "label": "A",
+    # },
     # Data from a Shoemaker-Levy 9 fragment's impact with Jupiter
     "impact": {
         "manifest": IMG_FILE,
