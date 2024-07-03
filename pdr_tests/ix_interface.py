@@ -47,6 +47,8 @@ def validate_dataset(ds: str) -> str:
 # more actions here, so that they are handled consistently across
 # all actions.  They will only be available to actions whose
 # execution function actually has a matching argument.
+# All options whose default comes from settings should also be here
+# even if they are only used by one action.
 cli_action.add_common_argspecs(
     dataset = {
         "help": "PDS data set to be processed",
@@ -55,6 +57,29 @@ cli_action.add_common_argspecs(
     product_type = {
         "help": "Process only data products of this type",
     },
+    manifest_dir = {
+        "help": "Directory containing manifest .parquet files",
+    },
+    data_root = {
+        "help": "Directory tree storing copies of PDS data for testing",
+    },
+    browse_root = {
+        "help": "Directory tree where browse products will be written",
+    },
+    tracker_log_dir = {
+        "help": "Directory to store tracker logs in",
+    },
+    headers = {
+        "help": (
+            "Additional HTTP request headers to send when downloading files"
+            " (expects a Python dictionary literal)"
+        ),
+    },
+    bucket = {
+        "short": "b",
+        "help": "AWS S3 bucket to upload files to",
+    },
+
     pdr_debug = {
         "help": "Enable debug mode in PDR",
         "neg_help": "Don't enable debug mode in PDR",
@@ -67,6 +92,20 @@ cli_action.add_common_argspecs(
     quiet = {
         "short": "q",
         "help": "Print only errors",
+    },
+    subset_size = {
+        "short": "s",
+        "help": (
+            "Maximum number of files to select per product type"
+            " (default: 200)"
+        ),
+    },
+    max_size = {
+        "short": "m",
+        "help": (
+            "Maximum size of each file to select, in *decimal* megabytes"
+            " (default: 8 GB)"
+        ),
     },
     dump_browse = {
         "short": "d",
@@ -83,53 +122,46 @@ cli_action.add_common_argspecs(
 )
 
 
-@cli_action(
-    manifest_dir = {
-        "help": "Directory containing manifest .parquet files",
-    },
-)
+@cli_action
 def sort(
     dataset: str,
     product_type: Optional[str] = None,
     *,
     manifest_dir: Optional[Path] = None,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
 ):
     """
     Filter a manifest down to a single data set, using selection rules.
     """
     if manifest_dir is None:
         manifest_dir = MANIFEST_DIR
-    picker = ProductPicker(dataset, DATA_ROOT, BROWSE_ROOT)
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
+    picker = ProductPicker(dataset, data_root, browse_root)
     picker.make_product_list(manifest_dir, product_type)
 
 
-@cli_action(
-    subset_size = {
-        "short": "s",
-        "help": (
-            "Maximum number of files to select per product type"
-            " (default: 200)"
-        ),
-    },
-    max_size = {
-        "short": "m",
-        "help": (
-            "Maximum size of each file to select, in *decimal* megabytes"
-            " (default: 8 GB)"
-        ),
-    },
-)
+@cli_action
 def pick(
     dataset: str,
     product_type: Optional[str] = None,
     *,
     subset_size: int = 200,
     max_size: int = 8000,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
 ):
     """
     Choose a random subset of a data set for manual systematic testing.
     """
-    picker = ProductPicker(dataset, DATA_ROOT, BROWSE_ROOT)
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
+    picker = ProductPicker(dataset, data_root, browse_root)
     picker.random_picks(product_type, subset_size, max_size)
 
 
@@ -144,13 +176,24 @@ def index(
     product_type: Optional[str] = None,
     *,
     dry_run: bool = False,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
+    headers: Optional[str] = None,
 ):
     """
     Download detached labels and create a comprehensive index for the
     products selected by 'ix pick'.
     """
-    indexer = IndexMaker(dataset, DATA_ROOT, BROWSE_ROOT)
-    indexer.get_labels(product_type, dry_run, add_req_headers=HEADERS)
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
+    if headers is None:
+        headers = HEADERS
+    else:
+        headers = literal_eval(headers)
+    indexer = IndexMaker(dataset, data_root, browse_root)
+    indexer.get_labels(product_type, dry_run, add_req_headers=headers)
     if dry_run:
         return
     indexer.write_subset_index(product_type)
@@ -172,6 +215,9 @@ def download(
     *,
     get_test: bool = False,
     full_lower: bool = False,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
+    headers: Optional[str] = None,
 ):
     """
     Download all of the indexed products for a data set.
@@ -189,11 +235,19 @@ def download(
         datasets = sorted(RULES_MODULES.keys())
     else:
         datasets = [dataset]
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
+    if headers is None:
+        headers = HEADERS
+    else:
+        headers = literal_eval(headers)
     for dataset in datasets:
-        downloader = IndexDownloader(dataset, DATA_ROOT, BROWSE_ROOT)
+        downloader = IndexDownloader(dataset, data_root, browse_root)
         downloader.download_index(
             product_type, get_test, full_lower=full_lower,
-            add_req_headers=HEADERS,
+            add_req_headers=headers,
         )
 
 
@@ -206,13 +260,22 @@ def check(
     warn: bool = True,
     dump_browse: bool = True,
     dump_kwargs: Optional[str] = None,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
+    tracker_log_dir: Optional[Path] = None,
 ):
     """
     Attempt to use PDR to read every indexed product in a data set.
     """
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
+    if tracker_log_dir is None:
+        tracker_log_dir = TRACKER_LOG_DIR
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
-    hasher = ProductChecker(dataset, DATA_ROOT, BROWSE_ROOT, TRACKER_LOG_DIR)
+    hasher = ProductChecker(dataset, data_root, browse_root, tracker_log_dir)
     hasher.check_product_type(
         product_type, dump_browse, dump_kwargs, pdr_debug, not warn
     )
@@ -252,10 +315,19 @@ def test(
     skip_hash: bool = False,
     dump_browse: bool = False,
     dump_kwargs: Optional[str] = None,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
+    tracker_log_dir: Optional[Path] = None,
 ):
     """
     Generate and/or compare test hashes for a data set (or all data sets).
     """
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
+    if tracker_log_dir is None:
+        tracker_log_dir = TRACKER_LOG_DIR
     if len(filetypes) > 0:
         filetypes = {f.lower().strip(".") for f in filetypes.split(" ")}
     if dump_kwargs is not None:
@@ -267,7 +339,8 @@ def test(
         datasets = [dataset]
     logs = []
     for dataset in datasets:
-        hasher = ProductChecker(dataset, DATA_ROOT, BROWSE_ROOT, TRACKER_LOG_DIR)
+        hasher = ProductChecker(dataset, data_root, browse_root,
+                                tracker_log_dir)
         hasher.tracker.paused = True
         try:
             test_logs = hasher.compare_test_hashes(
@@ -306,10 +379,20 @@ def test(
 def test_paths(
     dataset: Optional[str] = None,
     product_type: Optional[str] = None,
+    *,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
+    tracker_log_dir: Optional[Path] = None,
 ):
     """
     Print the names of the test inputs for a data set (or all data sets).
     """
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
+    if tracker_log_dir is None:
+        tracker_log_dir = TRACKER_LOG_DIR
     if dataset is None:
         sys.stderr.write(
             "no dataset argument provided; listing all defined datasets\n"
@@ -318,8 +401,8 @@ def test_paths(
     else:
         datasets = [dataset]
     for dataset in datasets:
-        lister = ProductChecker(dataset, DATA_ROOT, BROWSE_ROOT,
-                                TRACKER_LOG_DIR)
+        lister = ProductChecker(dataset, data_root, browse_root,
+                                tracker_log_dir)
         for test_paths in lister.dump_test_paths(product_type):
             for path in test_paths:
                 print(path)
@@ -329,10 +412,6 @@ def test_paths(
     subset_size = {
         "short": "n",
         "help": "Number of files to select for each product type (default: 1)",
-    },
-    bucket = {
-        "short": "b",
-        "help": "AWS S3 bucket to upload files to",
     },
     regen = {
         "short": "r",
@@ -354,17 +433,23 @@ def finalize(
     regen: bool = False,
     local: bool = False,
     subset_size: int = 1,
-    bucket: Optional[str] = None
+    bucket: Optional[str] = None,
+    data_root: Optional[Path] = None,
+    browse_root: Optional[Path] = None,
 ):
     """Create a test subset (if necessary) and upload relevant test files to S3."""
     if bucket is None:
         bucket = TEST_CORPUS_BUCKET
+    if data_root is None:
+        data_root = DATA_ROOT
+    if browse_root is None:
+        browse_root = BROWSE_ROOT
     if not dataset:
          raise ValueError(
              "finalize requires a dataset argument."
          )
 
-    finalizer = CorpusFinalizer(dataset, DATA_ROOT, BROWSE_ROOT)
+    finalizer = CorpusFinalizer(dataset, data_root, browse_root)
     finalizer.create_and_upload_test_subset(
         product_type,
         product,
