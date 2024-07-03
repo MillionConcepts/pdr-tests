@@ -1,22 +1,20 @@
-"""settings for pdr-tests"""
-from pathlib import Path
-import sys
+"""settings for pdr-tests - defaults"""
 
-self_path = Path(__file__)
-pkg_path = self_path.parent.parent
-user_settings_path = self_path.parent / "user.py"
-if not user_settings_path.exists():
-    user_settings_path.touch()
+#: Used by _patcher.merge_settings to know which attributes are
+#: supposed to be Path objects.  Relative path strings will be
+#: resolved relative to the pdr_tests package directory, not the
+#: source root, nor the current working directory.
+__PKG_RELATIVE_PATH_ATTRS__ = [
+    "BROWSE_ROOT",
+    "DATA_ROOT",
+    "MANIFEST_DIR",
+    "TRACKER_LOG_DIR",
+]
 
-from pdr_tests.settings._patcher import monkeypatch_literals
-from pdr_tests.settings import user as user_settings_mod
-
-BROWSE_ROOT = pkg_path / "browse"
-DATA_ROOT = pkg_path / "data"
-MANIFEST_DIR = pkg_path / "node_manifests"
-TRACKER_LOG_DIR = pkg_path / ".tracker_logs"
+BROWSE_ROOT = "browse"
+DATA_ROOT = "data"
+MANIFEST_DIR = "node_manifests"
+TRACKER_LOG_DIR = ".tracker_logs"
 
 HEADERS = {}
 TEST_CORPUS_BUCKET = None
-
-monkeypatch_literals(sys.modules[__name__], user_settings_mod)

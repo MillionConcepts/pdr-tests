@@ -1,31 +1,51 @@
-from inspect import getmembers
-from types import FunctionType, ModuleType
-from typing import Union
+"""glue logic to merge settings.base and settings.user"""
 
-from hostess.utilities import get_module
+import sys
+import types
+from pathlib import Path
 
+def load_settings():
+    """
+    Called when pdr_tests.settings is first loaded.  Do not call
+    unless you are pdr_tests/settings/__init__.py.
 
-def find_literals(module: ModuleType) -> list[str]:
-    members = []
-    for name, member in getmembers(module):
-        if member == module:
-            continue
-        if isinstance(member, (ModuleType, FunctionType, type)):
-            continue
-        else:
-            members.append(name)
-    return members
+    Erase the contents of pdr_tests.settings and replace it with a
+    clone of pdr_tests.settings.base; if pdr_tests.settings.user
+    exists, each attribute in .user with the same name as an attribute
+    of .base replaces base's value.
 
+    Additionally, if BASE defines the attribute __PKG_RELATIVE_PATH_ATTRS__,
+    each attribute with a matching name will be converted to a Path,
+    resolving relative paths relative to the pdr_tests package root
+    (not the source root or the cwd).
+    """
+    settings_mod = sys.modules["pdr_tests.settings"]
+    pkg_root = Path(settings_mod.__file__).parent.parent
 
-def monkeypatch_literals(
-    target_module: Union[str, ModuleType],
-    source_module: Union[str, ModuleType],
-):
-    if not isinstance(target_module, ModuleType):
-        target_module = get_module(target_module)
-    if not isinstance(source_module, ModuleType):
-        source_module = get_module(source_module)
-    source_literals = find_literals(source_module)
-    target_literals = find_literals(target_module)
-    for attrname in set(source_literals).intersection(target_literals):
-        setattr(target_module, attrname, getattr(source_module, attrname))
+    from pdr_tests.settings import base
+    try:
+        from pdr_tests.settings import user
+    except ImportError:
+        user = types.ModuleType("pdr_tests.settings.user")
+
+    path_attrs = frozenset(
+        getattr(base, "__PKG_RELATIVE_PATH_ATTRS__", ())
+    )
+
+    # settings_mod.__dict__.clear() would delete things like __name__
+    # also the Python reference manual says "modifying [a module
+    # object's] __dict__ directly is not recommended"
+    # dir() returns a list, not an iterator
+    for unwanted in dir(settings_mod):
+        if not unwanted.startswith("__"):
+            delattr(settings_mod, unwanted)
+
+    for attr in dir(base):
+        if not attr.startswith("_"):
+            if hasattr(user, attr):
+                val = getattr(user, attr)
+            else:
+                val = getattr(base, attr)
+            if attr in path_attrs:
+                val = pkg_root / val
+            setattr(settings_mod, attr, val)
