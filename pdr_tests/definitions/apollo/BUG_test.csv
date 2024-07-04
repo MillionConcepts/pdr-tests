@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-apollo16_68810.LBL,"[""APOLLO16_68810.CSV"", ""apollo16_68810.LBL""]",APOLLO16_68810,http://pds-geosciences.wustl.edu/lunar/buglab-l-bug-4-apollo-samples-v1/bug_9002/data,"{""SPREADSHEET"": ""a8c6192d0d52d1a70774034cfadd0aaa""}"
+apollo16_68810.LBL,"[""APOLLO16_68810.CSV"", ""apollo16_68810.LBL""]",APOLLO16_68810,http://pds-geosciences.wustl.edu/lunar/buglab-l-bug-4-apollo-samples-v1/bug_9002/data,"{""HEADER"": ""d3be3fc6de70ec70c29602af23bcf35d"", ""SPREADSHEET"": ""a8c6192d0d52d1a70774034cfadd0aaa""}"
