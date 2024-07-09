@@ -92,7 +92,7 @@ file_information = {
     "s_rdr_step": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.CSV'],
-        "url_must_contain": ['S-LECP-3-RDR-STEP', '/DATA'],
+        "url_must_contain": ['S-LECP-3-', 'STEP', '/DATA'],
         "label": "D",
     },
     # Saturn SUMM average (ix testing missed the VG2 product because of repeated
