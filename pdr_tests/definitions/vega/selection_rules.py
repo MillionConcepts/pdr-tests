@@ -57,9 +57,21 @@ file_information = {
     # MISCHA "original" dataset is safed, "halley" and "cruise" are archived
     "mischa": {
         "manifest": PPI_FILE,
-        "fn_must_contain": ['.'],
-        "url_must_contain": ['VEGA1-C-MISCHA-3-RDR-', 'DATA'],
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['VEGA1-','-MISCHA-3-RDR-', 'DATA'],
         "url_regex": [r'(HALLEY)|(CRUISE)'],
+        "label": "D",
+    },
+    "mischa_safed_asc": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VEGA','-MISCHA-3-RDR-ORIGINAL', 'DATA'],
+        "label": "D",
+    },
+    "mischa_safed_bin": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['VEGA','-MISCHA-3-RDR-ORIGINAL', 'DATA'],
         "label": "D",
     },
     # Television System raw, processed, and transform data
