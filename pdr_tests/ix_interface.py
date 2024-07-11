@@ -13,14 +13,7 @@ from pdr_tests.datasets import (
     MissingHashError,
 )
 from pdr_tests.definitions import RULES_MODULES
-from pdr_tests.settings import (
-    BROWSE_ROOT,
-    DATA_ROOT,
-    HEADERS,
-    MANIFEST_DIR,
-    TEST_CORPUS_BUCKET,
-    TRACKER_LOG_DIR,
-)
+from pdr_tests.settings import SETTINGS
 from pdr_tests.utilz.ix_utilz import (
     clean_logs,
     console_and_log,
@@ -140,11 +133,11 @@ def sort(
     Filter a manifest down to a single data set, using selection rules.
     """
     if manifest_dir is None:
-        manifest_dir = MANIFEST_DIR
+        manifest_dir = SETTINGS.manifest_dir
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
     picker = ProductPicker(dataset, data_root, browse_root)
     picker.make_product_list(manifest_dir, product_type)
 
@@ -163,9 +156,9 @@ def pick(
     Choose a random subset of a data set for manual systematic testing.
     """
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
     picker = ProductPicker(dataset, data_root, browse_root)
     picker.random_picks(product_type, subset_size, max_size)
 
@@ -190,11 +183,11 @@ def index(
     products selected by 'ix pick'.
     """
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
     if headers is None:
-        headers = HEADERS
+        headers = SETTINGS.headers
     else:
         headers = literal_eval(headers)
     indexer = IndexMaker(dataset, data_root, browse_root)
@@ -241,11 +234,11 @@ def download(
     else:
         datasets = [dataset]
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
     if headers is None:
-        headers = HEADERS
+        headers = SETTINGS.headers
     else:
         headers = literal_eval(headers)
     for dataset in datasets:
@@ -273,11 +266,11 @@ def check(
     Attempt to use PDR to read every indexed product in a data set.
     """
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
     if tracker_log_dir is None:
-        tracker_log_dir = TRACKER_LOG_DIR
+        tracker_log_dir = SETTINGS.tracker_log_dir
     if dump_kwargs is not None:
         dump_kwargs = literal_eval(dump_kwargs)
     hasher = ProductChecker(dataset, data_root, browse_root, tracker_log_dir)
@@ -328,11 +321,11 @@ def test(
     Generate and/or compare test hashes for a data set (or all data sets).
     """
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
     if tracker_log_dir is None:
-        tracker_log_dir = TRACKER_LOG_DIR
+        tracker_log_dir = SETTINGS.tracker_log_dir
     if len(filetypes) > 0:
         filetypes = {f.lower().strip(".") for f in filetypes.split(" ")}
     if dump_kwargs is not None:
@@ -393,11 +386,11 @@ def test_paths(
     Print the names of the test inputs for a data set (or all data sets).
     """
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
     if tracker_log_dir is None:
-        tracker_log_dir = TRACKER_LOG_DIR
+        tracker_log_dir = SETTINGS.tracker_log_dir
     if dataset is None:
         print("no dataset argument provided; listing all defined datasets")
         datasets = list_datasets()
@@ -442,12 +435,11 @@ def finalize(
 ):
     """Create a test subset (if necessary) and upload relevant test files to S3."""
     if bucket is None:
-        bucket = TEST_CORPUS_BUCKET
+        bucket = SETTINGS.test_corpus_bucket
     if bucket is None:
         raise ValueError(
             "The name of the s3 bucket you would like to upload to must be"
-            " given as TEST_CORPUS_BUCKET in pdr_tests.settings.user,"
-            " or via --bucket."
+            " given via the settings or via --bucket."
         )
     if dataset is None:
         raise ValueError(
@@ -455,9 +447,9 @@ def finalize(
             " all the files in the s3 bucket."
         )
     if data_root is None:
-        data_root = DATA_ROOT
+        data_root = SETTINGS.data_root
     if browse_root is None:
-        browse_root = BROWSE_ROOT
+        browse_root = SETTINGS.browse_root
 
     finalizer = CorpusFinalizer(dataset, data_root, browse_root)
     finalizer.create_and_upload_test_subset(
@@ -545,12 +537,11 @@ def sync(
     Download test files from an S3 bucket.
     """
     if bucket is None:
-        bucket = TEST_CORPUS_BUCKET
+        bucket = SETTINGS.test_corpus_bucket
     if bucket is None:
         raise ValueError(
             "The name of the s3 bucket you would like to sync with must be "
-            " given as TEST_CORPUS_BUCKET in pdr_tests.settings.user,"
-            " or via --bucket."
+            " given via settings or via --bucket."
         )
         return
     if dataset is None:
