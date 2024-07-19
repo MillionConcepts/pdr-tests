@@ -27,8 +27,8 @@ are detached.
 from pathlib import Path
 import pdr_tests
 
-
 GEO_MANIFEST = "geomgn"
+PPI_FILE = "plasm_full"
 
 file_information = {
 	
@@ -44,6 +44,13 @@ file_information = {
         "manifest": GEO_MANIFEST,
         "fn_must_contain": ['.wea'],
         "url_must_contain": ['mgn-v-rss-1-tracking'],
+        "label": "D",
+    },
+    # Original Data Records (ODRs)
+	"odr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.ODR'],
+        "url_must_contain": ['MGN-SS-RSS-1-ODR-OPENLOOP-SW-SCINT-V1.0/DATA'],
         "label": "D",
     },
     
