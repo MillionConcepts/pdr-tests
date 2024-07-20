@@ -54,6 +54,8 @@ ptypes = ("mr", # radiometric; specifically the MIPLRAD correction
           "sh", # slope heading
           "sm", # slope magnitude
           "se", # solar energy product
+          "sn", # slope northerly tilt
+          "us", # slope normal
           )
 # Product types in the MER Camera SIS that I couldn't find, most are variations
 # or components of the ptypes above:
@@ -65,9 +67,12 @@ ptypes = ("mr", # radiometric; specifically the MIPLRAD correction
 # IDD reachability: "id"
 image_size = ("[tn]", "[a-mo-su-z]") # thumnails vs. larger images
 
+# products without thumbnail versions archived
+no_thumbnail = ["ru", "us"]
+
 for ptype, size in product(ptypes, image_size):
-    if ptype == "ru" and size == "[tn]":
-        # did not find thumnails of surface roughness products
+    if ptype in no_thumbnail and size == "[tn]":
+        # did not find thumbnails of these products
         continue
     pattern = rf"\w[0-9]{{9}}{ptype}{size}.*img$"
     info = base | {"fn_regex": [pattern]}
