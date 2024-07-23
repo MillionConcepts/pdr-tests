@@ -36,12 +36,13 @@ base = {
 
 # range maps persistently reference first, don't know where it is;
 # others are irrelevant
-SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT"]
+SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT", 
+              "GEOMETRIC_CM.TXT"]
 
 # see: MSL Camera SIS, pp. 88+
 file_information = {"ANAGLYPH": base | {"fn_regex": [r"^[FR]A[AB].*\.IMG"]}}
 for ptype, samp in product(
-    ("XYZ", r"RA\w", r"D\w\w", r"RN\w", r"UV\w", r"RU\w", r"S[LRHMN]\w", r"AR\w"),
+    ("XYZ", r"RA\w", r"D\w\w", r"RN\w", r"UV\w", r"RU\w", r"S[LRHMN]\w", r"AR\w", r"ILT", r"M\w\w", r"XY[EMR]"),
     ("F", "S", "D", "T")
 ):
     pattern = rf"^[FR][RL].*{ptype}(_|\w){samp}.*\.IMG"
