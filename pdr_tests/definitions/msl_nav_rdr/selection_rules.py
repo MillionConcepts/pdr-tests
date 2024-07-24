@@ -50,6 +50,11 @@ for ptype, samp in product(ptypes, samps):
     info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}.*\.IMG"]}
     file_information[f"{ptype}_{samp}"] = info
 
+# additional ILT, RAD, and RAS ptypes
+for ptype, samp in product(("ILT", "RAD", "RAS"), "M"):
+    info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}.*\.IMG"]}
+    file_information[f"{ptype}_{samp}"] = info
+
 # range maps persistently reference first, don't know where it is;
 # others are irrelevant
 SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT"]
