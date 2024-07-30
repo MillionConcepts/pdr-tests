@@ -26,6 +26,8 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 IMG_FILE = "img_usgs_cassini"
+ATM_FILE = "atm"
+
 
 # Note: this is another dataset that uses multiple format files with the same name but 
 # slightly different contents: tlmtab.fmt. calib, edr_evj, and edr_sat each have their own.
@@ -40,6 +42,13 @@ file_information = {
         "manifest": IMG_FILE,
         "fn_regex": [r'(.img)|(.IMG)'],
         "url_must_contain": ['coiss_0', 'data'],
+        "label": "D",
+    },
+    # coiss_0011 volume at ATM is not a perfect mirror of coiss_0011 at IMG
+    "calib_atm": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['coiss_0011/data'],
         "label": "D",
     },
     # Earth/Venus/Jupiter EDRs
@@ -66,3 +75,5 @@ file_information = {
     # the MIDR directory includes 'maps' in addition to the 'images' product above. they
     # are publication/presentation quality versions of the images in PDF format.
 }
+
+SKIP_FILES = ["VICAR2.TXT"]
