@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+pfs_0010_cal_raw_sw.LBL,"[""MEX_ORIENTATION_DESC.TXT"", ""PFS_0010_CAL_RAW_SW.DAT"", ""pfs_0010_cal_raw_sw.LBL""]",PFS_0010_CAL_RAW_SW,http://pds-atmospheres.nmsu.edu/PDS/data/mexpfs_1001/data/mars/swc/orb001x,"{""TABLE"": ""c5e8c306c081ac2d74c21fc6cbdc71a8""}"

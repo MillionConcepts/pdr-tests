@@ -30,6 +30,7 @@ import pdr_tests
 MANIFEST_DIR = Path(Path(pdr_tests.__file__).parent, "node_manifests")
 
 GEO_FILE = "geomex"
+ATM_FILE = "atm"
 
 file_information = {
     
@@ -83,6 +84,20 @@ file_information = {
         "label": "D",
     },
     
+    # orb001x products only at ATM
+    "orb001_lwc": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['mexpfs', 'data/mars/lwc/orb001x'],
+        "label": "D",
+    },
+    "orb001_swc": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['mexpfs', 'data/mars/swc/orb001x'],
+        "label": "D",
+    },
+
     # The MEX-M-PFS-5-DDR-MAPS-V1.0 dataset is at PSA but not mirrored at GEO.
     # There are a half dozen ascii table products; water vapour maps. They
     # open fine and are listed as notionally supported.
