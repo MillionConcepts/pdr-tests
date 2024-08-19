@@ -69,6 +69,7 @@ file_information = {
     },
     
     # European Southern Observatory - EMMI images, IR spectra, and SUSI images
+    # Mirrored at SBN and ATM
     "eso_emmi": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
@@ -88,19 +89,19 @@ file_information = {
         "label": "D",
     },
     
-    # Mount Stromlo Siding Spring Observatory - spectrometer/imager
-    # SL9 impact images are missing from the manifest, the standard stars
-    # volume is included.
-##    "mssso_sl9": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['mssso-j-caspir-3-rdr-sl9-v1.0/mssso/caspir'],
-##        "label": "D",
-##    },
+    # Mount Stromlo Siding Spring Observatory
+    # Mirrored at SBN and ATM
     "mssso_star": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['mssso-j-caspir-3-rdr-sl9-stds-v1.0/mssso/caspir'],
+        "label": "D",
+    },
+    # CASPIR calibration is missing from the tiny_other manifest (as of 8/19/24)
+    "mssso_cal": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['sl9_0004/mssso/caspir'],
         "label": "D",
     },
     
