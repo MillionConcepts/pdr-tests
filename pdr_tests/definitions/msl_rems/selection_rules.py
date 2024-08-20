@@ -32,26 +32,24 @@ ATM_FILE = "atm"
 file_information = {
     # Rover Environmental Monitoring Station (REMS)
     # RDRs
-    # These open wrong because of mixed data types in some columns of the tables
-    # ("UNK" for unknown values is a string, and the data are float)
-    # "rdr_rtl": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ["RTL", ".TAB"],
-    #     "url_must_contain": ["mslrem_1001/DATA/SOL"],
-    #     "label": "D",
-    # },
-    # "rdr_rnv": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ["RNV", ".TAB"],
-    #     "url_must_contain": ["mslrem_1001/DATA/SOL"],
-    #     "label": "D",
-    # },
-    # "rdr_rmd": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ["RMD", ".TAB"],
-    #     "url_must_contain": ["mslrem_1001/DATA/SOL"],
-    #     "label": "D",
-    # },
+    "rdr_rtl": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ["RTL", ".TAB"],
+        "url_must_contain": ["mslrem_1001/DATA/SOL"],
+        "label": "D",
+    },
+    "rdr_rnv": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ["RNV", ".TAB"],
+        "url_must_contain": ["mslrem_1001/DATA/SOL"],
+        "label": "D",
+    },
+    "rdr_rmd": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ["RMD", ".TAB"],
+        "url_must_contain": ["mslrem_1001/DATA/SOL"],
+        "label": "D",
+    },
     "rdr_adr": {
         "manifest": ATM_FILE,
         "fn_must_contain": ["ADR", ".TAB"],
