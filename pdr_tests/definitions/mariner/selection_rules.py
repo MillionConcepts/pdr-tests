@@ -31,10 +31,44 @@ IMG_FILE = "img_usgs"
 
 file_information = {
     
-    # Mariner 10
-    # MAG, PLS, and POS are pre-peer review at PPI, and appears supported
-    # NAC/WAC is pre-peer review at IMG, but in an unsupported format
-    
+    # Mariner 10 NAC/WAC EDRs are pre-peer review at IMG. They were recovered 
+    # from magnetic tapes and are in an older data format (no PDS labels)
+
+    # Mariner 10 calibrated M1/M3 magnetomer data (safed)
+    "mag_rdr": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'(TAB$)|(DAT$)'],
+        "url_must_contain": ['M10-H-MAG-3-RDR-M','-HIGHRES-V1.0/DATA'],
+        "label": "D",
+    },
+    # Mariner 10 averaged M1/M3 magnetometer data (safed)
+    "mag_summ": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'(TAB$)|(DAT$)'],
+        "url_must_contain": ['M10-H-MAG-4-SUMM-M','-SUMMARY-V1.0/DATA'],
+        "label": "D",
+    },
+    # Mariner 10 plasma experiment calibrated electron counts (safed)
+    "pls_edr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['M10-H-PLS-3-RDR-ELECTRON-COUNTS-V1.0/DATA'],
+        "label": "D",
+    },
+    # Mariner 10 plasma experiment derived electron moments (safed)
+    "pls_ddr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['M10-H-PLS-5-DDR-ELECTRON-MOMENTS-V1.0/DATA'],
+        "label": "D",
+    },
+    # Mariner 10 trajectory data for M1 and M3 flybys (safed)
+    "pos_flyby": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['M10-H-POS-6-','DATA'],
+        "label": "D",
+    },
     # Mariner 9 Imaging Science Subsystem (pre-peer review dataset)
     "iss": {
         "manifest": IMG_FILE,
