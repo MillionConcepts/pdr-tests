@@ -49,7 +49,7 @@ file_information = {
         "label": "D",
     },
     # Mariner 10 plasma experiment calibrated electron counts (safed)
-    "pls_edr": {
+    "pls_rdr": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['M10-H-PLS-3-RDR-ELECTRON-COUNTS-V1.0/DATA'],
