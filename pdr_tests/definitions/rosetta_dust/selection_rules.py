@@ -54,13 +54,30 @@ file_information = {
 	
 # start MIDAS data products
     # RDRs
-    # frequency_series and time_series tables do not open
-#     "RDR_midas_dat": {
-#         "manifest": SB_FILE,
-#         "fn_must_contain": ['.dat'],
-#         "url_must_contain": ['-midas-3-', '/data'],
-#         "label": "D",
-#     },
+    "RDR_midas_fsc": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['-midas-3-', '/data/fsc'],
+        "label": "D",
+    },
+    "RDR_midas_lin": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['-midas-3-', '/data/lin'],
+        "label": "D",
+    },
+    "RDR_midas_spa": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['-midas-3-', '/data/spa'],
+        "label": "D",
+    },
+    "RDR_midas_sps": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['-midas-3-', '/data/sps'],
+        "label": "D",
+    },
     "RDR_midas_img": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.img'],
@@ -89,4 +106,5 @@ file_information = {
 	
 }
 
-
+SKIP_FILES = ["MID_EAICD.PDF", "MID_CALIBRATION.PDF", 
+              "MID_TIP_IMAGES.PDF", "MID_FS_SUMMARY.PDF"]
