@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-8400g.lbl,"[""rtlmtab.fmt"", ""8400g.img"", ""baddata.txt"", ""vicar2.txt"", ""rlineprx.fmt"", ""8400g.lbl""]",GO-8400G-199708,http://pdssbn.astro.umd.edu/holdings/go-j-ssi-2-redr-sl9-v1.0/galileo/ssi/c024880,"{""IMAGE"": ""3f06d7dcccb255d0a1b225bcb345db8e""}"
+8400g.lbl,"[""rtlmtab.fmt"", ""8400g.img"", ""baddata.txt"", ""vicar2.txt"", ""rlineprx.fmt"", ""8400g.lbl""]",GO-8400G-199708,http://pdssbn.astro.umd.edu/holdings/go-j-ssi-2-redr-sl9-v1.0/galileo/ssi/c024880,"{""TELEMETRY_TABLE"": ""b6b6d3a6dd8ee6684e4f9c114b1d0d9b"", ""IMAGE"": ""3f06d7dcccb255d0a1b225bcb345db8e""}"

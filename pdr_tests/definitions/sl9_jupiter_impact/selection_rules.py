@@ -147,12 +147,9 @@ file_information = {
         "url_must_contain": ['go-j-uvs-3-rdr-sl9-g-fragment-v1.0/galileo/uvs'],
         "label": "D",
     },
-    # The SSI IMAGE and IMAGE_HEADER pointers open fine.
-    # The BAD_DATA_VALUES_HEADER opens incorrectly.
+    # The SSI IMAGE, IMAGE_HEADER, and TELEMETRY_TABLE pointers open fine.
+    # The BAD_DATA_VALUES_HEADER might be opening correctly.
     # The LINE_PREFIX_TABLE does not open.
-    # The TELEMETRY_TABLE does not open because one of the bit columns in
-    # rtlmtab.fmt has ITEM_BITS mislabeled as BITS, which causes issues with
-    # pdr.bit_handling.get_bit_start_and_size()
     "go_ssi": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.img'],
@@ -161,4 +158,4 @@ file_information = {
     },
 }
 
-SKIP_FILES = ["vicar2.txt", "baddata.txt",]
+SKIP_FILES = ["vicar2.txt", "baddata.txt", "VICAR2.TXT", "BADDATA.TXT"]
