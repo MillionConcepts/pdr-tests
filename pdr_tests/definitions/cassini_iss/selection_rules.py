@@ -34,7 +34,6 @@ ATM_FILE = "atm"
 
 file_information = {
 	
-    # telemetry_tables are currently unsupported because of bit column issues
     # line_prefix_tables are unsupported with eventual support planned
 	
     # Calibration files
