@@ -36,16 +36,11 @@ file_information = {
         "url_must_contain": ['earth/wff-e-atm-1_5-v1', 'data'],
         "label": "D",
     },
-}
-"""
     # Raster image derived from vector data
-    # Opens incorrectly with offsets propagating across the image
-    # Browse images in .tif format available at:
-    # https://pds-geosciences.wustl.edu/earth/wff-e-atm-1_5-v1/atm_9001/browse/
     "dem_img": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.img'],
         "url_must_contain": ['earth/wff-e-atm-1_5-v1', 'data'],
         "label": "D",
     },
-"""
+}
