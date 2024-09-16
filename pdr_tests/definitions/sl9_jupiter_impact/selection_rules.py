@@ -69,6 +69,7 @@ file_information = {
     },
     
     # European Southern Observatory - EMMI images, IR spectra, and SUSI images
+    # Mirrored at SBN and ATM
     "eso_emmi": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
@@ -88,19 +89,19 @@ file_information = {
         "label": "D",
     },
     
-    # Mount Stromlo Siding Spring Observatory - spectrometer/imager
-    # SL9 impact images are missing from the manifest, the standard stars
-    # volume is included.
-##    "mssso_sl9": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['mssso-j-caspir-3-rdr-sl9-v1.0/mssso/caspir'],
-##        "label": "D",
-##    },
+    # Mount Stromlo Siding Spring Observatory
+    # Mirrored at SBN and ATM
     "mssso_star": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['mssso-j-caspir-3-rdr-sl9-stds-v1.0/mssso/caspir'],
+        "label": "D",
+    },
+    # CASPIR calibration is missing from the tiny_other manifest (as of 8/19/24)
+    "mssso_cal": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['sl9_0004/mssso/caspir'],
         "label": "D",
     },
     
@@ -146,12 +147,9 @@ file_information = {
         "url_must_contain": ['go-j-uvs-3-rdr-sl9-g-fragment-v1.0/galileo/uvs'],
         "label": "D",
     },
-    # The SSI IMAGE and IMAGE_HEADER pointers open fine.
-    # The BAD_DATA_VALUES_HEADER opens incorrectly.
+    # The SSI IMAGE, IMAGE_HEADER, and TELEMETRY_TABLE pointers open fine.
+    # The BAD_DATA_VALUES_HEADER might be opening correctly.
     # The LINE_PREFIX_TABLE does not open.
-    # The TELEMETRY_TABLE does not open because one of the bit columns in
-    # rtlmtab.fmt has ITEM_BITS mislabeled as BITS, which causes issues with
-    # pdr.bit_handling.get_bit_start_and_size()
     "go_ssi": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.img'],
@@ -160,4 +158,4 @@ file_information = {
     },
 }
 
-SKIP_FILES = ["vicar2.txt", "baddata.txt",]
+SKIP_FILES = ["vicar2.txt", "baddata.txt", "VICAR2.TXT", "BADDATA.TXT"]

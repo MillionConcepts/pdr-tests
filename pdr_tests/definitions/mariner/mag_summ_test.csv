@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+MAG_M3_ENC_1_2SEC_MO.LBL,"[""MAG_M3_ENC_1_2SEC_MO.LBL"", ""MAG_M3_ENC_1_2SEC_MO.DAT""]",MAG_M3_ENC_1_2SEC_MO,http://pds-ppi.igpp.ucla.edu/data/M10-H-MAG-4-SUMM-M3-SUMMARY-V1.0/DATA,"{""TABLE"": ""ddc34ca1e2379e7a8c2592a206f3d726""}"
+MAG_M1_ENC_42SEC_MO.LBL,"[""MAG_M1_ENC_42SEC_MO.LBL"", ""MAG_M1_ENC_42SEC_MO.TAB""]",MAG_M1_ENC_42SEC_MO,http://pds-ppi.igpp.ucla.edu/data/M10-H-MAG-4-SUMM-M1-SUMMARY-V1.0/DATA,"{""TABLE"": ""5408bd32f3241913d14b80e3db146ae9""}"

@@ -29,6 +29,17 @@ GEO_FILE = "geophx"
 
 file_information = {
     # EDRs:
+    # LED Sensor data
+    # (Notionally Supported: These open better now with a special case, but 
+    # several of the products' time columns are still wonky. It might be due to 
+    # typos in the data files at this point.)
+    "lededr": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['edr','.dat'],
+        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008',
+                             '/lededr'],
+        "label": "D",
+    },
     # Mass Spectrometer sweep raw data
     "egaedr": {
         "manifest": GEO_FILE,
@@ -94,19 +105,6 @@ file_information = {
                              '/engrdr'],
         "label": "D",
     },
-}
-"""
-All tables have 1 fewer rows than the labels claim. The time columns are also a mess.
-    # LED Sensor data
-    "lededr": {
-        "manifest": GEO_FILE,
-        "fn_must_contain": ['edr','.dat'],
-        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008',
-                             '/lededr'],
-        "label": "D",
-    },
-    
-The time columns have problems. Some are all 0, others are not human readable.
     # Thermal scanning calorimetry processed data
     "scrdr": {
         "manifest": GEO_FILE,
@@ -115,4 +113,4 @@ The time columns have problems. Some are all 0, others are not human readable.
                              '/scrdr'],
         "label": "D",
     },
-"""
+}

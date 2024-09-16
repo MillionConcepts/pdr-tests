@@ -29,24 +29,20 @@ SB_FILE = "tiny_rosetta"
 
 file_information = {
     # L2 / raw data
-    # # orbiter data; binary tables
-    # # Some tables have both ROW_PREFIX_BYTES and ROW_SUFFIX_BYTES, and the  
-    # # suffix bytes are not being skipped correctly.
-    # "l2_orbit": {
-    #     "manifest": SB_FILE,
-    #     "fn_must_contain": ['cn_o', '.dat'],
-    #     "url_must_contain": ['ro_rl-', '-consert-2-', '/data'],
-    #     "label": "D",
-    # },
-    # # lander data; binary tables
-    # # Some tables have both ROW_PREFIX_BYTES and ROW_SUFFIX_BYTES, and the  
-    # # suffix bytes are not being skipped correctly.
-    # "l2_land": {
-    #     "manifest": SB_FILE,
-    #     "fn_must_contain": ['cn_l', '.dat'],
-    #     "url_must_contain": ['ro_rl-', '-consert-2-', '/data'],
-    #     "label": "D",
-    # },
+    # orbiter data; binary tables
+    "l2_orbit": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_o', '.dat'],
+        "url_must_contain": ['ro_rl-', '-consert-2-', '/data'],
+        "label": "D",
+    },
+    # lander data; binary tables
+    "l2_land": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_l', '.dat'],
+        "url_must_contain": ['ro_rl-', '-consert-2-', '/data'],
+        "label": "D",
+    },
     # ground bench data; binary tables
     "l2_bench": {
         "manifest": SB_FILE,
@@ -79,24 +75,36 @@ file_information = {
     },
 
     # L3 / calibrated data
-    # # orbiter data; binary tables
-    # # Some tables have both ROW_PREFIX_BYTES and ROW_SUFFIX_BYTES, and the  
-    # # suffix bytes are not being skipped correctly.
-    # "l3_orbit": {
-    #     "manifest": SB_FILE,
-    #     "fn_must_contain": ['cn_o', '.dat'],
-    #     "url_must_contain": ['ro_rl-', '-consert-3-', '/data'],
-    #     "label": "D",
-    # },
-    # # lander data; binary tables
-    # # Some tables have both ROW_PREFIX_BYTES and ROW_SUFFIX_BYTES, and the  
-    # # suffix bytes are not being skipped correctly.
-    # "l3_land": {
-    #     "manifest": SB_FILE,
-    #     "fn_must_contain": ['cn_l', '.dat'],
-    #     "url_must_contain": ['ro_rl-', '-consert-3-', '/data'],
-    #     "label": "D",
-    # },
+    # orbiter data; binary tables
+    "l3_orbit": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_o', '.dat'],
+        "url_must_contain": ['ro_rl-', '/data'],
+        "url_regex": [r'(-consert-3-[a-eg-z])|(consert-3-fss-v1\.0)'],
+        "label": "D",
+    },
+    # similar to above, but uses a different format file w/ the same filename
+    "l3_orbit_fss": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_o', '.dat'],
+        "url_must_contain": ['ro_rl-c-consert-3-fss-v1.1/data'],
+        "label": "D",
+    },
+    # lander data; binary tables
+    "l3_land": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_l', '.dat'],
+        "url_must_contain": ['ro_rl-', '/data'],
+        "url_regex": [r'(-consert-3-[a-eg-z])|(consert-3-fss-v1\.0)'],
+        "label": "D",
+    },
+    # similar to above, but uses a different format file w/ the same filename
+    "l3_land_fss": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_l', '.dat'],
+        "url_must_contain": ['ro_rl-c-consert-3-fss-v1.1/data'],
+        "label": "D",
+    },
     # auxiliary AOCS data; ascii tables
     "l3_aux": {
         "manifest": SB_FILE,
@@ -106,26 +114,29 @@ file_information = {
     },
 
     # L4 / resampled data
-    # # orbiter data; binary tables
-    # # Some tables have both ROW_PREFIX_BYTES and ROW_SUFFIX_BYTES, and the  
-    # # suffix bytes are not being skipped correctly.
-    # # Also, The CARAC_TABLE has miscounted bytes and opens wrong. The format 
-    # # file is 3 bytes short of what the label defines for ROW_BYTES.
-    # "l4_orbit": {
-    #     "manifest": SB_FILE,
-    #     "fn_must_contain": ['cn_o', '.dat'],
-    #     "url_must_contain": ['ro_rl-', '-consert-4-', '/data'],
-    #     "label": "D",
-    # },
-    # # lander data; binary tables
-    # # Some tables have both ROW_PREFIX_BYTES and ROW_SUFFIX_BYTES, and the  
-    # # suffix bytes are not being skipped correctly.
-    # "l4_land": {
-    #     "manifest": SB_FILE,
-    #     "fn_must_contain": ['cn_l', '.dat'],
-    #     "url_must_contain": ['ro_rl-', '-consert-4-', '/data'],
-    #     "label": "D",
-    # },
+    # orbiter data; binary tables
+    "l4_orbit": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_o', '.dat'],
+        "url_must_contain": ['ro_rl-', '/data'],
+        "url_regex": [r'-consert-4-[a-fh-z]',],
+        "label": "D",
+    },
+    # similar to above, but uses a different format file w/ the same filename
+    "l4_orbit_grnd": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_o', '.dat'],
+        "url_must_contain": ['ro_rl-', '/data'],
+        "url_regex": [r'-consert-4-grnd',],
+        "label": "D",
+    },
+    # lander data; binary tables
+    "l4_land": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['cn_l', '.dat'],
+        "url_must_contain": ['ro_rl-', '-consert-4-', '/data'],
+        "label": "D",
+    },
     # auxiliary AOCS data; ascii tables
     "l4_aux": {
         "manifest": SB_FILE,
