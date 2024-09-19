@@ -27,7 +27,7 @@ are detached.
 PPI_FILE = "plasm_full"
 ATM_FILE = "atm"
 GEO_FILE = "geomariner"
-IMG_FILE = "img_usgs"
+IMG_FILE = "img_usgs_mariner"
 
 file_information = {
     
@@ -73,7 +73,7 @@ file_information = {
     "iss": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Mariner_09/mr9iss_'],
+        "url_must_contain": ['mr9iss_'],
         "label": "D",
     },
     # Mariner 9 electron density profiles

@@ -95,65 +95,65 @@ file_information = {
     "om_edr": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxom_0xxx/data'],
+        "url_must_contain": ['phxom_0xxx/data'],
         "label": "A",
     },
     # SSI edr and rdr
     "ssi_edr": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxssi_0xxx/data'],
+        "url_must_contain": ['phxssi_0xxx/data'],
         "label": "A",
     },
     "ssi_rdr": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxssi_1xxx/data'],
+        "url_must_contain": ['phxssi_1xxx/data'],
         "label": "A",
     },
     # RAC edr and rdr
     "rac_edr": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxrac_0xxx/data'],
+        "url_must_contain": ['phxrac_0xxx/data'],
         "label": "A",
     },
     "rac_rdr": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxrac_1xxx/data'],
+        "url_must_contain": ['phxrac_1xxx/data'],
         "label": "A",
     },
     # Science RDRs
     "om_sci": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxsci_0xxx/data/om/'],
+        "url_must_contain": ['phxsci_0xxx/data/om/'],
         "label": "A",
     },
     "ssi_sci": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxsci_0xxx/data/ssi'],
+        "url_must_contain": ['phxsci_0xxx/data/ssi'],
         "label": "A",
     },
     "rac_sci": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxsci_0xxx/data/rac'],
+        "url_must_contain": ['phxsci_0xxx/data/rac'],
         "label": "A",
     },
     # Mosaics
     "rac_mosaic": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxmos_0xxx/data/rac'],
+        "url_must_contain": ['phxmos_0xxx/data/rac'],
         "label": "A",
     },
     "ssi_mosaic": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Phoenix/phxmos_0xxx/data/ssi'],
+        "url_must_contain": ['phxmos_0xxx/data/ssi'],
         "label": "A",
     },
 }

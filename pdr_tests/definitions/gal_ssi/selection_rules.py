@@ -33,37 +33,37 @@ file_information = {
     "blemish": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Galileo/SSI/go_0001', 'blemish'],
+        "url_must_contain": ['SSI/go_0001', 'blemish'],
         "label": "D",
     },
     "dark": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.dat'],
-        "url_must_contain": ['Galileo/SSI/go_0001', 'dark'],
+        "url_must_contain": ['SSI/go_0001', 'dark'],
         "label": "D",
     },
     "shutter": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Galileo/SSI/go_0001', 'shutter'],
+        "url_must_contain": ['SSI/go_0001', 'shutter'],
         "label": "D",
     },
     "slope": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.dat'],
-        "url_must_contain": ['Galileo/SSI/go_0001', 'slope'],
+        "url_must_contain": ['SSI/go_0001', 'slope'],
         "label": "D",
     },
     # REDR data
     # Image pointer opens fine; TELEMETRY_TABLE is supported now too.
     # LINE_PREFIX_TABLE is not yet supported.
-##    "redr": {
-##        "manifest": IMG_FILE,
-##        "fn_must_contain": ['.img'],
-##        "url_must_contain": ['Galileo/SSI'],
-##        "url_regex": [r'\/[cC][0-9]{6}'],
-##        "label": "D",
-##    },
+#    "redr": {
+#        "manifest": IMG_FILE,
+#        "fn_must_contain": ['.img'],
+#        "url_must_contain": ['SSI'],
+#        "url_regex": [r'\/[cC][0-9]{6}'],
+#        "label": "D",
+#    },
     
     # The SB Node has Ida and Gaspra subsets of SSI data in different formats
     # (.fit and .qub), so they are included here.

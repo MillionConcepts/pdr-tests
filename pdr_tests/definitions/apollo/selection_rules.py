@@ -26,7 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 LUNAR_FILE = "geolunar"
-IMG_FILE = "img_usgs"
+IMG_FILE = "img_usgs_apollo"
 
 # note: most of these tables are not easy to validate -- technically L1 but
 # lots of mysterious numbers read straight off cybernetic-era instrumentation.

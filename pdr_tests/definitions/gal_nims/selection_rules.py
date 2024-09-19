@@ -33,34 +33,34 @@ file_information = {
     "pre_jup": {
         "manifest": IMG_FILE,
         "fn_regex": [r'e[0-9]{7}\.[0-9]{2}[a-z]'],
-        "url_must_contain": ['Galileo/NIMS', 'edr'],
-        "url_regex": [r'go_100[1-4]'],
+        "url_must_contain": ['NIMS/go_100', 'edr'],
         "label": "A",
     },
     # EDRs (go_1005-go_1008) - Jupiter and its moons
-    # DATA_TABLE and HEADER_TABLE do not open. KeyError: 'NAME'
-##    "edr": {
-##        "manifest": IMG_FILE,
-##        "fn_must_contain": ['.edr'],
-##        "url_must_contain": ['Galileo/NIMS', '/edr'],
-##        "url_regex": [r'go_100[5-8]'],
-##        "label": "A",
-##    },
+    # DATA_TABLE and HEADER_TABLE do not open (support planned). Both pointers 
+    # need a special case to make changes to the fmtdef, similar to 
+    # midas_rdr_sps_structure(). DATA_TABLE also has an unsupported array as 
+    # the last field in its format file.
+#    "edr": {
+#        "manifest": IMG_FILE,
+#        "fn_must_contain": ['.edr'],
+#        "url_must_contain": ['NIMS/go_100', 'edr'],
+#        "label": "A",
+#    },
     # Cubes (go_1101-go_1120)
-    # QUBEs do not open because they are VAX_REAL
-    # HISTOGRAM_IMAGEs also don't open. ValueError: This table's byte sizes are underspecified.
+    # SAMPLE_SPECTRUM_QUBE pointers are not supported (only included in 
+    # early mission products)
     "cube": {
        "manifest": IMG_FILE,
        "fn_regex": [r'qu[bt]$'],
-       "url_must_contain": ['Galileo/NIMS'],
-       "url_regex": [r'go_11..'],
+       "url_must_contain": ['NIMS/go_11'],
        "label": "A",
     },
     # Data from a Shoemaker-Levy 9 fragment's impact with Jupiter
     "impact": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.tab'],
-        "url_must_contain": ['Galileo/NIMS', 'sl9'],
+        "url_must_contain": ['NIMS', 'sl9'],
         "label": "D",
     },
     # Ida and Gaspra specific products at the SB Node:

@@ -24,7 +24,7 @@ label: "A" if the labels for this product type are attached; "D" if the labels
 are detached.
 """
 # variables naming specific parquet files in node_manifests
-MANIFEST_FILE = "img_usgs"
+MANIFEST_FILE = "img_usgs_lunar-orbiter"
 
 file_information = {
     

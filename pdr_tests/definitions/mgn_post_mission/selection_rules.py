@@ -47,14 +47,14 @@ file_information = {
     "fmap": {
         "manifest": IMG_MANIFEST,
         "fn_must_contain": ['.img'],
-        "url_regex": [r'Magellan/mg_1[1234]../'],
+        "url_must_contain": ['mg_1'],
         "label": "A",
     },
     # browse versions
     "fmap_browse": {
         "manifest": IMG_MANIFEST,
         "fn_must_contain": ['.ibg'],
-        "url_regex": [r'Magellan/mg_1[1234]../'],
+        "url_must_contain": ['mg_1'],
         "label": "A",
     },
     

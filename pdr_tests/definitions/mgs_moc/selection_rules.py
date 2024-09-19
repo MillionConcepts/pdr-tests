@@ -25,7 +25,7 @@ are detached.
 """
 
 # variables naming specific parquet files in node_manifests
-IMG_FILE = "img_usgs_mars_global_surveyor"
+IMG_FILE = "img_usgs_mars-global-surveyor"
 
 file_information = {
     
@@ -33,7 +33,7 @@ file_information = {
     "dsdp": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Mars_Global_Surveyor/MOC/mgsc_0'],
+        "url_must_contain": ['MOC/mgsc_0'],
         "label": "A",
     },
     # Compressed Standard Data Products
@@ -41,7 +41,7 @@ file_information = {
 ##    "sdp": {
 ##        "manifest": IMG_FILE,
 ##        "fn_must_contain": ['.imq'],
-##        "url_must_contain": ['Mars_Global_Surveyor/MOC/mgsc_1'],
+##        "url_must_contain": ['MOC/mgsc_1'],
 ##        "label": "A",
 ##    },
     

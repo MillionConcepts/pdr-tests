@@ -26,7 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 GEO_FILE = "geompf"
-IMG_FILE = "img_usgs_mars_pathfinder"
+IMG_FILE = "img_usgs_mars-pathfinder"
 
 
 file_information = {
@@ -69,7 +69,7 @@ file_information = {
     "imp_edr": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.img'],
-        "url_must_contain": ['Mars_Pathfinder/mpim_000', '/seq'],
+        "url_must_contain": ['mpim_000', '/seq'],
         "label": "A",
     },
     # Rover Camera EDRs
