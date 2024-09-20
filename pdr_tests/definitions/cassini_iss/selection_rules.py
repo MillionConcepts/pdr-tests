@@ -43,6 +43,15 @@ file_information = {
         "url_must_contain": ['coiss_0', 'data'],
         "label": "D",
     },
+    # "direct access" calibration images
+    # Note: ix grabs the wrong filename from the labels when writing the index 
+    # (*.ZIP instead of *.DA). A quick find/replace fixes it before ix download
+    "calib_da": {
+        "manifest": IMG_FILE,
+        "fn_regex": [r'(da$)|(DA$)'],
+        "url_must_contain": ['coiss_0', 'data'],
+        "label": "D",
+    },
     # coiss_0011 volume at ATM is not a perfect mirror of coiss_0011 at IMG
     "calib_atm": {
         "manifest": ATM_FILE,
@@ -75,4 +84,4 @@ file_information = {
     # are publication/presentation quality versions of the images in PDF format.
 }
 
-SKIP_FILES = ["VICAR2.TXT"]
+SKIP_FILES = ["VICAR2.TXT", "ZIPINFO.TXT"]

@@ -1,0 +1,5 @@
+label_file,files,product_id,url_stem,hash
+110449.LBL,"[""110449.LBL"", ""ZIPINFO.TXT"", ""110449.DA"", ""VICAR2.TXT""]",110449,http://dvr8xb2t7gqyu.cloudfront.net/ISS/coiss_0002/data/nacfm/ptp_da,"{""IMAGE"": ""474bcbbbdea967473c34d25c5523a9bd""}"
+123154.LBL,"[""ZIPINFO.TXT"", ""123154.LBL"", ""123154.DA"", ""VICAR2.TXT""]",123154,http://dvr8xb2t7gqyu.cloudfront.net/ISS/coiss_0007/data/wacfm/ptp_da,"{""IMAGE"": ""051d51847cf7d83552176f3a5f49bd67""}"
+116456.LBL,"[""116456.LBL"", ""ZIPINFO.TXT"", ""VICAR2.TXT"", ""116456.DA""]",116456,http://dvr8xb2t7gqyu.cloudfront.net/ISS/coiss_0001/data/nacfm/ftp_da,"{""IMAGE"": ""f0f76c3fdd3d8fb39f02e3bba918776f""}"
+118440.LBL,"[""118440.LBL"", ""ZIPINFO.TXT"", ""118440.DA"", ""VICAR2.TXT""]",118440,http://dvr8xb2t7gqyu.cloudfront.net/ISS/coiss_0001/data/nacfm/lossy_da,"{""IMAGE"": ""1a8269744986fc231707d13497687396""}"
