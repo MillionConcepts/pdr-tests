@@ -30,7 +30,6 @@ IMG_FILE = "img_usgs_mars-reconnaissance-orbiter"
 IMG_HIRISE_FILE = "img_hirise"
 
 file_information = {
-    # HiRISE RDRs are notionally supported (JP2 with detached labels)
     # HiRISE EDR
     "hirise_edr": {
         "manifest": IMG_HIRISE_FILE,
@@ -38,14 +37,27 @@ file_information = {
         "url_must_contain": ['/EDR/'],
         "label": "A",
     },
+    # HiRISE RDR
+    "hirise_rdr": {
+        "manifest": IMG_HIRISE_FILE,
+        "fn_must_contain": ['.JP2'],
+        "url_must_contain": ['PDS/RDR/'],
+        "label": "D",
+    },
     # HiRISE DTM
-    # Most DTM images are JP2 with detached labels (notionally supported), some
-    # products also have a IMG version with attached labels.
+    # Most DTM images are JP2 with detached labels, some products also have an 
+    # IMG version with attached labels.
     "hirise_dtm": {
         "manifest": IMG_HIRISE_FILE,
         "fn_must_contain": ['.IMG'],
         "url_must_contain": ['/DTM/'],
         "label": "A",
+    },
+    "hirise_dtm_jp2": {
+        "manifest": IMG_HIRISE_FILE,
+        "fn_must_contain": ['.JP2'],
+        "url_must_contain": ['/DTM/'],
+        "label": "D",
     },
     # CTX EDR
     "ctx_edr": {
@@ -84,3 +96,5 @@ file_information = {
     #     "label": "D",
     # },
 }
+
+SKIP_FILES = ["JP2INFO.TXT", "DSMAP.CAT"]
