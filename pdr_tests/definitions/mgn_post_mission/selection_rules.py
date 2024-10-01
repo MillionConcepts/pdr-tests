@@ -57,5 +57,16 @@ file_information = {
         "url_must_contain": ['mg_1'],
         "label": "A",
     },
+    # gazetter - tables of named features on Venus 
+    # (also spelled gazetteer in some of the documentation)
+    # Support planned, low priority. Some tables open fine, others are 
+    # double-spaced and open wrong. They're easier to test manually than with 
+    # ix because all products share the gazetter.tab filename.
+    # "gazetter": {
+    #     "manifest": IMG_MANIFEST,
+    #     "fn_must_contain": ['.tab'],
+    #     "url_must_contain": ['mg_1', 'gazetter'],
+    #     "label": "D",
+    # },
     
 }

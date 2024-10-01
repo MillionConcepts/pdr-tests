@@ -97,6 +97,17 @@ file_information = {
         "url_must_contain": ['vomr_0001/data'],
         "label": "D",
     },
+
+    # m71_0001_pds - This volume is missing most/all of its documentation, but  
+    # the .img products with attached labels are PDS3 compliant enough that we  
+    # can open them.
+    # The PREFIX_TABLE pointers are not yet supported.
+    "m71": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['m71_0001_pds'],
+        "label": "A",
+    },    
 }
 
 """
