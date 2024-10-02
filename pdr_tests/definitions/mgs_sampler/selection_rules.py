@@ -45,6 +45,12 @@ file_information = {
         "url_must_contain": ['mgs/mgs-sampler/mgs_0001', '/moc'],
         "label": "D",
     },
+    "mola_pedr": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.b'],
+        "url_must_contain": ['mgs/mgs-sampler/mgs_0001', '/mola/pedr'],
+        "label": "A",
+    },
     # one product opens wrong because of mistakes in the data file (AP00026V.TAB)
     "mola_pedr_asc": {
         "manifest": GEO_FILE,
@@ -89,12 +95,6 @@ support planned, see the mgs_mola selection rules for details
         "manifest": GEO_FILE,
         "fn_must_contain": ['.b'],
         "url_must_contain": ['mgs/mgs-sampler/mgs_0001', '/mola/aedr'],
-        "label": "A",
-    },
-    "mola_pedr": {
-        "manifest": GEO_FILE,
-        "fn_must_contain": ['.b'],
-        "url_must_contain": ['mgs/mgs-sampler/mgs_0001', '/mola/pedr'],
         "label": "A",
     },
 """

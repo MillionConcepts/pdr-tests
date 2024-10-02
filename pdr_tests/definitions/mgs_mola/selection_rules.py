@@ -29,7 +29,13 @@ MANIFEST_FILE = "geomgs"
 IMG_FILE = "img_usgs_mars_global_surveyor"
 
 file_information = {
-    
+    # precision EDRs; have non-standard labels but they open with special cases
+    "pedr": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.b'],
+        "url_must_contain": ['-mola-', '-pedr-'],
+        "label": "A",
+    },
     # precision RDRs; well-labeled fixed-length tables
     "prdr": {
         "manifest": MANIFEST_FILE,
@@ -85,12 +91,11 @@ file_information = {
         "url_must_contain": ['-mola-', '-aedr-'],
         "label": "A",
     },
-    # known unsupported; files are not in an archive compliant format
-    "pedr": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.b'],
-        "url_must_contain": ['-mola-', '-pedr-'],
-        "label": "A",
-    },
 
+Needed for aedr support:
+- figure out which format file to apply 
+    - there are 2 described in the labels, but the data only calls for one depending on a flag at byte 11 of the file
+    - seems like the whole table is either one format or the other
+    - unlike the pedr tables which change format from row to row
+- would need to extend the mgs.mola_pedr_special_block() hook to include aedr products
 """
