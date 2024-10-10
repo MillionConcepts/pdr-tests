@@ -28,24 +28,26 @@ MANIFEST_FILE = "img_usgs_lro-lamp"
 
 file_information = {
     # Experiment Data Record; uncalibrated data
-    # Acquisition list table is missing all but 1 row
-    # "door open" image header is a copy of the "door closed" image header
-##    "edr": {
-##        "manifest": MANIFEST_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['LROLAM_0', 'DATA'],
-##        "label": 'D',
-##    },
+   "edr": {
+       "manifest": MANIFEST_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['LROLAM_0', 'DATA'],
+       "label": 'D',
+   },
     # Reduced Data Record; calibrated data
-    # Acquisition list table is missing all but 1 row
-    # "door open" image header is a copy of the "door closed" image header
-    # Unique histogram image pointers are defined by one non-unique image object
-##    "rdr": {
-##        "manifest": MANIFEST_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['LROLAM_1', 'DATA'],
-##        "label": 'D',
-##    },
+    # The lro.lamp_rdr_hdu_start_byte() special case partially fixes these. 
+    # - The ANCILLARY_DATA_TABLE and CAL_PIXELLIST_DATA_TABLE pointers still do 
+    #   not open: "ValueError: Big-endian buffer not supported on little-endian 
+    #   compiler"
+    # - Multiple CAL_HISTOGRAM_[*]_IMAGE pointers point to the same FITS HDU 
+    #   (each pointer represents one image in a cube). They open correctly but 
+    #   cause data.show() to crash
+#    "rdr": {
+#        "manifest": MANIFEST_FILE,
+#        "fn_must_contain": ['.fit'],
+#        "url_must_contain": ['LROLAM_1', 'DATA'],
+#        "label": 'D',
+#    },
     # Gridded Data Record; calibrated LAMP data, gridded into polar
     # stereographic maps
     "gdr_month": {
