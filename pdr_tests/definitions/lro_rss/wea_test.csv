@@ -1,2 +1,3 @@
 label_file,files,product_id,url_stem,hash
 ws1s_2016042_2016.LBL,"[""LRO_WEA_REC_WS2.FMT"", ""LRO_WEA_HDR.FMT"", ""ws1s_2016042_2016.LBL"", ""WS1S_2016042_2016.WEA""]",WS1S_2016042_2016,http://pds-geosciences.wustl.edu/lro/lro-l-rss-1-tracking-v1/lrors_0001/data/wea/lro_es_43/2016042,"{""WEAHDR_TABLE"": ""d59c8b5684978df605a2205b51909139"", ""WEAREC_TABLE"": ""203700da07542010c6fdd7b6d7fb95ea""}"
+ku2s_2013014_1334.LBL,"[""LRO_WEA_HDR.FMT"", ""KU2S_2013014_1334.WEA"", ""LRO_WEA_REC_WS3.FMT"", ""ku2s_2013014_1334.LBL""]",KU2S_2013014_1334,http://pds-geosciences.wustl.edu/lro/lro-l-rss-1-tracking-v1/lrors_0001/data/wea/lro_es_04/2013014,"{""WEAHDR_TABLE"": ""6ecb4abda9f9e7e3b698423d91ff38f2"", ""WEAREC_TABLE"": ""7b4d3d0f9d4fb439ba96f1e3d7a0c45d""}"
