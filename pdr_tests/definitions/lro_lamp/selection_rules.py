@@ -39,9 +39,12 @@ file_information = {
     # - The ANCILLARY_DATA_TABLE and CAL_PIXELLIST_DATA_TABLE pointers still do 
     #   not open: "ValueError: Big-endian buffer not supported on little-endian 
     #   compiler"
+    #    --> Converting from array to dataframe (handlers.py line 119: "pd.DataFrame.from_records(body)") is where things go wrong. The array looks fine if you print it before the conversion happens, but trying to print the dataframe fails with the ValueError above
+    #    --> After playing around with subsetting by column, it looks like the first column and the rest of the table are incompatible for some reason
     # - Multiple CAL_HISTOGRAM_[*]_IMAGE pointers point to the same FITS HDU 
     #   (each pointer represents one image in a cube). They open correctly but 
     #   cause data.show() to crash
+    #    --> "TypeError: Cannot handle this data type: (1, 1, 32, 1024), |u1"
 #    "rdr": {
 #        "manifest": MANIFEST_FILE,
 #        "fn_must_contain": ['.fit'],
