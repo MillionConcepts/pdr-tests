@@ -44,8 +44,6 @@ file_information = {
         "label": "D",
     },
     # LSI/SSI comets survey; resampled images
-    # (A small subset of these products have a typo in their labels: the
-    #  QUALITY_IMAGE pointer name does not match its OBJECT name.)
     "comet_image": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
