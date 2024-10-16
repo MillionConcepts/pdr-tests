@@ -343,8 +343,8 @@ def _s3_download_chunk(bucket, filelist, ixchunk, extlower=False):
     if extlower is True:
         targ, dest = map(_extlower_series, (targ, dest))
     results = bucket.get(targ, dest)
-    good = [str(r) for r in results if isinstance(r, Path)]
-    bad = [(i, r) for i, r in enumerate(results) if not isinstance(r, Path)]
+    good = [str(r) for r in results if isinstance(r, (str, Path))]
+    bad = [(i, r) for i, r in enumerate(results) if isinstance(r, Exception)]
     return bad, good, ixchunk
 
 
