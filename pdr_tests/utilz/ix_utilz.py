@@ -324,7 +324,7 @@ def _verbose_s3_download_filelist(
         )
         if len(bad) > 0:
             bad, lowergood, ixchunk = _s3_download_chunk(
-                bucket, filelist, ixchunk, extlower=True
+                bucket, filelist, [ixchunk[i] for i, _ in bad], extlower=True
             )
             good += lowergood
         for g in good:
