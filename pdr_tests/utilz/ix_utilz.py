@@ -265,12 +265,13 @@ def _expand_index_table(filelist, data_path):
             rec = baserec | {'url': f"{row['url_stem']}/{f}"}
             rec['dest'] = data_path / Path(rec['url']).name
             rec['exists'] = _casecheck_wrap(rec['dest'])
+            recs.append(rec)
     filelist = pd.DataFrame(recs)
     if len(extant := filelist.loc[filelist['exists']]) > 0:
         print("The following files already exist in the filesystem, skipping:")
         for _, e in extant.iterrows():
             print(e['dest'])
-    return filelist.loc[~filelist.exists()].reset_index(drop=True).copy()
+    return filelist.loc[~filelist.exists].reset_index(drop=True).copy()
 
 
 def verbose_temp_download(filelist, data_path, temp_path, full_lower=False):
