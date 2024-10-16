@@ -21,5 +21,4 @@ dependencies:
   - requests
   - rich
   - textual
-  - pip:
-      - git+https://github.com/MillionConcepts/hostess.git
+  - hostess
