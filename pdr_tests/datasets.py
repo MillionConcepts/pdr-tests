@@ -22,7 +22,7 @@ from pdr_tests.utilz.ix_utilz import (
     flip_ends_with,
     read_and_hash,
     record_comparison,
-    find_manifest,
+    find_manifest, _casecheck_wrap,
 )
 from pyarrow import parquet
 
@@ -240,11 +240,13 @@ class IndexMaker(DatasetDefinition):
             self.data_mkdirs(product_type)
             dry = "" if dry_run is False else "(dry run)"
             print(f"Downloading labels for {self.dataset} {product_type} {dry}")
-            subset = self.load_subset_table(product_type)
+            subset, needed = self.load_subset_table(product_type)
             if dry_run is True:
                 return
+            if len(needed) == 0:
+                return
             verbose_temp_download(
-                subset,
+                needed,
                 self.product_data_path(product_type),
                 self.temp_data_path(product_type),
             )
@@ -275,8 +277,8 @@ class IndexMaker(DatasetDefinition):
         subset["path"] = subset["filename"].map(
             lambda fn: Path(self.product_data_path(product_type), fn)
         )
+        present = subset["path"].map(lambda path: _casecheck_wrap(path))
         if verbose is True:
-            present = subset["path"].map(lambda path: path.exists())
             if detached:
                 size_message = "detached labels; "
             else:
@@ -286,12 +288,12 @@ class IndexMaker(DatasetDefinition):
                 f"{len(subset)} labels; "
                 f"{len(subset.loc[present])} already in system; {size_message}"
             )
-        return subset
+        return subset, subset.loc[~present]
 
     def write_subset_index(self, product_types: Optional[str]):
         for product_type in self.expand_product_types(product_types):
             print(f"Writing index for {self.dataset} {product_type}")
-            subset = self.load_subset_table(product_type, verbose=False)
+            subset, _ = self.load_subset_table(product_type, verbose=False)
             product_rows = []
             for ix, product in subset.iterrows():
                 product_row = get_product_row(product["path"], product["url"])

@@ -256,22 +256,31 @@ BUCKETNAME_PAT = re.compile(r"^(?:(http(s)?|s3)://)?(?P<name>(\w|-)+)")
 ISBUCKET_PAT = re.compile(r"(^s3://)|(\.amazonaws\.com)")
 
 
-def _expand_index_table(filelist):
+def _expand_index_table(filelist, data_path):
     recs = []
     for _, row in filelist.iterrows():
         baserec = row.to_dict()
         files = json.loads(row['files'])
         for f in files:
-            recs.append(baserec | {'url': f"{row['url_stem']}/{f}"})
-    return pd.DataFrame(recs)
+            rec = baserec | {'url': f"{row['url_stem']}/{f}"}
+            rec['dest'] = data_path / Path(rec['url']).name
+            rec['exists'] = _casecheck_wrap(rec['dest'])
+    filelist = pd.DataFrame(recs)
+    if len(extant := filelist.loc[filelist['exists']]) > 0:
+        print("The following files already exist in the filesystem, skipping:")
+        for _, e in extant.iterrows():
+            print(e['dest'])
+    return filelist.loc[~filelist.exists()].reset_index(drop=True).copy()
 
 
 def verbose_temp_download(filelist, data_path, temp_path, full_lower=False):
     if 'url_stem' in filelist.columns:
-        filelist = _expand_index_table(filelist)
+        filelist = _expand_index_table(filelist, data_path)
         isbucket_target = 'url'
     else:
         isbucket_target = 'domain'
+    if len(filelist) == 0:
+        return
     if ISBUCKET_PAT.search(filelist[isbucket_target].iloc[0]):
         bucketname = BUCKETNAME_PAT.search(
             filelist[isbucket_target].iloc[0]
@@ -299,14 +308,6 @@ def _verbose_s3_download_filelist(
     filelist['dest'] = filelist['targ'].map(
         lambda p: Path(data_path) / Path(p).name
     )
-    exists = filelist['dest'].map(lambda p: p.exists())
-    if len(extant := filelist['dest'].loc[exists]) > 0:
-        print("The following files already exist in the filesystem, skipping:")
-        for e in extant:
-            print(e.name)
-    filelist = filelist.loc[~exists]
-    if len(filelist) == 0:
-        return
     print(f"downloading {len(filelist)} files...")
     if 'size' in filelist.columns:
         big = filelist['size'] / 1000 ** 2 > 250
@@ -562,3 +563,11 @@ def print_inline(text: str, blanks: int = 60):
     stdout.write(str(str(text)+'\r'))
     stdout.flush()
     return
+
+
+def _casecheck_wrap(path):
+    try:
+        check_cases(path)
+        return True
+    except FileNotFoundError:
+        return False
