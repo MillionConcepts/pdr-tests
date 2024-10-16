@@ -309,7 +309,7 @@ def _verbose_s3_download_filelist(
     filelist['dest'] = filelist['targ'].map(
         lambda p: Path(data_path) / Path(p).name
     )
-    print(f"downloading {len(filelist)} files...")
+    console_and_log(f"downloading {len(filelist)} files...")
     if 'size' in filelist.columns:
         big = filelist['size'] / 1000 ** 2 > 250
         small = filelist['size'] / 1000 ** 2 <= 250
@@ -328,9 +328,9 @@ def _verbose_s3_download_filelist(
             )
             good += lowergood
         for g in good:
-            print(f"successfully downloaded {g}")
+            console_and_log(f"successfully downloaded {g}")
         for i, b in bad:
-            print(f"failed to download {filelist.loc[ixchunk[i], 'targ']}: {b}")
+            console_and_log(f"failed to download {filelist.loc[ixchunk[i], 'targ']}: {b}")
 
 
 # TODO: eww
