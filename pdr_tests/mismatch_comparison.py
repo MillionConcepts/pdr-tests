@@ -41,11 +41,7 @@ def dump_data_subprocessed(rec, output_path, prefix):
 
 
 def get_outputs(rec, output_path, objname):
-    ref_table, ref_dt, ref_fmt = get_table(rec, output_path, objname, "ref")
-    test_table, test_dt, test_fmt = get_table(
-        rec, output_path, objname, "test"
-    )
-    return ref_table, ref_dt, ref_fmt, test_table, test_dt, test_fmt
+    return [get_table(rec, output_path, objname, r) for r in ("ref", "test")]
 
 
 def compare_values(r, t):
@@ -66,7 +62,8 @@ def compare_values(r, t):
     return value_mismatches
 
 
-def compare_outputs(r, r_dt, r_fmt, t, t_dt, t_fmt):
+def compare_outputs(refdict, testdict):
+    r, t = refdict['table'], testdict['table']
     comparison = {}
     if len(r) != len(t):
         comparison["row_count"] = {"ref": len(r), "test": len(t)}
@@ -79,18 +76,22 @@ def compare_outputs(r, r_dt, r_fmt, t, t_dt, t_fmt):
     value_mismatches = compare_values(r, t)
     if len(value_mismatches) > 0:
         comparison["values"] = value_mismatches
+    r_dt, t_dt = refdict['dt'], testdict['dt']
     dtype_mismatches = compare_values(r_dt, t_dt)
     if len(dtype_mismatches) > 0:
         comparison["in_memory_dtypes"] = dtype_mismatches
-    fmtdef_mismatches = compare_values(r_fmt, t_fmt)
-    if len(fmtdef_mismatches) > 0:
-        comparison["fmtdef_values"] = fmtdef_mismatches
-    missing_fmtdef_cols = set(r_fmt.columns).difference(t_fmt.columns)
-    new_fmtdef_cols = set(t_fmt.columns.difference(r_fmt.columns))
-    if len(missing_fmtdef_cols) + len(new_fmtdef_cols) > 0:
-        comparison[
-            "fmtdef_column_names"
-        ] = {"new": new_fmtdef_cols, "missing": missing_fmtdef_cols}
+    r_fmt, t_fmt = refdict['fmtdef'], testdict['fmtdef']
+    # FITS table loading does not generate a fmtdef
+    if r_fmt is not None and t_fmt is not None:
+        fmtdef_mismatches = compare_values(r_fmt, t_fmt)
+        if len(fmtdef_mismatches) > 0:
+            comparison["fmtdef_values"] = fmtdef_mismatches
+            missing_fmtdef_cols = set(r_fmt.columns).difference(t_fmt.columns)
+            new_fmtdef_cols = set(t_fmt.columns.difference(r_fmt.columns))
+            if len(missing_fmtdef_cols) + len(new_fmtdef_cols) > 0:
+                comparison[
+                    "fmtdef_column_names"
+                ] = {"new": new_fmtdef_cols, "missing": missing_fmtdef_cols}
     comparison["issues"] = list(comparison.keys())
     if len(comparison["issues"]) == 0:
         print("No differences found, hash mismatch likely in-memory")
@@ -110,7 +111,11 @@ def get_table(rec, output_path, objname, pre):
         raise NotATableError("Not a table, skipping.")
     dtype_path = output_path / (refname + "_dtypes.csv")
     fmtdef_path = output_path / (refname + "_fmtdef.csv")
-    return tuple(map(pd.read_csv, (matches[0], dtype_path, fmtdef_path)))
+    return {
+        k: pd.read_csv(p) if p.exists() else None
+        for k, p in
+        (('table', matches[0]), ('dt', dtype_path), ('fmtdef', fmtdef_path))
+    }
 
 
 class NotATableError(ValueError):
@@ -144,13 +149,9 @@ def check_mismatch(rec):
         try:
             print(f"\ncomparing outputs for {objname}...", end="")
             print("loading outputs...", end="")
-            r,r_dt, r_fmt, t, t_dt, t_fmt = get_outputs(
-                rec, output_path, objname
-            )
+            refdict, testdict = get_outputs(rec, output_path, objname)
             print("analyzing...", end="")
-            comparisons[objname] = compare_outputs(
-                r, r_dt, r_fmt, t, t_dt, t_fmt
-            )
+            comparisons[objname] = compare_outputs(refdict, testdict)
         except NotATableError as nte:
             print(f"not analyzing: {nte}...", end="")
     print("\n")

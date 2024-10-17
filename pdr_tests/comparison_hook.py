@@ -23,7 +23,8 @@ def dump_to_output(rec, output_path, prefix):
             loader.queries,
             {'data': data, 'name': objname, 'tracker': TrivialTracker()}
         )
-        info['fmtdef_dt'][0].to_csv(
-            Path(output_path) / (filestem + f"_{objname}_fmtdef.csv")
-        )
+        if 'fmtdef_dt' in info.keys():
+            info['fmtdef_dt'][0].to_csv(
+                Path(output_path) / (filestem + f"_{objname}_fmtdef.csv")
+            )
     data.dump_browse(f"{Path(rec['filename']).stem}_{prefix}", output_path)
