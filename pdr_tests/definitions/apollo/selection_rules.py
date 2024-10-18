@@ -133,19 +133,14 @@ file_information = {
         "url_must_contain": ['Metric_Camera', 'DATA'],
         "label": "D",
     },
-}
 
-"""
     # Scans of the original film photos of returned lunar rock/soil/core samples.
     # Pointers and object names don't match.
-    # These are partially supported. data["DOCUMENT"] outputs array data but
-    # data.show() fails. Changing the TIFF_DOCUMENT object to match the DOCUMENT
-    # pointer fixes it, but a first attempt at a check_special_block() special
-    # case didn't work.
     "sample_photos": {
         "manifest": IMG_FILE,
         "fn_must_contain": [".TIF"],
         "url_must_contain": ['Lunar_Sample_Photographs', 'DATA'],
         "label": "D",
     },
-"""
+}
+
