@@ -574,13 +574,14 @@ class CorpusFinalizer(DatasetDefinition):
                 for file in file_list:
                     try:
                         file = file.split('/')[-1].strip()
-                        corpus.put(
-                            Path(
-                                self.product_data_path(product_type), file),
-                                f'{self.dataset}/{product_type}/{file}'
-                            )
+                        target = Path(
+                            self.product_data_path(product_type), file
+                        )
+                        target = check_cases(target)
+                        dest = f'{self.dataset}/{product_type}/{target.name}'
+                        corpus.put(target, dest)
                         print(
-                            f'{self.dataset} {product_type}: {file} '
+                            f'{self.dataset} {product_type}: {target.name} '
                             f'uploaded to s3.'
                         )
                     except FileNotFoundError:
