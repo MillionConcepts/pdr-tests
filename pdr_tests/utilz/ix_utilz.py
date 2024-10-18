@@ -10,11 +10,15 @@ import xml.etree.ElementTree as ET
 from functools import wraps
 from hashlib import md5
 from io import StringIO
+from itertools import chain
 from pathlib import Path
 from sys import stdout
 from typing import Mapping, Sequence, MutableMapping, Collection, Callable, \
     Optional
+import re
+from urllib.parse import urlparse
 
+from hostess.aws.s3 import Bucket
 import numpy as np
 import pandas as pd
 import pyarrow as pa
@@ -22,6 +26,7 @@ import requests
 from dustgoggles.func import disjoint, intersection
 from dustgoggles.structures import dig_for_values
 from dustgoggles.tracker import TrivialTracker
+from more_itertools import chunked
 from multidict import MultiDict
 
 import pdr
@@ -197,9 +202,7 @@ def download_product_row(
         if any((file == skip_file for skip_file in skip_files)):
             continue
         url = f"{row['url_stem']}/{file}"
-        session = verbose_temp_download(
-            data_path, temp_path, url, session, full_lower=full_lower
-        )
+        verbose_temp_download(data_path, temp_path, url, full_lower)
     return session
 
 
@@ -249,10 +252,111 @@ class MaybeSession:
         return self.session.cookies
 
 
-# TODO / note: this is yet one more download
-#  thing that we should somehow unify and consolidate
-def verbose_temp_download(
-    data_path, temp_path, url, skip_quietly=True, session=None, full_lower=False
+BUCKETNAME_PAT = re.compile(r"^(?:(http(s)?|s3)://)?(?P<name>(\w|-)+)")
+ISBUCKET_PAT = re.compile(r"(^s3://)|(\.amazonaws\.com)")
+
+
+def _expand_index_table(filelist, data_path):
+    recs = []
+    for _, row in filelist.iterrows():
+        baserec = row.to_dict()
+        files = json.loads(row['files'])
+        for f in files:
+            rec = baserec | {'url': f"{row['url_stem']}/{f}"}
+            rec['dest'] = data_path / Path(rec['url']).name
+            rec['exists'] = _casecheck_wrap(rec['dest'])
+            recs.append(rec)
+    filelist = pd.DataFrame(recs)
+    if len(extant := filelist.loc[filelist['exists']]) > 0:
+        print("The following files already exist in the filesystem, skipping:")
+        for _, e in extant.iterrows():
+            print(e['dest'])
+    return filelist.loc[~filelist.exists].reset_index(drop=True).copy()
+
+
+def verbose_temp_download(filelist, data_path, temp_path, full_lower=False):
+    if 'url_stem' in filelist.columns:
+        filelist = _expand_index_table(filelist, data_path)
+        isbucket_target = 'url'
+    else:
+        isbucket_target = 'domain'
+    if len(filelist) == 0:
+        return
+    if ISBUCKET_PAT.search(filelist[isbucket_target].iloc[0]):
+        bucketname = BUCKETNAME_PAT.search(
+            filelist[isbucket_target].iloc[0]
+        ).groupdict()['name']
+        _verbose_s3_download_filelist(
+            filelist, data_path, bucketname, full_lower
+        )
+    else:
+        _verbose_web_temp_download_filelist(
+            filelist, data_path, temp_path, full_lower
+        )
+
+
+def _verbose_s3_download_filelist(
+    filelist, data_path, bucketname, full_lower=False
+):
+    filelist = filelist.copy()
+    filelist['targ'] = filelist['url'].map(
+        lambda u: urlparse(u).path
+    ).str.strip('/')
+    if full_lower is True:
+        filelist['targ'] = filelist['targ'].map(
+            lambda p: str(Path(p).parent / Path(p).name.lower())
+        )
+    filelist['dest'] = filelist['targ'].map(
+        lambda p: Path(data_path) / Path(p).name
+    )
+    console_and_log(f"downloading {len(filelist)} files...")
+    if 'size' in filelist.columns:
+        big = filelist['size'] / 1000 ** 2 > 250
+        small = filelist['size'] / 1000 ** 2 <= 250
+        bigix, smallix = filelist.index[big], filelist.index[small]
+        chunks = chain(chunked(smallix, 50), chunked(bigix, 10))
+    else:
+        chunks = chunked(filelist.index, 20)
+    bucket = Bucket(bucketname)
+    for ixchunk in map(list, chunks):
+        bad, good, ixchunk = _s3_download_chunk(
+            bucket, filelist, ixchunk, extlower=False
+        )
+        if len(bad) > 0:
+            bad, lowergood, ixchunk = _s3_download_chunk(
+                bucket, filelist, [ixchunk[i] for i, _ in bad], extlower=True
+            )
+            good += lowergood
+        for g in good:
+            console_and_log(f"successfully downloaded {g}")
+        for i, b in bad:
+            console_and_log(f"failed to download {filelist.loc[ixchunk[i], 'targ']}: {b}")
+
+
+# TODO: eww
+def _extlower_series(series):
+    return series.map(
+        lambda p: str(Path(p).with_suffix(Path(p).suffix.lower()))
+    )
+
+
+def _s3_download_chunk(bucket, filelist, ixchunk, extlower=False):
+    targ, dest = filelist.loc[ixchunk, 'targ'], filelist.loc[ixchunk, 'dest']
+    if extlower is True:
+        targ, dest = map(_extlower_series, (targ, dest))
+    results = bucket.get(targ, dest)
+    good = [str(r) for r in results if isinstance(r, (str, Path))]
+    bad = [(i, r) for i, r in enumerate(results) if isinstance(r, Exception)]
+    return bad, good, ixchunk
+
+
+def _verbose_web_temp_download_file(
+    data_path,
+    temp_path,
+    url,
+    skip_quietly=True,
+    session=None,
+    full_lower=False
 ):
     session = session if session is not None else MaybeSession()
     try:
@@ -266,42 +370,64 @@ def verbose_temp_download(
         pass
     console_and_log(f"attempting to download {url}.")
     response, session = get_response(session, url)
-    if response is None:
-        console_and_log(f"Download of {url} timed out.")
-        return session
-    if not response.ok:
-        response.close()
-        if full_lower:
-            urlsplit = url.split('/')
-        else:
-            urlsplit = url.split('.')
-        url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
-        response = session.get(url, stream=True, headers=HEADERS)
-        if not response.ok:
-            console_and_log(f"Download of {url} failed.")
-            response.close()
-            return session
     try:
-        with open(Path(temp_path, Path(url).name), "wb+") as fp:
-            size, fetched = response.headers.get('content-length'), 0
-            size = (
-                'unknown' if size is None else round(int(size) / 1000 ** 2, 2)
-            )
-            for ix, chunk in enumerate(response.iter_content(chunk_size=10**7)):
-                fetched += len(chunk)
-                print_inline(
-                    f"getting chunk {ix} "
-                    f"({round(fetched / 1000 ** 2, 2)} / {size} MB)"
-                )
-                fp.write(chunk)
+        if response is None:
+            console_and_log(f"Download of {url} timed out.")
+            return session
+        if not response.ok:
+            response.close()
+            if full_lower is True:
+                urlsplit = url.split('/')
+            else:
+                urlsplit = url.split('.')
+            url = url.split(urlsplit[-1])[0]+urlsplit[-1].lower()
+            response = session.get(url, stream=True, headers=HEADERS)
+            if not response.ok:
+                console_and_log(f"Download of {url} failed.")
+                response.close()
+                return session
+        _download_chunk(response, temp_path, url)
+        shutil.move(
+            Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
+        )
+        console_and_log(f"completed download of {url}.")
     finally:
-        session.close()
         response.close()
-    shutil.move(
-        Path(temp_path, Path(url).name), Path(data_path, Path(url).name)
-    )
-    console_and_log(f"completed download of {url}.")
-    return session
+
+
+def _download_chunk(response, temp_path, url):
+    with open(Path(temp_path, Path(url).name), "wb+") as fp:
+        size, fetched = response.headers.get('content-length'), 0
+        size = (
+            'unknown' if size is None else round(int(size) / 1000 ** 2, 2)
+        )
+        for ix, chunk in enumerate(response.iter_content(chunk_size=10 ** 7)):
+            fetched += len(chunk)
+            print_inline(
+                f"getting chunk {ix} "
+                f"({round(fetched / 1000 ** 2, 2)} / {size} MB)"
+            )
+            fp.write(chunk)
+
+
+def _verbose_web_temp_download_filelist(
+    filelist, data_path, temp_path, full_lower=False
+):
+    session = MaybeSession()
+    for ix, row in filelist.iterrows():
+        try:
+            session = _verbose_web_temp_download_file(
+                data_path,
+                temp_path,
+                row["url"],
+                skip_quietly=False,
+                session=session,
+                full_lower=full_lower
+            )
+        except KeyboardInterrupt:
+            raise
+        except Exception as ex:
+            console_and_log(f"download failed: {type(ex)}: {ex}")
 
 
 def get_response(session: MaybeSession, url: str):
@@ -315,7 +441,6 @@ def get_response(session: MaybeSession, url: str):
             console_and_log(f"slow response on {url}; reestablishing session")
             time.sleep(2)
             session.reset()
-    session.reset()
     return None, session
 
 
@@ -439,3 +564,11 @@ def print_inline(text: str, blanks: int = 60):
     stdout.write(str(str(text)+'\r'))
     stdout.flush()
     return
+
+
+def _casecheck_wrap(path):
+    try:
+        check_cases(path)
+        return True
+    except FileNotFoundError:
+        return False

@@ -17,14 +17,12 @@ from pdr_tests.utilz.ix_utilz import (
     get_product_row,
     console_and_log,
     stamp,
-    download_product_row,
     verbose_temp_download,
     assemble_urls,
     flip_ends_with,
     read_and_hash,
     record_comparison,
-    MaybeSession,
-    find_manifest,
+    find_manifest, _casecheck_wrap,
 )
 from pyarrow import parquet
 
@@ -242,15 +240,16 @@ class IndexMaker(DatasetDefinition):
             self.data_mkdirs(product_type)
             dry = "" if dry_run is False else "(dry run)"
             print(f"Downloading labels for {self.dataset} {product_type} {dry}")
-            subset = self.load_subset_table(product_type)
+            subset, needed = self.load_subset_table(product_type)
             if dry_run is True:
                 return
-            for url in subset["url"]:
-                verbose_temp_download(
-                    self.product_data_path(product_type),
-                    self.temp_data_path(product_type),
-                    url,
-                )
+            if len(needed) == 0:
+                return
+            verbose_temp_download(
+                needed,
+                self.product_data_path(product_type),
+                self.temp_data_path(product_type),
+            )
 
     def load_subset_table(self, product_type: str, verbose: bool = True):
         subset = pd.read_csv(self.subset_list_path(product_type))
@@ -278,8 +277,8 @@ class IndexMaker(DatasetDefinition):
         subset["path"] = subset["filename"].map(
             lambda fn: Path(self.product_data_path(product_type), fn)
         )
+        present = subset["path"].map(lambda path: _casecheck_wrap(path))
         if verbose is True:
-            present = subset["path"].map(lambda path: path.exists())
             if detached:
                 size_message = "detached labels; "
             else:
@@ -289,12 +288,12 @@ class IndexMaker(DatasetDefinition):
                 f"{len(subset)} labels; "
                 f"{len(subset.loc[present])} already in system; {size_message}"
             )
-        return subset
+        return subset, subset.loc[~present]
 
     def write_subset_index(self, product_types: Optional[str]):
         for product_type in self.expand_product_types(product_types):
             print(f"Writing index for {self.dataset} {product_type}")
-            subset = self.load_subset_table(product_type, verbose=False)
+            subset, _ = self.load_subset_table(product_type, verbose=False)
             product_rows = []
             for ix, product in subset.iterrows():
                 product_row = get_product_row(product["path"], product["url"])
@@ -310,50 +309,38 @@ class IndexMaker(DatasetDefinition):
 class IndexDownloader(DatasetDefinition):
     def __init__(self, name):
         super().__init__(name)
-        rules_module = import_module(f"definitions.{name}.selection_rules")
+
+        rules_module = import_module(
+            f"pdr_tests.definitions.{name}.selection_rules"
+        )
         self.skip_files = ()
         if hasattr(rules_module, "SKIP_FILES"):
             self.skip_files = getattr(rules_module, "SKIP_FILES")
 
-    def download_index(self, product_types: Optional[str], get_test: bool = False, full_lower: bool = False):
+    def download_index(
+        self,
+        product_types: Optional[str],
+        get_test: bool = False,
+        full_lower: bool = False
+    ):
         for product_type in self.expand_product_types(product_types):
             ptype = "subset files" if get_test is False else "test files"
             console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
             data_path = self.product_data_path(product_type)
             temp_path = self.temp_data_path(product_type)
             self.data_mkdirs(product_type)
-            session = MaybeSession()
+            # TODO: re-add file skipping
             if self.shared_list_path().exists():
                 print(f"Checking shared files for {self.dataset}.")
                 shared_index = pd.read_csv(self.shared_list_path())
-                for ix, row in shared_index.iterrows():
-                    try:
-                        session = verbose_temp_download(
-                            data_path,
-                            temp_path,
-                            row["url"],
-                            session=session,
-                            skip_quietly=False
-                        )
-                    except KeyboardInterrupt:
-                        raise
-                    except Exception as ex:
-                        console_and_log(f"download failed: {type(ex)}: {ex}")
+                verbose_temp_download(
+                    shared_index, data_path, temp_path
+                )
             if get_test is True:
                 index = pd.read_csv(self.test_path(product_type))
             else:
                 index = pd.read_csv(self.index_path(product_type))
-            for ix, row in index.iterrows():
-                console_and_log(f"Downloading product id: {row['product_id']}")
-                try:
-                    session = download_product_row(
-                        data_path, temp_path, row, self.skip_files, session, full_lower=full_lower
-                    )
-                except KeyboardInterrupt:
-                    raise
-                except Exception as ex:
-                    console_and_log(f"Download failed: {type(ex)}: {ex}")
-            session.close()
+            verbose_temp_download(index, data_path, temp_path, full_lower)
 
 
 class ProductChecker(DatasetDefinition):
