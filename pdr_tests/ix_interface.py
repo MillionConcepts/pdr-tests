@@ -12,7 +12,7 @@ from pdr_tests.datasets import (
     MissingHashError,
 )
 from pdr_tests.utilz.ix_utilz import console_and_log, list_datasets, \
-    download_datasets
+    download_datasets, clean_logs
 
 COMMANDS = [
     "sort",
@@ -25,7 +25,8 @@ COMMANDS = [
     "index_directory",
     "test_paths",
     "count",
-    "sync"
+    "sync",
+    "clean"
 ]
 
 
@@ -251,3 +252,7 @@ def sync(
         replace_offsize=replace_offsize,
         dry_run=dry_run
     )
+
+
+def clean():
+    clean_logs()

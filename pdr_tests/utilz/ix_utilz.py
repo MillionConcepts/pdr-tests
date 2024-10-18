@@ -716,3 +716,25 @@ def download_datasets(
     for e in extra:
         Path(data_path / e).unlink()
         console_and_log(f"Successfully deleted {data_path / e}")
+
+
+def clean_logs():
+    def_path = Path(pdr_tests.__file__).parent / "definitions"
+    targets = []
+    for mod in def_path.iterdir():
+        if not mod.is_dir():
+            continue
+        if not (mod / "logs").exists() or not (mod / "logs").is_dir():
+            continue
+        targets += list(
+            p for p in (mod / "logs").iterdir()
+            if not p.name.endswith("_latest.csv")
+        )
+    if len(targets) > 0:
+        console_and_log(f"Deleting {len(targets)} older logfiles")
+        for t in targets:
+            t.unlink()
+    else:
+        console_and_log("No older logfiles to delete")
+    console_and_log("Deleting primary log")
+    (Path(pdr_tests.__file__).parent / "pdrtests.log").unlink()
