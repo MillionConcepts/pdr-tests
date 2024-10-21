@@ -61,13 +61,14 @@ file_information = {
         "url_must_contain": ['GO-', '-MAG-', '-RDR-'],
         "label": "D",
     },
-    # Currently not supported due to incorrect format file, support not planned.
-    # "SUMM": {
-    #     "manifest": PLASM_FILE,
-    #     "fn_must_contain": ['.TAB'],
-    #     "url_must_contain": ['GO-', '-MAG-', '-SUMM-'],
-    #     "label": "D",
-    # }
+    # Currently not supported due to incorrect format file, support not planned
+    "SUMM": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['GO-', '-MAG-', '-SUMM-'],
+        "label": "D",
+        "support_np": True
+    },
     
     # SBN's Ida and Gaspra specific subset of mag data
     "small_bodies": {

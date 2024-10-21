@@ -110,10 +110,8 @@ file_information = {
         "url_regex": [r'(TLM)|(tlm)'],
         "label": "D",
     },
-    
-}
-"""
-# products with labels lacking pointer to 'data' file:
+
+    # products with labels lacking pointer to 'data' file:
  
     # LOG   log file 
     "log": {
@@ -121,6 +119,7 @@ file_information = {
         "url_must_contain": ['cors_'],
         "url_regex": [r'(/LOG)|(/log)'],
         "label": "D",
+        "support_np": True
     },
     # PD1   Path Delay Data File from AWVR1
     "pd1": {
@@ -129,6 +128,7 @@ file_information = {
         "url_must_contain": ['cors_'],
         "url_regex": [r'(PD1)|(pd1)'],
         "label": "D",
+        "support_np": True
     },
     # PD2   Path Delay Data File from AWVR2
     "pd2": {
@@ -137,6 +137,7 @@ file_information = {
         "url_must_contain": ['cors_'],
         "url_regex": [r'(PD2)|(pd2)'],
         "label": "D",
+        "support_np": True
     },
     # TNF
     "tnf": {
@@ -145,6 +146,7 @@ file_information = {
         "url_must_contain": ['cors_'],
         "url_regex": [r'(TNF)|(tnf)'],
         "label": "D",
+        "support_np": True
     },
     # EOP   Earth Orientation Parameters File
     "eop": {
@@ -153,6 +155,7 @@ file_information = {
         "url_must_contain": ['cors_'],
         "url_regex": [r'(EOP)|(eop)'],
         "label": "D",
+        "support_np": True
     },
     # ION   Ionosphere Calibration File
     "ion": {
@@ -161,6 +164,7 @@ file_information = {
         "url_must_contain": ['cors_'],
         "url_regex": [r'(ION)|(ion)'],
         "label": "D",
+        "support_np": True
     },
     # TRO   Troposphere Calibration File
     "tro": {
@@ -169,5 +173,7 @@ file_information = {
         "url_must_contain": ['cors_'],
         "url_regex": [r'(TRO)|(tro)'],
         "label": "D",
+        "support_np": True
     },
-"""
+}
+
