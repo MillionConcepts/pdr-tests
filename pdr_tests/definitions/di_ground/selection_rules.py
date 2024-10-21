@@ -97,16 +97,15 @@ file_information = {
     
     # KECK I LWS MID-IR IMAGES AND PHOTOMETRY OF 9P/TEMPEL 1
     # raw and reduced mid-ir images, and flux measurements
-    # The raw images open fine manually, but data.show() fails with:
-    # "TypeError: Cannot handle this data type: (1, 1, 1, 2, 128, 128), |u1"
-    # Listing them as notionally supported for now.
-#    "keck_raw": {
-#        "manifest": SBN_FILE,
-#        "fn_must_contain": ['.fit'],
-#        "url_must_contain": ['di_ear-c-keck1lws-3-9p-images-phot-v1.0',
-#                             '/data/raw'],
-#        "label": "D",
-#    },
+    # (Note: the raw images are 6-D arrays, so functions like data.show() 
+    # and dump-browse fail)
+   "keck_raw": {
+       "manifest": SBN_FILE,
+       "fn_must_contain": ['.fit'],
+       "url_must_contain": ['di_ear-c-keck1lws-3-9p-images-phot-v1.0',
+                            '/data/raw'],
+       "label": "D",
+   },
     "keck_reduced": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],

@@ -56,7 +56,7 @@ file_information = {
     "hirise_dtm_jp2": {
         "manifest": IMG_HIRISE_FILE,
         "fn_must_contain": ['.JP2'],
-        "url_must_contain": ['/DTM/'],
+        "url_must_contain": ['PDS/DTM/'],
         "label": "D",
     },
     # CTX EDR

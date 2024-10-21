@@ -12,13 +12,15 @@ from hashlib import md5
 from io import StringIO
 from itertools import chain
 from pathlib import Path
-from sys import stdout
-from typing import Mapping, Sequence, MutableMapping, Collection, Callable, \
-    Optional
 import re
+from sys import stdout
+from typing import (
+    Callable, Collection, Mapping, MutableMapping, Sequence, Optional
+)
 from urllib.parse import urlparse
 
 from hostess.aws.s3 import Bucket
+from hostess.directory import index_breadth_first
 import numpy as np
 import pandas as pd
 import pyarrow as pa
@@ -30,11 +32,12 @@ from more_itertools import chunked
 from multidict import MultiDict
 
 import pdr
+from pdr.pdr import Data
 from pdr.parselabel.pds3 import read_pvl
 from pdr.utils import check_cases
+import pdr_tests
 from pdr_tests.settings.base import HEADERS, MANIFEST_DIR
 from pdr_tests.utilz.dev_utilz import Stopwatch
-from pdr.pdr import Data
 
 REF_ROOT = Path(Path(__file__).parent.parent, "reference")
 DATA_ROOT = Path(Path(__file__).parent.parent, "data")
@@ -340,13 +343,18 @@ def _extlower_series(series):
     )
 
 
+def _bucketget(bucket: Bucket, targ, dest):
+    results = bucket.get(targ, dest)
+    good = [str(r) for r in results if isinstance(r, (str, Path))]
+    bad = [(i, r) for i, r in enumerate(results) if isinstance(r, Exception)]
+    return bad, good
+
+
 def _s3_download_chunk(bucket, filelist, ixchunk, extlower=False):
     targ, dest = filelist.loc[ixchunk, 'targ'], filelist.loc[ixchunk, 'dest']
     if extlower is True:
         targ, dest = map(_extlower_series, (targ, dest))
-    results = bucket.get(targ, dest)
-    good = [str(r) for r in results if isinstance(r, (str, Path))]
-    bad = [(i, r) for i, r in enumerate(results) if isinstance(r, Exception)]
+    bad, good = _bucketget(bucket, targ, dest)
     return bad, good, ixchunk
 
 
@@ -572,3 +580,161 @@ def _casecheck_wrap(path):
         return True
     except FileNotFoundError:
         return False
+
+
+def list_datasets() -> list[str]:
+    return [
+        d.name
+        for d in (Path(pdr_tests.__file__).parent / "definitions").iterdir()
+        if (d.is_dir() and (d / "selection_rules.py").exists())
+    ]
+
+
+def _sync_chunks(bucket, tofetch, data_path):
+    for chunk in chunked(tofetch, 20):
+        chunk = tuple(chunk)
+        bad, good = _bucketget(bucket, chunk, [data_path / f for f in chunk])
+        for g in good:
+            console_and_log(f"Successfully downloaded {g}")
+        for i, b in bad:
+            console_and_log(f"Failed to download {chunk[i]}: {type(b)}: {b}")
+
+
+def download_datasets(
+    datasets: list[str],
+    bucket_name: str,
+    clean: bool = False,
+    force: bool = False,
+    replace_newer: bool = False,
+    replace_offsize: bool = True,
+    dry_run: bool = False
+):
+    data_path = Path(pdr_tests.__file__).parent / "data"
+    bucket = Bucket(bucket_name)
+    local = pd.DataFrame(index_breadth_first(data_path))
+    local['path'] = local['path'].str.extract(r".*data/(.*)")[0]
+    local = local.loc[
+        local['directory'] == False
+    ].sort_values(by='path').reset_index()
+    console_and_log("indexing requested dataset prefixes in bucket")
+    if len(datasets) > 1:
+        remote = bucket.df()
+    else:
+        remote = bucket.ls(datasets[0], recursive=True, formatting='df')
+    remote = remote.sort_values(by='Key').reset_index()
+    console_and_log(f"indexing complete, {len(remote)} objects total")
+    root_prefixes = remote['Key'].str.split('/', n=1, expand=True)[0].unique()
+    if not set(root_prefixes).issuperset(datasets):
+        missing_datasets = sorted(set(datasets).difference(root_prefixes))
+        console_and_log(
+            f"WARNING: The following requested datasets do not exist as "
+            f"prefixes under the bucket root: {', '.join(missing_datasets)}. "
+            # TODO, maybe: check these cases 
+            f"Possibly unfinalized or have no defined ptypes."
+        )
+    # TODO, maybe: actually check against the test product indices
+    targets = remote.loc[
+        remote['Key'].str.split("/", expand=True)[0].isin(datasets)
+    ]
+    if force is False:
+        missing = targets.loc[~targets['Key'].isin(local['path'])]
+        present_remote = targets.loc[
+            targets['Key'].isin(local['path'])
+        ].copy().reset_index()
+        present_local = local.loc[
+            local['path'].isin(present_remote['Key'])
+        ].copy().reset_index()
+        console_and_log(f"{len(missing)} files missing from local")
+        fetchpaths = set(missing['Key'].tolist())
+        # TODO, maybe: this is a hack and maybe indicates there should be an
+        #  option in hostess to not return size in MB
+        present_local['stsize'] = present_local['path'].map(
+            lambda p: Path(data_path, p).stat().st_size
+        )
+        offsize = present_local['stsize'] != present_remote['Size']
+        if replace_newer is True:
+            tzlocal = dt.datetime.now().astimezone().tzinfo
+            newer = present_remote.index[
+                present_local['MTIME'].dt.tz_localize(tzlocal)
+                < present_remote['LastModified']
+            ]
+            if len(newer) > 0:
+                console_and_log(
+                    "replace_newer active, also downloading files more "
+                    "recently modified on remote"
+                )
+                console_and_log(f"{len(newer)} are newer on remote")
+                fetchpaths.update(newer['Key'].tolist())
+        if replace_offsize is True and offsize.any():
+            console_and_log(
+                f"replace_offsize active, also downloading files of different "
+                f"sizes on local and remote ({offsize.sum()} files)"
+            )
+            fetchpaths.update(present_remote['Key'].loc[offsize].tolist())
+
+        if offsize.any() and replace_offsize is False:
+            off = present_remote.loc[offsize]
+            no_download_offsize = off.loc[~off['Key'].isin(fetchpaths), 'Key']
+            if len(no_download_offsize) > 0:
+                console_and_log(
+                    "WARNING: the following files have different sizes "
+                    "but are not being downloaded because they are newer "
+                    "on local:"
+                )
+                for k in no_download_offsize:
+                    console_and_log(k)
+        fetchsize = remote.loc[
+            remote['Key'].isin(fetchpaths), 'Size'
+        ].sum() / 1000 ** 2
+    else:
+        console_and_log("force mode on, downloading all files")
+        fetchpaths = targets['Key']
+        fetchsize = targets['Size'].sum() / 1000 ** 2
+    if len(fetchpaths) == 0:
+        console_and_log("No remote objects to fetch.")
+        return
+    console_and_log(
+        f"Downloading {len(fetchpaths)} files ({fetchsize} MB total)"
+    )
+    if dry_run is True:
+        console_and_log(f"***dry-run mode active, not actually downloading***")
+        for f in fetchpaths:
+            console_and_log(f"Would download {f} to {data_path / f}")
+    else:
+        _sync_chunks(bucket, fetchpaths, data_path)
+    if clean is False:
+        return
+    extra = local.loc[~local['path'].isin(remote['Key']), 'path']
+    if len(extra) == 0:
+        return
+    console_and_log(f"Deleting {len(extra)} files from local")
+    if dry_run is True:
+        console_and_log(f"***dry-run mode active, not actually deleting***")
+        for e in extra:
+            console_and_log(f"Would delete {data_path / e}")
+        return
+    for e in extra:
+        Path(data_path / e).unlink()
+        console_and_log(f"Successfully deleted {data_path / e}")
+
+
+def clean_logs():
+    def_path = Path(pdr_tests.__file__).parent / "definitions"
+    targets = []
+    for mod in def_path.iterdir():
+        if not mod.is_dir():
+            continue
+        if not (mod / "logs").exists() or not (mod / "logs").is_dir():
+            continue
+        targets += list(
+            p for p in (mod / "logs").iterdir()
+            if not p.name.endswith("_latest.csv")
+        )
+    if len(targets) > 0:
+        console_and_log(f"Deleting {len(targets)} older logfiles")
+        for t in targets:
+            t.unlink()
+    else:
+        console_and_log("No older logfiles to delete")
+    console_and_log("Deleting primary log")
+    (Path(pdr_tests.__file__).parent / "pdrtests.log").unlink()

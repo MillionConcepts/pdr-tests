@@ -1,7 +1,6 @@
 from ast import literal_eval
-from itertools import chain
-from pathlib import Path
 from importlib import import_module
+from itertools import chain
 
 from pdr_tests.datasets import (
     ProductPicker,
@@ -12,7 +11,8 @@ from pdr_tests.datasets import (
     directory_to_index,
     MissingHashError,
 )
-from pdr_tests.utilz.ix_utilz import console_and_log
+from pdr_tests.utilz.ix_utilz import console_and_log, list_datasets, \
+    download_datasets, clean_logs
 
 COMMANDS = [
     "sort",
@@ -24,7 +24,9 @@ COMMANDS = [
     "test",
     "index_directory",
     "test_paths",
-    "count"
+    "count",
+    "sync",
+    "clean"
 ]
 
 
@@ -58,18 +60,14 @@ def download(
     if dataset is None:
         if get_test is False:
             raise ValueError(
-                "Refusing to download full versions of all datasets. Specify a "
-                "dataset or run with --get-test to get test subsets."
+                "Refusing to download full versions of all datasets. Specify "
+                "a dataset or run with --get-test to get test subsets."
             )
         print(
             "No dataset argument provided; downloading all defined dataset "
             "test subsets."
         )
-        datasets = [
-            d.name
-            for d in Path("definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        datasets = list_datasets()
     else:
         datasets = [dataset]
     for dataset in sorted(datasets):
@@ -116,11 +114,7 @@ def test(
         dump_kwargs = literal_eval(dump_kwargs)
     if dataset is None:
         print("no dataset argument provided; testing all defined datasets")
-        datasets = [
-            d.name
-            for d in Path("definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        datasets = list_datasets()
     else:
         datasets = [dataset]
     logs = []
@@ -163,11 +157,7 @@ def test(
 def test_paths(dataset=None, product_type=None):
     if dataset is None:
         print("no dataset argument provided; listing all defined datasets")
-        datasets = [
-            d.name
-            for d in Path(Path(__file__).parent, "definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        datasets = list_datasets()
     else:
         datasets = [dataset]
     paths = []
@@ -177,20 +167,35 @@ def test_paths(dataset=None, product_type=None):
     return tuple(chain.from_iterable(paths))
 
 
-def finalize(dataset=None, product_type=None, product=None, *,
-             regen: "r" = False,
-             local: "l" = False,
-             subset_size: "n" = 1):
-    """Creates a test subset (if necessary) and uploads relevant test files to s3."""
+def finalize(
+    dataset=None,
+    product_type=None,
+    product=None,
+    *,
+    regen: "r" = False,
+    local: "l" = False,
+    subset_size: "n" = 1
+):
+    """
+    Creates a test subset (if necessary) and uploads relevant test files to
+    s3.
+    """
     if dataset is None:
-        print("Upload requires a dataset argument. We don't want to re-upload all the files in the s3 bucket.")
+        print(
+            "Upload requires a dataset argument. We don't want to re-upload "
+            "all the files in the s3 bucket."
+        )
         return
     else:
         finalizer = CorpusFinalizer(dataset)
-        finalizer.create_and_upload_test_subset(product_type, product, subset_size, regen, local)
+        finalizer.create_and_upload_test_subset(
+            product_type, product, subset_size, regen, local
+        )
 
 
-def index_directory(target, manifest, output="index.csv", debug=False, filters=None):
+def index_directory(
+    target, manifest, output="index.csv", debug=False, filters=None
+):
     """simple wrapper for datasets.directory_to_index"""
     if filters is not None:
         filters = literal_eval(filters)
@@ -204,11 +209,7 @@ def ix_help(*_, **__):
 def count(dataset=None):
     if dataset is None:
         print("no dataset argument provided; listing all defined datasets")
-        datasets = [
-            d.name
-            for d in Path(Path(__file__).parent, "definitions").iterdir()
-            if (d.is_dir() and ("cache" not in d.name))
-        ]
+        datasets = list_datasets()
     else:
         datasets = [dataset]
     cnt = 0
@@ -219,3 +220,39 @@ def count(dataset=None):
         rules = getattr(rules_module, "file_information")
         cnt += len(rules)
     print(f"There are {cnt} total product types.")
+
+
+def sync(
+    dataset=None,
+    clean=False,
+    force=False,
+    replace_newer=False,
+    replace_offsize=True,
+    dry_run=False
+):
+    from pdr_tests.settings.base import TEST_CORPUS_BUCKET
+
+    if TEST_CORPUS_BUCKET is None:
+        print(
+            "The name of the bucket you would like to sync with must be "
+            "given as TEST_CORPUS_BUCKET in pdr_tests.settings.user."
+        )
+        return
+    if dataset is None:
+        print("no dataset argument provided; syncing all defined datasets")
+        datasets = list_datasets()
+    else:
+        datasets = [dataset]
+    download_datasets(
+        datasets,
+        bucket_name=TEST_CORPUS_BUCKET,
+        clean=clean,
+        force=force,
+        replace_newer=replace_newer,
+        replace_offsize=replace_offsize,
+        dry_run=dry_run
+    )
+
+
+def clean():
+    clean_logs()
