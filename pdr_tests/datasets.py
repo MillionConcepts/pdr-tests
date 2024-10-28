@@ -90,13 +90,24 @@ class DatasetDefinition:
         os.makedirs(self.product_data_path(product_type), exist_ok=True)
         os.makedirs(self.temp_data_path(product_type), exist_ok=True)
 
-    def expand_product_types(self, product_type: Optional[str]) -> Sequence[str]:
+    def expand_product_types(
+        self, product_type: Optional[str], ignore_support_np: bool = True
+    ) -> list[str]:
         """
-        Expand product_type=None to a list of all product types.
+        Expand product_type=None to a list of all product types. By default,
+        ignore product types marked as support-not-planned ('support_np': True)
+        if product_type=None.
         """
-        if product_type is None:
-            return sorted(self.rules.keys())
-        return [product_type]
+        if product_type is not None:
+            return [product_type]
+        if ignore_support_np is True:
+            ptypes = filter(
+                lambda k: self.rules[k].get('support_np') is not True,
+                self.rules
+            )
+        else:
+            ptypes = self.rules.keys()
+        return sorted(ptypes)
 
 
 class ProductPicker(DatasetDefinition):
@@ -110,10 +121,11 @@ class ProductPicker(DatasetDefinition):
     def make_product_list(self, product_types: Optional[str], write: bool = True):
         """
         construct full-set pyarrow table for a given product type, and
-        optionally write it as a parquet file.
+        optionally write it as a parquet file. Note that this method does not
+        ignore support-not-planned types; it writes indexes for everything.
         """
         result = []
-        for product_type in self.expand_product_types(product_types):
+        for product_type in self.expand_product_types(product_types, False):
             os.makedirs(
                 self.complete_list_path(product_type).parent, exist_ok=True
             )
@@ -257,15 +269,17 @@ class IndexMaker(DatasetDefinition):
         if detached:
             # TODO: PDS4
             label_rule = self.rules[product_type]["label"]
+            try:
+                regex = self.rules[product_type]["regex"]
+                print(
+                    f"regex has been set to {regex} for {product_type} "
+                    f"label replacement rules."
+                )
+            except KeyError:
+                # TODO: what's going on here? Is this variable supposed to be
+                #  used somewhere?
+                regex = False
             if isinstance(label_rule, tuple):
-                try:
-                    regex = self.rules[product_type]["regex"]
-                    print(
-                        f"regex has been set to {regex} for {product_type} "
-                        f"label replacement rules."
-                    )
-                except KeyError:
-                    regex = False
                 subset["filename"] = subset["filename"].str.replace(
                     *label_rule, regex=True
                 )
