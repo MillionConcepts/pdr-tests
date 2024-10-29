@@ -66,13 +66,14 @@ file_information = {
 ##        "url_must_contain": ['VGISS_', '/DATA'],
 ##        "label": "D",
 ##    },
-##    # compressed images; known unsupported (support not planned)
-##    # The attached labels are incomplete/incorrectly formatted
-##    "compressed": {
-##        "manifest": RMS_FILE,
-##        "fn_must_contain": ['.IMQ'],
-##        "url_must_contain": ['VG_0xxx/VG_00'],
-##        "label": "A",
-##    },
+   # compressed images; known unsupported (support not planned)
+   # The attached labels are incomplete/incorrectly formatted
+   "compressed": {
+       "manifest": RMS_FILE,
+       "fn_must_contain": ['.IMQ'],
+       "url_must_contain": ['VG_0xxx/VG_00'],
+       "label": "A",
+       "support_np": True
+   },
 }
 
