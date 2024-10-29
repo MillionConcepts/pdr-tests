@@ -61,6 +61,41 @@ file_information = {
 
     # Safed Datasets:
     # DS1-C-MICAS-2-EDR-VISCCD-BORRELLY-V1.0
+    "micas_edr": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['ds1-c-micas-2-edr-visccd-borrelly-v1.0/data'],
+        "label": "D",
+    },
     # DS1-C-MICAS-3-RDR-VISCCD-BORRELLY-V1.0
+    "micas_rdr": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.cub'],
+        "url_must_contain": ['ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived'],
+        "label": "A",
+    },
     # DS1-C-PEPE-2-EDR-BORRELLY-V1.0
+    "pepe_tab": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ds1-c-pepe-2-edr-borrelly-v1.0/data'],
+        "label": "D",
+    },
+    "pepe_dat": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.dat'],
+        "fn_regex": [r'(elc)|(ion)|(log)|(mq)|(tof)'],
+        "url_must_contain": ['ds1-c-pepe-2-edr-borrelly-v1.0/data'],
+        "label": "D",
+    },
+
+    # Support not planned:
+    # PEPE EDR - safed binary housekeeping files
+    "pepe_dat_unsupported": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['hsk', '.dat'],
+        "url_must_contain": ['ds1-c-pepe-2-edr-borrelly-v1.0/data'],
+        "label": "D",
+        "support_np": True
+    },
 }

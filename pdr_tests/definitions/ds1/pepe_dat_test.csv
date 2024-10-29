@@ -1,0 +1,6 @@
+label_file,files,product_id,url_stem,hash
+tof01264_b.LBL,"[""tof01264_b.LBL"", ""TOF01264_B.DAT""]",TOF01264_B,http://pdssbn.astro.umd.edu/holdings/ds1-c-pepe-2-edr-borrelly-v1.0/data,"{""TABLE"": ""becab2cc85a43262f28d53eb0e99201e""}"
+elc01262_b.LBL,"[""elc01262_b.LBL"", ""ELC01262_B.DAT""]",ELC01262_B,http://pdssbn.astro.umd.edu/holdings/ds1-c-pepe-2-edr-borrelly-v1.0/data,"{""BINARY_TABLE"": ""4d2b438ba6c12fe4aacc0e3b7faa465a""}"
+ion01262_b.LBL,"[""ion01262_b.LBL"", ""ION01262_B.DAT""]",ION01262_B,http://pdssbn.astro.umd.edu/holdings/ds1-c-pepe-2-edr-borrelly-v1.0/data,"{""BINARY_TABLE"": ""1c045f0b800982c4d6a3479f1280a8a5""}"
+log01262_b.LBL,"[""log01262_b.LBL"", ""LOG01262_B.DAT""]",LOG01262_B,http://pdssbn.astro.umd.edu/holdings/ds1-c-pepe-2-edr-borrelly-v1.0/data,"{""TABLE"": ""8a34de5302537c6bf503ead3c5d9d8eb""}"
+mq01262_b.LBL,"[""mq01262_b.LBL"", ""MQ01262_B.DAT""]",MQ01262_B,http://pdssbn.astro.umd.edu/holdings/ds1-c-pepe-2-edr-borrelly-v1.0/data,"{""TABLE"": ""4ed0d10bb87eebb0fe847ac576556f0a""}"
