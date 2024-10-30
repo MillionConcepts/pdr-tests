@@ -113,6 +113,34 @@ file_information = {
         "url_must_contain": ['LP-L-ENG-6-COMMAND-V1.0/DATA/COMMAND'],
         "label": "D",
     },
+
+    # ancillary/geometry ascii tables
+    "er_ancillary": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['LP-L-ER-'],
+        "url_regex": [r'(/EXTRAS)|(/DATA/((ANCILLARY)|(THETA)|(E_BINS)))'],
+        "label": "D",
+    },
+    "mag_ancillary": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['LP-L-MAG-4-SUMM-LUNARCRDS-5SEC-V1.0'],
+        "url_regex": [r'(/EXTRAS)|(/DATA/ANCILLARY)'],
+        "label": "D",
+    },
+    "mag_geometry": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['LP-L-MAG-4-SUMM-LUNARCRDS-5SEC-V1.0/GEOMETRY'],
+        "label": "D",
+    },
+    "eng_ancillary": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['LP-L-ENG', 'DATA/ANCILLARY'],
+        "label": "D",
+    },
 }
 """
     # level 0 data: merged telemetry files

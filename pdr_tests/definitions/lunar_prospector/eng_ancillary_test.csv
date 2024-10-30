@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+OUTAGES.LBL,"[""OUTAGES.TAB"", ""OUTAGES.LBL""]",OUTAGES,http://pds-ppi.igpp.ucla.edu/data/LP-L-ENG-6-ATTITUDE-V1.0/DATA/ANCILLARY,"{""TABLE"": ""20ad99469d376801bbf9c08fac34a1de""}"
