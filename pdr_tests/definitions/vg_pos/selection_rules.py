@@ -30,7 +30,7 @@ PPI_FILE = "plasm_full"
 file_information = {
     
     # PDS4: VG1 jupiter and saturn
-    # Safed: solar wind (VG1/VG2)
+    # Safed: cruise phase (VG1/VG2)
     
     # spacecraft position data near jupiter in RTN and S3 coordinates
     "jupiter": {
@@ -91,5 +91,13 @@ file_information = {
         "label": "D",
     },
     
+    # Safed datasets:
+    # VG1 and VG2 cruise phase position/trajectory data
+    "cruise": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG','-SS-POS-6-1DAY-V1.0/DATA'],
+        "label": "D",
+    },
 }
 

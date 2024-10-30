@@ -152,12 +152,5 @@ file_information = {
         "url_must_contain": ['VG','-SW-MAG-4-SUMM-HGCOORDS', '/DATA'],
         "label": "D",
     },
-    # VG1 and VG2 cruise phase position/trajectory data
-    "position_cruise": {
-        "manifest": PPI_FILE,
-        "fn_must_contain": ['.TAB'],
-        "url_must_contain": ['VG','-SS-POS-6-1DAY-V1.0/DATA'],
-        "label": "D",
-    },
 }
 
