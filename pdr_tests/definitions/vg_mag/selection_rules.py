@@ -45,7 +45,7 @@ file_information = {
     # RDR - Saturn, Kronographic coordinates
     "rdr_sat_l1": {
         "manifest": PPI_FILE,
-        "fn_must_contain": ['L1', '.TAB'],
+        "fn_must_contain": ['.TAB'],
         "url_must_contain": ['VG2-S-MAG-4-RDR-L1COORDS', '/DATA'],
         "label": "D",
     },
@@ -144,5 +144,20 @@ file_information = {
         "label": "D",
     },
     
+    # Safed datasets:
+    # VG1 and VG2 solar wind data
+    "solar_wind": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG','-SW-MAG-4-SUMM-HGCOORDS', '/DATA'],
+        "label": "D",
+    },
+    # VG1 and VG2 cruise phase position/trajectory data
+    "position_cruise": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG','-SS-POS-6-1DAY-V1.0/DATA'],
+        "label": "D",
+    },
 }
 
