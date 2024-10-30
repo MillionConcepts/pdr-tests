@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+ccd_mid_4_2_32b_lev1.cub,"[""ccd_mid_4_2_32b_lev1.cub""]",ccd_mid_4_2_32b_lev1,http://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/near_ccd_subset/deblur_radiometric,"{""QUBE"": ""7fa8069dcc746af1a52eb5fb3312e6fb""}"
+IR_streak_1_32_bot_sc.cub,"[""IR_streak_1_32_bot_sc.cub""]",IR_streak_1_32_bot_sc,http://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/near_swir/normalized_spectra,"{""QUBE"": ""940e1395f1e63db79a6772a2a224512c""}"
+dem_y_component.cub,"[""dem_y_component.cub""]",dem_y_component,http://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo,"{""QUBE"": ""e1b9ddf6abe1fe585409d90291b150e5""}"
