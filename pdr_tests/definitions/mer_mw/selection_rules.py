@@ -31,7 +31,7 @@ file_information = {
     "haz": {
         "manifest": IMG_FILE,
         "url_must_contain": ['mer', 'mw_0xxx/data/hazcam'],
-        "fn_regex": [r'[^lbl]$'],
+        "fn_regex": [r'(vst|rgb|ht|pfb)$'],
         "label": "D",
         "support_np": True
     },
@@ -39,15 +39,15 @@ file_information = {
     "nav": {
         "manifest": IMG_FILE,
         "url_must_contain": ['mer', 'mw_0xxx/data/navcam'],
-        "fn_regex": [r'[^lbl]$'],
+        "fn_regex": [r'(vst|rgb|ht|pfb)$'],
         "label": "D",
         "support_np": True
     },
     # pancam meshes and wedges
     "pan": {
         "manifest": IMG_FILE,
-        "url_must_contain": ['mer', 'mw_0xxx/data/navcam'],
-        "fn_regex": [r'[^lbl]$'],
+        "url_must_contain": ['mer', 'mw_0xxx/data/pancam'],
+        "fn_regex": [r'(vst|rgb|ht|pfb)$'],
         "label": "D",
         "support_np": True
     },
