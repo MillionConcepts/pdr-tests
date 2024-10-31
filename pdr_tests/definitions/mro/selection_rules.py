@@ -88,13 +88,14 @@ file_information = {
         "label": "D",
     },
     # Format issues, alerting node
-    # # MCS DDR
-    # "mcs_ddr": {
-    #     "manifest": ATM_FILE,
-    #     "fn_must_contain": ['DDR.TAB'],
-    #     "url_must_contain": ['MROM_2', '/DATA'],
-    #     "label": "D",
-    # },
+    # MCS DDR
+    "mcs_ddr": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['DDR.TAB'],
+        "url_must_contain": ['MROM_2', '/DATA'],
+        "label": "D",
+        "support_np": True
+    },
 }
 
 SKIP_FILES = ["JP2INFO.TXT", "DSMAP.CAT"]

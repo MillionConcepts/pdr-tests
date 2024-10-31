@@ -59,12 +59,13 @@ file_information = {
     },
     # telemetry data -- out of scope
     # from documentation: reformatted telemetry packets are not fixed length and are not well-suited to description by PDS labeling standards
-#     "refdr_telemetry": {
-#         "manifest": PPI_FILE,
-#         "fn_must_contain": ['.PKT'],
-#         "url_must_contain": ['CO-V_E_J_S_SS-RPWS-2-REFDR-ALL', 'DATA', 'RPWS_RAW_COMPLETE'],
-#         "label": "D",
-#     },
+    "refdr_telemetry": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.PKT'],
+        "url_must_contain": ['CO-V_E_J_S_SS-RPWS-2-REFDR-ALL', 'DATA', 'RPWS_RAW_COMPLETE'],
+        "label": "D",
+        "support_np": True
+    },
     # full resolution wideband standard data products
     "refdr_wbr": {
         "manifest": PPI_FILE,

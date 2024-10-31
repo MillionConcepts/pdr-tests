@@ -63,28 +63,27 @@ file_information = {
         "label": "D",
     },
     
-}
-
-"""
-# Unsupported GZ products; incomplete PDS3 labels do not fully define the 
-# tables' formats.
-
+    # Unsupported GZ products; incomplete PDS3 labels do not fully define the 
+    # tables' formats.
     "flux_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ihw-c-ppflx-3-rdr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "mag_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ihw-c-ppmag-3-rdr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "pol_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ihw-c-ppol-3-rdr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
-"""
+}

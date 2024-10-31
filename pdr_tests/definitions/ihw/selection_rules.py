@@ -171,31 +171,29 @@ file_information = {
         "url_must_contain": ['ear-c-ccd-3-edr-halley-outburst', 'data'],
         "label": "D",
     },
-}
 
-"""
-Known Unsupported / Support Not Planned
-
-    # Most GZ products have incomplete PDS3 labels
+    # Most GZ products have incomplete PDS3 labels (support not planned)
     "spec_gz_raw": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['ihw-c-spec-2-edr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "spec_gz_cal": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['ihw-c-spec-3-edr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "am_vis_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ihw-c-amvis-2-rdr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
-    
     # Compressed GZ and Halley v1.0 images are not supported. Some images open
     # incorrectly as all static, others do not open at all.
     "lsp_compressed": {
@@ -203,6 +201,6 @@ Known Unsupported / Support Not Planned
         "fn_must_contain": ['.imq'],
         "url_must_contain": ['ihw-c-lspn-2-didr', 'data/compressed'],
         "label": "D",
+        "support_np": True
     },
-
-"""
+}

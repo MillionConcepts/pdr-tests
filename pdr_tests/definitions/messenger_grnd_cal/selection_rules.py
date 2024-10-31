@@ -28,20 +28,6 @@ are detached.
 GEO_MESSENGER_FILE = "geomessenger"
 
 file_information = {
-# 	#known unsupported (not planned); no END_OBJECT for TABLE in the label
-#     "ns": {
-#         "manifest": GEO_MESSENGER_FILE,
-#         "fn_must_contain": [".BIN"],
-#         "url_must_contain": ['ground_cal', '/NS/DATA'],
-#         "label": "D",
-#     },
-#     # known unsupported; format file is a draft version
-#     "mascs": {
-#         "manifest": GEO_MESSENGER_FILE,
-#         "fn_must_contain": [".DAT"],
-#         "url_must_contain": ['ground_cal', '/MASCS'],
-#         "label": "D",
-#     },
     "mdis": {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": [".FIT"],
@@ -95,4 +81,20 @@ file_information = {
         "label": "D",
     },
 
+    #known unsupported (not planned); no END_OBJECT for TABLE in the label
+    "ns": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".BIN"],
+        "url_must_contain": ['ground_cal', '/NS/DATA'],
+        "label": "D",
+        "support_np": True
+    },
+    # known unsupported; format file is a draft version
+    "mascs": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".DAT"],
+        "url_must_contain": ['ground_cal', '/MASCS'],
+        "label": "D",
+        "support_np": True
+    },
 }

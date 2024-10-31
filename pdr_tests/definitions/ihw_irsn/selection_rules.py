@@ -91,39 +91,41 @@ file_information = {
         "label": "D",
     },
     
-}
-
-"""
-# The Gz products have stub labels missing a lot of table format info
+    # Support not planned:
+    # The Gz products have stub labels missing a lot of table format info
     "param_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ihw-c-irftab-2-rdr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "photom_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ihw-c-irphot-2-rdr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "polar_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['ihw-c-irpol-2-rdr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "spec_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['ihw-c-irspec-3-edr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
     "mag_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['ihw-c-irimag-3-edr-gz', 'data'],
         "label": "D",
+        "support_np": True
     },
-
-"""
+}

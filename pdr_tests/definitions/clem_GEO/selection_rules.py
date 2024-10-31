@@ -78,13 +78,6 @@ file_information = {
         "url_must_contain": ['clem1-gravity-topo', '/images'],
         "label": "D",
     },
-#     # RSS level 1 BSR products have non-compliant labels (missing pointers; support not planned)
-#     "bsr_edr": {
-#         "manifest": MANIFEST_FILE,
-#         "fn_must_contain": ['.lbl'],
-#         "url_must_contain": ['clem1-l-rss-1-bsr', '/geometry'],
-#         "label": "D",
-#     },
     # bistatic radar observations; pointers to data files are formatted unusually
     "bsr_rdr_data": {
         "manifest": MANIFEST_FILE,
@@ -107,4 +100,21 @@ file_information = {
         "label": "D",
     },
     
+    # RSS level 1 BSR products have non-compliant labels 
+    # (missing pointers; support not planned)
+    "bsr_edr_data": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((odr)|(tdf)|(lmc))$'],
+        "url_must_contain": ['clem1-l-rss-1-bsr'],
+        "url_regex": [r'(/odr)|(/tdf)|(/lmc)'],
+        "label": "D",
+        "support_np": True
+    },
+    "bsr_edr_geo": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((tck)|(tsc)|(tsp))$'],
+        "url_must_contain": ['clem1-l-rss-1-bsr', '/geometry'],
+        "label": "D",
+        "support_np": True
+    },
 }

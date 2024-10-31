@@ -77,9 +77,8 @@ file_information = {
 ##        "url_must_contain": ['ihw-c-rsuv-2-edr-halley-v1.0/data'],
 ##        "label": "D",
 ##    },
-}
 
-"""
+    # Support not planned:
     # The GZ products have incomplete PDS3 labels. Their pointers are also
     # formatted weird when there are multiple image pointers in one label.
     "occult_gz": {
@@ -87,12 +86,13 @@ file_information = {
         "fn_must_contain": ['.img'],
         "url_must_contain": ['ihw-c-rsoc-3-edr-gz-v1.0/data'],
         "label": "D",
+        "support_np": True
     },
-
     "oh_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['ihw-c-rsoh-3-edr-gz-v1.0/data'],
         "label": "D",
+        "support_np": True
     },
-"""
+}

@@ -86,8 +86,7 @@ file_information = {
         "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'housekeeping'],
         "label": 'D',
     },
-}
-"""
+
     # SAR Raw Packetized Data Records; raw binary telemetry
     # Support not planned --> The parameter files (.txt) open, but there are 
     # no pointers to the data files (.dat).
@@ -96,5 +95,6 @@ file_information = {
         "fn_regex": [r'(dat$)|(DAT$)'],
         "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'data', 'raw'],
         "label": 'D',
+        "support_np": True
     },
-"""
+}

@@ -105,16 +105,6 @@ file_information = {
         "url_must_contain": ['dif-c-hrii-5-tempel1-surf-temp-maps', '/data'],
         "label": "D",
     },
-    # 9P/Tempel 1 approach/encounter movies
-    # "UserWarning: The MOVIE pointer is not yet fully supported."
-    # MPEG file format
-##    "movie": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.mpg'],
-##        "url_must_contain": ['di-c-hriv_its_mri-5-movie-coll', '/data'],
-##        "label": "D",
-##    },
-    
     # IRAS images derived from sky survey atlas scans and pointed observations
     "iras_img_survey": {
         "manifest": SBN_FILE,
@@ -142,4 +132,15 @@ file_information = {
         "url_must_contain": ['di_iras-c-fpa-5-9p-phot-v1.0/data'],
         "label": "D",
     },
+
+    # 9P/Tempel 1 approach/encounter movies
+    # "UserWarning: The MOVIE pointer is not yet fully supported."
+    # MPEG file format
+   "movie": {
+       "manifest": SBN_FILE,
+       "fn_must_contain": ['.mpg'],
+       "url_must_contain": ['di-c-hriv_its_mri-5-movie-coll', '/data'],
+       "label": "D",
+        "support_np": True
+   },
 }

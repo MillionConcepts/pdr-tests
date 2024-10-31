@@ -39,16 +39,6 @@ file_information = {
         "url_must_contain": ['mgn-v-rdrs-5-c-bidr-v1'],
         "label": "D",
     },
-    # ancillary tables; known unsupported 
-    # labels do not define number of columns for tables, headers are being sent to read_table()
-    # "c-bidr_tables": {
-    #     "manifest": GEO_MANIFEST,
-    #     "fn_must_contain": ['.DAT'],
-    #     "fn_regex": [r'^[A-HJ-Z]'],
-    #     "url_must_contain": ['mgn-v-rdrs-5-c-bidr-v1'],
-    #     "label": "D",
-    # },
-	
     # Mosaic Image Data Record
     # full resolution
     "f-midr": {
@@ -74,12 +64,22 @@ file_information = {
         "label": "D",
     },
     
-#     # Full-Resolution Basic Image Data Record --> no pointers, not archive compliant
-#     "f-bidr": {
-#         "manifest": GEO_MANIFEST,
-#         "fn_must_contain": [''],
-#         "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
-#         "label": "D",
-#     },
-	
+    # Full-Resolution Basic Image Data Record --> no pointers, not archive compliant
+    "f-bidr": {
+        "manifest": GEO_MANIFEST,
+        "fn_must_contain": [''],
+        "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
+        "label": "D",
+        "support_np": True
+    },
+	# ancillary tables; known unsupported 
+    # labels do not define number of columns for tables, headers are being sent to read_table()
+    "c-bidr_tables": {
+        "manifest": GEO_MANIFEST,
+        "fn_must_contain": ['.DAT'],
+        "fn_regex": [r'^[A-HJ-Z]'],
+        "url_must_contain": ['mgn-v-rdrs-5-c-bidr-v1'],
+        "label": "D",
+        "support_np": True
+    },
 }

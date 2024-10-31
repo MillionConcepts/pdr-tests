@@ -121,18 +121,9 @@ file_information = {
         "url_must_contain": ['earth/grsfe', 'tims'],
         "label": "D",
     },
-}
 
-"""
-Products missing/incomplete/wrong labels:
-    # airborne data locator maps (appear to be ancillary)
-    # SAMPLE_TYPE = BYTE should probably be VAX_INTEGER
-    "locator": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.img'],
-        "url_must_contain": ['earth/grsfe', 'locator'],
-        "label": "D",
-    },
+    # Support not planned ptypes:
+
     # Daedalus Spectrometer
     # SPECTRUM does not open; it's defined wrong in the label.
     # SPECTRUM_HEADER fails because ReadTable is called instead of ReadHeader 
@@ -141,27 +132,28 @@ Products missing/incomplete/wrong labels:
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['earth/grsfe', 'daedalus'],
         "label": "D",
+        "support_np": True
     },
-    # Directional Emissivity Experiment - text files with no labels
-
-Mistakes in data files:
-    # SIRIS Spectrometer
-    # Something is broken in these products' data files 
+    # SIRIS Spectrometer - something is broken in these products' data files 
     "siris": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['earth/grsfe', 'siris'],
         "label": "D",
+        "support_np": True
     },
-
-AIRSAR images:
-    # support not planned
+    # AIRSAR compressed images
     "airsar_compressed": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.imq'],
         "url_must_contain": ['earth/grsfe', 'airsar'],
         "label": "D",
+        "support_np": True
     },
+}
+
+"""
+Support planned:
     # Does not open because SAMPLE_TYPE = BYTE. According to vicar2.txt
     # BYTE is an 8-bit "VAX byte"
     "airsar_img": {
@@ -170,4 +162,15 @@ AIRSAR images:
         "url_must_contain": ['earth/grsfe', 'airsar'],
         "label": "D",
     },
+    # airborne data locator maps (appear to be ancillary)
+    # SAMPLE_TYPE = BYTE should probably be VAX_INTEGER
+    "locator": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['earth/grsfe', 'locator'],
+        "label": "D",
+    },
+
+Additional support not planned products:
+    Directional Emissivity Experiment - text files with no labels
 """

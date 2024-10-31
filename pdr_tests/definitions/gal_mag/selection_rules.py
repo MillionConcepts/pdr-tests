@@ -29,13 +29,6 @@ PLASM_FILE = "plasm_full"
 SB_FILE = "tiny_sbnarchive"
 
 file_information = {
-    # EDR officially unsupported.
-    # "EDR": {
-    #     "manifest": PLASM_FILE,
-    #     "fn_must_contain": ['.DAT'],
-    #     "url_must_contain": ['GO-', '-MAG-', '-EDR-'],
-    #     "label": "D",
-    # },
     "REDR": {
         "manifest": PLASM_FILE,
         "fn_must_contain": ['.DAT'],
@@ -76,5 +69,14 @@ file_information = {
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['galileo/idagaspra', 'data/galileo_mag'],
         "label": "D",
+    },
+
+    # EDR officially unsupported.
+    "EDR": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['GO-', '-MAG-', '-EDR-'],
+        "label": "D",
+        "support_np": True
     },
 }
