@@ -55,6 +55,13 @@ file_information = {
         "url_must_contain": ['mg_2401/data'],
         "label": "D",
     },
-    
-	
+
+    # Spacecraft attitude info during radio occultation
+    # (most other products in the geometry directories are spice kernels)
+    "geometry": {
+        "manifest": ATM_MANIFEST,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['mg_22', 'geometry'],
+        "label": "D",
+    },
 }

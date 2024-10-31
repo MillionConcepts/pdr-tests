@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+hga03212.LBL,"[""HGA03212.TAB"", ""hga03212.LBL"", ""HGA.FMT""]",ORB3212.DRF.FILT.OUT,http://pds-atmospheres.nmsu.edu/PDS/data/mg_2201/geometry,"{""TABLE"": ""28b8a9f4b5021dadacd9bdc22a72cb05""}"
+drf03213.LBL,"[""drf03213.LBL"", ""DRF03213.TAB"", ""DRF.FMT""]",ORB3213.DRF,http://pds-atmospheres.nmsu.edu/PDS/data/mg_2201/geometry,"{""TABLE"": ""ee39f1b7a8b4a977ffd95d3c79ac5765""}"
+qua94221.LBL,"[""qua94221.LBL"", ""QUA94221.TAB""]",QUA94221.TAB,http://pds-atmospheres.nmsu.edu/PDS/data/mg_2205/geometry,"{""TABLE"": ""c7fe23b445895485d310aedef1e98463""}"
