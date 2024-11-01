@@ -49,11 +49,11 @@ file_information = {
 
     # IRIS full-res observations; unsupported VAX tables
     "iris_fullres": {
-       "manifest": ATM_FILE,
-       "fn_must_contain": ['.dat'],
-       "url_must_contain": ['/vg_2001/'],
-       "fn_regex": [r'^vg[12]_'],
-       "label": "D",
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['/vg_2001/'],
+        "fn_regex": [r'^vg[12]_'],
+        "label": "D",
     },
     # IRIS full-res expanded Jupiter/Saturn dataset 
     "iris_expanded_ascii": {
