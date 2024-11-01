@@ -124,12 +124,13 @@ file_information = {
 
 # start SD2 data products
     # RECORD_TYPE and PRODUCT_TYPE are UND (undefined) in the EDR labels
-#     "EDR_sd2": {
-#         "manifest": SB_FILE,
-#         "fn_must_contain": ['.dat'],
-#         "url_must_contain": ['-sd2-3-', '/data/raw'],
-#         "label": "D",
-#     },
+    "EDR_sd2": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['-sd2-3-', '/data/raw'],
+        "label": "D",
+        "support_np": True
+    },
     "RDR_sd2": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.tab'],

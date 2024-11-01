@@ -44,6 +44,24 @@ file_information = {
         "label": "D",
     },
     
+    # Support not planned; missing PDS3 compliant labels
+    # (These products are mirrored in the ASU Node's TES archive.)
+    # raw interferogram data (.var); variable length table
+    "tsdr_IFG_data": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['ifg', '.var'],
+        "url_must_contain": ['-tes-', '-tsdr-', '/mars'],
+        "label": "A",
+        "support_np": True
+    },
+    # raw and calibrated radiance data (.var); variable length table
+    "tsdr_RAD_data": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['rad', '.var'],
+        "url_must_contain": ['-tes-', '-tsdr-', '/mars'],
+        "label": "A",
+        "support_np": True
+    },
 }
 
 """
@@ -103,26 +121,6 @@ file_information = {
     "tsdr_TLM": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['tlm', '.tab'],
-        "url_must_contain": ['-tes-', '-tsdr-', '/mars'],
-        "label": "A",
-    },
-
-
-# Known unsupported products; .var files missing PDS3 compliant labels
-# Support not planned.
-
-    # raw interferogram data (.var); variable length table
-    "tsdr_IFG_data": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['ifg', '.var'],
-        "url_must_contain": ['-tes-', '-tsdr-', '/mars'],
-        "label": "A",
-    },
-
-    # raw and calibrated radiance data (.var); variable length table
-    "tsdr_RAD_data": {
-        "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['rad', '.var'],
         "url_must_contain": ['-tes-', '-tsdr-', '/mars'],
         "label": "A",
     },

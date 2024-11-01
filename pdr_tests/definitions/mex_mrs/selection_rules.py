@@ -125,11 +125,7 @@ file_information = {
         "url_must_contain": ['mex-m-mrs-1_2_3', 'data/level02/closed'],
         "label": "D",
     },
-}
 
-SKIP_FILES = ["MARS_DESC.TXT", "MEX_POINTING_MODE_DESC.TXT"]
-
-"""
     # Level 1a data; closed loop; binary tables
     # Support not planned --> incomplete/non compliant labels
     "lvl_1a_icl": {
@@ -137,20 +133,27 @@ SKIP_FILES = ["MARS_DESC.TXT", "MEX_POINTING_MODE_DESC.TXT"]
         "fn_must_contain": ['icl', '.raw'],
         "url_must_contain": ['mex-m-mrs-1_2_3', 'data/level1a/closed'],
         "label": "D",
+        "support_np": True
     },
     "lvl_1a_tcl": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['tcl', '.raw'],
         "url_must_contain": ['mex-m-mrs-1_2_3', 'data/level1a/closed'],
         "label": "D",
+        "support_np": True
     },
     "lvl_1a_tnf": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['tnf', '.dat'],
         "url_must_contain": ['mex-m-mrs-1_2_3', 'data/level1a/closed'],
         "label": "D",
+        "support_np": True
     },
-    
+}
+
+SKIP_FILES = ["MARS_DESC.TXT", "MEX_POINTING_MODE_DESC.TXT"]
+
+"""
     # Level 1b open loop products appear to not exist in the archive, even
     # though they are listed in the dataset documentation.
     "lvl_1b_open": {

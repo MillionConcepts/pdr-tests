@@ -93,37 +93,33 @@ file_information = {
         "url_must_contain": ['mars_by_table/tlm'],
         "label": "A",
     },
-}
 
-
-"""
-# Known unsupported product; labels unusually short
-
-    # Percent concentraion tables; fixed length table
+    # Support not planned
+    # Percent concentration tables; fixed length table 
+    # Labels are unusually short
     "PCT": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['mars_by_table/pct'],
         "label": "A",
+        "support_np": True
     },
-
-# Known unsupported products; .var files missing PDS3 compliant labels
-# Support not planned.
-
     # raw interferogram data (.var); variable length table
+    # Missing PDS3 compliant labels
     "IFG_data": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.var'],
         "url_must_contain": ['mars_by_table/ifg'],
         "label": "A",
+        "support_np": True
     },
-
     # raw and calibrated radiance data (.var); variable length table
+    # Missing PDS3 compliant labels
     "RAD_data": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.var'],
         "url_must_contain": ['mars_by_table/rad'],
         "label": "A",
+        "support_np": True
     },
-
-"""
+}

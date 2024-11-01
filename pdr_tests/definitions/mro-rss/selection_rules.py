@@ -37,10 +37,11 @@ file_information = {
             "url_must_contain": ['rss', '/rsr'],
             "fn_regex": [r'\..*[^lbl]'],
             "label": "D"},
-    # 'tnf': {'manifest': GEO_MRO_FILE,
-    #         'fn_must_contain': ['.tnf'],
-    #         'url_must_contain': ['rss', '/tnf'],  # same thing here
-    #         "label": "D"},
+    'tnf': {'manifest': GEO_MRO_FILE,
+            'fn_must_contain': ['.tnf'],
+            'url_must_contain': ['rss', '/tnf'],  # same thing here
+            "label": "D",
+            "support_np": True},
     'rsdmap': {'manifest': GEO_MRO_FILE,
                'fn_must_contain': ['.img'],
                'url_must_contain': ['rss', '/rsdmap'],

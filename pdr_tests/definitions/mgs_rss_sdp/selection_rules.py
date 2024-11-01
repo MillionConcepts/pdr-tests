@@ -126,13 +126,12 @@ file_information = {
     },
     
     
-#     # Adobe PostScript files; out of scope
-#     "bro": {
-#         "manifest": MANIFEST_FILE,
-#         "fn_must_contain": ['.ps1'],
-#         "url_must_contain": ['-rss-5-sdp-'],
-#         "label": "D",
-#     },
-    
+    # Adobe PostScript files; out of scope
+    "bro": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.ps1'],
+        "url_must_contain": ['-rss-5-sdp-'],
+        "label": "D",
+        "support_np": True
+    },
 }
-
