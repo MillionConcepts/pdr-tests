@@ -173,40 +173,47 @@ def _pspec_parser(
 
 class ParamSpec:
     """
-    A paramspec defines how to parse one or more command line
-    arguments into a single parameter to some function.  It does this
-    by specifying how to call argparse.ArgumentParser.add_argument
-    so that the ArgumentParser will parse those arguments into that
-    parameter.  As much information as possible is derived from the
-    parameter's name, type annotation, and defaults:
+    A paramspec defines how to parse one or more command line args into
+    a single parameter to some function.  It does this by specifying how
+    to call argparse.ArgumentParser.add_argument so that the argument
+    parser will parse those arguments into that parameter.  As much
+    information as possible is derived from the parameter's name, kind
+    (positional, keyword, rest, etc), type annotation, and defaults.
+    Only argument types actually used in ix_interface.py are supported.
 
-      - Parameters with defaults are optional, parameters with no
-        default are required.  This cannot be overridden; in
-        particular you cannot specify a mandatory --option.
+    The parameter's name will be the name used in the argparse.Namespace
+    object returned by parse_args, and also at least one of the names
+    it is known by on the command line (except for boolean options that
+    default to True, see below).
 
-      - By default, a positional-only or positional/keyword parameter
-        will be mapped to either a zero-one or one-exactly positional
-        command line argument, depending on whether it has a default.
-        A positional rest parameter (*args) will be mapped to a
-        zero-or-more positional command line argument.  Keyword-only
-        arguments will be mapped to options.  Some of this can be
-        overridden, see below.
+    Parameters with defaults are optional, parameters with no default
+    are required.  This cannot be overridden; in particular you cannot
+    specify a mandatory --option.
 
-      - The parameter will be converted to its declared type, as
-        modified by 'nargs'.  This can be overridden, see below.
+    By default, a positional-only or positional/keyword parameter will
+    be mapped to either a zero-one or one-exactly positional command
+    line argument, depending on whether it has a default.  A positional
+    rest parameter (*args) will be mapped to a zero-or-more positional
+    command line argument.  Keyword-only arguments will be mapped to
+    options.  Some of this can be overridden, see below.
 
-      - The parameter's name will be the name used in the argparse.Namespace
-        object returned by parse_args, and also at least one of the
-        names it is known by on the command line.
+    Each command line argument will be converted to an appropriate
+    type, based on the declared type of the parameter that receives it.
+    For mandatory parameters the conversion target is simply the
+    declared type; for optional parameters, it's the non-None
+    alternative (i.e. the T in Optional[T]), and for parameters that
+    can receive more than one argument, it's the sequence item type.
+    The parser can be overridden, see below.
 
-      - Appropriate argparse action, nargs, and const settings are
-        deduced from the type and default if possible.  In particular,
-        `flag: bool = False/True` is sufficient to set up --flag as a
-        zero-argument boolean option whose default is false or true,
-        and `positional: Optional[T] = None` is sufficient to declare
-        an optional positional argument.  Note that only argument
-        types that are actually used in ix_interface.py are presently
-        supported.
+    Boolean parameters have special handling:
+
+    `flag: bool = False` specifies a zero-argument, normally-off
+    toggle option spelled `--flag`.
+
+    `flag: bool = True` specifies a zero-argument, normally-*on*
+    toggle option spelled `--no-flag`.  Note that in this case the
+    Python parameter name (`flag`) will be different from the primary
+    command line option name (`--no-flag`).
 
     The keyword arguments to __init__ supply additional information
     that may be required:
@@ -237,6 +244,7 @@ class ParamSpec:
       action, nargs, const, choices, metavar:
               Override the values used for these arguments to
               add_argument.  See argparse documentation for details.
+
     """
     def __init__(
         self,
@@ -302,13 +310,15 @@ class ParamSpec:
         if metavar is not None:
             spec["metavar"] = metavar
         elif not is_option:
-            # for positional arguments, the adjusted parameter name has
-            # to be specified as 'metavar', and *not* as a positional
-            # argument to .add_argument(), or we will get either an
-            # assertion failure in .add_argument, or a Namespace object
-            # some of whose data cannot be accessed via .attribute.
-            # see https://github.com/python/cpython/issues/117834
-            # and https://github.com/python/cpython/issues/95100
+            # For positional arguments, the adjusted parameter name must
+            # be specified as 'metavar', and *not* as a positional arg
+            # to add_argument, or we will get either an assertion
+            # failure in add_argument, or a Namespace object some of
+            # whose data cannot be accessed via .attribute.  This has
+            # been reported as a bug in argparse at least three times:
+            # * https://github.com/python/cpython/issues/59330
+            # * https://github.com/python/cpython/issues/95100
+            # * https://github.com/python/cpython/issues/117834
             spec["metavar"] = self.names.pop(0)
             assert not self.names
 
@@ -374,15 +384,21 @@ class CLIPreparedCall:
 
 class CLIAction:
     """
-    Wraps a function and adapts it to take its arguments from the command
-    line.  As much information as possible is pulled from the function's
-    type signature and docstring; the remainder comes from the "argspec"
-    dictionary, which should have keys matching the function's arguments,
-    and values that are dictionaries of additional arguments to pass to
-    argparse.ArgumentParser.add_argument.  It is OK for this dictionary
-    to have keys that don't correspond to any function argument; they
-    will be ignored.  Function arguments with no matching argspec entry,
-    on the other hand, are an error.
+    Wraps a function and adapts it to take its arguments from the
+    command line.  The function's arguments must all have type
+    annotations.
+
+    As much information as possible is pulled from the function's type
+    signature and docstring; the remainder comes from the "argspec"
+    dict, which should have keys matching the function's arguments,
+    and values that are dicts of additional arguments to pass to
+    argparse.ArgumentParser.add_argument.  There must at least be
+    a "help" entry in argspec for each argument; see ParamSpec
+    for specifics of what else you can put in argspec.
+
+    It is OK for argspec to have keys that don't correspond to any
+    function argument; they will be ignored.  Function arguments
+    without matching argspec entries, on the other hand, are an error.
     """
 
     def __init__(self, fn, argspec):
