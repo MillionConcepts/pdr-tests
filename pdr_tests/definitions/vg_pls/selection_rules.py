@@ -79,16 +79,6 @@ file_information = {
         "url_must_contain": ['VG2-N-PLS-5-RDR-2PROMAGSPH', '/DATA'],
         "label": "D",
     },
-    # Known unsupported; missing pointers in the labels.
-    # Adding pointers manually leads to an error: "UserWarning: Unable to load
-    # TIME_SERIES: 'utf-8' codec can't decode byte 0xc6 in position 1: invalid
-    # continuation byte"
-##    "nep_ele_sphere": {
-##        "manifest": PPI_FILE,
-##        "fn_must_contain": ['.DAT'],
-##        "url_must_contain": ['VG2-N-PLS-5-RDR-ELEMAGSPHERE', '/DATA'],
-##        "label": "D",
-##    },
     "nep_wind": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.DAT'],
@@ -142,6 +132,18 @@ file_information = {
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['VG2-SS-PLS-4-SUMM-1HR-AVG', '/DATA'],
         "label": "D",
+    },
+
+    # Support not planned; missing pointers in the labels.
+    # Adding pointers manually leads to an error: "UserWarning: Unable to load
+    # TIME_SERIES: 'utf-8' codec can't decode byte 0xc6 in position 1: invalid
+    # continuation byte"
+    "nep_ele_sphere": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['VG2-N-PLS-5-RDR-ELEMAGSPHERE', '/DATA'],
+        "label": "D",
+        "support_np": True
     },
 }
 

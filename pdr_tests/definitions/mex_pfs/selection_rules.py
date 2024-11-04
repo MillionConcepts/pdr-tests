@@ -97,25 +97,26 @@ file_information = {
     # The MEX-M-PFS-5-DDR-MAPS-V1.0 dataset is at PSA but not mirrored at GEO.
     # There are a half dozen ascii table products; water vapour maps. They
     # open fine and are listed as notionally supported.
-}
 
-SKIP_FILES = ["MEX_ORIENTATION_DESC.TXT"]
-
-"""
-Calibrated radiance spectra -- unsupported
-- ROWS does not always match FILE_RECORDS
-- multiple columns have the wrong DATA_TYPE 
-- the wavelength and radiance columns have the wrong START_BYTE
+    # Support not planned:
+    # Calibrated radiance spectra
+    # - ROWS does not always match FILE_RECORDS
+    # - multiple columns have the wrong DATA_TYPE 
+    # - the wavelength and radiance columns have the wrong START_BYTE
     "rad_lwc": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['meas_rad_lw', '.dat'],
         "url_must_contain": ['mex-m-pfs-2-edr', 'data'],
         "label": "D",
+        "support_np": True
     },
     "rad_swc": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['meas_rad_sw', '.dat'],
         "url_must_contain": ['mex-m-pfs-2-edr', 'data'],
         "label": "D",
+        "support_np": True
     },
-"""
+}
+
+SKIP_FILES = ["MEX_ORIENTATION_DESC.TXT"]

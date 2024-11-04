@@ -570,6 +570,11 @@ def _sync_chunks(bucket, tofetch, data_path):
             console_and_log(f"Failed to download {chunk[i]}: {type(b)}: {b}")
 
 
+def _canonicalize_test_data_path(pathname: str) -> str:
+    path = Path(pathname)
+    return f"{path.parent.parent.name}/{path.parent.name}/{path.name}"
+
+
 def download_datasets(
     datasets: list[str],
     bucket_name: str,
@@ -582,7 +587,7 @@ def download_datasets(
     data_path = Path(pdr_tests.__file__).parent / "data"
     bucket = Bucket(bucket_name)
     local = pd.DataFrame(index_breadth_first(data_path))
-    local['path'] = local['path'].str.extract(r".*data/(.*)")[0]
+    local['path'] = local['path'].map(_canonicalize_test_data_path)
     local = local.loc[
         local['directory'] == False
     ].sort_values(by='path').reset_index()

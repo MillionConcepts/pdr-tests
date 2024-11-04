@@ -105,30 +105,35 @@ file_information = {
         "url_must_contain": ['/ODTSDP_v1/', 'odtvr'],
         "label": "A",
     },
+
+    # Support not planned:
+    # note that _v1 geoprojected products are, per data providers, not really 
+    # science products -- they contain cosmetic processing
+
+    # geographically projected products derived from ir_RDR; three-dimensional 
+    # spectral image CUBEs; version 1
+    "ir_GEO_v1": {
+        "manifest": THEMIS_FILE,
+        "fn_must_contain": ['.CUB.gz'],
+        "url_must_contain": ['/ODTGEO_v1/', 'odtig'],
+        "label": "D",
+        "support_np": True
+    },
+    # geographically projected products derived from vis_RDR; three-dimensional 
+    # spectral image CUBEs; version 1
+    "vis_GEO_v1": {
+        "manifest": THEMIS_FILE,
+        "fn_must_contain": ['.CUB'],
+        "url_must_contain": ['/ODTGEO_v1/', 'odtvg'],
+        "label": "D",
+        "support_np": True
+    },
 }
 
 """
 # following ptypes are currently (and maybe permanently) not supported due to 
 # ISIS axplanes along multiple axes
 
-# note that _v1 geoprojected products are, per data providers, not really 
-# science products -- they contain cosmetic processing 
-# geographically projected products derived from ir_RDR; three-dimensional 
-# spectral image CUBEs; version 1
-"ir_GEO_v1": {
-    "manifest": THEMIS_FILE,
-    "fn_must_contain": ['.CUB.gz'],
-    "url_must_contain": ['/ODTGEO_v1/', 'odtig'],
-    "label": "D",
-},
-# geographically projected products derived from vis_RDR; three-dimensional 
-# spectral image CUBEs; version 1
-"vis_GEO_v1": {
-    "manifest": THEMIS_FILE,
-    "fn_must_contain": ['.CUB'],
-    "url_must_contain": ['/ODTGEO_v1/', 'odtvg'],
-    "label": "D",
-},
 # calibrated infrared data; three-dimensional spectral image QUBEs
 "ir_RDR": {
     "manifest": THEMIS_FILE,

@@ -39,11 +39,12 @@ file_information = {
     },
     # Low-level RSS data from Saturn and Titan occultations. Mirrored at RMS
     # (support not planned; labels are missing pointers to the data files)
-##    "odr": {
-##        "manifest": PPI_FILE,
-##        "fn_must_contain": ['.ODR'],
-##        "url_must_contain": ['VG', 'RSS-1-ROCC', '/DATA'],
-##        "label": "D",
-##    },
+    "odr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.ODR'],
+        "url_must_contain": ['VG', 'RSS-1-ROCC', '/DATA'],
+        "label": "D",
+        "support_np": True
+    },
 }
 

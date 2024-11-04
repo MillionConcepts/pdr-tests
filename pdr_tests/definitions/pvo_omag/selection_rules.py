@@ -70,11 +70,11 @@ file_information = {
     },
    # SCCOORDS 24 second averages ascii version
    "sc_24s_asc": {
-       "manifest": PPI_FILE,
-       "fn_must_contain": ['.TAB'],
-       "url_must_contain": ['PVO-V-OMAG-4--SCCOORDS-24SEC',
-                            'DATA/ASCII'],
-       "label": "D",
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['PVO-V-OMAG-4--SCCOORDS-24SEC',
+                             'DATA/ASCII'],
+        "label": "D",
    },
     # P-SENSOR 24 second averages original binary files
     "ps_24s_bi": {

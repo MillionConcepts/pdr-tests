@@ -61,14 +61,15 @@ file_information = {
         "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/wcl'],
         "label": "D",
     },
-#    # The "CP" and "CV" products are unsupported (wrong start bytes/offsets)
-#    "wcl_rdr_broken": {
-#        "manifest": GEO_FILE,
-#        "fn_must_contain": ['.tab'],
-#        "fn_regex": [r'(cp_)|(cv_)'],
-#        "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/wcl'],
-#        "label": "D",
-#    },
+   # The "CP" and "CV" products are unsupported (wrong start bytes/offsets)
+   "wcl_rdr_broken": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tab'],
+        "fn_regex": [r'(cp_)|(cv_)'],
+        "url_must_contain": ['phx-m-meca-4-nirdr-v1/phxmec_1xxx/data','/wcl'],
+        "label": "D",
+        "support_np": True
+   },
     # MECA AFM edr and rdr
     "afm_edr": {
         "manifest": GEO_FILE,

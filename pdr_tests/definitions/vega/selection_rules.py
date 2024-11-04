@@ -143,18 +143,20 @@ file_information = {
        "label": "D",
     },
     # Unsupported; missing PDS label files
-##    "puma_raw": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['piki','.dat'],
-##        "url_must_contain": ['vega','-c-puma-2-rdr-halley-v1.0/data'],
-##        "label": "D",
-##    },
+    "puma_raw": {
+        "manifest": SBN_HOLDINGS_FILE,
+        "fn_must_contain": ['piki','.dat'],
+        "url_must_contain": ['vega','-c-puma-2-rdr-halley-v1.0/data'],
+        "label": "D",
+        "support_np": True
+    },
     # Unsupported; missing PDS label files
-##    "puma_processed": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['pmpi','.tbl'],
-##        "url_must_contain": ['vega','-c-puma-3-rdr-halley-processed-v1.0/data'],
-##        "label": "D",
-##    },
+    "puma_processed": {
+        "manifest": SBN_HOLDINGS_FILE,
+        "fn_must_contain": ['pmpi','.tbl'],
+        "url_must_contain": ['vega','-c-puma-3-rdr-halley-processed-v1.0/data'],
+        "label": "D",
+        "support_np": True
+    },
 }
 

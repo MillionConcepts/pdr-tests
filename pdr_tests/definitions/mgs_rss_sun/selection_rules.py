@@ -49,14 +49,13 @@ file_information = {
         "url_must_contain": ['MGS-SUN-RSS-1-ROCC-V1.0/DATA', 'MCT'],
         "label": "D",
     },
-}
 
-"""
-Unsupported product types; no pointers in the labels
-- ion
-- mch
-- soe
-- spk
-- tro
-- wea
-"""
+    # Support not planned; no pointers in the labels
+    "unsupported": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'(ION)|(MCH)|(SOE)|(SPK)|(TRO)|(WEA)'],
+        "url_must_contain": ['MGS-SUN-RSS-1-ROCC-V1.0/DATA'],
+        "label": "D",
+        "support_np": True
+    },
+}

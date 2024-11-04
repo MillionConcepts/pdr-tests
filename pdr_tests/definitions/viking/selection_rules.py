@@ -62,6 +62,28 @@ file_information = {
         "url_must_contain": ['vl2-m-seis-5-rdr-v1/vl_9020/data'],
         "label": "D",
     },
+
+    # # IRTM - 1989 version
+    # # Unsupported: the pointers are in an old format (easy special case), the
+    # # tables use VAX_INTEGER (probably not the issue) and VAX_BIT_STRING (more
+    # # likely a problem) data types, AND the tables are in a messy "partially
+    # # transposed" format (likely part of the problem)
+    # "irtm_89": {
+    #     "manifest": GEO_FILE,
+    #     "fn_must_contain": ['.DAT'],
+    #     "url_must_contain": ['vo1_vo2-m-irtm-4-v1/old_vo_0001', 'DATA'],
+    #     "label": "D",
+    # },
+
+    # Support not planned (incomplete labels)
+    # IRTM - 1994 version "intended to be compatible with the TES data format"
+    "irtm_94": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r'\.[0-9]{3}$'],
+        "url_regex": ['vo1_vo2-m-irtm-4-v1/vo_000[12]/VO[12]_DATA'],
+        "label": "A",
+        "support_np": True
+    },
 }
 
 r"""
@@ -84,24 +106,5 @@ Safed:
 Included in other selection rules:
 - RSS LOS gravity data (part of GEO's pre-magellan collection)
 - Viking Orbiter and Mariner 9 cloud catalog (tested with Mariner)
-Unsupported PDS3 product types:
-    # IRTM - 1989 version
-    # Unsupported: the pointers are in an old format (easy special case), the
-    # tables use VAX_INTEGER (probably not the issue) and VAX_BIT_STRING (more
-    # likely a problem) data types, AND the tables are in a messy "partially
-    # transposed" format (likely part of the problem)
-    "irtm_89": {
-        "manifest": GEO_FILE,
-        "fn_must_contain": ['.DAT'],
-        "url_must_contain": ['vo1_vo2-m-irtm-4-v1/old_vo_0001', 'DATA'],
-        "label": "D",
-    },
-    # IRTM - 1994 version "intended to be compatible with the TES data format"
-    # Unsupported; support not planned (incomplete labels)
-    "irtm_94": {
-        "manifest": GEO_FILE,
-        "fn_regex": [r'\.[0-9]{3}$'],
-        "url_regex": ['vo1_vo2-m-irtm-4-v1/vo_000[12]/VO[12]_DATA'],
-        "label": "A",
-    },
+    
 """

@@ -70,22 +70,20 @@ file_information = {
         "url_must_contain": ['VG2-N-PRA-4-SUMM-BROWSE-48SEC-V1.0/DATA'],
         "label": "D",
     },
-}
 
-"""
-VG2-U-PRA-4-SUMM-BROWSE-48SEC-V1.0 has multiple known unsupported products
-(support not planned).
-- The original binary versions use an illegal format for ITEMS and START_BYTE.
-- The newer ascii version fixes the table formatting but is missing pointers
-  in the label. The PPI node has been emailed about this.
-- Ancillary summary products open fine.
-
+    # Support not planned:
+    # - The original binary versions use an illegal format for ITEMS 
+    #   and START_BYTE.
+    # - The newer ascii version fixes the table formatting but is missing 
+    #   pointers in the label. The PPI node has been emailed about this.
+    # - Ancillary summary products open fine.
     # uranus 48sec summ browse data; ascii product
     "summ_ur_asc": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['VG2-U-PRA-4-SUMM-BROWSE-48SEC-V1.0', '/DATA'],
         "label": "D",
+        "support_np": True
     },
     # uranus 48sec summ browse data; 'original binary' products
     "summ_ur_bin": {
@@ -94,5 +92,6 @@ VG2-U-PRA-4-SUMM-BROWSE-48SEC-V1.0 has multiple known unsupported products
         "url_must_contain": ['VG2-U-PRA-4-SUMM-BROWSE-48SEC-V1.0',
                              '/DATA/ORIGINAL_BINARY'],
         "label": "D",
+        "support_np": True
     },
-"""
+}

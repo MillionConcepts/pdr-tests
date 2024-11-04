@@ -141,8 +141,26 @@ file_information = {
         "url_must_contain": ['LP-L-ENG', 'DATA/ANCILLARY'],
         "label": "D",
     },
+
+    # Support not planned (no pointers in the labels)
+    "ephemeris": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['LP-L-6-EPHEMERIS-V1.0/DATA/EPHEMERIS'],
+        "label": "D",
+        "support_np": True
+    },
+    "position": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['LP-L-6-POSITION-V1.0/DATA/POSITION'],
+        "label": "D",
+        "support_np": True
+    },
 }
 """
+Support planned:
+
     # level 0 data: merged telemetry files
     # They do not open (UserWarning: Unable to load TABLE: "('BIT_STRING',
     # nan, 2) is not a currently-supported data type.")
@@ -160,6 +178,4 @@ file_information = {
         "url_must_contain": ['LP-L-ENG-6-SUNPULSE-V1.0/DATA/SUNPULSE'],
         "label": "D",
     },
-
-Other known unsupported products: ephemeris and position (no pointers in the labels)
 """

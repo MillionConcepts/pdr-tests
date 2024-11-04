@@ -100,12 +100,20 @@ file_information = {
         "url_must_contain": ['JNO-SW-JAD', "UNCALIBRATED", 'ION_LOGICALS'],
         "label": "D",
     },
-    # ion spectra housekeeping products (HSK_ION_SPA) are not supported; the format files are incorrect
     "V3_uncal_is": {
         "manifest": PLASM_FILE,
         "fn_must_contain": [".DAT"],
+        "fn_regex": [r"(LRS)|(BRT)|(HRS)|(CAL)"],
         "url_must_contain": ['JNO-SW-JAD', "UNCALIBRATED", 'ION_SPECTRA'],
         "label": "D",
+    },
+    # ion spectra housekeeping products (HSK_ION_SPA) are not supported; the format files are incorrect
+    "V3_uncal_is_unsupported": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ["HSK", ".DAT"],
+        "url_must_contain": ['JNO-SW-JAD', "UNCALIBRATED", 'ION_SPECTRA'],
+        "label": "D",
+        "support_np": True
     },
     "V3_uncal_itof": {
         "manifest": PLASM_FILE,

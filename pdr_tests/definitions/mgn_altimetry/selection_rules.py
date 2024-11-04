@@ -29,14 +29,6 @@ GEO_MANIFEST = "geomgn"
 
 file_information = {
     
-    # Altimeter Experiment Data Record
-    # known unsupported; support not planned; labels not PDS compliant (COLUMNS = 'UNK')
-##     "edr": {
-##         "manifest": GEO_MANIFEST,
-##         "fn_must_contain": ['.DAT'],
-##         "url_must_contain": ['mgn-v-rdrs-2-alt-edr-v1'],
-##         "label": "D",
-##     },
     # Altimetry and Radiometry Composite Data Records
     # 3 products per orbit: orbit header (OHF), altimetry (ADF), radiometry (RDF)
     # known unsupported; support planned --> VAX_REAL 64 bit data type
@@ -49,16 +41,6 @@ file_information = {
     
     # Derived products that pull at least some of their data from ALT-EDR and/or ARCDR:
 
-    # Surface Characteristics Vector Data Record 
-    # 6 products per orbit: altimetry inversion (ANF), emissivity (EDF), alt inversion fit
-    # (NFF), orbit header (OHF), oblique sinusoidal image (OIF), sinusoidal image (SIF)
-    # known unsupported; support not planned would require format specific parsers
-    # "scvdr": {
-    #     "manifest": GEO_MANIFEST,
-    #     "fn_regex": [r'\.[1-9]$'],
-    #     "url_must_contain": ['mgn-v-rdrs-5-scvdr-v1', '/s'],
-    #     "label": "D",
-    # },
     # Global Vector Data Record
     # Similar archive layout as GxDR with merc, north, south, and sinus subdirectories
     # Data products: GVADF, GVANF, GVRDF, GVXIF (others are ancilllary)
@@ -67,5 +49,25 @@ file_information = {
         "fn_must_contain": ['gv', '.tab'],
         "url_must_contain": ['mgn-v-rdrs-5-gvdr-v1', '/gvdr/'],
         "label": "D",
+    },
+
+    # Support not planned:
+    # Altimeter Experiment Data Record; not PDS compliant (COLUMNS = 'UNK')
+    "edr": {
+        "manifest": GEO_MANIFEST,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['mgn-v-rdrs-2-alt-edr-v1'],
+        "label": "D",
+        "support_np": True
+    },
+    # Surface Characteristics Vector Data Record 
+    # 6 products per orbit: ANF, EDF, NFF, OHF, OIF, SIF
+    # known unsupported; would require format specific parsers
+    "scvdr": {
+        "manifest": GEO_MANIFEST,
+        "fn_regex": [r'\.[1-9]$'],
+        "url_must_contain": ['mgn-v-rdrs-5-scvdr-v1', '/s'],
+        "label": "D",
+        "support_np": True
     },
 }

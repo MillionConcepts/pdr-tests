@@ -64,5 +64,11 @@ file_information = {
     
     # other unsupported tracking/telemetry products: 
     # AMD, ION, TRO (labels lack pointers to data files)
-	
+    "unsupported_telemetry": {
+        "manifest": GEO_MANIFEST,
+        "fn_regex": [r'(amd$)|(ion$)|(tro$)'],
+        "url_must_contain": ['mgn-v-rss-1-tracking'],
+        "label": "D",
+        "support_np": True
+    },
 }
