@@ -527,6 +527,12 @@ class CLIDispatcher:
                     obj.cli_action.add_to_parser(cmds)
         self.ap = ap
 
-    def parse_args(self):
-        args = self.ap.parse_args()
+    def parse_args(self, arguments = None):
+        """
+        Parse command line arguments from sys.argv.
+        If ARGUMENTS is not None, it should be a list of strings;
+        command line arguments are parsed from that list *instead of*
+        from sys.argv.
+        """
+        args = self.ap.parse_args(arguments)
         return args._subcommand.postprocess_args(args)
