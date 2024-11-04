@@ -378,7 +378,15 @@ class CLIPreparedCall:
                 import traceback
                 traceback.print_exc()
             else:
-                sys.stderr.write(f"{e}\n")
+                xtype = type(e).__name__
+                xmsg = str(e)
+                if not xmsg:
+                    sys.stderr.write(f"{xtype}\n")
+                elif xmsg.startswith(xtype):
+                    sys.stderr.write(f"{xmsg}\n")
+                else:
+                    sys.stderr.write(f"{xtype}: {xmsg}\n")
+
             return 2
 
 
