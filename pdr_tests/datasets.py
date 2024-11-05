@@ -631,7 +631,10 @@ def test_product(
         "error": None,
         "filename": path,
         "hashtime": float('nan'),
-        "readtime": float('nan')
+        "readtime": float('nan'),
+        "hashmem": 0,
+        "readmem": 0,
+        "prodsize": 0
     }
     excluded, log_row = check_exclusions(
         filetypes, log_row, max_size, product, path

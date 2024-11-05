@@ -472,6 +472,12 @@ def flip_ends_with(strings: Collection[str], ending: str) -> Callable:
     return pa.compute.ends_with(strings, pattern=ending)
 
 
+def _memformat(memval: int):
+    if memval == 0:
+        return "~0 MB"
+    return f"{round(memval / 1000 ** 2, 2)} MB"
+
+
 def read_and_hash(
     path: Path,
     product: Mapping[str, str],
@@ -485,7 +491,10 @@ def read_and_hash(
     log appropriately
     """
     import astropy.io.fits.verify
-    watch, runtimes = Stopwatch(digits=3, silent=True), {}
+    from pdr_tests.utilz.mem_utilz import Memwatcher
+
+    memwatcher = Memwatcher()
+    watch, runstats = Stopwatch(digits=3, silent=True), {}
     with warnings.catch_warnings():
         # We don't want to hear about UserWarnings we're intentionally raising
         # inside pdr (for things like unsupported object types, etc.)
@@ -505,23 +514,33 @@ def read_and_hash(
             module="astropy.io.fits.header"
         )
         watch.start()
-        data = pdr.read(str(path), debug=pdr_debug, tracker=tracker)
-        data.load("all")
-        runtimes["readtime"] = watch.peek()
+        with memwatcher.watch():
+            data = pdr.read(str(path), debug=pdr_debug, tracker=tracker)
+            data.load("all")
+        runstats["readtime"] = watch.peek()
+        runstats["readmem"] = memwatcher.peaks[-1]
     console_and_log(
-        f"Opened {product['product_id']} ({runtimes['readtime']} s)",
+        f"Opened {product['product_id']} ({runstats['readtime']} s, "
+        f"{_memformat(memwatcher.peaks[-1])})",
         quiet=quiet
     )
     watch.click()
+    runstats["prodsize"] = sum(
+        os.stat(p).st_size for p in set(data.file_mapping.values())
+    )
     if skiphash is True:
-        return data, {}, runtimes
-    hashes = just_hash(data)
-    runtimes['hashtime'] = watch.peek()
+        return data, {}, runstats
+    with memwatcher.watch():
+        hashes = just_hash(data)
+        runstats['hashtime'] = watch.peek()
+        runstats['hashmem'] = memwatcher.peaks[-1]
     console_and_log(
         f"Computed hashes for {product['product_id']} "
-        f"({runtimes['hashtime']} s)", quiet=quiet
+        f"({runstats['hashtime']} s, "
+        f"{_memformat(memwatcher.peaks[-1])})",
+        quiet=quiet
     )
-    return data, hashes, runtimes
+    return data, hashes, runstats
 
 
 def record_comparison(
