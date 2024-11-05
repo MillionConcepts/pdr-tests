@@ -1,4 +1,5 @@
 """support objects and logging procedures for ix framework."""
+from blake3 import blake3
 import datetime as dt
 import json
 import logging
@@ -78,8 +79,9 @@ def checksum_object(obj, hash_function=md5):
     attempts to cover the cases we actually have.
     """
     hasher = hash_function(usedforsecurity=False)
+    # hasher = hash_function(usedforsecurity=False)
     if isinstance(obj, np.ndarray):
-        hasher.update(obj)
+        hasher.update(np.frombuffer(obj.data, dtype='uint8'))
     elif isinstance(obj, pd.DataFrame):
         # note that object ('O') dtypes do not, by design, have stable
         # byte-level representations.
@@ -103,7 +105,7 @@ def checksum_object(obj, hash_function=md5):
                 #  array is somewhat memory-inefficient. another solution is
                 #  to dump each line as string or bytes -- like we do for
                 #  object dtypes above -- which would be slower but smaller.
-                hasher.update(blocks[dtype].values.copy())
+                hasher.update(np.ascontiguousarray(blocks[dtype].values))
     else:
         # TODO: determine when this is and is not actually stable
         hasher.update(obj.__repr__().encode("utf-8"))
