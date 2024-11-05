@@ -122,8 +122,22 @@ file_information = {
         "label": "D",
     },
 
-    # SAFED datasets that are being skipped for testing:
+    # SAFED datasets:
     # STARDUST-C/E/L-DFMI-2-EDR-V1.0 - early cruise phase DFMI data
+    "safed_dfmi": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['stardust-c_e_l-dfmi-2-edr-v1.0/data'],
+        "label": "D",
+    },
     # STARDUST-C/E/L-NC-2-EDR-V1.0 - early cruise phase NAVCAM images
+    # The IMAGE pointers open fine; the IMAGE_HISTOGRAMs fail
+    "safed_nav_cruise": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.img'],
+        "url_must_contain": ['stardust-c_e_l-nc-2-edr-v1.0/data'],
+        "label": "A",
+    },
     # STARDUST-CAL-NC-2-PREFLIGHT-V1.0
+    # V2.0 is tested above (nav_cal), and V1.0 is not included in the manifest
 }
