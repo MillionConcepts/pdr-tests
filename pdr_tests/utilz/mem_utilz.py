@@ -17,6 +17,7 @@ def watch_mempeak(
     while quitval.value == 0:
         mems.append(proc.memory_info().rss)
         time.sleep(interval)
+    mems.append(proc.memory_info().rss)
     if len(mems) > 0:
         memval.value = max(mems) - memval.value
     else:
