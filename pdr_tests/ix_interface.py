@@ -516,7 +516,8 @@ def count(dataset: Optional[str] = None):
         "help": "Replace files more recently modified on the remote"
     },
     replace_offsize = {
-        "help": "Replace files whose sizes don't match the remote"
+        "help": "Replace files whose sizes don't match the remote",
+        "neg_help": "Don't replace files whose sizes don't match the remote",
     },
     dry_run = {
         "short": "d",
