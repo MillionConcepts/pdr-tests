@@ -659,7 +659,7 @@ def download_datasets(
         offsize = present_local['stsize'] != present_remote['Size']
         if replace_newer is True:
             tzlocal = dt.datetime.now().astimezone().tzinfo
-            newer = present_remote.index[
+            newer = present_remote.loc[
                 present_local['MTIME'].dt.tz_localize(tzlocal)
                 < present_remote['LastModified']
             ]
@@ -695,32 +695,33 @@ def download_datasets(
         console_and_log("force mode on, downloading all files")
         fetchpaths = targets['Key']
         fetchsize = targets['Size'].sum() / 1000 ** 2
-    if len(fetchpaths) == 0:
-        console_and_log("No remote objects to fetch.")
-        return
-    console_and_log(
-        f"Downloading {len(fetchpaths)} files ({fetchsize} MB total)"
-    )
-    if dry_run is True:
-        console_and_log(f"***dry-run mode active, not actually downloading***")
-        for f in fetchpaths:
-            console_and_log(f"Would download {f} to {data_path / f}")
+    if len(fetchpaths) > 0:
+        console_and_log(
+            f"Downloading {len(fetchpaths)} files ({fetchsize} MB total)"
+        )
+        if dry_run is True:
+            console_and_log("***dry-run mode active, not actually downloading***")
+            for f in fetchpaths:
+                console_and_log(f"Would download {f} to {data_path / f}")
+        else:
+            _sync_chunks(bucket, fetchpaths, data_path)
     else:
-        _sync_chunks(bucket, fetchpaths, data_path)
-    if clean is False:
-        return
-    extra = local.loc[~local['path'].isin(remote['Key']), 'path']
-    if len(extra) == 0:
-        return
-    console_and_log(f"Deleting {len(extra)} files from local")
-    if dry_run is True:
-        console_and_log(f"***dry-run mode active, not actually deleting***")
-        for e in extra:
-            console_and_log(f"Would delete {data_path / e}")
-        return
-    for e in extra:
-        Path(data_path / e).unlink()
-        console_and_log(f"Successfully deleted {data_path / e}")
+        console_and_log("No remote objects to fetch.")
+
+    if clean:
+        extra = local.loc[~local['path'].isin(remote['Key']), 'path']
+        if len(extra) > 0:
+            console_and_log(f"Deleting {len(extra)} files from local")
+            if dry_run is True:
+                console_and_log(f"***dry-run mode active, not actually deleting***")
+                for e in extra:
+                    console_and_log(f"Would delete {data_path / e}")
+            else:
+                for e in extra:
+                    Path(data_path / e).unlink()
+                    console_and_log(f"Successfully deleted {data_path / e}")
+        else:
+            console_and_log("No extra files to delete.")
 
 
 def clean_logs():
