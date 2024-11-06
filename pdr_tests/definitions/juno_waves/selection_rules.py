@@ -44,4 +44,18 @@ file_information = {
 #        "url_must_contain": ['JNO', "CDR", 'WAVES_SURVEY'],
 #        "label": "D",
 #    },
+    "edr_hsk": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": [".DAT"],
+        "url_must_contain": ['JNO-E_J_SS-WAV-2-EDR-V1.0/DATA'],
+        "label": "D",
+    },
+    # Support not planned - The labels have no pointers to the data files
+    "edr": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": [".PKT"],
+        "url_must_contain": ['JNO-E_J_SS-WAV-2-EDR-V1.0/DATA'],
+        "label": "D",
+        "support_np": True
+    },
 }
