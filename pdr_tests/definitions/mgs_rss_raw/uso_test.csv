@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+usoah200.LBL,"[""usoah200.LBL"", ""USOAH200.TAB""]",USOAH200.TAB,http://pds-geosciences.wustl.edu/mgs/mgs-m-rss-1-ext-v1/mors_2234/uso,"{""TABLE"": ""17e9cd979f3655564700af23665b4d11""}"
+usom1032.LBL,"[""usom1032.LBL"", ""USOM1032.TAB""]",USOM1032.TAB,http://pds-geosciences.wustl.edu/mgs/mgs-m-rss-1-map-v1/mors_0584/uso,"{""TABLE"": ""070774d1f071a9a52b0e9bb2e1f40f01""}"
