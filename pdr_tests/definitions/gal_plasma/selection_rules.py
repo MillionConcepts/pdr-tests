@@ -39,6 +39,14 @@ file_information = {
         "url_regex": [r'(-GET-)|(-IET-)|(-EARTH)|(-VET-)'],
         "label": "D",
     },
+    # support not planned - PLS EDRs are raw telemetry data
+    "pls_edr_unsupported": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.PKT'],
+        "url_must_contain": ['GO-J-PLS-2-EDR-RAW-TELEM-PACKETS-V1.0/DATA'],
+        "label": "D",
+        "support_np": True
+    },
     
     
     # PLasma Wave Receiver (PWS)

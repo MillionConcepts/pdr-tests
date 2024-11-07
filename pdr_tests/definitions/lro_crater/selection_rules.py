@@ -28,14 +28,15 @@ MANIFEST_FILE = "plasm_full"
 
 file_information = {
     # Level 0 primary science data
-    # All bit columns; many rows are missing from the tables; format spec doesn't match
-    # number of bytes in file
-    # "edr_pri": {
-    #     "manifest": MANIFEST_FILE,
-    #     "fn_must_contain": ['PRI', '.DAT'],
-    #     "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
-    #     "label": 'D',
-    # },
+    # All bit columns; many rows are missing from the tables; format spec 
+    # doesn't match number of bytes in file
+    "edr_pri": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['PRI', '.DAT'],
+        "url_must_contain": ['LRO-L-CRAT-2-EDR-RAWDATA-V1.0/DATA'],
+        "label": 'D',
+        "support_np": True
+    },
     # Level 0 secondary science data
     # Each table is consistently missing 1 row
     "edr_sec": {

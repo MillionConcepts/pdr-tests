@@ -26,6 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 RMS_PDS4 = "ringpds4"
+RMS_PDS3 = "ringvolumes"
 
 file_information = {
 	
@@ -41,5 +42,14 @@ file_information = {
         "fn_must_contain": ['.qub'],
         "url_must_contain": ['cassini_vims_cruise/data_raw'],
         "label": ('.qub', '.xml'),
+    },
+
+    # Support not planned - PDS3 EDRs
+    "cube_pds3": {
+        "manifest": RMS_PDS3,
+        "fn_must_contain": ['.qub'],
+        "url_must_contain": ['COVIMS_0xxx/', '/data'],
+        "label": "D",
+        "support_np": True
     },
 }

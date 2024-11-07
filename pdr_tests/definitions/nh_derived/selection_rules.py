@@ -96,12 +96,14 @@ file_information = {
         "url_must_contain": ['nh-p_psa-lorri_alice_rex-5-atmos-', '/data', 'rexatmos'],
         "label": "D",
     },
-##    "star_occ": {
-##        "manifest": SB_FILE,
-##        "fn_must_contain": ['.fit'],
-##        "url_must_contain": ['nh-p_psa-lorri_alice_rex-5-atmos-v2.0/data', 'starocc'],
-##        "label": "D",
-##    },
+    # Notionally supported - the data product opens fine, it's dataset just 
+    # isn't in the manifest yet (need to rescrape SBN at some point)
+#    "star_occ": {
+#        "manifest": SB_FILE,
+#        "fn_must_contain": ['.fit'],
+#        "url_must_contain": ['nh-p_psa-lorri_alice_rex-5-atmos-v2.0/data', 'starocc'],
+#        "label": "D",
+#    },
     "therm_scan": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.tab'],
