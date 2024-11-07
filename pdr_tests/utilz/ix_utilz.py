@@ -714,3 +714,13 @@ def clean_logs():
         console_and_log("No older logfiles to delete")
     console_and_log("Deleting primary log")
     (Path(pdr_tests.__file__).parent / "pdrtests.log").unlink()
+
+
+def print_rules_list(dataset: Optional[str] = None):
+    rules = RULES_MODULES
+    if dataset is not None:
+        rules = {dataset: rules[dataset]}
+    for ds, mod in sorted(rules.items(), key=lambda kv: kv[0]):
+        print(f"- {ds}")
+        for ptype in sorted(mod.file_information.keys()):
+            print(f"  - {ptype} ({mod.file_information[ptype]['manifest']})")

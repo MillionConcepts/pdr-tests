@@ -1,4 +1,3 @@
-import sys
 from ast import literal_eval
 from pathlib import Path
 from typing import Optional
@@ -14,13 +13,14 @@ from pdr_tests.datasets import (
 )
 from pdr_tests.definitions import RULES_MODULES
 from pdr_tests.settings import SETTINGS
+from pdr_tests.utilz.cli_utilz import cli_action
 from pdr_tests.utilz.ix_utilz import (
     clean_logs,
     console_and_log,
     download_datasets,
     list_datasets,
+    print_rules_list,
 )
-from pdr_tests.utilz.cli_utilz import cli_action
 
 
 def validate_dataset(ds: str) -> str:
@@ -40,6 +40,7 @@ def validate_dataset(ds: str) -> str:
         # KeyError and rethrow the original ModuleNotFoundError.
         if e.__cause__ is not None:
             raise e.__cause__
+
 
 # Define help, short options, etc. for each option used by two or
 # more actions here, so that they are handled consistently across
@@ -544,7 +545,6 @@ def sync(
             "The name of the s3 bucket you would like to sync with must be "
             " given via settings or via --bucket."
         )
-        return
     if dataset is None:
         print("no dataset argument provided; syncing all defined datasets")
         datasets = list_datasets()
@@ -559,6 +559,16 @@ def sync(
         replace_offsize=replace_offsize,
         dry_run=dry_run
     )
+
+
+@cli_action
+def ls(dataset: Optional[str] = None):
+    """
+    List all ix product types associated with a particular ix dataset, or,
+    if no dataset is given, all datasets and product types. These correspond
+    directly to selection rules.
+    """
+    print_rules_list(dataset)
 
 
 @cli_action
