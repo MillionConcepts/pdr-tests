@@ -724,3 +724,50 @@ def print_rules_list(dataset: Optional[str] = None):
         print(f"- {ds}")
         for ptype in sorted(mod.file_information.keys()):
             print(f"  - {ptype} ({mod.file_information[ptype]['manifest']})")
+
+
+def _find_in_row_group(meta, ix, rgix, reader, mrecs, urls):
+    nrows = meta.row_group(rgix).num_rows
+    minix = mrecs[0]['index']
+    if minix > ix + nrows - 1:
+        return ix + nrows, rgix + 1, mrecs, urls
+    rg = reader.read_row_group(rgix)
+    while minix <= ix + nrows - 1:
+        # todo, maybe: pretty wasteful
+        row = rg.take([minix - ix]).to_pylist()[0]
+        urls.append('/'.join([row['domain'], row['url'], row['filename']]))
+        mrecs = mrecs[1:]
+        if len(mrecs) == 0:
+            break
+        minix = mrecs[0]['index']
+    return ix + nrows, rgix + 1, mrecs, urls
+
+
+def find_product(
+    filename_table_path: Path, manifest_path: Path, pid: str
+) -> list[str]:
+    from cytoolz import groupby
+    from pyarrow import parquet as pq
+
+    res = pq.read_table(
+        filename_table_path,
+        filters=[('stem', '=', pid.split(".")[0].lower())]
+    )
+    if len(res) == 0:
+        raise FileNotFoundError(f"No products found matching {pid}.")
+    manifest_map = json.loads(res.schema.metadata[b'mcodes'].decode('ascii'))
+    res = res.to_pylist()
+    manifest_map = {int(k): v for k, v in manifest_map.items()}
+    mgroups = groupby(lambda rec: rec['mcode'], res)
+    urls = []
+    for mcode, mrecs in mgroups.items():
+        manifest = find_manifest(manifest_map[mcode], manifest_path)
+        meta = pq.read_metadata(manifest)
+        reader = pq.ParquetFile(manifest).reader
+        mrecs = sorted(mrecs, key=lambda r: r['index'])
+        ix, rgix, urls = 0, 0, []
+        while rgix < meta.num_row_groups and len(mrecs) > 0:
+            ix, rgix, mrecs, urls = _find_in_row_group(
+                meta, ix, rgix, reader, mrecs, urls
+            )
+    return sorted(set(urls))

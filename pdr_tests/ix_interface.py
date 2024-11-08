@@ -19,7 +19,7 @@ from pdr_tests.utilz.ix_utilz import (
     console_and_log,
     download_datasets,
     list_datasets,
-    print_rules_list,
+    print_rules_list, find_product,
 )
 
 
@@ -577,3 +577,26 @@ def clean():
     Erase most pdr-tests log files.
     """
     clean_logs()
+
+
+@cli_action(
+    pid={"help": "Filename or product ID to find"},
+    filename_table_path={"help": "path to filename parquet table"}
+)
+def find(
+    pid: str,
+    *,
+    manifest_dir: Optional[Path] = None,
+    filename_table_path: Optional[Path] = None
+):
+    if manifest_dir is None:
+        manifest_dir = SETTINGS.manifest_dir
+    if filename_table_path is None:
+        filename_table_path = SETTINGS.filename_table_path
+    try:
+        urls = find_product(filename_table_path, manifest_dir, pid)
+        for url in urls:
+            print(url)
+    except FileNotFoundError as fnf:
+        print(fnf)
+
