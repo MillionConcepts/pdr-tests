@@ -746,6 +746,11 @@ def _find_in_row_group(meta, ix, rgix, reader, mrecs, urls):
 def find_product(
     filename_table_path: Path, manifest_path: Path, pid: str
 ) -> list[str]:
+    if not filename_table_path.exists():
+        raise FileNotFoundError(
+            f"Filename table not found at {filename_table_path}."
+        )
+
     from cytoolz import groupby
     from pyarrow import parquet as pq
 
