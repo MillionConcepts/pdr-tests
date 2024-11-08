@@ -34,7 +34,7 @@ file_information = {
     # spacecraft engineering data; well-labeled fixed-length tables
     "ech": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['csv', '.ech'],
+        "fn_regex": [r'^((csv)|(CSV)).*((ech)|(ECH))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
@@ -48,7 +48,7 @@ file_information = {
     # engineering telemetry data as function of time; well-labeled fixed-length tables
     "ect": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.ect'],
+        "fn_regex": [r'((ect)|(ECT))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
@@ -62,21 +62,21 @@ file_information = {
     # DSN monitor data; well-labeled fixed-length tables
     "mch": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['csv', '.mch'],
+        "fn_regex": [r'^((csv)|(CSV)).*((mch)|(MCH))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
     # DSN monitor data as function of time; well-labeled fixed-length tables
     "mct": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.mct'],
+        "fn_regex": [r'((mct)|(MCT))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
     # radio science receiver standard format data units; well-labeled fixed-length tables
     "rsr": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.rsr'],
+        "fn_regex": [r'((rsr)|(RSR))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
@@ -84,7 +84,7 @@ file_information = {
     # orbit data files; fixed-length tables
     "odf": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.odf'],
+        "fn_regex": [r'((odf)|(ODF))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
@@ -103,6 +103,40 @@ file_information = {
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
+    # UltraStable Oscillator data; fixed-length tables
+    "uso": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['mgs-m-rss-1-', 'uso'],
+        "label": "D",
+    },
     
     
+    # support not planned  - stream and undefined RECORD_TYPEs
+    "unsupported": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((agk)|(amd)|(dkf)|(ps[123])|(eop)|(gd[nf])|(ion)|(ipn)|'
+                     r'(lit)|(mif)|(mp[dfk])|(opt)|(sak)|(sfo)|(soe)|(spk)|'
+                     r'(tck)|(tro)|(tnf)|(wea))$'],
+        "url_must_contain": ['mgs-m-rss-1-'],
+        "label": "D",
+        "support_np": True
+    },
+    "unsupported_upper": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((AGK)|(AMD)|(DFK)|(EOP)|(ION)|(MPD)|(OPT)|(SAK)|(SOE)|'
+                     r'(SPK)|(TCK)|(TRO))$'],
+        "url_must_contain": ['mgs-m-rss-1-'],
+        "label": "D",
+        "support_np": True
+    },
+    # The ech and mch products have 2 verions: filenames that start with 'csv' 
+    # are supported products, the rest are not
+    "unsupported_ech_mch": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'(^[0-9]).*((mch)|(MCH)|(ech)|(ECH))$'],
+        "url_must_contain": ['mgs-m-rss-1-'],
+        "label": "D",
+        "support_np": True
+    },
 }

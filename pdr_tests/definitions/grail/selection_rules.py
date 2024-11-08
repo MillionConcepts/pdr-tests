@@ -56,6 +56,15 @@ file_information = {
         "url_must_contain": ['grail-l-rss-2-edr-v1/grail_0201/rsr'],
         "label": "D",
     },
+    # Support not planned - BTM, TDM, TNF, XRF, and ancillary products
+    "rss_unsupported": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((btm)|(tdm)|(tnf)|(xfr)|(eop)|(ion)|(tro)|(wea))$'],
+        "url_must_contain": ['grail-l-rss-2-edr-v1/grail_0201/'],
+        "url_regex": [r'(btm)|(tdm)|(tnf)|(xfr)|(ancillary)'],
+        "label": "D",
+        "support_np": True
+    },
 # Derived Lunar Gravitational Field Data; level 2 (PDS3 and PDS4)
     # Spherical Harmonics ASCII Data Records
     "lgrs_shadr": {

@@ -179,4 +179,36 @@ file_information = {
         "url_must_contain": ['pv01_100', 'data'],
         "label": "A",
     },
+
+    # Ancillary tables for unsupported datasets below
+    "orpa_raw_ancillary": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['PVO-V-ORPA-2--IVCURVES-HIRES-V1.0/DATA'],
+        "label": "D",
+    },
+    "orse_odr_ancillary": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['PVO-V-ORSE-1-ODR-OPENLOOP--V1.0/DATA'],
+        "label": "D",
+    },
+
+    # Support not planned
+    # RECORD_TYPE = STREAM, and missing pointers in the labels
+    "orpa_raw": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.RDR'],
+        "url_must_contain": ['PVO-V-ORPA-2--IVCURVES-HIRES-V1.0/DATA'],
+        "label": "D",
+        "support_np": True
+    },
+    # RECORD_TYPE = VARIABLE_LENGTH, and missing pointers in the labels
+    "orse_odr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.ODR'],
+        "url_must_contain": ['PVO-V-ORSE-1-ODR-OPENLOOP--V1.0/DATA'],
+        "label": "D",
+        "support_np": True
+    },
 }

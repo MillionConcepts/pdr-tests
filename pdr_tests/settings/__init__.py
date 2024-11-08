@@ -209,6 +209,9 @@ class IxSettings:
     #: complete PDS archive
     manifest_dir: Path = "$PDR_TESTS_ROOT/node_manifests"
 
+    #: Path to concatenated filename table used by ix find
+    filename_table_path: Path = "$PDR_TESTS_ROOT/filenames.parquet"
+
     #: Directory to write tracker logs to.
     tracker_log_dir: Path = "$PDR_TESTS_ROOT/.tracker_logs"
 

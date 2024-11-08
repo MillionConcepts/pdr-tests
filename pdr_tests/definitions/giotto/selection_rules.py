@@ -43,6 +43,13 @@ file_information = {
         "url_must_contain": ['gio-c-gre-3-rdr-halley-v1.0/data'],
         "label": "D",
     },
+    "gre_edr_unsupported": {
+        "manifest": SB_FILE,
+        "fn_regex": [r'(odr$)|(tdf$)'],
+        "url_must_contain": ['gio-c-gre-1-edr-halley-addenda-v1.0/data'],
+        "label": "D",
+        "support_np": True
+    },
     # Halley Multicolour Camera (HMC)
     "hmc": {
         "manifest": SB_FILE,

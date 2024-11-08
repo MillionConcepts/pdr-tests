@@ -140,6 +140,13 @@ file_information = {
         "url_must_contain": ['U-LECP-4-RDR-SECTOR-15MIN', '/DATA'],
         "label": "D",
     },
+    "u_rdr_sector_binary": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'], # unsupported 'ORIGINAL BINARY' versions
+        "url_must_contain": ['U-LECP-4-RDR-SECTOR-15MIN', '/DATA'],
+        "label": "D",
+        "support_np": True
+    },
     # Uranus SUMM average
     "u_summ_average": {
         "manifest": PPI_FILE,

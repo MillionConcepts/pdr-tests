@@ -79,14 +79,38 @@ file_information = {
         "url_must_contain": ['VXRS_110', '/WEA'],
         "label": "D",
     },
-}
 
-"""
-Unsupported product types (support not planned)
-spice kernels: 
-  - BCK, BSP, FRK, LSK, PCK, SCK
-incomplete labels: 
-  - ENB, HEA, MFT, TNF
-PostScript files:
-  - BRO
-"""
+    # Support not planned:
+    # spice kernels
+    "unsupported_spice": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'((BCK)|(BSP)|(FRK)|(LSK)|(PCK)|(SCK))$'],
+        "url_must_contain": ['VXRS_110'],
+        "label": "D",
+        "support_np": True
+    },
+    # incomplete labels
+    "unsupported_mft": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.MFT'],
+        "url_must_contain": ['VXRS_110', '/MFT'],
+        "label": "A",
+        "support_np": True
+    },
+    # incomplete labels
+    "unsupported_tnf": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.TNF'],
+        "url_must_contain": ['VXRS_110', '/TNF'],
+        "label": "D",
+        "support_np": True
+    },
+    # PostScript files
+    "unsupported_bro": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.PS1'],
+        "url_must_contain": ['VXRS_110', '/BRO'],
+        "label": "D",
+        "support_np": True
+    },
+}
