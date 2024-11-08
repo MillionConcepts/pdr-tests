@@ -436,6 +436,7 @@ class ProductChecker(DatasetDefinition):
                     log(f"dumping browse products for {product['product_id']}")
                     self.dump_test_browse(data, product_type, dump_kwargs)
                     log(f"dumped browse products for {product['product_id']}")
+                del data
             if (overwrite is True) and (write is False):
                 log("write=False passed, not updating hashes in csv")
             elif (overwrite is True) and (skiphash is False):
