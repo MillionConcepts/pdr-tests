@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-pfs_0010_meas_hk_lw.LBL,"[""pfs_0010_meas_hk_lw.LBL"", ""PFS_0010_MEAS_HK_LW.DAT"", ""PFS_HK.FMT"", ""MEX_ORIENTATION_DESC.TXT""]",PFS_0010_MEAS_HK_LW,http://pds-atmospheres.nmsu.edu/PDS/data/mexpfs_1001/data/mars/lwc/orb001x,"{""TABLE"": ""29f9b19e501f2b2120830134cdc90973""}"
+pfs_0010_meas_hk_lw.LBL,"[""pfs_0010_meas_hk_lw.LBL"", ""PFS_0010_MEAS_HK_LW.DAT"", ""PFS_HK.FMT"", ""MEX_ORIENTATION_DESC.TXT""]",PFS_0010_MEAS_HK_LW,http://pds-atmospheres.nmsu.edu/PDS/data/mexpfs_1001/data/mars/lwc/orb001x,"{""TABLE"": ""89f4faf532b3a95fed6e92316c9b053850cd7d98783aad06fae89da0db3a643c""}"

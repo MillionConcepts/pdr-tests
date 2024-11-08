@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-cgs_20090821_20_22.LBL,"[""CGS_20090821_20_22.DAT"", ""CORR_GAMMA_SPECTRA_COLS.FMT"", ""cgs_20090821_20_22.LBL""]",CGS_20090821_20_22,http://pds-geosciences.wustl.edu/ody/ody-m-grs-4-cgs-v1/odgc1_xxxx/2009/20090821,"{""TIME_SERIES"": ""ce1eea4bc6e2f5e58a396355fe5f6cd3""}"
+cgs_20090821_20_22.LBL,"[""CGS_20090821_20_22.DAT"", ""CORR_GAMMA_SPECTRA_COLS.FMT"", ""cgs_20090821_20_22.LBL""]",CGS_20090821_20_22,http://pds-geosciences.wustl.edu/ody/ody-m-grs-4-cgs-v1/odgc1_xxxx/2009/20090821,"{""TIME_SERIES"": ""f7908e67e91d0e8f9ae8e4a412b6b54ac56c59cda2539fa2a473011651bb9efd""}"

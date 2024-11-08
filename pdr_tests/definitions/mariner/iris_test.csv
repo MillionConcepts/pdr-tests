@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-mr9_iris.LBL,"[""mr9_iris.LBL"", ""mr9_iris.dat""]",mr9_iris,http://pds-atmospheres.nmsu.edu/PDS/data/mr9_1001/data,"{""TABLE"": ""a357c580dff7258c4ba2ba92d37f8f47"", ""SPECTRAL_SERIES"": ""a1d61fb06daf998273ff89bf296498c2""}"
+mr9_iris.LBL,"[""mr9_iris.LBL"", ""mr9_iris.dat""]",mr9_iris,http://pds-atmospheres.nmsu.edu/PDS/data/mr9_1001/data,"{""TABLE"": ""bbf1144a169c7c5342645c8d0561a30f345c3485436999ac11b035144e6c9d95"", ""SPECTRAL_SERIES"": ""2f4b2f1535c2cc245dc8eb7ddc0c8ae0b0c9b8d40931cd159e1f78371213752c""}"

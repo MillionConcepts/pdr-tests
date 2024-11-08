@@ -1,4 +1,5 @@
 """support objects and logging procedures for ix framework."""
+
 from blake3 import blake3
 import datetime as dt
 import json
@@ -72,14 +73,13 @@ def find_manifest(fn: str, manifest_dir: Path):
     raise FileNotFoundError(f"no file matching {fn} found in {manifest_dir}")
 
 
-def checksum_object(obj, hash_function=md5):
+def checksum_object(obj, hash_function=blake3):
     """
     make stable byte array from python object. the general case of this is
     impossible, or at least implementation-dependent, so this just
     attempts to cover the cases we actually have.
     """
     hasher = hash_function(usedforsecurity=False)
-    # hasher = hash_function(usedforsecurity=False)
     if isinstance(obj, np.ndarray):
         hasher.update(np.frombuffer(obj.data, dtype='uint8'))
     elif isinstance(obj, pd.DataFrame):
@@ -105,7 +105,8 @@ def checksum_object(obj, hash_function=md5):
                 #  array is somewhat memory-inefficient. another solution is
                 #  to dump each line as string or bytes -- like we do for
                 #  object dtypes above -- which would be slower but smaller.
-                hasher.update(np.ascontiguousarray(blocks[dtype].values))
+                contiguous = np.ascontiguousarray(blocks[dtype].values)
+                hasher.update(np.frombuffer(contiguous, dtype=np.uint8))
     else:
         # TODO: determine when this is and is not actually stable
         hasher.update(obj.__repr__().encode("utf-8"))

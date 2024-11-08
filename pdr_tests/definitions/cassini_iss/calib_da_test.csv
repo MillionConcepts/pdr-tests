@@ -1,5 +1,5 @@
 label_file,files,product_id,url_stem,hash
-110449.LBL,"[""110449.LBL"", ""ZIPINFO.TXT"", ""110449.DA"", ""VICAR2.TXT""]",110449,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0002/data/nacfm/ptp_da,"{""IMAGE"": ""474bcbbbdea967473c34d25c5523a9bd""}"
-123154.LBL,"[""ZIPINFO.TXT"", ""123154.LBL"", ""123154.DA"", ""VICAR2.TXT""]",123154,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0007/data/wacfm/ptp_da,"{""IMAGE"": ""051d51847cf7d83552176f3a5f49bd67""}"
-116456.LBL,"[""116456.LBL"", ""ZIPINFO.TXT"", ""VICAR2.TXT"", ""116456.DA""]",116456,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0001/data/nacfm/ftp_da,"{""IMAGE"": ""f0f76c3fdd3d8fb39f02e3bba918776f""}"
-118440.LBL,"[""118440.LBL"", ""ZIPINFO.TXT"", ""118440.DA"", ""VICAR2.TXT""]",118440,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0001/data/nacfm/lossy_da,"{""IMAGE"": ""1a8269744986fc231707d13497687396""}"
+110449.LBL,"[""110449.LBL"", ""ZIPINFO.TXT"", ""110449.DA"", ""VICAR2.TXT""]",110449,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0002/data/nacfm/ptp_da,"{""IMAGE"": ""51a25aa243d3e70f049c0b8f148449491e2fd06bdac1730547d1aecbfafaf245""}"
+123154.LBL,"[""ZIPINFO.TXT"", ""123154.LBL"", ""123154.DA"", ""VICAR2.TXT""]",123154,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0007/data/wacfm/ptp_da,"{""IMAGE"": ""36b8b20138baa8323c0e3ff85ab0b20154284d12d2d04248852775fa089a81f0""}"
+116456.LBL,"[""116456.LBL"", ""ZIPINFO.TXT"", ""VICAR2.TXT"", ""116456.DA""]",116456,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0001/data/nacfm/ftp_da,"{""IMAGE"": ""20cb19d97721a84f6e7044dc424bcde17eb68b1d3c3b4711c4b38f0bdfe1d944""}"
+118440.LBL,"[""118440.LBL"", ""ZIPINFO.TXT"", ""118440.DA"", ""VICAR2.TXT""]",118440,http://asc-pds-cassini.s3.us-west-2.amazonaws.com/ISS/coiss_0001/data/nacfm/lossy_da,"{""IMAGE"": ""78a5a2149a0f11996469ee56747e0ed4a67ee029b623aa286deab457b8fd13ff""}"

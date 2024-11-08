@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-CDASTAT_12063_12090.LBL,"[""CDASTAT_12063_12090.LBL"", ""CDASTAT_12063_12090.TAB""]",CDA_STAT,http://sbnarchive.psi.edu/pds3/cassini/cda/COCDA_0074/DATA,"{""TABLE"": ""d5c774bd67b9abba4a1bed176b99852c""}"
-CDASTAT_07274_07304.LBL,"[""CDASTAT_07274_07304.TAB"", ""CDASTAT_07274_07304.LBL""]",CDA_STAT,http://sbnarchive.psi.edu/pds3/cassini/cda/COCDA_0040/DATA,"{""TABLE"": ""495f32b1c5e78d50980aa915beda2ce6""}"
+CDASTAT_12063_12090.LBL,"[""CDASTAT_12063_12090.LBL"", ""CDASTAT_12063_12090.TAB""]",CDA_STAT,http://sbnarchive.psi.edu/pds3/cassini/cda/COCDA_0074/DATA,"{""TABLE"": ""931786fc1260688d583ecba3ef8f564ab862503f38194ad70b62def8b4fe4009""}"
+CDASTAT_07274_07304.LBL,"[""CDASTAT_07274_07304.TAB"", ""CDASTAT_07274_07304.LBL""]",CDA_STAT,http://sbnarchive.psi.edu/pds3/cassini/cda/COCDA_0040/DATA,"{""TABLE"": ""e4b6e66a9302e2b5bf36bea80ac47c3378cbe8db87be7a848c1f5fa270b71dd5""}"

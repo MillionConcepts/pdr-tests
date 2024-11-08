@@ -1,4 +1,4 @@
 label_file,files,product_id,url_stem,hash
-geom.LBL,"[""geom.LBL"", ""GEOM.TAB""]",geom,http://pds-geosciences.wustl.edu/mgn/mgn-v-rdrs-5-midr-full-res-v1/mg_0042/f50n264,"{""TABLE"": ""40ad23f8203ec63a1cb205d0e285f59f""}"
-hist.LBL,"[""hist.LBL"", ""HIST.TAB""]",hist,http://pds-geosciences.wustl.edu/mgn/mgn-v-rdrs-5-midr-full-res-v1/mg_0057/c130n333,"{""IMAGE_HISTOGRAM"": ""deadaa8ab0eda3684527dd5ce137d45a""}"
-frame.LBL,"[""FRAME.TAB"", ""frame.LBL""]",frame,http://pds-geosciences.wustl.edu/mgn/mgn-v-rdrs-5-midr-full-res-v1/mg_0083/c200n286,"{""TABLE"": ""4772bbc5da5020d3b14c472c50c413f7""}"
+geom.LBL,"[""geom.LBL"", ""GEOM.TAB""]",geom,http://pds-geosciences.wustl.edu/mgn/mgn-v-rdrs-5-midr-full-res-v1/mg_0042/f50n264,"{""TABLE"": ""5b9078480b118c29d7395f0072135b93d9a586e6e0fdd8a2e8e4be6e0a714c25""}"
+hist.LBL,"[""hist.LBL"", ""HIST.TAB""]",hist,http://pds-geosciences.wustl.edu/mgn/mgn-v-rdrs-5-midr-full-res-v1/mg_0057/c130n333,"{""IMAGE_HISTOGRAM"": ""a1ce2bba4a3ece74dd0d026acbf7032cdce6f96b83502d113f9ec2df0d604154""}"
+frame.LBL,"[""FRAME.TAB"", ""frame.LBL""]",frame,http://pds-geosciences.wustl.edu/mgn/mgn-v-rdrs-5-midr-full-res-v1/mg_0083/c200n286,"{""TABLE"": ""d07d07db935cef434170eb7428364c0cb453d6aa20cc0e04866c8d1d6b6de7f4""}"

@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-rsrdr001.lbl,"[""rsrdr001.lbl"", ""rsrdr001.dat""]",rsrdr001,http://pdssbn.astro.umd.edu/holdings/ihw-c-rsrdr-3-edr-halley-v1.0/data,"{""RHC_POLARIZATION_SPECTRUM"": ""a43569919233432b799bdad4b3137fe4"", ""LHC_POLARIZATION_SPECTRUM"": ""880e16c8f70fa2b3ae56011dfdd91525""}"
+rsrdr001.lbl,"[""rsrdr001.lbl"", ""rsrdr001.dat""]",rsrdr001,http://pdssbn.astro.umd.edu/holdings/ihw-c-rsrdr-3-edr-halley-v1.0/data,"{""RHC_POLARIZATION_SPECTRUM"": ""caa85ace4f7f2bc857b7f7752a36a046816715181156a1ce56d76911f0077f38"", ""LHC_POLARIZATION_SPECTRUM"": ""7b33002b49c491059932c1c9a5acce5c0763f13edac5e8799df1fbe1191d32c2""}"

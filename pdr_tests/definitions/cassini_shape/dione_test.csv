@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-dione_quad128q.LBL,"[""dione_quad128q.tab"", ""dione_quad128q.LBL""]",DIONE_QUAD128Q_TAB,http://sbnarchive.psi.edu/pds3/multi_mission/CO_SA_ISSNA_ISSWA_5_DIONESHAPE_V1_0/data,"{""Q_TABLE"": ""54409ea540dc450d53a86133d867c772"", ""VERTEX_TABLE"": ""6358967d296db21c21d28da62aa441e4""}"
+dione_quad128q.LBL,"[""dione_quad128q.tab"", ""dione_quad128q.LBL""]",DIONE_QUAD128Q_TAB,http://sbnarchive.psi.edu/pds3/multi_mission/CO_SA_ISSNA_ISSWA_5_DIONESHAPE_V1_0/data,"{""Q_TABLE"": ""2f7bd91a657a1afd8d89d05995cf8ea70aa71165cf805cc6c69b623f44fbc9f8"", ""VERTEX_TABLE"": ""9c0f2b3440e012c970208c54d9534c1a8ec45c3427b964e31f3d308326568e39""}"

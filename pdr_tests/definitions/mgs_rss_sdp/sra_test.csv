@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-9173q04a.LBL,"[""9173Q04A.SRA"", ""9173q04a.LBL""]",9173Q04A.SRA,http://pds-geosciences.wustl.edu/mgs/mgs-m-rss-5-sdp-v1/mors_1016/sra,"{""HGA_POINTING_HDR_TABLE"": ""c95394cd3b29e82eb439a6c6cabf7680"", ""HGA_POINTING_TABLE"": ""0f4e00b0192b72d5a10d7ffd655fee26""}"
+9173q04a.LBL,"[""9173Q04A.SRA"", ""9173q04a.LBL""]",9173Q04A.SRA,http://pds-geosciences.wustl.edu/mgs/mgs-m-rss-5-sdp-v1/mors_1016/sra,"{""HGA_POINTING_HDR_TABLE"": ""47f795a360d09af759cbdbb7e917b6b525e72fe86e13be610888b7fbb02831e0"", ""HGA_POINTING_TABLE"": ""bd6963b0f0f67f2c4685c921b2cbdd0756d618afc19289e16bf2163e911fd953""}"

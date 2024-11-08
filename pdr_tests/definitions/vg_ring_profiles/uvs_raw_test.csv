@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-UN1R01P.LBL,"[""UN1R01P.LBL"", ""UN1R01P.DAT"", ""RAWDATAP.FMT""]",UN1R01P.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2802/RAWDATA,"{""TABLE"": ""14bd0af72dcaff0cc809aed8d92281d9""}"
-US3R01ID.LBL,"[""US3R01ID.DAT"", ""US3R01ID.LBL"", ""RAWDATAI.FMT""]",US3R01ID.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2802/RAWDATA,"{""TABLE"": ""33b6a9fc7c4d6955e78e8c94bcce9c4a""}"
+UN1R01P.LBL,"[""UN1R01P.LBL"", ""UN1R01P.DAT"", ""RAWDATAP.FMT""]",UN1R01P.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2802/RAWDATA,"{""TABLE"": ""da57b76bfbf26ab236eb36f38fb277752b67e7d2df83a9357072aa300a74fae1""}"
+US3R01ID.LBL,"[""US3R01ID.DAT"", ""US3R01ID.LBL"", ""RAWDATAI.FMT""]",US3R01ID.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2802/RAWDATA,"{""TABLE"": ""c815fea0020d946c46944bf2e3edda8267f40546cfe1ceee2e1440f9f857810f""}"

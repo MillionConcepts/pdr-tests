@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-jgm75e01.LBL,"[""JGM75E01.SHA"", ""jgm75e01.LBL""]",JGM75E01.SHA,http://pds-geosciences.wustl.edu/mgs/mgs-m-rss-5-sdp-v1/mors_1009/sha,"{""SHADR_HEADER_TABLE"": ""bd110ea4fb9f651d1eba77a9146b9db5"", ""SHADR_COEFFICIENTS_TABLE"": ""21ef31e142017d4edca0e664ff6a4f9d""}"
+jgm75e01.LBL,"[""JGM75E01.SHA"", ""jgm75e01.LBL""]",JGM75E01.SHA,http://pds-geosciences.wustl.edu/mgs/mgs-m-rss-5-sdp-v1/mors_1009/sha,"{""SHADR_HEADER_TABLE"": ""add9bab0ef2263ea9742f2bf1a7d0a7c321d6d43025371b0082b7195017b4fa5"", ""SHADR_COEFFICIENTS_TABLE"": ""900d370708fe8d2a408563c9034baddb69fb4a0ea460e44a8128078888c888c2""}"

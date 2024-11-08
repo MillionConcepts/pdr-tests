@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-sgs_02_165_180_15.LBL,"[""sgs_02_165_180_15.LBL"", ""SUMMED_GAMMA_SPECTRA_COLS.FMT"", ""SGS_02_165_180_15.DAT""]",SGS_02_165_180_15,http://pds-geosciences.wustl.edu/ody/ody-m-grs-5-sgs-v1/odgs1_xxxx/yr02/yr02_ls165_180,"{""TABLE"": ""7d3f9b9e38821b8e0f4b4c68b21e4a48""}"
+sgs_02_165_180_15.LBL,"[""sgs_02_165_180_15.LBL"", ""SUMMED_GAMMA_SPECTRA_COLS.FMT"", ""SGS_02_165_180_15.DAT""]",SGS_02_165_180_15,http://pds-geosciences.wustl.edu/ody/ody-m-grs-5-sgs-v1/odgs1_xxxx/yr02/yr02_ls165_180,"{""TABLE"": ""233d621de408e247f54743465d44e86b192417a61c0a86c2c941ae3f1b9d35f2""}"

@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-nixdb.lbl,"[""nixdb.fit"", ""nixdb.lbl""]",NIS-LEVEL2-SPECTRA,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_5_EDR_EROS_ORBIT_V1_0/data,"{""HEADER"": ""e072865ac6b9d47d8623dbe288f2ab8b"", ""TABLE"": ""3b74f63df2d534dffd17f0dcfd80afa1"", ""TABLE_HEADER"": ""e072865ac6b9d47d8623dbe288f2ab8b""}"
+nixdb.lbl,"[""nixdb.fit"", ""nixdb.lbl""]",NIS-LEVEL2-SPECTRA,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_5_EDR_EROS_ORBIT_V1_0/data,"{""HEADER"": ""98593206f31fb13953df50a73ecabdaa4a2eeb1c259f8662f86dde8e2c047cfc"", ""TABLE"": ""0367532bf24147ccac95a68d3b59853ed8c74c86017086a609b6eef8b72c8f95"", ""TABLE_HEADER"": ""98593206f31fb13953df50a73ecabdaa4a2eeb1c259f8662f86dde8e2c047cfc""}"

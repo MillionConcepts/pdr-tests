@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-south_pole_mosaic.LBL,"[""SOUTH_POLE_MOSAIC.IMG"", ""DSMAP_POLAR.CAT"", ""south_pole_mosaic.LBL""]",SOUTH_POLE_MOSAIC,http://pds-geosciences.wustl.edu/lunar/gdscc-l-dss14_dss13_dss15_dss25-5-v1/lram_10xx/data,"{""IMAGE"": ""ee350a9134c906bba3d2308d939450fc""}"
+south_pole_mosaic.LBL,"[""SOUTH_POLE_MOSAIC.IMG"", ""DSMAP_POLAR.CAT"", ""south_pole_mosaic.LBL""]",SOUTH_POLE_MOSAIC,http://pds-geosciences.wustl.edu/lunar/gdscc-l-dss14_dss13_dss15_dss25-5-v1/lram_10xx/data,"{""IMAGE"": ""79509a3da8297877143b6a65da8746f630734a9f7526318af0423f0a8e70f32f""}"

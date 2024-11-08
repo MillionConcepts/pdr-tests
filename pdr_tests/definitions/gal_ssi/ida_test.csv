@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-i1945.lbl,"[""i1945.lbl"", ""i1945.fit""]",IGSSI-I1945-199509,http://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida,"{""HEADER"": ""49dbf22975bd1428c2405e869fbf809b"", ""IMAGE"": ""413cb7da28eac88bc5a89974f980cdfd"", ""IMAGE_HEADER"": ""49dbf22975bd1428c2405e869fbf809b""}"
+i1945.lbl,"[""i1945.lbl"", ""i1945.fit""]",IGSSI-I1945-199509,http://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida,"{""HEADER"": ""b955593cfe0de36bfc8f04f2b941f4a370bbe04c6f57b941818b62d1c8e5c8a3"", ""IMAGE"": ""52d040589b8688d9ee1f5d07e535ba81953d4cec4be65a45b2bc4353f2689f1e"", ""IMAGE_HEADER"": ""b955593cfe0de36bfc8f04f2b941f4a370bbe04c6f57b941818b62d1c8e5c8a3""}"

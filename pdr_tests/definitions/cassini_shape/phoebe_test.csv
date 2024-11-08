@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-phoebe_quad64q.LBL,"[""phoebe_quad64q.LBL"", ""phoebe_quad64q.tab""]",PHOEBE_QUAD64Q_TAB,http://sbnarchive.psi.edu/pds3/multi_mission/CO_SA_ISSNA_5_PHOEBESHAPE_V2_0/data,"{""Q_TABLE"": ""fba951c110ca0a47ea5c0c56264e92b7"", ""VERTEX_TABLE"": ""6816d08e18f73eed1e6317ed5e2c084f""}"
+phoebe_quad64q.LBL,"[""phoebe_quad64q.LBL"", ""phoebe_quad64q.tab""]",PHOEBE_QUAD64Q_TAB,http://sbnarchive.psi.edu/pds3/multi_mission/CO_SA_ISSNA_5_PHOEBESHAPE_V2_0/data,"{""Q_TABLE"": ""97bfdbb3a068069557128c8746b8d922d6da8b2c43a547a15f65bc74db91176e"", ""VERTEX_TABLE"": ""b6779570725ffbae4b23dd10b05c59ed2ebc88d2ac4242bfdbaa4c12a86fc6cd""}"

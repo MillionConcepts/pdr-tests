@@ -1,4 +1,4 @@
 label_file,files,product_id,url_stem,hash
-albedo.LBL,"[""albedo.LBL"", ""ALBEDO.DAT""]",albedo,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""61d78f23f29c6bc6d9ffd0751a020f08""}"
-inertia.LBL,"[""INERTIA.DAT"", ""inertia.LBL""]",inertia,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""907104fab0e6b32bd92a7f2fd000910b""}"
-topo.LBL,"[""TOPO.DAT"", ""topo.LBL""]",topo,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""a5af9c4cf744ebb1e71fb5d83292f156""}"
+albedo.LBL,"[""albedo.LBL"", ""ALBEDO.DAT""]",albedo,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""7244577e9541948d42be4b62e6770402e7a18542b1399036011a76267b0d4dea""}"
+inertia.LBL,"[""INERTIA.DAT"", ""inertia.LBL""]",inertia,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""f9c427ff60a575012b99be524f6e2245fd6e4f9d1051ac335365ab755e519eb4""}"
+topo.LBL,"[""TOPO.DAT"", ""topo.LBL""]",topo,http://pds-atmospheres.nmsu.edu/PDS/data/atmos_0006/data,"{""TABLE"": ""5e1ef409bfa958c4311acaa221ab2593fa1aaa4c677d1d8e1ae2173e11ba84dd""}"

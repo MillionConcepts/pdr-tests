@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-event_wind_summary.LBL,"[""EVENT_WIND_SUMMARY.TAB"", ""event_wind_summary.LBL""]",EVENT_WIND_SUMMARY,http://pds-geosciences.wustl.edu/viking/vl2-m-seis-5-rdr-v1/vl_9020/data,"{""TABLE"": ""e014a5fac5977471449385f3e2e95cd2""}"
-high_wind_summary.LBL,"[""high_wind_summary.LBL"", ""HIGH_WIND_SUMMARY.TAB""]",HIGH_WIND_SUMMARY,http://pds-geosciences.wustl.edu/viking/vl2-m-seis-5-rdr-v1/vl_9020/data,"{""TABLE"": ""3cf73fb5c5d2fb5b08e171554375b629""}"
+event_wind_summary.LBL,"[""EVENT_WIND_SUMMARY.TAB"", ""event_wind_summary.LBL""]",EVENT_WIND_SUMMARY,http://pds-geosciences.wustl.edu/viking/vl2-m-seis-5-rdr-v1/vl_9020/data,"{""TABLE"": ""4d6b110908ced9fb9756bc5fc69fd3ce29434522854a6098a47606d525287f32""}"
+high_wind_summary.LBL,"[""high_wind_summary.LBL"", ""HIGH_WIND_SUMMARY.TAB""]",HIGH_WIND_SUMMARY,http://pds-geosciences.wustl.edu/viking/vl2-m-seis-5-rdr-v1/vl_9020/data,"{""TABLE"": ""e4fc40ac3744453e13293db613d60cb1fb97df2c9b86ede02498b25dc6446b7e""}"

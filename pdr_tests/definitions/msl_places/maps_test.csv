@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-msl_orbital_dem.LBL,"[""VICAR2.TXT"", ""DSMAP.CAT"", ""ODL.TXT"", ""msl_orbital_dem.img"", ""msl_orbital_dem.LBL""]",msl_orbital_dem,http://pds-imaging.jpl.nasa.gov/data/msl/MSLPLC_1XXX/DATA/MAPS,"{""IMAGE"": ""99efd21f47c11cb10483b691706a681a""}"
+msl_orbital_dem.LBL,"[""VICAR2.TXT"", ""DSMAP.CAT"", ""ODL.TXT"", ""msl_orbital_dem.img"", ""msl_orbital_dem.LBL""]",msl_orbital_dem,http://pds-imaging.jpl.nasa.gov/data/msl/MSLPLC_1XXX/DATA/MAPS,"{""IMAGE"": ""da374878959690e220a19c2cd3f1df002356a31d9978fb4c87d184a59ee3015a""}"

@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-T860125.LBL,"[""T860125.LBL"", ""LECPDATA.FMT"", ""T860125.DAT""]",T860125,http://pds-ppi.igpp.ucla.edu/data/VG2-U-LECP-4-SUMM-SCAN-24SEC-V1.0/DATA/ORIGINAL_BINARY,"{""TIME_SERIES"": ""055c64dbee0b3360c54ce8718c2b7de8""}"
-RDR_SCAN.LBL,"[""RDR_SCAN.LBL"", ""RDR_SCAN.TAB""]",RDR_SCAN,http://pds-ppi.igpp.ucla.edu/data/VG2-U-LECP-4-SUMM-SCAN-24SEC-V1.0/DATA,"{""TABLE"": ""d80363acf53b589a7fc44620dda2ca6d""}"
+T860125.LBL,"[""T860125.LBL"", ""LECPDATA.FMT"", ""T860125.DAT""]",T860125,http://pds-ppi.igpp.ucla.edu/data/VG2-U-LECP-4-SUMM-SCAN-24SEC-V1.0/DATA/ORIGINAL_BINARY,"{""TIME_SERIES"": ""b724414e9a62076304fe092bcaf8344037dd93846cb81a87c97d903ed1930c3d""}"
+RDR_SCAN.LBL,"[""RDR_SCAN.LBL"", ""RDR_SCAN.TAB""]",RDR_SCAN,http://pds-ppi.igpp.ucla.edu/data/VG2-U-LECP-4-SUMM-SCAN-24SEC-V1.0/DATA,"{""TABLE"": ""be6019a3680843d1b89762d534c40e76d0c141cd1efd4774951b433fa5daf4c1""}"

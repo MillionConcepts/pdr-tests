@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-rs_20170515_211900_udsc64_l4_ai_v10.LBL,"[""rs_20170515_211900_udsc64_l4_ai_v10.LBL"", ""rs_20170515_211900_udsc64_l4_ai_v10.tab""]",RS_20170515_211900_UDSC64_L4_AI_V10.TAB,http://pds-atmospheres.nmsu.edu/PDS/data/vcors_2001/data/l4,"{""ATM_TABLE"": ""233fcd57f5b3df5fb0baa96c44152846""}"
+rs_20170515_211900_udsc64_l4_ai_v10.LBL,"[""rs_20170515_211900_udsc64_l4_ai_v10.LBL"", ""rs_20170515_211900_udsc64_l4_ai_v10.tab""]",RS_20170515_211900_UDSC64_L4_AI_V10.TAB,http://pds-atmospheres.nmsu.edu/PDS/data/vcors_2001/data/l4,"{""ATM_TABLE"": ""ca4dee4ccaf5736c6421c5a20015b4f872910a8ea34f73af087a34d15da284bb""}"

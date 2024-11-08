@@ -1,5 +1,5 @@
 label_file,files,product_id,url_stem,hash
-THETA.LBL,"[""THETA.LBL"", ""THETA.TAB""]",THETA.TAB,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-3-RDR-3DELEFLUX-80SEC-V1.1/DATA/THETA,"{""TABLE"": ""03b9cd2ae52c0f5b6ce1e387cd4dc839""}"
-ATTITUDE.LBL,"[""ATTITUDE.LBL"", ""ATTITUDE.TAB""]",LP_ATTITUDE_990923,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-3-RDR-HIGHRESFLUX-V1.1/EXTRAS,"{""TABLE"": ""676bb041fc14f6a34592d637bc5db7da""}"
-E_BINS.LBL,"[""E_BINS.TAB"", ""E_BINS.LBL""]",E_BINS.TAB,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-4-SUMM-OMNIDIRELEFLUX-V1.1/DATA/E_BINS,"{""TABLE"": ""965f2afddecfa1db06a7f3ef63dbf5d0""}"
-MOON_POS.LBL,"[""MOON_POS.TAB"", ""MOON_POS.LBL""]",LP_ATTITUDE_980915,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-4-SUMM-OMNIDIRELEFLUX-V1.1/EXTRAS,"{""TABLE"": ""42c7a71477e60d65f5a0872567b1a4b8""}"
+THETA.LBL,"[""THETA.LBL"", ""THETA.TAB""]",THETA.TAB,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-3-RDR-3DELEFLUX-80SEC-V1.1/DATA/THETA,"{""TABLE"": ""1fed8506f2a82fb302b8e408641efbaa0e93a9a3717b7f2e549174d8dca79565""}"
+ATTITUDE.LBL,"[""ATTITUDE.LBL"", ""ATTITUDE.TAB""]",LP_ATTITUDE_990923,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-3-RDR-HIGHRESFLUX-V1.1/EXTRAS,"{""TABLE"": ""cceb5102be1423dd782dc0d1dd69672a4a2ec9a50beb34a520d0e6cf8d8c31b1""}"
+E_BINS.LBL,"[""E_BINS.TAB"", ""E_BINS.LBL""]",E_BINS.TAB,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-4-SUMM-OMNIDIRELEFLUX-V1.1/DATA/E_BINS,"{""TABLE"": ""0e9330695b03fb1be2e12240def9597e46138165b740eddccdc7dc4f559a2a05""}"
+MOON_POS.LBL,"[""MOON_POS.TAB"", ""MOON_POS.LBL""]",LP_ATTITUDE_980915,http://pds-ppi.igpp.ucla.edu/data/LP-L-ER-4-SUMM-OMNIDIRELEFLUX-V1.1/EXTRAS,"{""TABLE"": ""7dcf57fca96a2588dccab18b11b17a32d0484e68c51712c25960aaaa9311efc8""}"

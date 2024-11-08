@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-vg1_jup.lbl,"[""vg1_jup.lbl"", ""vg1_jup.dat"", ""vg1nesr.dat"", ""irishedr.fmt""]",vg1_jup,http://pds-atmospheres.nmsu.edu/PDS/data/vg_2001/jupiter,"{""TABLE"": ""fb256c7a530abb49c7906fbcd50d32b6"", ""SPECTRAL_SERIES"": ""5cc1035b6b4d7e15ba410b1d84847654"", ""SPECTRUM"": ""4d7e1d2f6f655ea19bc70ed148b1e7c8""}"
+vg1_jup.lbl,"[""vg1_jup.lbl"", ""vg1_jup.dat"", ""vg1nesr.dat"", ""irishedr.fmt""]",vg1_jup,http://pds-atmospheres.nmsu.edu/PDS/data/vg_2001/jupiter,"{""TABLE"": ""cf1f88938276c8b378743b5a57c829c1e681a44d886695958c6335b24628cddd"", ""SPECTRAL_SERIES"": ""74b30b7dfa0adb0574409d62c454b248b9d2447bf3fc52790de1d074e65219d8"", ""SPECTRUM"": ""52e9e12677f2ea1316c7821bb07fa560b31939808a9755848f6c344301f36ccb""}"

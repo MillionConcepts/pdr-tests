@@ -1,5 +1,5 @@
 0,label_file,files,product_id,url_stem,hash
-3,ms_abydos2.lbl,"[""ms_abydos2.tab"", ""ms_abydos2.lbl""]",ms_abydos2,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""e7c481f73c2e26da09caaf96b366ab43""}"
-1,compounds.lbl,"[""compounds.lbl"", ""compounds.tab""]",compounds,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""387622fff6a6661577007a4aee325f24""}"
-8,ms_agilkia.lbl,"[""ms_agilkia.tab"", ""ms_agilkia.lbl""]",ms_agilkia,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""b2b7db24fd9240354e7f638e5de3ebda""}"
-9,ms_summary.lbl,"[""ms_summary.tab"", ""ms_summary.lbl""]",ms_summary,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""99db611348e1dbb0b9ff2613093c6508""}"
+3,ms_abydos2.lbl,"[""ms_abydos2.tab"", ""ms_abydos2.lbl""]",ms_abydos2,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""5d9fe0a584e86aaa3b2311f62a52bf83b1db3222cd88920ad592696664d4ae64""}"
+1,compounds.lbl,"[""compounds.lbl"", ""compounds.tab""]",compounds,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""98c440b36c824dd0c5f81f537821212b4abeec25cb45460379ed9a760ef8cba6""}"
+8,ms_agilkia.lbl,"[""ms_agilkia.tab"", ""ms_agilkia.lbl""]",ms_agilkia,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""cef686ea62b5b43d882008e68b67496c32508dac65aedad57c3bf501e3d164d6""}"
+9,ms_summary.lbl,"[""ms_summary.tab"", ""ms_summary.lbl""]",ms_summary,http://pdssbn.astro.umd.edu/holdings/rl-c-ptolemy-5-fss-v1.0/data,"{""TABLE"": ""7436f70cdc956dc1cd55b896183d0564d95db977797bab958cfde284298157bb""}"

@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-jgm50c01.LBL,"[""JGM50C01.SHA"", ""jgm50c01.LBL""]",JGM50C01.SHA,http://pds-geosciences.wustl.edu/mgs/mgs-sampler/mgs_0001/rss/sha,"{""SHADR_HEADER_TABLE"": ""2d82d5d0d3a43558a7f798c57098a51f"", ""SHADR_COEFFICIENTS_TABLE"": ""fc6f3eae99140783ae38e69587bc2a26""}"
+jgm50c01.LBL,"[""JGM50C01.SHA"", ""jgm50c01.LBL""]",JGM50C01.SHA,http://pds-geosciences.wustl.edu/mgs/mgs-sampler/mgs_0001/rss/sha,"{""SHADR_HEADER_TABLE"": ""616a75ba3ff425254ca5a1b41e8fe0e5409e5902142ef4a18ca5dcec4741407c"", ""SHADR_COEFFICIENTS_TABLE"": ""efc484c19ce6eb0be42b2ac2e96f8c3e93f769ae4975582ad049b2482b736f42""}"

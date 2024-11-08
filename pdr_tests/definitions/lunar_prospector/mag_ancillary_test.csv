@@ -1,3 +1,3 @@
 label_file,files,product_id,url_stem,hash
-ATTITUDE.LBL,"[""ATTITUDE.TAB"", ""ATTITUDE.LBL""]",LP_ATTITUDE_990923,http://pds-ppi.igpp.ucla.edu/data/LP-L-MAG-4-SUMM-LUNARCRDS-5SEC-V1.0/EXTRAS,"{""TABLE"": ""676bb041fc14f6a34592d637bc5db7da""}"
-MOON_POS.LBL,"[""MOON_POS.LBL"", ""MOON_POS.TAB""]",LP_ATTITUDE_980915,http://pds-ppi.igpp.ucla.edu/data/LP-L-MAG-4-SUMM-LUNARCRDS-5SEC-V1.0/EXTRAS,"{""TABLE"": ""42c7a71477e60d65f5a0872567b1a4b8""}"
+ATTITUDE.LBL,"[""ATTITUDE.TAB"", ""ATTITUDE.LBL""]",LP_ATTITUDE_990923,http://pds-ppi.igpp.ucla.edu/data/LP-L-MAG-4-SUMM-LUNARCRDS-5SEC-V1.0/EXTRAS,"{""TABLE"": ""cceb5102be1423dd782dc0d1dd69672a4a2ec9a50beb34a520d0e6cf8d8c31b1""}"
+MOON_POS.LBL,"[""MOON_POS.LBL"", ""MOON_POS.TAB""]",LP_ATTITUDE_980915,http://pds-ppi.igpp.ucla.edu/data/LP-L-MAG-4-SUMM-LUNARCRDS-5SEC-V1.0/EXTRAS,"{""TABLE"": ""7dcf57fca96a2588dccab18b11b17a32d0484e68c51712c25960aaaa9311efc8""}"

@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-gfragtim.lbl,"[""gfragtim.lbl"", ""time_tab.fmt"", ""gfragtim.dat""]",GFRAGTIM.DAT,http://pdssbn.astro.umd.edu/holdings/go-j-uvs-2-edr-sl9-v1.0/galileo/uvs,"{""TABLE"": ""b8a12796feb80b10a13134ebaf6cf9df"", ""SPECTRUM"": ""cea0b36bfccfd56378dfa5375b30cf42""}"
+gfragtim.lbl,"[""gfragtim.lbl"", ""time_tab.fmt"", ""gfragtim.dat""]",GFRAGTIM.DAT,http://pdssbn.astro.umd.edu/holdings/go-j-uvs-2-edr-sl9-v1.0/galileo/uvs,"{""TABLE"": ""e0ccc91a392e792c1f33d81acc732041888fea3447385b5205ec0c03106502d7"", ""SPECTRUM"": ""bb60ddb82a2b0dfc89981e47af5fc0d2b1c960874bc5543e571c9f9696630cfc""}"

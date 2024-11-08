@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-e1016535.00a,"[""EDRDATA.FMT"", ""e1016535.00a"", ""NIMSINST.TXT"", ""EDRHDR.FMT""]",e1016535,http://pdsimage2.wr.usgs.gov/Missions/Galileo/NIMS/go_1004/edr/c101653,"{""HEADER_TABLE"": ""e11ec5c42f0ee5dd638c8eae22bb9d4e"", ""DATA_TABLE"": ""bc180d6a4061d37ebf742e6521af31cd""}"
+e1016535.00a,"[""EDRDATA.FMT"", ""e1016535.00a"", ""NIMSINST.TXT"", ""EDRHDR.FMT""]",e1016535,http://pdsimage2.wr.usgs.gov/Missions/Galileo/NIMS/go_1004/edr/c101653,"{""HEADER_TABLE"": ""1a77d37b43942cfcb11f76e069ddfbab9c0c83fc9f3e244c7554be5e18e418aa"", ""DATA_TABLE"": ""a8868d23c6316d8b6ea9ef603f7901c970336283473817c3fbc5ec7f38e99ffb""}"
