@@ -385,7 +385,8 @@ class ProductChecker(DatasetDefinition):
         quiet=False,
         max_size=0,
         filetypes=None,
-        skiphash=False
+        skiphash=False,
+        check_memory=False
     ):
         """
         generate and / or compare test hashes for a specified mission and
@@ -418,7 +419,8 @@ class ProductChecker(DatasetDefinition):
                 (regen is True) or ("hash" not in index.columns)
             )
             test_args = (
-                compare, pdr_debug, quiet, max_size, filetypes, skiphash, self.tracker
+                compare, pdr_debug, quiet, max_size, filetypes, skiphash,
+                self.tracker, check_memory
             )
             # compare/overwrite are redundant rn, but presumably we might want
             # different logic in the future.
@@ -618,7 +620,8 @@ def test_product(
     max_size: float = 0,
     filetypes: Optional[Sequence[str]] = None,
     skiphash: bool = False,
-    tracker: Optional[Tracker] = None
+    tracker: Optional[Tracker] = None,
+    check_memory: bool = False
 ) -> tuple[Optional[Data], str, dict]:
     """
     handler function for testing an individual product: records exceptions
@@ -632,8 +635,8 @@ def test_product(
         "filename": path,
         "hashtime": float('nan'),
         "readtime": float('nan'),
-        "hashmem": 0,
-        "readmem": 0,
+        "hashmem": float('nan'),
+        "readmem": float('nan'),
         "prodsize": 0
     }
     excluded, log_row = check_exclusions(
@@ -644,7 +647,7 @@ def test_product(
         return data, hash_json, log_row
     try:
         data, hashes, runtimes = read_and_hash(
-            path, product, pdr_debug, quiet, skiphash, tracker
+            path, product, pdr_debug, quiet, skiphash, tracker, check_memory
         )
         if (skiphash is False) and (compare is True):
             if isinstance(product["hash"], float):

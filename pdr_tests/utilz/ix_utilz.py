@@ -476,6 +476,8 @@ def flip_ends_with(strings: Collection[str], ending: str) -> Callable:
 
 
 def _memformat(memval: int):
+    if memval is None:
+        return "n/a"
     if memval == 0:
         return "~0 MB"
     return f"{round(memval / 1000 ** 2, 2)} MB"
@@ -487,7 +489,8 @@ def read_and_hash(
     pdr_debug: bool,
     quiet: bool,
     skiphash: bool,
-    tracker: Optional[TrivialTracker] = None
+    tracker: Optional[TrivialTracker] = None,
+    check_memory: bool = False
 ) -> tuple[Data, dict[str, str], dict[str, str]]:
     """
     read a product at a specified path, compute hashes from its data objects,
@@ -496,7 +499,7 @@ def read_and_hash(
     import astropy.io.fits.verify
     from pdr_tests.utilz.mem_utilz import Memwatcher
 
-    memwatcher = Memwatcher()
+    memwatcher = Memwatcher(fake=not check_memory)
     watch, runstats = Stopwatch(digits=3, silent=True), {}
     with warnings.catch_warnings():
         # We don't want to hear about UserWarnings we're intentionally raising
@@ -533,10 +536,10 @@ def read_and_hash(
     )
     if skiphash is True:
         return data, {}, runstats
-    with memwatcher.watch():
-        hashes = just_hash(data)
-        runstats['hashtime'] = watch.peek()
-        runstats['hashmem'] = memwatcher.peaks[-1]
+    # with memwatcher.watch():
+    hashes = just_hash(data)
+    runstats['hashtime'] = watch.peek()
+    runstats['hashmem'] = memwatcher.peaks[-1]
     console_and_log(
         f"Computed hashes for {product['product_id']} "
         f"({runstats['hashtime']} s, "

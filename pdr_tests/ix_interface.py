@@ -300,6 +300,9 @@ def check(
     filetypes = {
         "help": "Space-separated list of file extensions to process",
     },
+    check_memory = {
+        "help": "Track memory usage (slower)"
+    }
 )
 def test(
     dataset: Optional[str] = None,
@@ -311,6 +314,7 @@ def test(
     write: bool = True,
     pdr_debug: bool = True,
     quiet: bool = False,
+    check_memory: bool = False,
     skip_hash: bool = False,
     dump_browse: bool = False,
     dump_kwargs: Optional[str] = None,
@@ -352,7 +356,8 @@ def test(
                 quiet,
                 max_size,
                 filetypes,
-                skip_hash
+                skip_hash,
+                check_memory
             )
             logs += test_logs
         except MissingHashError:

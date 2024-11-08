@@ -50,12 +50,29 @@ class _MemwatcherContext:
         self.parent.active_watcher = None
 
 
+class _FakeMemwatcherContext:
+
+    def __init__(self, parent):
+        self.parent = parent
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, *_):
+        self.parent.peaks.append(None)
+        pass
+
+
 class Memwatcher:
 
-    def __init__(self):
+    def __init__(self, fake=False):
         self.peaks = []
         self.active_watcher = None
+        self.fake = fake
 
     def watch(self):
-        self.active_watcher = _MemwatcherContext(self)
+        if self.fake is True:
+            self.active_watcher = _FakeMemwatcherContext(self)
+        else:
+            self.active_watcher = _MemwatcherContext(self)
         return self.active_watcher
