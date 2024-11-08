@@ -536,10 +536,10 @@ def read_and_hash(
     )
     if skiphash is True:
         return data, {}, runstats
-    # with memwatcher.watch():
-    hashes = just_hash(data)
-    runstats['hashtime'] = watch.peek()
-    runstats['hashmem'] = memwatcher.peaks[-1]
+    with memwatcher.watch():
+        hashes = just_hash(data)
+        runstats['hashtime'] = watch.peek()
+        runstats['hashmem'] = memwatcher.peaks[-1]
     console_and_log(
         f"Computed hashes for {product['product_id']} "
         f"({runstats['hashtime']} s, "
