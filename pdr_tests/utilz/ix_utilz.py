@@ -770,7 +770,7 @@ def find_product(
         meta = pq.read_metadata(manifest)
         reader = pq.ParquetFile(manifest).reader
         mrecs = sorted(mrecs, key=lambda r: r['index'])
-        ix, rgix, urls = 0, 0, []
+        ix, rgix = 0, 0
         while rgix < meta.num_row_groups and len(mrecs) > 0:
             ix, rgix, mrecs, urls = _find_in_row_group(
                 meta, ix, rgix, reader, mrecs, urls
