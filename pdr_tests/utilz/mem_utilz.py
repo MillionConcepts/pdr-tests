@@ -2,6 +2,8 @@ from ctypes import c_uint8, c_long
 from multiprocessing.sharedctypes import Value
 from multiprocessing import Process
 import os
+from typing import MutableMapping, Optional
+
 import psutil
 import time
 
@@ -76,3 +78,40 @@ class Memwatcher:
         else:
             self.active_watcher = _MemwatcherContext(self)
         return self.active_watcher
+
+
+# TODO, maybe: add a timeout
+class OOMLock:
+
+    def __init__(
+        self,
+        memstats: MutableMapping,
+        shared_memval: Optional[Value] = None,
+        max_mem: int = 0,
+    ):
+        self.memstats = memstats
+        self.shared_memval = shared_memval
+        self.max_mem = max_mem
+        self.pickmem = 0
+
+    def __enter__(self):
+        if self.shared_memval is None:
+            return next(iter(self.memstats.keys()))
+        while True:
+            current = self.shared_memval.value
+            for ix, mem in tuple(self.memstats.items()):
+                if mem == 0:
+                    self.pickmem = 0
+                    self.memstats.pop(ix)
+                    return ix
+                if mem + current < self.max_mem:
+                    self.shared_memval.value += mem
+                    self.pickmem = mem
+                    self.memstats.pop(ix)
+                    return ix
+            time.sleep(0.01)
+
+    def __exit__(self, *_):
+        if self.shared_memval is None or self.pickmem == 0:
+            return
+        self.shared_memval.value -= self.pickmem

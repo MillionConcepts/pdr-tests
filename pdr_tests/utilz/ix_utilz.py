@@ -1,26 +1,25 @@
 """support objects and logging procedures for ix framework."""
 
-from blake3 import blake3
 import datetime as dt
 import json
 import logging
-import os
-import tempfile
-import time
-import warnings
-import xml.etree.ElementTree as ET
 from functools import wraps
-from hashlib import md5
 from io import StringIO
 from itertools import chain
+import os
 from pathlib import Path
 import re
 from sys import stdout
+import tempfile
+import time
 from typing import (
-    Callable, Collection, Mapping, MutableMapping, Sequence, Optional
+    Callable, Collection, Mapping, MutableMapping, Optional, Sequence
 )
 from urllib.parse import urlparse
+import warnings
+import xml.etree.ElementTree as ET
 
+from blake3 import blake3
 from hostess.aws.s3 import Bucket
 from hostess.directory import index_breadth_first
 import numpy as np
@@ -538,8 +537,8 @@ def read_and_hash(
         return data, {}, runstats
     with memwatcher.watch():
         hashes = just_hash(data)
-        runstats['hashtime'] = watch.peek()
-        runstats['hashmem'] = memwatcher.peaks[-1]
+    runstats['hashtime'] = watch.peek()
+    runstats['hashmem'] = memwatcher.peaks[-1]
     console_and_log(
         f"Computed hashes for {product['product_id']} "
         f"({runstats['hashtime']} s, "
@@ -801,3 +800,49 @@ def find_product(
                 meta, ix, rgix, reader, mrecs, urls
             )
     return sorted(set(urls))
+
+
+def test_datasets(
+    datasets, browse_root, check_memory, data_root, dump_browse,
+    dump_kwargs, filetypes, max_size, pdr_debug, product_type, quiet, regen,
+    skip_hash, tracker_log_dir, write,
+    shared_memval=None, max_mem=None, memtable_path=None,
+):
+    """subroutine of ix test"""
+    from pdr_tests.datasets import ProductChecker, MissingHashError
+
+    logs = []
+    for dataset in datasets:
+        hasher = ProductChecker(dataset, data_root, browse_root,
+                                tracker_log_dir)
+        hasher.tracker.paused = True
+        try:
+            test_logs = hasher.compare_test_hashes(
+                product_type,
+                regen,
+                write,
+                pdr_debug,
+                dump_browse,
+                dump_kwargs,
+                quiet,
+                max_size,
+                filetypes,
+                skip_hash,
+                check_memory,
+                shared_memval,
+                max_mem,
+                memtable_path
+            )
+            logs += test_logs
+        except MissingHashError:
+            return
+        except FileNotFoundError as fnf:
+            print(f"Necessary file missing for this dataset: {fnf}")
+        except KeyboardInterrupt:
+            console_and_log("received keyboard interrupt, halting")
+            break
+        finally:
+            hasher.tracker.outpath.unlink(missing_ok=True)
+            hasher.tracker.paused = False
+            hasher.tracker.dump()
+    return logs

@@ -386,7 +386,10 @@ class ProductChecker(DatasetDefinition):
         max_size=0,
         filetypes=None,
         skiphash=False,
-        check_memory=False
+        check_memory=False,
+        shared_memval=None,
+        max_mem=None,
+        memtable_path=None
     ):
         """
         generate and / or compare test hashes for a specified mission and
@@ -406,17 +409,44 @@ class ProductChecker(DatasetDefinition):
         dump_kwargs: kwargs for browse writer
         """
         result = []
+        log = partial(console_and_log, quiet=quiet)
+        if shared_memval is not None:
+            memdata = pd.read_csv(memtable_path)
+            ptype_memdata = {
+                ptype: group for ptype, group
+                in memdata.loc[
+                    memdata['dataset'] == self.dataset
+                ].groupby("product_type")
+            }
+            for k, v in ptype_memdata.items():
+                ptype_memdata[k] = {
+                    r['fn']: r['mem'] for _, r in v.iterrows()
+                }
+        else:
+            ptype_memdata = {}
         for product_type in self.expand_product_types(product_types):
-            self.tracker.set_metadata(product_type=product_type)
-            log = partial(console_and_log, quiet=quiet)
-            log(f"Hashing {self.dataset} {product_type}.")
+            # TODO: check validity in some kind of efficient way
             index = pd.read_csv(self.test_path(product_type))
+            index_dict = {
+                Path(row['label_file']).stem: (ix, row)
+                for ix, row in index.iterrows()
+            }
+            memdata = ptype_memdata.get(product_type)
+            if memdata is not None:
+                for k in tuple(memdata.keys()):
+                    if memdata[k] <= max_mem:
+                        continue
+                    console_and_log(f"{k} exceeds memory limit. Skipping.")
+                    memdata.pop(k)
+                    index_dict.pop(k)
+            self.tracker.set_metadata(product_type=product_type)
+            log(f"Hashing {self.dataset} {product_type}.")
             if "hash" not in index.columns:
                 log(f"no hashes found for {product_type}, writing new")
             elif regen is True:
                 log(f"regenerate=True passed, overwriting hashes")
             compare = not (
-                (regen is True) or ("hash" not in index.columns)
+                    (regen is True) or ("hash" not in index.columns)
             )
             test_args = (
                 compare, pdr_debug, quiet, max_size, filetypes, skiphash,
@@ -427,16 +457,21 @@ class ProductChecker(DatasetDefinition):
             overwrite = (regen is True) or ("hash" not in index.columns)
             data_path = self.product_data_path(product_type)
             self.hash_rows, self.log_rows = {}, {}
-            for ix, product in index.iterrows():
-                log(f"testing {product['product_id']}")
-                data, self.hash_rows[ix], self.log_rows[ix] = test_product(
-                    product, Path(data_path, product["label_file"]), *test_args
-                )
-                if (dump_browse is True) and (data is not None):
-                    log(f"dumping browse products for {product['product_id']}")
-                    self.dump_test_browse(data, product_type, dump_kwargs)
-                    log(f"dumped browse products for {product['product_id']}")
-                del data
+            from pdr_tests.utilz.mem_utilz import OOMLock
+            while len(index_dict) > 0:
+                with OOMLock(memdata, shared_memval, max_mem) as pick:
+                    ix, product = index_dict.pop(pick)
+                    log(f"testing {product['product_id']}")
+                    data, self.hash_rows[ix], self.log_rows[ix] = test_product(
+                        product,
+                        Path(data_path, product["label_file"]),
+                        *test_args
+                    )
+                    if (dump_browse is True) and (data is not None):
+                        log(f"dumping browse products for {product['product_id']}")
+                        self.dump_test_browse(data, product_type, dump_kwargs)
+                        log(f"dumped browse products for {product['product_id']}")
+                    del data
             if (overwrite is True) and (write is False):
                 log("write=False passed, not updating hashes in csv")
             elif (overwrite is True) and (skiphash is False):

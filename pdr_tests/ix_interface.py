@@ -1,6 +1,11 @@
 from ast import literal_eval
+from itertools import chain
 from pathlib import Path
 from typing import Optional
+
+import psutil
+from dustgoggles.structures import MaybePool
+from more_itertools import chunked
 
 from pdr_tests.datasets import (
     ProductPicker,
@@ -9,17 +14,15 @@ from pdr_tests.datasets import (
     ProductChecker,
     CorpusFinalizer,
     directory_to_index,
-    MissingHashError,
 )
 from pdr_tests.definitions import RULES_MODULES
 from pdr_tests.settings import SETTINGS
 from pdr_tests.utilz.cli_utilz import cli_action
 from pdr_tests.utilz.ix_utilz import (
     clean_logs,
-    console_and_log,
     download_datasets,
     list_datasets,
-    print_rules_list, find_product,
+    print_rules_list, find_product, test_datasets,
 )
 
 
@@ -302,6 +305,12 @@ def check(
     },
     check_memory = {
         "help": "Track memory usage (slower)"
+    },
+    n_threads = {
+        "help": "Number of threads to use (runs serial by default)"
+    },
+    mem_table_path = {
+        "help": "path to memory table used for multithreading"
     }
 )
 def test(
@@ -321,6 +330,8 @@ def test(
     data_root: Optional[Path] = None,
     browse_root: Optional[Path] = None,
     tracker_log_dir: Optional[Path] = None,
+    n_threads: Optional[int] = None,
+    mem_table_path: Optional[Path] = None
 ):
     """
     Generate and/or compare test hashes for a data set (or all data sets).
@@ -340,43 +351,40 @@ def test(
         datasets = list_datasets()
     else:
         datasets = [dataset]
-    logs = []
-    for dataset in datasets:
-        hasher = ProductChecker(dataset, data_root, browse_root,
-                                tracker_log_dir)
-        hasher.tracker.paused = True
-        try:
-            test_logs = hasher.compare_test_hashes(
-                product_type,
-                regen,
-                write,
-                pdr_debug,
-                dump_browse,
-                dump_kwargs,
-                quiet,
-                max_size,
-                filetypes,
-                skip_hash,
-                check_memory
-            )
-            logs += test_logs
-        except MissingHashError:
-            return
-        except FileNotFoundError as fnf:
-            print(f"Necessary file missing for this dataset: {fnf}")
-        except KeyboardInterrupt:
-            console_and_log("received keyboard interrupt, halting")
-            break
-        finally:
-            hasher.tracker.outpath.unlink(missing_ok=True)
-            hasher.tracker.paused = False
-            hasher.tracker.dump()
+    if mem_table_path is None:
+        mem_table_path = SETTINGS.mem_table_path
+    args = (
+        browse_root, check_memory, data_root, dump_browse,
+        dump_kwargs, filetypes, max_size, pdr_debug, product_type,
+        quiet, regen, skip_hash, tracker_log_dir, write
+    )
+    n_threads = None if n_threads is None or n_threads <= 0 else n_threads
+    if len(datasets) == 1 and n_threads is not None:
+        print("Ignoring n_threads setting for single dataset.")
+        n_threads = None
+
+    if n_threads is None:
+        memval_address, max_mem = None, None
+        logs = test_datasets(datasets, *args, memval_address, max_mem, mem_table_path)
+    else:
+        from multiprocessing import Manager
+
+        manager = Manager()
+        shared_memval = manager.Value('Q', 0)
+        max_mem = int(psutil.virtual_memory().available * 0.75)
+        argrecs = [
+            {'args': (dsg, *args, shared_memval, max_mem, mem_table_path)}
+            for dsg in chunked(datasets, 3)
+        ]
+        pool = MaybePool(n_threads)
+        pool.map(test_datasets, argrecs)
+        pool.close()
+        pool.join()
+        logs = list(chain(*[v for v in pool.get(raise_exc=True).values()]))
     if len(logs) > 0:
         import pandas as pd
 
-        pd.concat(logs).to_csv(
-            "combined_test_log_latest.csv", index=False
-        )
+        pd.concat(logs).to_csv("combined_test_log_latest.csv", index=False)
 
 
 @cli_action

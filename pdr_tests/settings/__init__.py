@@ -212,6 +212,9 @@ class IxSettings:
     #: Path to concatenated filename table used by ix find
     filename_table_path: Path = "$PDR_TESTS_ROOT/filenames.parquet"
 
+    # Path to concatenated memory table used in multithreaded ix test
+    mem_table_path: Path = "$PDR_TESTS_ROOT/memtable.csv"
+
     #: Directory to write tracker logs to.
     tracker_log_dir: Path = "$PDR_TESTS_ROOT/.tracker_logs"
 
