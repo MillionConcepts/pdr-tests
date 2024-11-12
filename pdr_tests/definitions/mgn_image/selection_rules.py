@@ -26,6 +26,7 @@ are detached.
 
 # variables naming specific parquet files in node_manifests
 GEO_MANIFEST = "geomgn"
+IMG_MANIFEST = "img_usgs_magellan"
 
 file_information = {
 	
@@ -77,6 +78,15 @@ file_information = {
         "fn_regex": [r'^[A-HJ-Z]'],
         "url_must_contain": ['mgn-v-rdrs-5-c-bidr-v1'],
         "label": "D",
+        "support_np": True
+    },
+
+    # Support not planned - SAR EDRs are safed
+    "sar_edr_safed": {
+        "manifest": IMG_MANIFEST,
+        "fn_must_contain": ['EDR'],
+        "url_must_contain": ['edr/MGN_', '/EDR'],
+        "label": "A",
         "support_np": True
     },
 }

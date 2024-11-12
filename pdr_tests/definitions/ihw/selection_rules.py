@@ -155,14 +155,6 @@ file_information = {
 #        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
 #        "label": "D",
 #    },
-#    # The filename extensions do not match the pointers in their labels.
-#    "spec_hal_didr_typo": {
-#        "manifest": SBN_FILE,
-#        "fn_must_contain": ['.img'],
-#        "fn_regex": [r'spec[12]'],
-#        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
-#        "label": "D",
-#    },
 
     # Earth-based CCD observations of Halley outburst
     "ccd_outburst": {
@@ -204,3 +196,16 @@ file_information = {
         "support_np": True
     },
 }
+"""
+Update 11/11/24:
+It looks like these broken products were removed from SBN.
+
+    # The filename extensions do not match the pointers in their labels.
+    "spec_hal_didr_typo": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.img'],
+        "fn_regex": [r'spec[12]'],
+        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
+        "label": "D",
+    },
+"""

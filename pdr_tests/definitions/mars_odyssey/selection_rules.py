@@ -147,7 +147,7 @@ file_information = {
     "odf": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.odf'],
-        "url_must_contain": ['ody-m-rss-1-raw-v1', '/odf'],
+        "url_must_contain": ['ody-m-rss-1-raw-v1'],
         "label": "D",
     },
     "tdf": {
@@ -161,6 +161,15 @@ file_information = {
         "fn_must_contain": ['.rsr'],
         "url_must_contain": ['ody-m-rss-1-raw-v1', '/rsr'],
         "label": "D",
+    },
+    # Support not planned
+    "rss_unsupported": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r'((agk)|(ps1)|(eop)|(ion)|(lit)|(opt)|(sak)|(sff)|(soe)|'
+                     r'(spk)|(tck)|(tro)|(tnf)|(wea))$'],
+        "url_must_contain": ['ody-m-rss-1-raw-v1'],
+        "label": "D",
+        "support_np": True
     },
 }
 
