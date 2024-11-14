@@ -118,7 +118,7 @@ file_information = {
         "manifest": ATM_FILE,
         "url_must_contain": ['cors_'],
         "url_regex": [r'(/LOG)|(/log)'],
-        "label": "D",
+        "label": "A",
         "support_np": True
     },
     # PD1   Path Delay Data File from AWVR1

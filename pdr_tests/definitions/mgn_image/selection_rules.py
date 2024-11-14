@@ -65,9 +65,16 @@ file_information = {
     # Full-Resolution Basic Image Data Record --> no pointers, not archive compliant
     "f-bidr": {
         "manifest": GEO_MANIFEST,
-        "fn_must_contain": [''],
+        "fn_must_contain": ['FILE'],
         "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
         "label": "D",
+        "support_np": True
+    },
+    "f-bidr_no_labels": {
+        "manifest": GEO_MANIFEST,
+        "fn_must_contain": ['file'],
+        "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
+        "label": "A",
         "support_np": True
     },
 	# ancillary tables; known unsupported 
