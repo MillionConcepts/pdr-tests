@@ -767,6 +767,34 @@ def _find_in_row_group(meta, ix, rgix, reader, mrecs, urls):
     return ix + nrows, rgix + 1, mrecs, urls
 
 
+def filter_parquet_sorted(fn, col, val):
+    from pyarrow import compute as pc, parquet as pq
+
+    file = pq.ParquetFile(fn)
+    meta = file.metadata
+    colno = meta.schema.names.index(col)
+
+    groups = []
+    for i in range(meta.num_row_groups):
+        rg = meta.row_group(i)
+        rcol = rg.column(colno)
+        stats = rcol.statistics
+        if stats.max < val:  # NOTE: not checking min assumes sorting
+            continue
+        groups.append(i)
+        # NOTE: this also assumes sorting
+        if stats.max != val:
+            break
+
+    if len(groups) == 0:
+        return []
+    if len(groups) == 1:
+        tab = file.read_row_group(groups[0])
+    else:
+        tab = pa.concat_tables([file.read_row_group(g) for g in groups])
+    return tab.filter(pc.equal(tab[colno], val))
+
+
 def find_product(
     filename_table_path: Path, manifest_path: Path, pid: str
 ) -> list[str]:
@@ -778,9 +806,8 @@ def find_product(
     from cytoolz import groupby
     from pyarrow import parquet as pq
 
-    res = pq.read_table(
-        filename_table_path,
-        filters=[('stem', '=', pid.split(".")[0].lower())]
+    res = filter_parquet_sorted(
+        filename_table_path, 'stem', pid.split(".")[0].lower()
     )
     if len(res) == 0:
         raise FileNotFoundError(f"No products found matching {pid}.")
