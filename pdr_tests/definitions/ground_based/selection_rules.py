@@ -79,16 +79,11 @@ file_information = {
         "url_must_contain": ['ear-x-i2041-5-ch3dicespec-v1.0/data'],
         "label": "D",
     },
-    
-}
-
-"""
     # Mars Analog Handlens-Scale Image Data Base
-    # Not supported: "The DOCUMENT pointer is not yet fully supported."
     "mahl": {
         "manifest": GEOLAB_FILE,
         "fn_must_contain": ['.jpg'],
         "url_must_contain": ['mahl_0001/data'],
         "label": "D",
     },
-"""
+}

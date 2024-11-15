@@ -34,7 +34,7 @@ file_information = {
             "label": ("a_..dat", "a.lbl"),
             "regex": True},
     'RDR': {'manifest': GEO_MRO_FILE,
-            "fn_must_contain": ['.dat'],
+            "fn_regex": ['(dat$)|(DAT$)'],
             "url_must_contain": ['sharad', '/data/', '-rdr-'],
             "label": "D"},
     'rgram': {'manifest': GEO_MRO_FILE,

@@ -39,6 +39,18 @@ file_information = {
         "url_must_contain": ["CDR", "NAC"],
         "label": "A",
     },
+    "NAC_CDR_cal": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r"^C.*\.IMG"],
+        "url_must_contain": ["CDR", "NAC"],
+        "label": "A",
+    },
+    "NAC_CDR_earth": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r"^E.*\.IMG"],
+        "url_must_contain": ["CDR", "NAC"],
+        "label": "A",
+    },
     "WAC_CDR": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": [".IMG"],
@@ -55,6 +67,12 @@ file_information = {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": [".IMG"],
         "url_must_contain": ["EDR", "WAC"],
+        "label": "A",
+    },
+    "GSFC_PFCAL_EDR": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": [".IMG"],
+        "url_must_contain": ["EDR", "PFCALIB/GSFC"],
         "label": "A",
     },
     "NAC_DTM": {
