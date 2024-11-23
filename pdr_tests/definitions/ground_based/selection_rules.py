@@ -59,6 +59,18 @@ file_information = {
         "url_must_contain": ['EBROCC_0001/DATA'],
         "label": "D",
     },
+    "ring_occ_1989_geometry": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['EBROCC_0001/GEOMETRY'],
+        "label": "D",
+    },
+    "ring_occ_1989_source": {
+        "manifest": RMS_FILE,
+        "fn_regex": [r'(DAT$)|(OUT$)'],
+        "url_must_contain": ['EBROCC_0001/SORCDATA'],
+        "label": "D",
+    },
     # Lowell Observatory Cometary Database and Production Rates
     "lowell_comet": {
         "manifest": SBN_FILE,

@@ -169,5 +169,35 @@ file_information = {
     },
     # Ancillary products: calibration models and geometry files. Source
     # data files are safed.
+
+
+    # Safed source data files
+    "source_pps": {
+        "manifest": RMS_FILE,
+        "fn_regex": [r'(DAT$)|(GS3$)|(SCO$)|(SGR$)|(LIS$)'],
+        "url_must_contain": ['VG_28xx/VG_2801/SORCDATA'],
+        "label": "D",
+    },
+    "source_uvs": {
+        "manifest": RMS_FILE,
+        "fn_regex": [r'(VOY$)|(TAB$)'],
+        "url_must_contain": ['VG_28xx/VG_2802/SORCDATA'],
+        "label": "D",
+    },
+    # Safed ptypes that do not open; support not planned
+    "source_rss": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['VG_28xx/VG_2803', '/SORCDATA'],
+        "label": "D",
+        "support_np": True
+    },
+    "source_iss": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.IMQ'],
+        "url_must_contain": ['VG_28xx/VG_2810', '/SOURCE'],
+        "label": "A",
+        "support_np": True
+    },
 }
 

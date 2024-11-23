@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+ES2_INGRESS.LBL,"[""ES2_INGRESS.OUT"", ""ES2_INGRESS.LBL""]",ES2_INGRESS.OUT,http://pds-rings.seti.org/holdings/volumes/EBROCC_xxxx/EBROCC_0001/SORCDATA/ESO22M,{}
+PAL_EGRESS_GEOMETRY.LBL,"[""PAL_EGRESS_GEOMETRY.DAT"", ""PAL_EGRESS_GEOMETRY.LBL""]",PAL_EGRESS_GEOMETRY.DAT,http://pds-rings.seti.org/holdings/volumes/EBROCC_xxxx/EBROCC_0001/SORCDATA/PAL200,{}

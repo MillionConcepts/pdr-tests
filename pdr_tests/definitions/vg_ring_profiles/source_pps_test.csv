@@ -1,0 +1,6 @@
+label_file,files,product_id,url_stem,hash
+PESCO.LBL,"[""PESCO.DAT"", ""PESCO.LBL""]",PESCO.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2801/SORCDATA,"{""TABLE"": ""7a46d8eafad738e078263272132f665d""}"
+P21120.LBL,"[""P21120.LBL"", ""P21120.SCO""]",P21120.SCO,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2801/SORCDATA,"{""TABLE"": ""1c17befddb861018b9a969c3c94308bc""}"
+P21936.LBL,"[""P21936.SGR"", ""P21936.LBL""]",P21936.SGR,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2801/SORCDATA,"{""TABLE"": ""017540bc46ccda300f903c06b39c5ca4""}"
+D309STCA.LBL,"[""D309STCA.LBL"", ""D309STCA.GS3""]",D309STCA.GS3,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2801/SORCDATA,"{""TABLE"": ""8199e6057c06ac0dc6dd9638f4ac19d8""}"
+D309LMCY.LBL,"[""D309LMCY.LBL"", ""D309LMCY.LIS""]",D309LMCY.LIS,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2801/SORCDATA,"{""TABLE"": ""6995bc51178e75b6ae79bc30f1f3b2b9""}"
