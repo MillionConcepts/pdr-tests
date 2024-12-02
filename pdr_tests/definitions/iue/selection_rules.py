@@ -51,6 +51,7 @@ file_information = {
         "label": "D",
     },
     # LMX/SMX SL9; raw spectra
+    # (Partially mirrored at ATM; sl9_0001/iue)
     "sl9_raw": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['mx','.fit'],
@@ -58,6 +59,7 @@ file_information = {
         "label": "D",
     },
     # LSI/SSI SL9; resampled images
+    # (Partially mirrored at ATM; sl9_0001/iue)
     "sl9_image": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['si','.fit'],

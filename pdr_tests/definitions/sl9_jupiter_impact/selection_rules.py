@@ -106,6 +106,7 @@ file_information = {
     },
     
     # Okayama Astrophysical Observatory - OASIS images
+    # (Mirrored at ATM; sl9_0001/oao)
     "oao": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
@@ -123,6 +124,7 @@ file_information = {
     # Galileo Orbiter - subset of NIMS, PPR, SSI, and UVS data specific to the
     # SL9 impact. There may be overlap with a few products covered by the
     # Galileo specific selection rules, but most products appear to be unique.
+    # (Mirrored at ATM; sl9_0001/galileo)
     "go_nims": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
