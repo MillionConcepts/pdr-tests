@@ -81,6 +81,12 @@ file_information = {
         "url_must_contain": ["/DATA/"],
         "label": "D",
     },
+    "NAC_DTM_img": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ["NAC_DTM", ".IMG"],
+        "url_must_contain": ["/DATA/", "NAC_DTM"],
+        "label": "A",
+    },
     "NAC_PHO": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ["NAC_PHO", ".IMG"],
@@ -100,6 +106,12 @@ file_information = {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ["NAC_ROI", ".IMG"],
         "label": "A",
+    },
+    "NAC_ROI_tif": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ["NAC_ROI", ".TIF"],
+        "url_must_contain": ["/DATA/", "NAC_ROI"],
+        "label": "D",
     },
     "WAC_CSHADE": {
         "manifest": MANIFEST_FILE,

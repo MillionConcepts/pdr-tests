@@ -43,6 +43,17 @@ file_information = {
         "url_must_contain": ['-tes-', '-special-'],
         "label": "D",
     },
+    # Ancillary tables - It looks like there are 5 tables that are duplicated 
+    # across all tsdr volumes.
+    # .tab files in the data/mars directory are mirrored (and supported) at the 
+    # ASU node's TES archive (their commented out GEO selection rules are below)
+    "tsdr_ancillary": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['mgs-m-tes-3-tsdr-v2'],
+        "url_regex": [r'/data$'],
+        "label": "D",
+    },
     
     # Support not planned; missing PDS3 compliant labels
     # (These products are mirrored in the ASU Node's TES archive.)
