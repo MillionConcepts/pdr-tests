@@ -84,4 +84,19 @@ file_information = {
                  'fn_must_contain': ['.tab'],
                  'url_must_contain': ['crism', 'typespec-v1'],
                  'label': 'D'},
+    
+    # These appear to be ancillary tables
+    'ancil_cdr': {'manifest': GEO_MRO_FILE,
+                 'fn_must_contain': ['.tab'],
+                 'url_must_contain': ['crism', 'cdr'],
+                 'label': 'D'},
+    'ancil_rdr': {'manifest': GEO_MRO_FILE,
+                 'fn_must_contain': ['.tab'],
+                 'url_must_contain': ['crism-4-rdr', 'ter'],
+                 'label': 'D'},
+    'ancil_mrdr': {'manifest': GEO_MRO_FILE,
+                 'fn_must_contain': ['.tab'],
+                 'url_must_contain': ['crism-5-rdr', 'mrdr'],
+                 'url_regex': [r'mrocr_3[12]'],
+                 'label': 'D'},
 }

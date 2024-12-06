@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+atf_ir_2009_164_11.LBL,"[""ATF_IR_2009_164_11.TAB"", ""atf_ir_2009_164_11.LBL""]",ATF_IR_2009_164_11,http://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0003/cdr/2009/2009_164/atf,"{""TABLE"": ""ba72586e38132e915401fea229ef34ef""}"
+atf_vn_2013_047_11.LBL,"[""atf_vn_2013_047_11.LBL"", ""ATF_VN_2013_047_11.TAB""]",ATF_VN_2013_047_00,http://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0006/cdr/2013/2013_047/atf,"{""TABLE"": ""bdf3f30187458e64c1512d1baf8121e9""}"

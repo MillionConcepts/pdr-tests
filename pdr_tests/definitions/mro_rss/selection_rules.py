@@ -29,19 +29,14 @@ GEO_MRO_FILE = "geomro_full"
 ATM_FILE = "atm"
 
 file_information = {
-    # 'odf': {'manifest': GEO_MRO_FILE,
-    #         "fn_must_contain": ['.odf'],
-    #         "url_must_contain": ['rss', '/odf'],  # this is probably unnecessary, but it's here anyway
-    #         "label": "D"},
+    'odf': {'manifest': GEO_MRO_FILE,
+            "fn_must_contain": ['.odf'],
+            "url_must_contain": ['rss', '/odf'],
+            "label": "D"},
     'rsr': {'manifest': GEO_MRO_FILE,
             "url_must_contain": ['rss', '/rsr'],
             "fn_regex": [r'\..*[^lbl]'],
             "label": "D"},
-    'tnf': {'manifest': GEO_MRO_FILE,
-            'fn_must_contain': ['.tnf'],
-            'url_must_contain': ['rss', '/tnf'],  # same thing here
-            "label": "D",
-            "support_np": True},
     'rsdmap': {'manifest': GEO_MRO_FILE,
                'fn_must_contain': ['.img'],
                'url_must_contain': ['rss', '/rsdmap'],
@@ -54,9 +49,32 @@ file_information = {
               'fn_must_contain': ['.dat'],
               'url_must_contain': ['rss', '/shbdr'],
               "label": "D"},
+    'sha_clone': {'manifest': GEO_MRO_FILE,
+              'fn_must_contain': ['.tab'],
+              'url_must_contain': ['rss-5', '/extras/clones'],
+              "label": "D"},
     # temperature-pressure profiles
     'tps': {'manifest': ATM_FILE,
               'fn_must_contain': ['.TPS'],
               'url_must_contain': ['data/mrors_2001/tps'],
               "label": "D"},
+        
+#     # Unsupported; probably support not planned
+#     # The FILE_HEADER pointer opens, but the rest do not. Their block is 'None'
+#     'dlf': {'manifest': GEO_MRO_FILE,
+#             'fn_must_contain': ['.dlf'],
+#             'url_must_contain': ['rss','/ancillary/'],
+#             "label": "D",},
+    # Support not planned
+    'tnf': {'manifest': GEO_MRO_FILE,
+            'fn_must_contain': ['.tnf'],
+            'url_must_contain': ['rss', '/tnf'],
+            "label": "D",
+            "support_np": True},
+    'ancil': {'manifest': GEO_MRO_FILE,
+            'fn_regex': [r'(ack)|(acp)|(agk)|(cck)|(ccp)|(eop)|(ion)|(ltf)|'
+                         r'(mpd)|(sak)|(sck)|(scp)|(sff)|(spk)|(tro)|(wea)$'],
+            'url_must_contain': ['rss','/ancillary/'],
+            "label": "D",
+            "support_np": True},
 }

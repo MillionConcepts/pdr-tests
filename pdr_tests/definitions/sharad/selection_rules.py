@@ -40,7 +40,7 @@ file_information = {
     'rgram': {'manifest': GEO_MRO_FILE,
               'fn_must_contain': ['.img'],
               'url_must_contain': ['sharad', '/rgram/'],
-              "label": {"D"}},
+              "label": "D"},
     'geom': {'manifest': GEO_MRO_FILE,
              'fn_must_contain': ['.tab'],
              'url_must_contain': ['sharad', '/geom/'],

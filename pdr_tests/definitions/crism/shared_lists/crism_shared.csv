@@ -1,5 +1,5 @@
-filename,url
-EDRHK.FMT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0002/label/EDRHK.FMT
-TRDRHK.FMT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-3-rdr-targeted-v1/mrocr_2101/label/TRDRHK.FMT
-MRR_MAP.CAT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-multispectral-v1/mrocr_3001/catalog/MRR_MAP.CAT
-MTR_MAP.CAT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-mptargeted-v1/mrocr_4001/catalog/MTR_MAP.CAT
+domain,filename,url
+pds-geosciences.wustl.edu,EDRHK.FMT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0002/label/EDRHK.FMT
+pds-geosciences.wustl.edu,TRDRHK.FMT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-3-rdr-targeted-v1/mrocr_2101/label/TRDRHK.FMT
+pds-geosciences.wustl.edu,MRR_MAP.CAT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-multispectral-v1/mrocr_3001/catalog/MRR_MAP.CAT
+pds-geosciences.wustl.edu,MTR_MAP.CAT,https://pds-geosciences.wustl.edu/mro/mro-m-crism-5-rdr-mptargeted-v1/mrocr_4001/catalog/MTR_MAP.CAT
