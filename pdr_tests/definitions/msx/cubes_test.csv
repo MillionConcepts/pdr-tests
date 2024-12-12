@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-dc3503.LBL,"[""dc3503.LBL"", ""DC3503.QUB"", ""DC3503.HDR""]",DC3503,http://pds-geosciences.wustl.edu/lunar/msx-l-spirit3-2_4-v1/msx_9001/data,"{""ENVI_HEADER"": ""b4685c941174d06e39b14e14905b1543"", ""QUBE"": ""85e122db455921aeb12bf3eccc40b580""}"
+dc3503.LBL,"[""dc3503.LBL"", ""DC3503.QUB"", ""DC3503.HDR""]",DC3503,http://pds-geosciences.wustl.edu/lunar/msx-l-spirit3-2_4-v1/msx_9001/data,"{""QUBE"": ""85e122db455921aeb12bf3eccc40b580""}"
