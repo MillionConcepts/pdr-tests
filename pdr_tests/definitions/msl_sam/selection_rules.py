@@ -30,8 +30,15 @@ GEO_FILE = "geomsl"
 
 file_information = {
     
-    # SAM EDRs are safed, but according to GEO "the lowest-level SAM RDR
+    # SAM EDRs are safed, and according to GEO "the lowest-level SAM RDR
     # product is essentially equivalent to the raw data"
+    "edr_safed": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": [".dat"],
+        "url_must_contain": ["msl-m-sam-2-edr-v1/mslsam_0xxx/data"],
+        "label": "D",
+        "support_np": True
+    },
     
     # The RDRs can have multiple data files per label, so the selection rules
     # grab the label instead of the csv, tab, and/or txt file(s).

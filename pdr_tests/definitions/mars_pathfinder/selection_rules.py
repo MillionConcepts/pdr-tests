@@ -124,5 +124,14 @@ file_information = {
         "label": "D",
     },
     
+    # Support not planned
+    # Supplementary files without labels; compressed with gzip
+    "3d_unsupported": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.wrz'],
+        "url_must_contain": ['mpfl-m-imp-5-3dposition-v1/mpim_2xxx/extras'],
+        "label": "A",
+        "support_np": True
+    },
 }
 

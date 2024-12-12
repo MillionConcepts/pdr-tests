@@ -46,4 +46,22 @@ file_information = {
         "url_must_contain": ['jnogrv'],
         "label": ('.TNF', '.xml'),
     },
+
+    # Ancillary products from the jnogrv_0001 volume; most are unsupported 
+    # (incomplete labels). 
+    # Ancillary products in the jnogrv_1001 volume have pds4 labels available, 
+    # so are not included here
+    "ancillary": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": [".AMC"],
+        "url_must_contain": ['jnogrv_0001', 'ANCILLARY'],
+        "label": "D",
+    },
+    "unsupported": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r"(EOP)|(ION)|(SFF)|(TRO)|(WEA)$"],
+        "url_must_contain": ['jnogrv_0001', 'ANCILLARY'],
+        "label": "D",
+        "support_np": True
+    },
 }

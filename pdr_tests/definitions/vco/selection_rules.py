@@ -100,5 +100,13 @@ file_information = {
         "url_must_contain": ['vcors_20','/data'],
         "label": "D",
     },
+
+    # Tables from the 'extras' directories
+    "extras": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['vco','/extras'],
+        "label": "D",
+    },
 }
 
