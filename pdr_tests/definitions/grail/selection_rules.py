@@ -87,40 +87,40 @@ file_information = {
         "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap'],
         "label": "D",
     },
-   # Ascii tables in the extras directory that are missing PDS labels
-   "extras": {
-       "manifest": MANIFEST_FILE,
-       "fn_regex": [r'(tab)|(asc)$'],
-       "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/extras'],
-       "label": "A",
-       "support_np": True
-   },
-   # Spice kernels (I think the coverage manifest pipeline auto excludes 'spk' 
-   # files at this point, so this ptype may be unnecessary)
-   "spk": {
-       "manifest": MANIFEST_FILE,
-       "fn_must_contain": ['.spk'],
-       "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/spk'],
-       "label": "D",
-       "support_np": True
-   },
+    # Ascii tables in the extras directory that are missing PDS labels
+    "extras": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'(tab)|(asc)$'],
+        "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/extras'],
+        "label": "A",
+        "support_np": True
+    },
+    # Spice kernels (I think the coverage manifest pipeline auto excludes 'spk' 
+    # files at this point, so this ptype may be unnecessary)
+    "spk": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.spk'],
+        "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/spk'],
+        "label": "D",
+        "support_np": True
+    },
 
-   # Lunar Gravity Ranging System raw data; level 0
-   # Unsupported: no pointers to data file, no table formatting given
-   "lgrs_edr": {
-       "manifest": MANIFEST_FILE,
-       "fn_must_contain": ['.asc'],
-       "url_must_contain": ['grail-l-lgrs-2-edr-v1/grail_0001', 'level_0'],
-       "label": "D",
-       "support_np": True
-   },
-   # calibrated/resampled LGRS data; level 1A/1B 
-   # Unsupported: no pointers to data file, no table formatting given
-   "lgrs_cdr": {
-       "manifest": MANIFEST_FILE,
-       "fn_must_contain": ['.asc'],
-       "url_must_contain": ['grail-l-lgrs-3-cdr-v1/grail_0101/level_1'],
-       "label": "D",
-       "support_np": True
-   },
+    # Lunar Gravity Ranging System raw data; level 0
+    # Unsupported: no pointers to data file, no table formatting given
+    "lgrs_edr": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.asc'],
+        "url_must_contain": ['grail-l-lgrs-2-edr-v1/grail_0001', 'level_0'],
+        "label": "D",
+        "support_np": True
+    },
+    # calibrated/resampled LGRS data; level 1A/1B 
+    # Unsupported: no pointers to data file, no table formatting given
+    "lgrs_cdr": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.asc'],
+        "url_must_contain": ['grail-l-lgrs-3-cdr-v1/grail_0101/level_1'],
+        "label": "D",
+        "support_np": True
+    },
 }

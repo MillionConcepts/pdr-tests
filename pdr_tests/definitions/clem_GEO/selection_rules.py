@@ -99,6 +99,20 @@ file_information = {
         "url_must_contain": ['clem1-l-rss-5-bsr', '/img'],
         "label": "D",
     },
+    # Sorted/aggregated BSR data; images and tables
+    "bsr_rdr_sorted_tab": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['clem1-l-rss-5-bsr', '/sort'],
+        "label": "D",
+    },
+    # Opening wrong, issue might be in the labels; support planned 
+    # "bsr_rdr_sorted_img": {
+    #     "manifest": MANIFEST_FILE,
+    #     "fn_must_contain": ['.img'],
+    #     "url_must_contain": ['clem1-l-rss-5-bsr', '/sort'],
+    #     "label": "D",
+    # },
     
     # RSS level 1 BSR products have non-compliant labels 
     # (missing pointers; support not planned)

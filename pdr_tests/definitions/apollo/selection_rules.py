@@ -116,6 +116,14 @@ file_information = {
         "url_must_contain": ['sm_000', 'data'],
         "label": "D",
     },
+    # Alternate versions of the soil tables and videos; missing PDS labels
+    "A15_16_SMSS_extras": {
+        "manifest": LUNAR_FILE,
+        "fn_regex": [r"(rm)|(xls)$"],
+        "url_must_contain": ['sm_000', 'extras'],
+        "label": "A",
+        "support_np": True
+    },
     # A17 Traverse Gravimeter Experiment data. There is only one product, an
     # ascii table.
     "A17_TG": {

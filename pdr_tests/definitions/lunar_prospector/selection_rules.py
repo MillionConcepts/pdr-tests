@@ -36,6 +36,15 @@ file_information = {
         "url_regex": [r'(nominal)|(extended)'],
         "label": "D",
     },
+    # LOSRES output; once decompressed they are text files without PDS labels
+    "losres_output": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.zip'],
+        "url_must_contain": ['lp-l-rss-5-los-v1', 'extras'],
+        "label": "A",
+        "support_np": True
+    },
+
     # Electron Reflectometer (ER) high resolution data
     "er_rdr": {
         "manifest": PPI_FILE,
