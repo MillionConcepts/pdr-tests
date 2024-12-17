@@ -38,6 +38,7 @@ file_information = {
         "url_must_contain": ['gbat_0001/data'],
         "label": "D",
     },
+
     # Bloomsburg University Goniometer Mars soil analogs
     # Analogs: AREF_235, AREF_236, AREF_237, AREF_238, and JSC_Mars1
     "bug_dist_funct": {
@@ -52,6 +53,15 @@ file_information = {
         "url_must_contain": ['bug_9001/data'],
         "label": "D",
     },
+    # Sample images and raw instrument data; no PDS labels
+    "bug_extras": {
+        "manifest": GEOLAB_FILE,
+        "fn_regex": [r'(tif)|(tab)'],
+        "url_must_contain": ['bug_9001/extras'],
+        "label": "A",
+        "support_np": True
+    },
+
     # 1989 Saturn ring occultation of 28 Sagittarii
     "ring_occ_1989": {
         "manifest": RMS_FILE,
@@ -71,6 +81,7 @@ file_information = {
         "url_must_contain": ['EBROCC_0001/SORCDATA'],
         "label": "D",
     },
+
     # Lowell Observatory Cometary Database and Production Rates
     "lowell_comet": {
         "manifest": SBN_FILE,
@@ -84,6 +95,7 @@ file_information = {
         "url_must_contain": ['ear-c-phot-5-rdr-lowell-comet-db-pr-v1.0/data'],
         "label": "D",
     },
+
     # Northern Arizona University - Lab CH3D Ice Absorption Coefficients
     "nau_lab_ice": {
         "manifest": SBN_FILE,
@@ -91,6 +103,7 @@ file_information = {
         "url_must_contain": ['ear-x-i2041-5-ch3dicespec-v1.0/data'],
         "label": "D",
     },
+
     # Mars Analog Handlens-Scale Image Data Base
     "mahl": {
         "manifest": GEOLAB_FILE,

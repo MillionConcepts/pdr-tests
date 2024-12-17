@@ -86,4 +86,11 @@ file_information = {
         "url_must_contain": ['coradr_5001/data'],
         "label": "D",
     },
+    "cal_tod_support_np": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.ff'],
+        "url_must_contain": ['coradr_5001/extras/maps'],
+        "label": "A",
+        "support_np": True
+    },
 }

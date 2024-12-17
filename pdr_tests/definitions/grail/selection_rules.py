@@ -87,6 +87,23 @@ file_information = {
         "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap'],
         "label": "D",
     },
+   # Ascii tables in the extras directory that are missing PDS labels
+   "extras": {
+       "manifest": MANIFEST_FILE,
+       "fn_regex": [r'(tab)|(asc)$'],
+       "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/extras'],
+       "label": "A",
+       "support_np": True
+   },
+   # Spice kernels (I think the coverage manifest pipeline auto excludes 'spk' 
+   # files at this point, so this ptype may be unnecessary)
+   "spk": {
+       "manifest": MANIFEST_FILE,
+       "fn_must_contain": ['.spk'],
+       "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/spk'],
+       "label": "D",
+       "support_np": True
+   },
 
    # Lunar Gravity Ranging System raw data; level 0
    # Unsupported: no pointers to data file, no table formatting given

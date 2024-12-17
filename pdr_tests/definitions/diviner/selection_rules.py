@@ -83,5 +83,15 @@ file_information = {
         "url_must_contain": ['lro-l-dlre-4-rdr-v1/lro', 'data'],
         "fn_regex": ["(pcp|dlre_prp|global)_.*tab"],
         "label": "D",
-    }
+    },
+
+    # Unsupported
+    # .xml files in the extras directory; no PDS labels
+    "xml": {
+        "manifest": LRO_FILE,
+        "fn_must_contain": ['.xml'],
+        "url_must_contain": ['lro-l-dlre-4-rdr-v1/lrodlr_1001/extras'],
+        "label": "A",
+        "support_np": True
+    },
 }

@@ -39,6 +39,15 @@ file_information = {
         "url_must_contain": ['vega_5001/data'],
         "label": "D",
     },
+    # balloon dynamics models; no labels, minimal documentation
+    "balloon_models": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['vega_5001/extras'],
+        "label": "A",
+        "support_np": True
+    },
+
     # PLASMAG-1 experiment; Vega 1 & 2
     "pm1": {
         "manifest": PPI_FILE,
@@ -74,6 +83,7 @@ file_information = {
         "url_must_contain": ['VEGA','-MISCHA-3-RDR-ORIGINAL', 'DATA'],
         "label": "D",
     },
+
     # Television System raw, processed, and transform data
     "tvs_raw": {
         "manifest": SBN_HOLDINGS_FILE,
