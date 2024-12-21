@@ -105,4 +105,13 @@ file_information = {
         "url_must_contain": ['mascs-3-virs-cdr-caldata-', '/dap', '/virs'],
         "label": "D",
     },
+
+    # .xls files in the extras directories without PDS labels
+    "extras": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".xls"],
+        "url_must_contain": ['/extras'],
+        "url_regex": [r'(mascs-2-virs-edr-)|(mascs-3-virs-cdr-caldata-)'],
+        "support_np": True
+    },
 }

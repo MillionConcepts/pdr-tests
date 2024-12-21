@@ -52,6 +52,12 @@ file_information = {
         "url_must_contain": ['mex-m-hrsc-4-refdr-mapproject','data', '-v4/'],
         "label": "A",
     },
+    "refdr_extras": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tif'],
+        "url_must_contain": ['mex-m-hrsc-4-refdr-mapproject', '-v4/', 'extras'],
+        "label": "D",
+    },
     # REFDR - Map-Projected Image Data, v3
     # This dataset has been superseded by version 4, but I could only find
     # version 3 of products from the norminal mission phase.
@@ -61,6 +67,13 @@ file_information = {
         "url_must_contain": ['mex-m-hrsc-5-refdr-mapprojected','data', '-v3/'],
         "label": "A",
     },
+    # # notionally supported .jp2 version of above
+    # "projected_v3_jp2": {
+    #     "manifest": GEO_FILE,
+    #     "fn_must_contain": ['.jp2'],
+    #     "url_must_contain": ['mex-m-hrsc-5-refdr-mapprojected','data', '-v3/'],
+    #     "label": "D",
+    # },
     # REFDR - HRSC Orthophoto and DTM data
     "dtm": {
         "manifest": GEO_FILE,

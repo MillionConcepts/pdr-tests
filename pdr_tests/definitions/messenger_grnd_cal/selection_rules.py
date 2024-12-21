@@ -28,6 +28,11 @@ are detached.
 GEO_MESSENGER_FILE = "geomessenger"
 
 file_information = {
+
+    # Note: this whole volume is safed rather than officially archived.
+    # Any unsupported data is very low priority for support, or just 'support 
+    # not planned'
+
     "mdis": {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": [".FIT"],
@@ -80,6 +85,13 @@ file_information = {
         "url_must_contain": ['ground_cal', 'MLA/DATA'],
         "label": "D",
     },
+    # known unsupported; no PDS labels
+    "mla_extras": {
+        "manifest": GEO_MESSENGER_FILE,
+        # "fn_regex": [r"(XLS)|(QPC)|(PRN)|(MCD)|(PPT)$"],
+        "url_must_contain": ['ground_cal', 'MLA/DATA', 'EXTRAS'],
+        "support_np": True
+    },
 
     #known unsupported (not planned); no END_OBJECT for TABLE in the label
     "ns": {
@@ -94,6 +106,14 @@ file_information = {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": [".DAT"],
         "url_must_contain": ['ground_cal', '/MASCS'],
+        "label": "D",
+        "support_np": True
+    },
+    # known unsupported; ascii text documents
+    "ascii_docs": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".ASC"],
+        "url_must_contain": ['ground_cal'],
         "label": "D",
         "support_np": True
     },

@@ -86,4 +86,26 @@ file_information = {
         "url_must_contain": ['mex-m-aspera3-2-3-edr-rdr-npi', 'data'],
         "label": "D",
     },
+
+    # ancillary index table
+    "index_table": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['mex-m-aspera3-2-3-edr-rdr-npi', 'extras'],
+        "label": "D",
+    },
+    # support not planned
+    "spice": {
+        "manifest": GEO_FILE,
+        "url_must_contain": ['mex-m-aspera3-2-3-edr-rdr-npi',
+                            'extras/spice_data'],
+        "support_np": True
+    },
+    "compressed": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.zip'],
+        "url_must_contain": ['mex-m-aspera3-2-3-edr-rdr-npi', 'extras'],
+        "label": "D",
+        "support_np": True
+    },
 }

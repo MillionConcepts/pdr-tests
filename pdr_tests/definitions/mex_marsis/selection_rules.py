@@ -46,6 +46,12 @@ file_information = {
         "url_must_contain": ['-rdr-ss-'],
         "label": "D",
     },
+    "SS_RDR_cal": {
+        "manifest": GEO_MEX_FILE,
+        "fn_must_contain": ['_cmp_t.dat'],
+        "url_must_contain": ['-rdr-ss-'],
+        "label": "D",
+    },
     # we appear to not be able to read these (AIS_RDR) due to an inconsistent format file
     "AIS_RDR": {
         "manifest": GEO_MEX_FILE,
