@@ -44,6 +44,18 @@ file_information = {
         "url_must_contain": ['mgn-v-rss-1-bsr', 'tdf'],
         "label": "D",
     },
+    # Geometry files
+    # The QPC, TSP, and XSP labels are missing pointers to their data files.
+    # The TAB files are all copies of the same product. Their labels have an 
+    # extra ^TABLE pointer that causes issues (looks like a copy-paste error)
+    "geom_raw": {
+        "manifest": GEO_MANIFEST,
+        "fn_regex": [r'(qpc)|(tsp)|(xsp)|(tab)$'],
+        "url_must_contain": ['mgn-v-rss-1-bsr', 'geometry'],
+        "label": "D",
+        "support_np": True
+    },
+
     # Magellan Bistatic Radar Calibrated Data Archive:
     # calibrated echo spectra (SPC)
     "spectra": {

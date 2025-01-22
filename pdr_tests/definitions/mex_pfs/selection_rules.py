@@ -117,6 +117,21 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    # Geometry data
+    # Opens wrong; ROW_BYTES and RECORD_BYTES don't match, and both appear wrong
+    # Likely support not planned (seems like a low priority dataset)
+    # "geo_lwc": {
+    #     "manifest": GEO_FILE,
+    #     "fn_must_contain": ['geo_lw', '.dat'],
+    #     "url_must_contain": ['mex-m-pfs-2-edr', 'geometry'],
+    #     "label": "D",
+    # },
+    # "geo_swc": {
+    #     "manifest": GEO_FILE,
+    #     "fn_must_contain": ['geo_sw', '.dat'],
+    #     "url_must_contain": ['mex-m-pfs-2-edr', 'geometry'],
+    #     "label": "D",
+    # },
 }
 
 SKIP_FILES = ["MEX_ORIENTATION_DESC.TXT"]

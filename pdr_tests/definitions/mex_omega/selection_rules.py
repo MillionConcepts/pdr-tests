@@ -45,6 +45,15 @@ file_information = {
     
     # The MEX-M-OMEGA-4-DDR-PROF-V1.0 dataset is archived at PSA but not GEO.
     # The products are ascii tables. They are notionally supported.
+
+    # Products in the DDR extras directory (none have PDS labels)
+    # The .tif and .png images are supported; the rest are 'support not planned'
+    "extras": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r'(cub)|(kml)|(dbf)|(shp)|(shx)$'],
+        "url_must_contain": ['mex-m-omega-5-ddr-global-maps', '/extras'],
+        "support_np": True
+    },
 }
 
 """

@@ -45,13 +45,28 @@ file_information = {
         "label": "D",
         "support_np": True
     },
-    
+
     "CCAM_RMI_EDR": {
         "manifest": GEO_FILE,
         "fn_regex": [r"cr0.*edr.*ccam.*\.img"],
         "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
         "label": "D",
     },
+    # reference pixels
+    "CCAM_RMI_EDR_ref": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cr0.*erp.*ccam.*\.img"],
+        "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
+        "label": "D",
+    },
+    # "state of health" products
+    "CCAM_SOH_EDR": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"^cc.*ccam.*\.dat"],
+        "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
+        "label": "D",
+    },
+
     "CCAM_LIBS_L2": {
         "manifest": GEO_FILE,
         "fn_regex": [r"([mu][oe]c|rsm|tec)_\d{4}_\d{4}\.csv"],
@@ -68,6 +83,12 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_regex": [r"cr0.*prc.*ccam.*\.tif"],
         "url_must_contain": ["msl-m-chemcam-libs-4_5-rdr-v1"],
+        "label": "D",
+    },
+    "rdr_extras": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": [".png"],
+        "url_must_contain": ["msl-m-chemcam-libs-4_5-rdr-v1", "/extras/"],
         "label": "D",
     },
 }
