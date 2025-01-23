@@ -319,7 +319,7 @@ def _verbose_s3_download_filelist(
 # TODO: eww
 def _extlower_series(series):
     return series.map(
-        lambda p: str(Path(p).with_suffix(Path(p).suffix.lower()))
+        lambda p: str(Path(p).with_name(Path(p).name.lower()))
     )
 
 
