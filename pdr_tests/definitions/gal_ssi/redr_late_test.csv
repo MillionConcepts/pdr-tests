@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+8968r.LBL,"[""8968r.LBL"", ""RTLMTAB.FMT"", ""BADDATA.TXT"", ""RLINEPRX.FMT"", ""8968R.IMG"", ""VICAR2.TXT""]",8968r,http://asc-pds-galileo.s3.us-west-2.amazonaws.com/SSI/go_0021/c22/jupiter/c051241,"{""TELEMETRY_TABLE"": ""be4f748da370e77a8ecb937db1bdca6f"", ""IMAGE"": ""54eb527a7cbe120bb12ed74d9ffce2f5"", ""LINE_PREFIX_TABLE"": ""d226ef66cf4c57215adc54ad3afffbea""}"

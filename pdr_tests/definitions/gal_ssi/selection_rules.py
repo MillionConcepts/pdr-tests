@@ -55,15 +55,42 @@ file_information = {
         "label": "D",
     },
     # REDR data
-    # Image pointer opens fine; TELEMETRY_TABLE is supported now too.
-    # LINE_PREFIX_TABLE is not yet supported.
-#    "redr": {
-#        "manifest": IMG_FILE,
-#        "fn_must_contain": ['.img'],
-#        "url_must_contain": ['SSI'],
-#        "url_regex": [r'\/[cC][0-9]{6}'],
-#        "label": "D",
-#    },
+    # Image pointer opens fine; TELEMETRY_TABLE and LINE_PREFIX_TABLE pointers 
+    # are supported now too.
+    # The line prefix table format file changes throughout the mission but its 
+    # filename stays the same. The REDRs are separated by volume here so the 
+    # products are tested with the correct format file
+    # volumes go_0002-go_0006
+    "redr_early": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['r.img'],
+        "url_must_contain": ['SSI/go_'],
+        "url_regex": [r'\/[cC][0-9]{6}', r'go_000[2-6]'],
+        "label": "D",
+    },
+    # volumes go_0007-go_0016
+    "redr_mid": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['r.img'],
+        "url_must_contain": ['SSI/go_'],
+        "url_regex": [r'\/[cC][0-9]{6}', r'(go_000[7-9])|(go_001[0-6])'],
+        "label": "D",
+    },
+    # volumes go_0017-go_0023
+    "redr_late": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['r.img'],
+        "url_must_contain": ['SSI/go_'],
+        "url_regex": [r'\/[cC][0-9]{6}', r'(go_001[7-9])|(go_002[0-3])'],
+        "label": "D",
+    },
+    "redr_special": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['s.img'],
+        "url_must_contain": ['SSI/go_00'],
+        "url_regex": [r'\/[cC][0-9]{6}'],
+        "label": "D",
+    },
     
     # The SB Node has Ida and Gaspra subsets of SSI data in different formats
     # (.fit and .qub), so they are included here.

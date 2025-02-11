@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem
+7845r.LBL,"[""RTLMTAB.FMT"", ""7845R.IMG"", ""7845r.LBL"", ""RLINEPRX.FMT"", ""VICAR2.TXT""]",7845r,http://asc-pds-galileo.s3.us-west-2.amazonaws.com/SSI/go_0003/moon/c006097
+5700r.LBL,"[""5700r.LBL"", ""5700R.IMG"", ""RTLMTAB.FMT"", ""BADDATA.TXT"", ""RLINEPRX.FMT"", ""VICAR2.TXT""]",5700r,http://asc-pds-galileo.s3.us-west-2.amazonaws.com/SSI/go_0004/earth/c006141
