@@ -151,7 +151,7 @@ file_information = {
     },
     # The SSI IMAGE, IMAGE_HEADER, and TELEMETRY_TABLE pointers open fine.
     # The BAD_DATA_VALUES_HEADER might be opening correctly.
-    # The LINE_PREFIX_TABLE does not open.
+    # The LINE_PREFIX_TABLE is supported now.
     "go_ssi": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.img'],
