@@ -37,10 +37,14 @@ file_information = {
     # line_prefix_tables are unsupported with eventual support planned
 	
     # Calibration files
+    # "Raw Ground Calibration for WACFM and NACFM Volumes 1-10. Volume 11 
+    # contains calibration data, software, algorithms, sample images, and 
+    # related calibration documentation"
     "calib": {
         "manifest": IMG_FILE,
         "fn_regex": [r'(.img)|(.IMG)'],
-        "url_must_contain": ['coiss_0', 'data'],
+        "url_must_contain": ['data'],
+        "url_regex": [r'(coiss_000[0-9])|(coiss_0010)'],
         "label": "D",
     },
     # "direct access" calibration images
@@ -52,12 +56,33 @@ file_information = {
         "url_must_contain": ['coiss_0', 'data'],
         "label": "D",
     },
-    # coiss_0011 volume at ATM is not a perfect mirror of coiss_0011 at IMG
+    # Volume coiss_0011_v3 is technically superseded by coiss_0011_v4.3 at the 
+    # IMG JPL node, but the v4.3 products have multiple errors in their labels.
+    # Products in v3 at IMG USGS appear to open correctly. 
+    "calib_0011": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['coiss_0011_v3/data'],
+        "label": "D",
+    },
+    # Other superseded versions of coiss_0011 at IMG USGS
+    "calib_superceded": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.img'],
+        "url_regex": [r'(coiss_0011/data)|(coiss_0011_v2/data)'],
+        "label": "D",
+        "support_np": True
+    },
+    # coiss_0011 at ATM is a mirror of coiss_0011_v4.3 at IMG JPL.
+    # The products have multiple BYTES/RECORD_BYTES mistakes in their labels 
+    # that cause them to open incorrectly. The mistakes are inconsistent enough 
+    # that writing special cases for them is extremely tedious
     "calib_atm": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.IMG'],
         "url_must_contain": ['coiss_0011/data'],
         "label": "D",
+        "support_np": True
     },
     # Earth/Venus/Jupiter EDRs
     "edr_evj": {

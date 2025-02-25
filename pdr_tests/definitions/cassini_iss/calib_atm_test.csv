@@ -1,3 +1,0 @@
-label_file,files,product_id,url_stem,hash
-N1465676754_2.LBL,"[""TLMTAB.FMT"", ""N1465676754_2.IMG"", ""N1465676754_2.LBL"", ""PREFIX2.FMT"", ""VICAR2.TXT""]",1_N1465676754.118,http://pds-atmospheres.nmsu.edu/PDS/data/coiss_0011/data,"{""TELEMETRY_TABLE"": ""5ad5fdd03fb64a5f214038f57ce42394"", ""IMAGE"": ""9feb7afdc3ac2297e259baf6d4e8bbe1""}"
-N1465676754_2_CAL_IOF.LBL,"[""N1465676754_2_CAL_IOF.IMG"", ""VICAR2.TXT"", ""TLMTAB.FMT"", ""N1465676754_2_CAL_IOF.LBL""]",N1465676754_2_CAL_IOF,http://pds-atmospheres.nmsu.edu/PDS/data/coiss_0011/data,"{""TELEMETRY_TABLE"": ""40efccfbebc4ce86d20926b7f4a2444b"", ""IMAGE"": ""4b382afe481945b6c6c43fd2b388dd07""}"
