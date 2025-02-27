@@ -33,9 +33,7 @@ ATM_FILE = "atm"
 # slightly different contents: tlmtab.fmt. calib, edr_evj, and edr_sat each have their own.
 
 file_information = {
-	
-    # line_prefix_tables are unsupported with eventual support planned
-	
+		
     # Calibration files
     # "Raw Ground Calibration for WACFM and NACFM Volumes 1-10. Volume 11 
     # contains calibration data, software, algorithms, sample images, and 
