@@ -28,6 +28,11 @@ are detached.
 GEO_FILE = "img_usgs_chandrayaan_1"
 
 file_information = {
+    # These selection rules are out of date for the IMG USGS node; the dataset 
+    # has been converted to PDS4 there. Most directory/file names are lowercase 
+    # now, and the products are .fits instead of .IMG
+    # (IMG JPL still has the PDS3 versions)
+
     "M3_L0": {
         "manifest": GEO_FILE,
         "fn_ends_with": ["_L0.IMG"],

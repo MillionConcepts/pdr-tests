@@ -30,14 +30,7 @@ IMG_MANIFEST = "img_usgs_magellan"
 
 file_information = {
 	
-    # Compressed-Resolution Basic Image Data Record
-    "c-bidr": {
-        "manifest": GEO_MANIFEST,
-        "fn_must_contain": ['IM', '.DAT'], # image data products only
-        "url_must_contain": ['mgn-v-rdrs-5-c-bidr-v1'],
-        "label": "D",
-    },
-    # Mosaic Image Data Record
+    # Mosaic Image Data Record (PDS4 also available)
     # full resolution
     "f-midr": {
         "manifest": GEO_MANIFEST,
@@ -75,6 +68,21 @@ file_information = {
         "fn_must_contain": ['file'],
         "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
         "label": "A",
+        "support_np": True
+    },
+    # Compressed-Resolution Basic Image Data Record
+    # The image products are unsupported; they have underdefined line prefix 
+    # bytes and intermittent headers between chunks of the image.
+    # From the label: "This file consists of varying-length logical data 
+    #       records. Each record contains a 92-byte header, followed by a 
+    #       rectangular pixel array. Each line of the pixel array begins with a 
+    #       pair of 2-byte integers defining the start and end of valid pixels 
+    #       in that line."
+    "c-bidr": {
+        "manifest": GEO_MANIFEST,
+        "fn_must_contain": ['IM', '.DAT'],
+        "url_must_contain": ['mgn-v-rdrs-5-c-bidr-v1'],
+        "label": "D",
         "support_np": True
     },
 	# ancillary tables; known unsupported 
