@@ -238,7 +238,7 @@ BUCKETNAME_PAT = re.compile(r"^(?:(http(s)?|s3)://)?(?P<name>(\w|-)+)")
 ISBUCKET_PAT = re.compile(r"(^s3://)|(\.amazonaws\.com)")
 
 
-def _expand_index_table(filelist, data_path):
+def _expand_index_table(filelist, data_path, skip_files):
     recs = []
     for _, row in filelist.iterrows():
         baserec = row.to_dict()
@@ -247,8 +247,13 @@ def _expand_index_table(filelist, data_path):
             rec = baserec | {'url': f"{row['url_stem']}/{f}"}
             rec['dest'] = data_path / Path(rec['url']).name
             rec['exists'] = _casecheck_wrap(rec['dest'])
+            rec['skip'] = True if f in skip_files else False
             recs.append(rec)
     filelist = pd.DataFrame(recs)
+    if len(filelist.loc[filelist['skip']]) > 0:
+        print("Files listed as skippable in the selection rules:")
+        print(skip_files)
+    filelist = filelist.loc[~filelist.skip].reset_index(drop=True).copy()
     if len(extant := filelist.loc[filelist['exists']]) > 0:
         print("The following files already exist in the filesystem, skipping:")
         for _, e in extant.iterrows():
@@ -257,9 +262,9 @@ def _expand_index_table(filelist, data_path):
 
 
 def verbose_temp_download(filelist, data_path, full_lower=False,
-                          add_req_headers={}):
+                          add_req_headers={}, skip_files=[]):
     if 'url_stem' in filelist.columns:
-        filelist = _expand_index_table(filelist, data_path)
+        filelist = _expand_index_table(filelist, data_path, skip_files)
         isbucket_target = 'url'
     else:
         isbucket_target = 'domain'

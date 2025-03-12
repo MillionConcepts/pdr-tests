@@ -340,7 +340,6 @@ class IndexDownloader(DatasetDefinition):
             console_and_log(f"Downloading {self.dataset} {product_type} {ptype}.")
             data_path = self.product_data_path(product_type)
             self.data_mkdirs(product_type)
-            # TODO: re-add file skipping
             if self.shared_list_path().exists():
                 print(f"Checking shared files for {self.dataset}.")
                 shared_index = pd.read_csv(self.shared_list_path())
@@ -352,7 +351,7 @@ class IndexDownloader(DatasetDefinition):
             else:
                 index = pd.read_csv(self.index_path(product_type))
             verbose_temp_download(
-                index, data_path, full_lower, add_req_headers
+                index, data_path, full_lower, add_req_headers, self.skip_files
             )
 
 
