@@ -45,7 +45,23 @@ ptypes = (
 samps = ("D", "F", "S", "T")
 
 # see: MSL Camera SIS, pp. 88+
-file_information = {"ANAGLYPH": base | {"fn_regex": [r"^NA.*\.IMG"]}}
+file_information = {
+    "ANAGLYPH": base | {"fn_regex": [r"^NA.*\.IMG"]},
+
+    # unique products "generated using off nominal processing"
+    "special": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": [".IMG"],
+        "url_must_contain": ["MSLNAV_1XXX/EXTRAS/SPECIAL_PROCESSING"],
+        "label": "D",
+    },
+    "special_v1": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": [".IMG"],
+        "url_must_contain": ["MSLNAV_1XXX/EXTRAS_V1/SPECIAL_PROCESSING"],
+        "label": "D",
+    },
+}
 for ptype, samp in product(ptypes, samps):
     info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}.*\.IMG"]}
     file_information[f"{ptype}_{samp}"] = info
