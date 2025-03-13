@@ -40,7 +40,17 @@ SKIP_FILES = ["MIPL_ERROR_METHODS.TXT", "VICAR2.TXT", "ODL.TXT",
               "GEOMETRIC_CM.TXT"]
 
 # see: MSL Camera SIS, pp. 88+
-file_information = {"ANAGLYPH": base | {"fn_regex": [r"^[FR]A[AB].*\.IMG"]}}
+file_information = {
+    "ANAGLYPH": base | {"fn_regex": [r"^[FR]A[AB].*\.IMG"]},
+
+    # unique products "generated using off nominal processing"
+    "special": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": [".IMG"],
+        "url_must_contain": ["MSLHAZ_1XXX/EXTRAS/SPECIAL_PROCESSING"],
+        "label": "D",
+    },
+}
 for ptype, samp in product(
     ("XYZ", r"RA\w", r"D\w\w", r"RN\w", r"UV\w", r"RU\w", r"S[LRHMN]\w", r"AR\w", r"ILT", r"M\w\w", r"XY[EMR]"),
     ("F", "S", "D", "T")
