@@ -36,15 +36,24 @@ file_information = {
         "url_regex": [r'mer[12]-m-rss-1-edr-v1'],
         "label": "D",
     },
-}
-"""
     # MER 1 and 2 odf products; binary tables
-    # (mer2rs_0002 ODF4B tables appear to be opening wrong, others are okay)
+    # volumes: mer1rs_0001, mer1rs_0002, mer2rs_0001
     "odf": {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['/odf'],
-        "url_regex": [r'mer[12]-m-rss-1-edr-v1'],
+        "url_regex": [r'mer[12]-m-rss-1-edr-v1/((mer1rs)|(mer2rs_0001))'],
         "label": "D",
     },
-"""
+    # mer2rs_0002 -- several table pointers are opening wrong
+    # The labels miscount how many rows are in some tables. The problem starts 
+    # with the ODF3B table's ROWS value, and miscounted bytes propagate through 
+    # the tables from there
+    "odf_unsupported": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['mer2-m-rss-1-edr-v1/mer2rs_0002/odf'],
+        "label": "D",
+        "support_np": True,
+    },
+}

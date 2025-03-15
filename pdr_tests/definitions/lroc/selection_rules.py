@@ -186,4 +186,29 @@ file_information = {
         "fn_must_contain": ["ANAGLYPH", ".TIF"],
         "label": "D",
     },
+    "AMES_DTM": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ["DTM", ".TAB"],
+        "url_must_contain": ["/EXTRAS/AMES_DTM"],
+         "label": "D",
+    },
+    "NAC_DTM_extras": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ["NAC_DTM", ".TIF"],
+        "url_must_contain": ["/EXTRAS/AMES_DTM/LRONAC_DTMS"],
+        "label": "D",
+        "support_np": True, # incomplete PDS3 labels
+    },
+    "NAC_DTM_thumb": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ["NAC_DTM", "Thumbnail", ".TIF"],
+        "url_must_contain": ["/EXTRAS/AMES_DTM/LRONAC_THUMBNAILS"],
+        "support_np": True, # no PDS labels
+    },
+    "SHAPEFILE": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r"(dbf)|(prj)|(shp)|(shx)|(DBF)|(PRJ)|(SHP)|(SHX)$"],
+        "url_must_contain": ["/EXTRAS/", "SHAPEFILE"],
+        "support_np": True, # no PDS labels
+    },
 }
