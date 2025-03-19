@@ -79,6 +79,20 @@ file_information = {
         "url_must_contain": ['ice-c-uleca-3-rdr-giacobini-zin-v1.0/data'],
         "label": "D",
     },
+    # Geometry files shared across all volumes
+    "geom_tab": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ice-c-', 'geometry'],
+        "label": "D",
+    },
+    "geom_tbl": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tbl'],
+        "url_must_contain": ['ice-c-', 'geometry'],
+        "label": "D",
+        "support_np": True
+    },
 
     # Ephemeris data
     # (There are only 3 unique products, but it looks like 18 because each 
