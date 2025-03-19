@@ -94,9 +94,22 @@ file_information = {
     },
     # Particle Impact Analyzer (PIA)
     "pia": {
-       "manifest": SB_FILE,
-       "fn_must_contain": ['.dat'],
-       "url_must_contain": ['gio-c-pia-3-rdr-halley-v1.0/data/mode'],
-       "label": "D",
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['gio-c-pia-3-rdr-halley-v1.0/data/mode'],
+        "label": "D",
+    },
+    "pia_no_labels": {
+        "manifest": SB_FILE,
+        "fn_regex": [r'(tbl)|(hdr)$'],
+        "url_must_contain": ['gio-c-pia-3-rdr-halley-v1.0/data'],
+        "support_np": True
+    },
+    # FORTRAN source code files
+    "code": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.for'],
+        "url_must_contain": ['gio-c-','/geometry'],
+        "support_np": True
     },
 }

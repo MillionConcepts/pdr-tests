@@ -36,6 +36,15 @@ base = {
 
 file_information = {
     "anaglyph": base | {"fn_regex": [r"^..A"]},
+
+    # Support not planned (no PDS labels)
+    # Brightness overlap and tiepoint files
+    "ancillary": {
+        "manifest": IMG_FILE,
+        "fn_regex": [r"(OVR$)|(TIE$)"],
+        "url_must_contain": ["MSLMOS_1XXX/EXTRAS/ANCILLARY"],
+        "support_np": True,
+    },
 }
 
 for ptype in (

@@ -107,4 +107,12 @@ file_information = {
         "url_must_contain": ['nh-a-sdc-3-kem1-v','.0/data'],
         "label": "D",
     },
+
+    # Unsupported products in the extras directory (incomplete labels)
+    "extras": {
+        "manifest": SB_FILE,
+        "fn_regex": [r'(lbl)|(dat)$'],
+        "url_must_contain": ['nh-','-sdc-','/extras'],
+        "support_np": True,
+    },
 }

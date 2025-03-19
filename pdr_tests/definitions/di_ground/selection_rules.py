@@ -163,4 +163,11 @@ file_information = {
         "url_must_contain": ['di_ear-c-lplccd-3-mtbg61-tmpl1-v1.0/data'],
         "label": "D",
     },
+
+    # Support not planned --> no PDS labels
+    "notes": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['di_ear-','/NOTES'],
+        "support_np": True,
+    },
 }

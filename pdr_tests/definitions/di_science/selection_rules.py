@@ -143,4 +143,20 @@ file_information = {
        "label": "D",
         "support_np": True
    },
+
+    # Unsupported - no PDS labels
+    # (Includes products from datasets that are otherwise covered by 
+    # ptypes in di_nav)
+    "notes": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['/NOTES'],
+        "url_regex": [r'(dif-)|(dii-)'],
+        "support_np": True
+    },
+    "code": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['/CODE'],
+        "url_regex": [r'(dif-)|(dii-)'],
+        "support_np": True
+    },
 }

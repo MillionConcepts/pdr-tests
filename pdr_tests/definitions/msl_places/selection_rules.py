@@ -29,6 +29,9 @@ IMG_FILE = "img_jpl_msl_etc"
 
 file_information = {
     
+    # These selection rules are out-of-date. The dataset has been converted to 
+    # PDS4 at IMG JPL, and the directory structure has changed!
+
     # A special case opens these with read_csv()
     "localizations": {
         "manifest": IMG_FILE,

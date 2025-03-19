@@ -158,6 +158,15 @@ file_information = {
         "url_must_contain": ['go-j-ssi-2-redr-sl9-v1.0/galileo/ssi'],
         "label": "D",
     },
+
+    # Files in the NOTES and CODE directories; no PDS labels
+    # Volumes: ear-j_sa-hsotp-2-edr-sl9-v1.0 and ear-j_c-hsccd-3-rdr-sl9-v1.0
+    "unsupported": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['ear-j'],
+        "url_regex": [r'(NOTES)|(CODE)'],
+        "support_np": True
+    },
 }
 
 SKIP_FILES = ["vicar2.txt", "baddata.txt", "VICAR2.TXT", "BADDATA.TXT"]

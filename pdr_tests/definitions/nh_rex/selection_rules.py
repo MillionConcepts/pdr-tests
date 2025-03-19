@@ -120,13 +120,12 @@ file_information = {
         "url_must_contain": ['nh-','-rex-','data/tnf'],
         "label": "D",
     },
-}
-"""
     # TNF --> unsupported, support not planned (incomplete/non-compliant labels)
     "tnf_raw": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.tnf'],
         "url_must_contain": ['nh-','-rex-','data/tnf'],
         "label": "D",
+        "support_np": True,
     },
-"""
+}

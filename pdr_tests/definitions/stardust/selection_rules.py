@@ -121,6 +121,11 @@ file_information = {
         "url_must_contain": ['ear-c-i0039-2-sbn0007_keckiiesi-v1.0/data'],
         "label": "D",
     },
+    "keck_notes": {
+        "manifest": SB_FILE,
+        "url_must_contain": ['ear-c-i0039-2-sbn0007_keckiiesi-v1.0/NOTES'],
+        "support_np": True
+    },
 
     # SAFED datasets:
     # STARDUST-C/E/L-DFMI-2-EDR-V1.0 - early cruise phase DFMI data

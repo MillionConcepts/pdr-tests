@@ -79,6 +79,22 @@ file_information = {
         "url_must_contain": ['mer','om_0xxx/data/pancam'],
         "label": "A",
     },
+
+    # Support not planned:
+    # List of images used in the mosaic products
+    "image_list": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.lis'],
+        "url_must_contain": ['mer','om_0xxx/data/'],
+        "support_np": True
+    },
+    # Pointing correction files for some mosaics
+    "pointing_correction": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.nav'],
+        "url_must_contain": ['mer','om_0xxx/data/'],
+        "support_np": True
+    },
 }
 
 # irrelevant

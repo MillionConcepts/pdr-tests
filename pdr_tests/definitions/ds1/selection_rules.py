@@ -98,4 +98,10 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    # ancillary files without PDS labels in the NOTES directory
+    "notes": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['ds1-','/NOTES'],
+        "support_np": True
+    },
 }
