@@ -29,13 +29,14 @@ SB_FILE = "tiny_rosetta"
 
 file_information = {
     
-#     # "RECORD_TYPE = UNDEFINED"
-#     "UDR": {
-#         "manifest": SB_FILE,
-#         "fn_must_contain": ['.raw'],
-#         "url_must_contain": ['-rsi-1_2_3-', '/data', '/level1a'],
-#         "label": "D",
-#     },
+    # "RECORD_TYPE = UNDEFINED"
+    "UDR": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.raw'],
+        "url_must_contain": ['-rsi-1_2_3-', '/data', '/level1a'],
+        "label": "D",
+        "support_np": True
+    },
 	# fixed-length tables
 	# a few label files have typos that cause rows to be cut off the tables when opened with pdr; found most often in the doppler_tables
     "EDR": {
@@ -51,7 +52,12 @@ file_information = {
         "url_must_contain": ['-rsi-1_2_3-', '/data', '/level02'],
         "label": "D",
     },
-
+    # ancillary files without PDS labels
+    "ancillary": {
+        "manifest": SB_FILE,
+        "url_must_contain": ['-rsi-1_2_3-', '/data', '/extras/ancillary'],
+        "support_np": True
+    },
 }
 
 

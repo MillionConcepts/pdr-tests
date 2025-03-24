@@ -78,6 +78,18 @@ file_information = {
         "url_must_contain": ['-midas-3-', '/data/sps'],
         "label": "D",
     },
+    "RDR_midas_hk": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['-midas-3-', '/data/hk'],
+        "label": "D",
+    },
+    "RDR_midas_roi": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['-midas-3-', '/data/roi'],
+        "label": "D",
+    },
     "RDR_midas_img": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.img'],

@@ -45,7 +45,19 @@ file_information = {
         "url_must_contain": ['holdings/ro-', '-navcam-3-', '/data'],
         "label": "D",
     },
-
+    # FITS versions of IMG data 
+    "EDR_fits": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['holdings/ro-', '-navcam-2-', '/extras'],
+        "label": "D",
+    },
+    "RDR_fits": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['holdings/ro-', '-navcam-3-', '/extras'],
+        "label": "D",
+    },
 }
 
 

@@ -144,4 +144,18 @@ file_information = {
         "url_must_contain": ['ro_rl-', '-consert-4-', '/data'],
         "label": "D",
     },
+
+    # tables in the geometry directories
+    "l3_geom": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ro_rl-', '-consert-3-', 'v1.1/geometry'],
+        "label": "D",
+    },
+    "l4_geom": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ro_rl-', '-consert-4-', '/geometry'],
+        "label": "D",
+    },
 }

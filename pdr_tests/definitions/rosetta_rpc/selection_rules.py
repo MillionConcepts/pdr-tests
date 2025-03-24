@@ -74,6 +74,12 @@ file_information = {
         "url_must_contain": ['-rpcies-5-', '/data'],
         "label": "D",
     },
+    "rpcies_extras": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['-rpcies-', '/extras'],
+        "label": "D",
+    },
     
 # start RPCLAP
     "EDR_RPCLAP": {

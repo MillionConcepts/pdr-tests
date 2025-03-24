@@ -102,6 +102,13 @@ file_information = {
         "url_must_contain": ['-miro-4-', '-67p-', '/data'],
         "label": "D",
     },
+    # ascii geometry tables
+    "miro_geom": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['-miro-3-', '/geometry'],
+        "label": "D",
+    },
 	
 # start ROSINA data products
 

@@ -43,6 +43,13 @@ file_information = {
         "url_must_contain": ['-srem-5-', '/data'],
         "label": "D",
     },
+    # Original SREM data files the PDS products are derived from (No PDS labels)
+    "CDF": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.cdf'],
+        "url_must_contain": ['-srem-', '/extras'],
+        "support_np": True
+    },
 }
 
 
