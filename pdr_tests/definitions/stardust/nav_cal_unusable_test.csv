@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+nc4_0543.LBL,"[""nc4_0543.LBL"", ""nc4_0543.fit""]",NC4_0543.FIT,http://pdssbn.astro.umd.edu/holdings/stardust-cal-nc-2-preflight-v2.0/data/unusable,"{""FITS_HEADER"": ""afc84e1b8bfd5416f44582a2f2acb0cb"", ""IMAGE"": ""bd3dad71cf4d0a5b72568c558b0a3cda"", ""IMAGE_HEADER"": ""afc84e1b8bfd5416f44582a2f2acb0cb""}"

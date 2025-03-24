@@ -57,11 +57,16 @@ file_information = {
         "label": "A",
     },
     # NAVCAM - pre-flight calibration
-    # (skipping testing for products in the "unusable" directory)
     "nav_cal": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['stardust-cal-nc-2-preflight-v2.0/data/minus'],
+        "label": "D",
+    },
+    "nav_cal_unusable": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['stardust-cal-nc-2-preflight-v2.0/data/unusable'],
         "label": "D",
     },
     # NAVCAM - raw images
@@ -145,4 +150,21 @@ file_information = {
     },
     # STARDUST-CAL-NC-2-PREFLIGHT-V1.0
     # V2.0 is tested above (nav_cal), and V1.0 is not included in the manifest
+
+    # Supplementary files in the extras directory
+    "extras": {
+        "manifest": SB_FILE,
+        "url_must_contain": ['sdu-'],
+        "url_regex": [r'/extras$'],
+        "support_np": True,
+    },
+    # Mostly ascii text files; none have PDS labels
+    "notes": {
+        "manifest": SB_FILE,
+        "url_must_contain": ['sdu-', '/NOTES'],
+        "support_np": True,
+    },
+    # (The extras and notes ptypes also include products from the Stardust-NEXT 
+    # volumes. They are included here instead of the stardust_next selection 
+    # rules for simplicity.)
 }

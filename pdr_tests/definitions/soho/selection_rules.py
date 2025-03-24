@@ -42,6 +42,13 @@ file_information = {
         "url_must_contain": ['soho-c-lasco-5-kreutzphotom-v1.0/data'],
         "label": "D",
     },
+
+    # SBN's notes about the dataset
+    "notes": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['soho-c-lasco-4-cometimages-v1.0/NOTES'],
+        "support_np": True,
+    },
 }
 
 """

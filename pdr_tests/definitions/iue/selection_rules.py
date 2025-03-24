@@ -66,5 +66,13 @@ file_information = {
         "url_must_contain": ['iue-j','3-edr-sl9', '/data/sl9'],
         "label": "D",
     },
+
+    # Products without PDS labels in the NOTES and CODE directories
+    "ancillary": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['iue-c-'],
+        "url_regex": [r'(NOTES)|(CODE)'],
+        "support_np": True,
+    },
 }
 

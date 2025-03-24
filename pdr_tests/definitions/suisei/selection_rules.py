@@ -34,4 +34,10 @@ file_information = {
         "url_must_contain": ['suisei-c-esp-3-rdr-halley-v1.0/data'],
         "label": "D",
     },
+    "geom": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['suisei-c-esp-3-rdr-halley-v1.0/geometry'],
+        "label": "D",
+    },
 }

@@ -35,8 +35,7 @@ file_information = {
     # In-progress: version 2.0 of several Halley datasets
     
     # AMSN - amateur observations
-    # Drawing, Photography, and Spectroscopy products are all null-data headers
-    # for products thart were never digitized.
+    # Drawing, Photography, and Spectroscopy products were never digitized.
     # Visual products are ascii tables with detached labels and FITs headers
     "am_vis": {
         "manifest": SBN_FILE,
@@ -55,12 +54,12 @@ file_information = {
     },
     # Halley observations from the 1980s; ascii tables
     # Some products miscount the padding bytes in columns 3 and 5 of the table
-##    "astr_halley": {
-##        "manifest": SBN_FILE,
-##        "fn_must_contain": ['.tab'],
-##        "url_must_contain": ['ihw-c-astr-2-edr-halley', 'data/1986'],
-##        "label": "D",
-##    },
+    # "astr_halley": {
+    #     "manifest": SBN_FILE,
+    #     "fn_must_contain": ['.tab'],
+    #     "url_must_contain": ['ihw-c-astr-2-edr-halley', 'data/1986'],
+    #     "label": "D",
+    # },
     # re-reduced Halley data from its 1835 and 1910 appearances
     "astr_historic": {
         "manifest": SBN_FILE,
@@ -140,21 +139,21 @@ file_information = {
         "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
         "label": "D",
     },
-#    # SPECTRAL_IMAGE_QUBE pointer does not open
-#    "spec_hal_raw_dat": {
-#        "manifest": SBN_FILE,
-#        "fn_must_contain": ['.dat'],
-#        "url_must_contain": ['ihw-c-spec-2-edr-halley', 'data'],
-#        "label": "D",
-#    },
-#    # SPECTRAL_IMAGE_QUBE pointer does not open.
-#    # Products with a SPECTRUM pointer do open.
-#    "spec_hal_didr_dat": {
-#        "manifest": SBN_FILE,
-#        "fn_must_contain": ['.dat'],
-#        "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
-#        "label": "D",
-#    },
+    # # SPECTRAL_IMAGE_QUBE pointer does not open
+    # "spec_hal_raw_dat": {
+    #     "manifest": SBN_FILE,
+    #     "fn_must_contain": ['.dat'],
+    #     "url_must_contain": ['ihw-c-spec-2-edr-halley', 'data'],
+    #     "label": "D",
+    # },
+    # # SPECTRAL_IMAGE_QUBE pointer does not open.
+    # # Products with a SPECTRUM pointer do open.
+    # "spec_hal_didr_dat": {
+    #     "manifest": SBN_FILE,
+    #     "fn_must_contain": ['.dat'],
+    #     "url_must_contain": ['ihw-c-spec-3-didr-halley', 'data'],
+    #     "label": "D",
+    # },
 
     # Earth-based CCD observations of Halley outburst
     "ccd_outburst": {
@@ -192,6 +191,14 @@ file_information = {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.imq'],
         "url_must_contain": ['ihw-c-lspn-2-didr', 'data/compressed'],
+        "label": "D",
+        "support_np": True
+    },
+    # Null-data headers for products that were never digitized
+    "null_data": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.hdr'],
+        "url_must_contain": ['ihw-c-','-n-ndr-', 'data'],
         "label": "D",
         "support_np": True
     },

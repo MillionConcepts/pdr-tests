@@ -56,6 +56,15 @@ file_information = {
         "url_must_contain": ['sdu-c_d-cida-2_3-next-tempel1-v1.0/data'],
         "label": "A",
     },
+    # CIDA - alternate version with detached labels
+    # "These prototype detached labels are value-added; they are not fully 
+    # PDS-compliant"
+    "cida_detached": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.tbl'],
+        "url_must_contain": ['sdu-c_d-cida-2_3-next-tempel1-v1.0/extras/detached'],
+        "label": "D",
+    },
 }
 """
 This is already covered by the di_science selection rules.
