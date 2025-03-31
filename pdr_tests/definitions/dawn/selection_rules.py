@@ -31,9 +31,6 @@ file_information = {
     # GRaND products have PDS4 versions available: EDR, RDR, maps/mosaics
     
     # Framing Camera - calibration images
-    # A few products are known unsupported: 20110925_FC1_VTH_CHKOUT_DARK_V01,
-    # 20120626_FC1_VT2_CHKOUT_DARK_V01, FC1_FLAT_HI_F4_N,
-    # FC2_F7_FLAT_V02_SLR_NORM, and FC2_F8_FLAT_V02_SLR_NORM
     "fc_cal": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.IMG'],

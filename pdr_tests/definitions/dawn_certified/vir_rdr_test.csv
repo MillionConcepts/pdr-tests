@@ -1,0 +1,3 @@
+label_file,files,product_id,url_stem,hash
+VIR_IR_1B_1_384185355_3.LBL,"[""VIR_IR_1B_1_384185355_3.QUB"", ""VIR_IR_1B_1_384185355_3.LBL""]",VIR_IR_1B_1_384185355,http://sbnarchive.psi.edu/pds3/dawn/vir/certified/DWNVVIR_I1B/DATA/20111212_LAMO/20120225_CYCLE12,"{""QUBE"": ""214feecfdc28c22dd366fe9f3e1c3b7c""}"
+VIR_IR_1B_1_384185355_QQ_3.LBL,"[""VIR_IR_1B_1_384185355_QQ_3.QUB"", ""VIR_IR_1B_1_384185355_QQ_3.LBL""]",VIR_IR_1B_1_384185355_QQ,http://sbnarchive.psi.edu/pds3/dawn/vir/certified/DWNVVIR_I1B/DATA/20111212_LAMO/20120225_CYCLE12,"{""QUBE"": ""fe01f847a6eecc71be42b0b9540956fc""}"
