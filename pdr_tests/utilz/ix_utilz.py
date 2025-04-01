@@ -685,6 +685,7 @@ def download_datasets(
 
     if clean:
         extra = local.loc[~local['path'].isin(remote['Key']), 'path']
+        extra = extra.loc[~extra.str.contains(".DS_Store")] # macOS specific
         if len(extra) > 0:
             console_and_log(f"Deleting {len(extra)} files from local")
             if dry_run is True:
