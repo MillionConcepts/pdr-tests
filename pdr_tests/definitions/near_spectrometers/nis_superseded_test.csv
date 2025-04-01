@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+nix2000113.LBL,"[""NIX2000113.FIT"", ""nix2000113.LBL""]",NIX2000113.FIT,http://sbnarchive.psi.edu/pds3/near/NEAR_A_NIS_5_EDR_EROS_ORBIT_UTCDOY_V1_0/data/eros,"{""HEADER"": ""0342dd82d50c29155ebf8ec2852473c7"", ""EXTENSION_HEADER"": ""e224da8e93eb0ce4e3703ce4dbad6634"", ""TABLE"": ""a6136a3216098a89bba7a12d1305ae91"", ""TABLE_HEADER"": ""e224da8e93eb0ce4e3703ce4dbad6634""}"

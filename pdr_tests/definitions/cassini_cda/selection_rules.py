@@ -61,6 +61,14 @@ file_information = {
         "url_regex": [r'(COCDA_0002)|(COCDA_0003)'],
         "label": "D",
     },
+    "cda_spectra_no_data": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['SPECTRA', '.TAB'],
+        "url_must_contain": ['DATA'],
+        "url_regex": [r'(COCDA_000[14-9])|(COCDA_00[1-9])|(COCDA_01)'],
+        "label": "D",
+        "support_np": True # placeholder files; zero row tables
+    },
     # Settings Table: voltages
     "cda_settings": {
         "manifest": SB_FILE,

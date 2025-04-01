@@ -37,6 +37,14 @@ file_information = {
         "url_must_contain": ['NEAR_A_RSS_1_5', '/odf'],
         "label": "D",
     },
+    "unsupported": {
+        "manifest": SBN_FILE,
+        "fn_regex": [r'(eop)|(ion)|(tro)|(txt)$'],
+        "url_must_contain": ['NEAR_A_RSS_1_5'],
+        "url_regex": [r'/(eop)|(ion)|(tro)|(txt)'],
+        "label": "D",
+        "support_np": True
+    },
     # Eros gravity acceleration maps
     "grav_map": {
         "manifest": SBN_FILE,
@@ -64,5 +72,12 @@ file_information = {
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['NEAR_A_RSS_5_EROS_GRAVITY_V1_0/erosgrav'],
         "label": "D",
+    },
+    # SPICE dataset
+    "spice": {
+        "manifest": SBN_FILE,
+        "url_must_contain": ['NEAR_A_SPICE_6_', '/data'],
+        "label": "D",
+        "support_np": True
     },
 }

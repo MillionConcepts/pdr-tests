@@ -83,6 +83,31 @@ file_information = {
         "url_must_contain": ['ody-m-grs-2-edr-v1'],
         "label": "D",
     },
+    # EDR - message and command list logs
+    "edr_logs": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.dat'],
+        "fn_regex": [r'(command_list)|(message_log)'],
+        "url_must_contain": ['ody-m-grs-2-edr-v1'],
+        "label": "D",
+    },
+    # EDR - notionally supported ancillary products that are annoying to test 
+    # with ix because the have several (sometimes dozens) of .dat files per 
+    # label, and the label names do not always match the data files' names
+    "edr_chan": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['ody-m-grs-2-edr-v1', '/chan'],
+        "label": "D",
+        "support_np": True
+    },
+    "edr_eng": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['ody-m-grs-2-edr-v1', '/eng'],
+        "label": "D",
+        "support_np": True
+    },
     # corrected gamma spectra
     "cgs": {
         "manifest": GEO_FILE,

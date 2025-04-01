@@ -84,6 +84,13 @@ file_information = {
         "label": "A",
         "support_np": True
     },
+    # Support not planned (webpages, not PDS products)
+    "lr_edr_extras": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.htm'],
+        "url_must_contain": ['vl1_vl2-m-lr-2-edr-v1/vl_9010/extras'],
+        "support_np": True
+    },
 }
 
 r"""

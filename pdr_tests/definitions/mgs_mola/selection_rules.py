@@ -65,6 +65,13 @@ file_information = {
         "url_must_contain": ['-mola-', '-megdr-'],
         "label": "D",
     },
+    # ENVI headers for MEGDR images
+    "megdr_envi": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.hdr'],
+        "url_must_contain": ['-mola-', '-megdr-', 'extras'],
+        "support_np": True
+    },
     # topography model; well-labeled header and coefficient tables
     "shadr": {
         "manifest": MANIFEST_FILE,

@@ -80,11 +80,25 @@ file_information = {
         "url_must_contain": ['NEAR_A_NIS_2_EDR_', '/data'],
         "label": "D",
     },
+    "nis_edr_extras": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['NEAR_A_NIS_2_EDR_', '/extras'],
+        "support_np": True # no PDS labels
+    },
     # NIS L2 data - original version
     "nis_l2_orig": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['NEAR_A_NIS_5_EDR_EROS_ORBIT_V1_0/data'],
+        "label": "D",
+    },
+    # NIS L2 data - same data as above, just subdivided into smaller tables 
+    "nis_superseded": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['NEAR_A_NIS_5_EDR_', '/data'],
+        "url_regex": [r'(CRUISE)|(EARTH)|(EROS_FLY)|(EROS_ORBIT_(.+)V)'],
         "label": "D",
     },
     # NIS L2 data - revised version
