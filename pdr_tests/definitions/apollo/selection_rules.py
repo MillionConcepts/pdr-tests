@@ -119,7 +119,7 @@ file_information = {
     # Alternate versions of the soil tables and videos; missing PDS labels
     "A15_16_SMSS_extras": {
         "manifest": LUNAR_FILE,
-        "fn_regex": [r"(rm)|(xls)$"],
+        "fn_regex": [r"((rm)|(xls))$"],
         "url_must_contain": ['sm_000', 'extras'],
         "label": "A",
         "support_np": True

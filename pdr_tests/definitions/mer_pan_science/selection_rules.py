@@ -31,14 +31,14 @@ file_information = {
     # Version 2 is PDS4
     "rad": {
         "manifest": GEO_FILE,
-        "fn_regex": [r'(img)|(IMG)$'],
+        "fn_regex": [r'((img)|(IMG))$'],
         "url_must_contain": ['/data'],
         "url_regex": [r'mer[12]-m-pancam-3-radcal-rdr-v1'],
         "label": "A",
     },
     "iof": {
         "manifest": GEO_FILE,
-        "fn_regex": [r'(img)|(IMG)$'],
+        "fn_regex": [r'((img)|(IMG))$'],
         "url_must_contain": ['/data'],
         "url_regex": [r'mer[12]-m-pancam-3-iofcal-sci-v1'],
         "label": "A",

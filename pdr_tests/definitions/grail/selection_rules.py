@@ -90,7 +90,7 @@ file_information = {
     # Ascii tables in the extras directory that are missing PDS labels
     "extras": {
         "manifest": MANIFEST_FILE,
-        "fn_regex": [r'(tab)|(asc)$'],
+        "fn_regex": [r'((tab)|(asc))$'],
         "url_must_contain": ['grail-l-lgrs-5-rdr-v1/grail_1001/extras'],
         "label": "A",
         "support_np": True

@@ -101,7 +101,7 @@ file_information = {
     },
     "pia_no_labels": {
         "manifest": SB_FILE,
-        "fn_regex": [r'(tbl)|(hdr)$'],
+        "fn_regex": [r'((tbl)|(hdr))$'],
         "url_must_contain": ['gio-c-pia-3-rdr-halley-v1.0/data'],
         "label": "NA",
         "support_np": True

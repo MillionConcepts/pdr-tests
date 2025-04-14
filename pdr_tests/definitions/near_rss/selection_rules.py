@@ -39,7 +39,7 @@ file_information = {
     },
     "unsupported": {
         "manifest": SBN_FILE,
-        "fn_regex": [r'(eop)|(ion)|(tro)|(txt)$'],
+        "fn_regex": [r'((eop)|(ion)|(tro)|(txt))$'],
         "url_must_contain": ['NEAR_A_RSS_1_5'],
         "url_regex": [r'/(eop)|(ion)|(tro)|(txt)'],
         "label": "D",

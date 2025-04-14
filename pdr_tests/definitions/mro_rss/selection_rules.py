@@ -72,8 +72,8 @@ file_information = {
             "label": "D",
             "support_np": True},
     'ancil': {'manifest': GEO_MRO_FILE,
-            'fn_regex': [r'(ack)|(acp)|(agk)|(cck)|(ccp)|(eop)|(ion)|(ltf)|'
-                         r'(mpd)|(sak)|(sck)|(scp)|(sff)|(spk)|(tro)|(wea)$'],
+            'fn_regex': [r'((ack)|(acp)|(agk)|(cck)|(ccp)|(eop)|(ion)|(ltf)|'
+                         r'(mpd)|(sak)|(sck)|(scp)|(sff)|(spk)|(tro)|(wea))$'],
             'url_must_contain': ['rss','/ancillary/'],
             "label": "D",
             "support_np": True},

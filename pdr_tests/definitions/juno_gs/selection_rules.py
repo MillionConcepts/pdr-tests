@@ -59,7 +59,7 @@ file_information = {
     },
     "unsupported": {
         "manifest": ATM_FILE,
-        "fn_regex": [r"(EOP)|(ION)|(SFF)|(TRO)|(WEA)$"],
+        "fn_regex": [r"((EOP)|(ION)|(SFF)|(TRO)|(WEA))$"],
         "url_must_contain": ['jnogrv_0001', 'ANCILLARY'],
         "label": "D",
         "support_np": True

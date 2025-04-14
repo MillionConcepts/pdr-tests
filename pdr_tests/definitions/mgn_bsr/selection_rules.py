@@ -50,7 +50,7 @@ file_information = {
     # extra ^TABLE pointer that causes issues (looks like a copy-paste error)
     "geom_raw": {
         "manifest": GEO_MANIFEST,
-        "fn_regex": [r'(qpc)|(tsp)|(xsp)|(tab)$'],
+        "fn_regex": [r'((qpc)|(tsp)|(xsp)|(tab))$'],
         "url_must_contain": ['mgn-v-rss-1-bsr', 'geometry'],
         "label": "D",
         "support_np": True
