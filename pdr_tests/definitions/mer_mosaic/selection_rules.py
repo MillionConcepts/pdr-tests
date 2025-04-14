@@ -86,6 +86,7 @@ file_information = {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.lis'],
         "url_must_contain": ['mer','om_0xxx/data/'],
+        "label": "NA",
         "support_np": True
     },
     # Pointing correction files for some mosaics
@@ -93,6 +94,7 @@ file_information = {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.nav'],
         "url_must_contain": ['mer','om_0xxx/data/'],
+        "label": "NA",
         "support_np": True
     },
 }

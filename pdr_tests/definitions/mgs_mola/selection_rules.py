@@ -70,6 +70,7 @@ file_information = {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.hdr'],
         "url_must_contain": ['-mola-', '-megdr-', 'extras'],
+        "label": "NA",
         "support_np": True
     },
     # topography model; well-labeled header and coefficient tables

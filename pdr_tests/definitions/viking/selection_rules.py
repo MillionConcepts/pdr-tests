@@ -89,6 +89,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ['.htm'],
         "url_must_contain": ['vl1_vl2-m-lr-2-edr-v1/vl_9010/extras'],
+        "label": "NA",
         "support_np": True
     },
 }

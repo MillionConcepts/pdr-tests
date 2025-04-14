@@ -129,6 +129,7 @@ file_information = {
     "keck_notes": {
         "manifest": SB_FILE,
         "url_must_contain": ['ear-c-i0039-2-sbn0007_keckiiesi-v1.0/NOTES'],
+        "label": "NA",
         "support_np": True
     },
 
@@ -156,12 +157,14 @@ file_information = {
         "manifest": SB_FILE,
         "url_must_contain": ['sdu-'],
         "url_regex": [r'/extras$'],
+        "label": "NA",
         "support_np": True,
     },
     # Mostly ascii text files; none have PDS labels
     "notes": {
         "manifest": SB_FILE,
         "url_must_contain": ['sdu-', '/NOTES'],
+        "label": "NA",
         "support_np": True,
     },
     # (The extras and notes ptypes also include products from the Stardust-NEXT 

@@ -47,6 +47,7 @@ file_information = {
     "notes": {
         "manifest": SBN_FILE,
         "url_must_contain": ['soho-c-lasco-4-cometimages-v1.0/NOTES'],
+        "label": "NA",
         "support_np": True,
     },
 }

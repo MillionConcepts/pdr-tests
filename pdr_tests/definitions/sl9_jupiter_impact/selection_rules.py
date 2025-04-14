@@ -165,6 +165,7 @@ file_information = {
         "manifest": SBN_FILE,
         "url_must_contain": ['ear-j'],
         "url_regex": [r'(NOTES)|(CODE)'],
+        "label": "NA",
         "support_np": True
     },
 }

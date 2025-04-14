@@ -81,6 +81,7 @@ file_information = {
         "manifest": SB_FILE,
         "fn_regex": [r'(tif)|(db)$'],
         "url_must_contain": ['galileo/derived', '_NIMS_', '/extras'],
+        "label": "NA",
         "support_np": True
     },
 }

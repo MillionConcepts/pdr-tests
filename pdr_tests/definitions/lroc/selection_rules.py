@@ -203,12 +203,14 @@ file_information = {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ["NAC_DTM", "Thumbnail", ".TIF"],
         "url_must_contain": ["/EXTRAS/AMES_DTM/LRONAC_THUMBNAILS"],
+        "label": "NA",
         "support_np": True, # no PDS labels
     },
     "SHAPEFILE": {
         "manifest": MANIFEST_FILE,
         "fn_regex": [r"(dbf)|(prj)|(shp)|(shx)|(DBF)|(PRJ)|(SHP)|(SHX)$"],
         "url_must_contain": ["/EXTRAS/", "SHAPEFILE"],
+        "label": "NA",
         "support_np": True, # no PDS labels
     },
 }

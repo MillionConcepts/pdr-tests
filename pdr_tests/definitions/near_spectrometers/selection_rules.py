@@ -84,6 +84,7 @@ file_information = {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['NEAR_A_NIS_2_EDR_', '/extras'],
+        "label": "NA",
         "support_np": True # no PDS labels
     },
     # NIS L2 data - original version

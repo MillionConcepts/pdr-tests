@@ -102,6 +102,7 @@ file_information = {
     "notes": {
         "manifest": SBN_FILE,
         "url_must_contain": ['ds1-','/NOTES'],
+        "label": "NA",
         "support_np": True
     },
 }

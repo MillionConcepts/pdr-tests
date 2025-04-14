@@ -56,6 +56,7 @@ file_information = {
     "ancillary": {
         "manifest": SB_FILE,
         "url_must_contain": ['-rsi-1_2_3-', '/data', '/extras/ancillary'],
+        "label": "NA",
         "support_np": True
     },
 }

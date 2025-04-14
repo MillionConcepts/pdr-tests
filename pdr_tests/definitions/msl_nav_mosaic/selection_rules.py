@@ -43,6 +43,7 @@ file_information = {
         "manifest": IMG_FILE,
         "fn_regex": [r"(OVR$)|(TIE$)"],
         "url_must_contain": ["MSLMOS_1XXX/EXTRAS/ANCILLARY"],
+        "label": "NA",
         "support_np": True,
     },
 }

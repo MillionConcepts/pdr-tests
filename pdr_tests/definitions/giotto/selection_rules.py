@@ -103,6 +103,7 @@ file_information = {
         "manifest": SB_FILE,
         "fn_regex": [r'(tbl)|(hdr)$'],
         "url_must_contain": ['gio-c-pia-3-rdr-halley-v1.0/data'],
+        "label": "NA",
         "support_np": True
     },
     # FORTRAN source code files
@@ -110,6 +111,7 @@ file_information = {
         "manifest": SB_FILE,
         "fn_must_contain": ['.for'],
         "url_must_contain": ['gio-c-','/geometry'],
+        "label": "NA",
         "support_np": True
     },
 }

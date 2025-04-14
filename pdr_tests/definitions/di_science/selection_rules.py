@@ -136,11 +136,11 @@ file_information = {
     # 9P/Tempel 1 approach/encounter movies
     # "UserWarning: The MOVIE pointer is not yet fully supported."
     # MPEG file format
-   "movie": {
-       "manifest": SBN_FILE,
-       "fn_must_contain": ['.mpg'],
-       "url_must_contain": ['di-c-hriv_its_mri-5-movie-coll', '/data'],
-       "label": "D",
+    "movie": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.mpg'],
+        "url_must_contain": ['di-c-hriv_its_mri-5-movie-coll', '/data'],
+        "label": "D",
         "support_np": True
    },
 
@@ -151,12 +151,14 @@ file_information = {
         "manifest": SBN_FILE,
         "url_must_contain": ['/NOTES'],
         "url_regex": [r'(dif-)|(dii-)'],
+        "label": "NA",
         "support_np": True
     },
     "code": {
         "manifest": SBN_FILE,
         "url_must_contain": ['/CODE'],
         "url_regex": [r'(dif-)|(dii-)'],
+        "label": "NA",
         "support_np": True
     },
 }

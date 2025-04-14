@@ -88,8 +88,9 @@ file_information = {
     # known unsupported; no PDS labels
     "mla_extras": {
         "manifest": GEO_MESSENGER_FILE,
-        # "fn_regex": [r"(XLS)|(QPC)|(PRN)|(MCD)|(PPT)$"],
+        "fn_regex": [r"(([A-KM-Z]..)|(L[AC-Z].)|(LB[A-KM-Z]))$"],
         "url_must_contain": ['ground_cal', 'MLA/DATA', 'EXTRAS'],
+        "label": "NA",
         "support_np": True
     },
 

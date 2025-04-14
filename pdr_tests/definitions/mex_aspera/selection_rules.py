@@ -99,6 +99,7 @@ file_information = {
         "manifest": GEO_FILE,
         "url_must_contain": ['mex-m-aspera3-2-3-edr-rdr-npi',
                             'extras/spice_data'],
+        "label": "NA",
         "support_np": True
     },
     "compressed": {

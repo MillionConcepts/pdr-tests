@@ -48,6 +48,7 @@ file_information = {
         "manifest": SB_FILE,
         "fn_must_contain": ['.cdf'],
         "url_must_contain": ['-srem-', '/extras'],
+        "label": "NA",
         "support_np": True
     },
 }

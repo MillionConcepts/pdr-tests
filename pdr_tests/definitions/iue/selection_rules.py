@@ -72,6 +72,7 @@ file_information = {
         "manifest": SBN_FILE,
         "url_must_contain": ['iue-c-'],
         "url_regex": [r'(NOTES)|(CODE)'],
+        "label": "NA",
         "support_np": True,
     },
 }

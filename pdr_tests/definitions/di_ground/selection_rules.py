@@ -168,6 +168,7 @@ file_information = {
     "notes": {
         "manifest": SBN_FILE,
         "url_must_contain": ['di_ear-','/NOTES'],
+        "label": "NA",
         "support_np": True,
     },
 }

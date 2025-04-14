@@ -52,6 +52,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_regex": [r'(cub)|(kml)|(dbf)|(shp)|(shx)$'],
         "url_must_contain": ['mex-m-omega-5-ddr-global-maps', '/extras'],
+        "label": "NA",
         "support_np": True
     },
 }

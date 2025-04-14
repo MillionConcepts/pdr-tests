@@ -112,6 +112,7 @@ file_information = {
         "fn_must_contain": [".xls"],
         "url_must_contain": ['/extras'],
         "url_regex": [r'(mascs-2-virs-edr-)|(mascs-3-virs-cdr-caldata-)'],
+        "label": "NA",
         "support_np": True
     },
 }
