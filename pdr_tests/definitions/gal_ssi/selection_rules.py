@@ -91,6 +91,13 @@ file_information = {
         "url_regex": [r'\/[cC][0-9]{6}'],
         "label": "D",
     },
+    "redr_graphics": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['g.img'],
+        "url_must_contain": ['SSI/go_00'],
+        "url_regex": [r'\/[cC][0-9]{6}'],
+        "label": "D",
+    },
     
     # The SB Node has Ida and Gaspra subsets of SSI data in different formats
     # (.fit and .qub), so they are included here.
@@ -126,3 +133,4 @@ file_information = {
         "label": "D",
     },
 }
+SKIP_FILES = ["BADDATA.TXT", "VICAR2.TXT"]

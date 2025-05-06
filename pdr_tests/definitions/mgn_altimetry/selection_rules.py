@@ -50,6 +50,12 @@ file_information = {
         "url_must_contain": ['mgn-v-rdrs-5-gvdr-v1', '/gvdr/'],
         "label": "D",
     },
+    "gvdr_index": {
+        "manifest": GEO_MANIFEST,
+        "fn_must_contain": ['index.tab'],
+        "url_must_contain": ['mgn-v-rdrs-5-gvdr-v1', '/gvdr/'],
+        "label": "D",
+    },
 
     # Support not planned:
     # Altimeter Experiment Data Record; not PDS compliant (COLUMNS = 'UNK')
@@ -67,6 +73,13 @@ file_information = {
         "manifest": GEO_MANIFEST,
         "fn_regex": [r'\.[1-9]$'],
         "url_must_contain": ['mgn-v-rdrs-5-scvdr-v1', '/s'],
+        "label": "D",
+        "support_np": True
+    },
+    "scvdr_geometry": {
+        "manifest": GEO_MANIFEST,
+        "fn_regex": [r'\.[1-9]$'],
+        "url_must_contain": ['mgn-v-rdrs-5-scvdr-v1', '/geometry'],
         "label": "D",
         "support_np": True
     },

@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+7000g.LBL,"[""7000G.IMG"", ""7000g.LBL"", ""VICAR2.TXT"", ""RLINEPRX.FMT"", ""RTLMTAB.FMT"", ""BADDATA.TXT""]",7000g,http://asc-pds-galileo.s3.us-west-2.amazonaws.com/SSI/go_0016/sl9/c024880,"{""TELEMETRY_TABLE"": ""81e3932718d9a4855df27b41f18feb91"", ""IMAGE"": ""a1cfe676de8d393bb708dafb95967835"", ""LINE_PREFIX_TABLE"": ""21b3e38f194307a1b2fdc8a1cd13f34b""}"
