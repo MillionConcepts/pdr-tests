@@ -88,6 +88,14 @@ file_information = {
         "url_must_contain": ['mgs/mgs-sampler/mgs_0001', '/geometry'],
         "label": "D",
     },
+    # support not planned; spice kernels
+    "spice": {
+        "manifest": GEO_FILE,
+        "fn_regex": ['((bc)|(bsp)|(tls)|(tpc)|(tsc))$'],
+        "url_must_contain": ['mgs/mgs-sampler/mgs_0001', '/geometry'],
+        "label": "D",
+        "support_np": True
+    },
 }
 """
 support planned, see the mgs_mola selection rules for details

@@ -94,4 +94,12 @@ file_information = {
         "label": "A",
         "support_np": True
     },
+    # .zip files in the extras directory
+    "zip": {
+        "manifest": LRO_FILE,
+        "fn_must_contain": ['.zip'],
+        "url_must_contain": ['lro-l-dlre-4-rdr-v1/lrodlr_1001/extras'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
 }

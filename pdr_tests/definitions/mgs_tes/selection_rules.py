@@ -122,4 +122,23 @@ file_information = {
         "label": "A",
         "support_np": True
     },
+    # ancillary files, ascii lists of file types;
+    # No pointers in the labels
+    "file_list": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.lst'],
+        "url_must_contain": ['mars_by_table'],
+        "label": "D",
+        "support_np": True
+    },
+
+    # duplicates of the mars_by_table data tested in the ptypes above; they're 
+    # the same products, just stored in a different directory structure
+    "by_volume": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((var)|(tab))$'],
+        "url_must_contain": ['mars_by_volume'],
+        "label": "A",
+        "support_np": True
+    },
 }

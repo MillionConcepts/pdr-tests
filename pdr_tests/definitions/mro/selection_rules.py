@@ -44,6 +44,13 @@ file_information = {
         "url_must_contain": ['PDS/RDR/'],
         "label": "D",
     },
+    "hirise_rdr_roi": {
+        "manifest": IMG_HIRISE_FILE,
+        "fn_must_contain": ['.roi'],
+        "url_must_contain": ['PDS/RDR/'],
+        "label": "A", # no PDS labels, attached or otherwise
+        "support_np": True
+    },
     # HiRISE DTM
     # Most DTM images are JP2 with detached labels, some products also have an 
     # IMG version with attached labels.

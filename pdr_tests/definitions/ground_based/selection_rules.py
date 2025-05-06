@@ -111,4 +111,11 @@ file_information = {
         "url_must_contain": ['mahl_0001/data'],
         "label": "D",
     },
+    "mahl_extras": {
+        "manifest": GEOLAB_FILE,
+        "fn_must_contain": ['.xls'],
+        "url_must_contain": ['mahl_0001/extras'],
+        "label": "A", # no PDS label available
+        "support_np": True
+    },
 }

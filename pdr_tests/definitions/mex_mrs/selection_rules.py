@@ -145,6 +145,15 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+
+    # Support not planned; files in the extras/ancillary directory
+    # Many are in a spice subdirectory, almost all are missing PDS labels
+    "ancillary": {
+        "manifest": GEO_FILE,
+        "url_must_contain": ['mex-m-mrs-1_2_3', 'extras/ancillary'],
+        "label": "A",
+        "support_np": True
+    },
 }
 
 SKIP_FILES = ["MARS_DESC.TXT", "MEX_POINTING_MODE_DESC.TXT"]

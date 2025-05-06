@@ -97,4 +97,12 @@ file_information = {
         "label": 'D',
         "support_np": True
     },
+    # orbit number files; ascii tables, no PDS labels
+    "orbnum": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.orb'],
+        "url_must_contain": ['lro-l-mrflro-4-cdr-v1', 'extras'],
+        "label": 'A',
+        "support_np": True
+    },
 }

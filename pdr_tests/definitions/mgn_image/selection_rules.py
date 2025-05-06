@@ -63,6 +63,13 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    "f-bidr_misc": {
+        "manifest": GEO_MANIFEST,
+        "fn_regex": [r'((DAT)|(BCK))$'],
+        "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
     "f-bidr_no_labels": {
         "manifest": GEO_MANIFEST,
         "fn_must_contain": ['file'],

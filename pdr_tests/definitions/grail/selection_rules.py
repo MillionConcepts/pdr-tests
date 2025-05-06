@@ -109,7 +109,7 @@ file_information = {
     # Unsupported: no pointers to data file, no table formatting given
     "lgrs_edr": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.asc'],
+        "fn_regex": [r'(asc$)|(dat$)'],
         "url_must_contain": ['grail-l-lgrs-2-edr-v1/grail_0001', 'level_0'],
         "label": "D",
         "support_np": True
@@ -121,6 +121,14 @@ file_information = {
         "fn_must_contain": ['.asc'],
         "url_must_contain": ['grail-l-lgrs-3-cdr-v1/grail_0101/level_1'],
         "label": "D",
+        "support_np": True
+    },
+    # additional unsupported files in the 'extras' directories; no PDS labels
+    "extras_xls": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.xls'],
+        "url_must_contain": ['grail-l-lgrs-', '/grail_', '/extras'],
+        "label": "A",
         "support_np": True
     },
 }
