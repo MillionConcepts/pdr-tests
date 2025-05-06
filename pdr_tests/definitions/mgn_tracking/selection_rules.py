@@ -33,7 +33,7 @@ file_information = {
     # Archival Tracking Data Files (ATDF/TDF)
     "tdf": {
         "manifest": GEO_MANIFEST,
-        "fn_must_contain": ['.tdf'],
+        "fn_regex": [r'((tdf)|(TDF))$'],
         "url_must_contain": ['mgn-v-rss-1-tracking'],
         "label": "D",
     },
@@ -57,7 +57,7 @@ file_information = {
     # from documentation: "similar data to the ATDF but in an edited and compressed format"
 #     "odf": {
 #         "manifest": GEO_MANIFEST,
-#         "fn_must_contain": ['.odf'],
+#         "fn_regex": [r'((odf)|(ODF))$'],
 #         "url_must_contain": ['mgn-v-rss-1-tracking'],
 #         "label": "D",
 #     },

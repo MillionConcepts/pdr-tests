@@ -92,14 +92,14 @@ file_information = {
     # include 'BCD' and 'Binary Coded Decimal' DATA_TYPES
     "odr": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.odr'],
+        "fn_regex": [r'((odr)|(ODR))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
     # tracking data file; fixed-length tables
     "tdf": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.tdf'],
+        "fn_regex": [r'((tdf)|(TDF))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
     },
@@ -124,8 +124,8 @@ file_information = {
     },
     "unsupported_upper": {
         "manifest": MANIFEST_FILE,
-        "fn_regex": [r'((AGK)|(AMD)|(DFK)|(EOP)|(ION)|(MPD)|(OPT)|(SAK)|(SOE)|'
-                     r'(SPK)|(TCK)|(TRO))$'],
+        "fn_regex": [r'((AGK)|(AMD)|(DKF)|(EOP)|(ION)|(MPD)|(OPT)|(SAK)|(SOE)|'
+                     r'(SPK)|(TCK)|(TRO)|(PS1)|(WEA))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
         "support_np": True
@@ -134,7 +134,7 @@ file_information = {
     # are supported products, the rest are not
     "unsupported_ech_mch": {
         "manifest": MANIFEST_FILE,
-        "fn_regex": [r'(^[0-9]).*((mch)|(MCH)|(ech)|(ECH))$'],
+        "fn_regex": [r'^(([0-9])|(g)).*((mch)|(MCH)|(ech)|(ECH))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
         "support_np": True
