@@ -145,4 +145,18 @@ file_information = {
         "label": "D",
     },
     # RSS - gravity EDR -> brief manual testing of PDS4 products looks good
+
+    # SPICE kernels - lists of SPICE kernels used
+    "vir_spice": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((TM)|(MK))$'],
+        "url_must_contain": ['dawn/vir/DWN', 'GEOMETRY'],
+        "label": "D",
+    },
+    "fc_spice": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((mk)|(tpc))$'],
+        "url_must_contain": ['dawn/fc/DWN', 'GEOMETRY'],
+        "label": "D",
+    },    
 }

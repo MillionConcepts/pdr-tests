@@ -95,7 +95,15 @@ file_information = {
       "url_must_contain": ['dawn/vir/certified/DWN','DATA'],
       "label": "D",
    },
-# partial mirrors in other "certified" directories
+   # VIR - Vesta mosaics
+   "vir_mosaic_vesta": {
+      "manifest": MANIFEST_FILE,
+      "fn_must_contain": ['.IMG'],
+      "url_must_contain": ['dawn/vir/certified/DWNVVIR_2/DATA'],
+      "label": "D",
+   },
+
+   # partial mirrors in other "certified" directories
    "vir_edr_mirror": {
       "manifest": MANIFEST_FILE,
       "fn_must_contain": ['.QUB'],
@@ -115,7 +123,21 @@ file_information = {
       "fn_must_contain": ['.TAB'],
       "url_must_contain": ['pds3/certified/DWN', 'DATA'],
       "label": "D",
-   },    
+   },
+
+   # SPICE kernels - lists of SPICE kernels used
+    "vir_spice": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((TM)|(MK))$'],
+        "url_must_contain": ['certified', 'VIR', 'DWN', 'GEOMETRY'],
+        "label": "D",
+    },
+    "fc_spice": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((mk)|(tpc))$'],
+        "url_must_contain": ['certified', 'FC', 'DWN', 'GEOMETRY'],
+        "label": "D",
+    },
 }
 
 SKIP_FILES = ["VICAR2.TXT", "DSMAP.CAT"]
@@ -131,14 +153,6 @@ coverage for the mirrored products.
    "fn_must_contain": ['.IMG'],
    "url_must_contain": ['dawn/vir/certified/DWNCVIR_2/DATA'],
    "label": "D",
-},
-# VIR - Vesta mosaics
-# (4 products in archive. Only 1 has actual data, the rest are just labels.)
-"vir_mosaic_vesta": {
-   "manifest": MANIFEST_FILE,
-   "fn_must_contain": ['.IMG'],
-   "url_must_contain": ['dawn/vir/certified/DWNVVIR_2/DATA'],
-   "label": "A",
 },
 # RSS - gravity models
 "shadr": {
