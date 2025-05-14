@@ -157,5 +157,12 @@ file_information = {
         "url_must_contain": ['phxmos_0xxx/data/ssi'],
         "label": "A",
     },
+    "mosaic_list": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.lis'],
+        "url_must_contain": ['phxmos_0xxx/data'],
+        "label": "D",
+        "support_np": True # no pointers in the labels
+    },
 }
 

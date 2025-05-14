@@ -37,6 +37,14 @@ file_information = {
         "url_must_contain": ['vg_2499/data'],
         "label": "D",
     },
+    # a spice kernel; label has no pointer to the data file
+    "spice": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.tsp'],
+        "url_must_contain": ['vg_2499/geometry'],
+        "label": "D",
+        "support_np": True
+    },
     # Low-level RSS data from Saturn and Titan occultations. Mirrored at RMS
     # (support not planned; labels are missing pointers to the data files)
     "odr": {

@@ -25,40 +25,23 @@ are detached.
 """
 
 # variables naming specific parquet files in node_manifests
-SB_FILE = "tiny_rosetta"
+RMS_FILE = "ringvolumes"
 
 file_information = {
-    
-    # "RECORD_TYPE = UNDEFINED"
-    "UDR": {
-        "manifest": SB_FILE,
-        "fn_must_contain": ['.raw'],
-        "url_must_contain": ['-rsi-1_2_3-', '/data', '/level1a'],
-        "label": "D",
-        "support_np": True
+    "data": {
+        "manifest": RMS_FILE,
+        "fn_regex": [r'((bdb)|(bep)|(bes)|(tf)|(ti)|(tls)|(bpc)|(tpc)'
+                     r'|(tsc)|(bsp))$'],
+        "url_must_contain": ['COSP_xxxx/COSP_1000/data'],
+        "label": 'D',
+        "support_np": True,
     },
-	# fixed-length tables
-	# a few label files have typos that cause rows to be cut off the tables when opened with pdr; found most often in the doppler_tables
-    "EDR": {
-        "manifest": SB_FILE,
-        "fn_must_contain": ['.tab'],
-        "url_must_contain": ['-rsi-1_2_3-', '/data', '/level1b'],
-        "label": "D",
-    },
-    # well-labeled fixed-length tables
-    "RDR": {
-        "manifest": SB_FILE,
-        "fn_must_contain": ['.tab'],
-        "url_must_contain": ['-rsi-1_2_3-', '/data', '/level02'],
-        "label": "D",
-    },
-    # ancillary files without PDS labels
-    "ancillary": {
-        "manifest": SB_FILE,
-        "url_must_contain": ['-rsi-1_2_3-', '/extras/ancillary'],
-        "label": "NA",
-        "support_np": True
+    "extras": {
+        "manifest": RMS_FILE,
+        "fn_regex": [r'((orb)|(tm)|(zip))$'],
+        "url_must_contain": ['COSP_xxxx/COSP_1000/extras'],
+        "label": 'A', # no PDS labels
+        "support_np": True,
     },
 }
-
 

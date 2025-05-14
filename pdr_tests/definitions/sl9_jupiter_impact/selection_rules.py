@@ -168,6 +168,14 @@ file_information = {
         "label": "NA",
         "support_np": True
     },
+    # ancillary ascii file with no PDS label
+    "ancillary": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.rpt'],
+        "url_must_contain": ['ear-j_sa-hsotp-2-edr-sl9-v1.0/data/flash'],
+        "label": "NA",
+        "support_np": True
+    },
 }
 
 SKIP_FILES = ["vicar2.txt", "baddata.txt", "VICAR2.TXT", "BADDATA.TXT"]

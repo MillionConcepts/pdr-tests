@@ -28,21 +28,21 @@ MANIFEST_FILE = "img_usgs_lro-lamp"
 
 file_information = {
     # Experiment Data Record; uncalibrated data
-   "edr": {
-       "manifest": MANIFEST_FILE,
-       "fn_must_contain": ['.fit'],
-       "url_must_contain": ['LROLAM_0', 'DATA'],
-       "label": 'D',
-   },
+    "edr": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['LROLAM_0', 'DATA'],
+        "label": 'D',
+    },
     # Reduced Data Record; calibrated data
     # Note: the CAL_HISTOGRAM_[*]_IMAGE pointers are 4-D arrays, so data.show() 
     # and dump-browse fail on them
-   "rdr": {
-       "manifest": MANIFEST_FILE,
-       "fn_must_contain": ['.fit'],
-       "url_must_contain": ['LROLAM_1', 'DATA'],
-       "label": 'D',
-   },
+    "rdr": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['LROLAM_1', 'DATA'],
+        "label": 'D',
+    },
     # Gridded Data Record; calibrated LAMP data, gridded into polar
     # stereographic maps
     "gdr_month": {
@@ -56,5 +56,13 @@ file_information = {
         "fn_regex": [r'[a-z]_[0-9]+\.img$'],
         "url_must_contain": ['LROLAM_2', 'DATA'],
         "label": 'D',
+    },
+    # Spice kernels (from the edr, rdr, and gdr volumes)
+    "spice": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((bpc)|(bsp)|(tf)|(ti)|(tls)|(tpc)|(tsc))$'],
+        "url_must_contain": ['LROLAM_', 'GEOMETRY'],
+        "label": 'D',
+        "support_np": True
     },
 }

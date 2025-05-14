@@ -152,6 +152,14 @@ file_information = {
     # STARDUST-CAL-NC-2-PREFLIGHT-V1.0
     # V2.0 is tested above (nav_cal), and V1.0 is not included in the manifest
 
+    # Random zip file containing one volume's catalog directory
+    "catalog_zip": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.zip'],
+        "url_must_contain": ['sdu-c_d-cida-1-edf_hk-v1.0'],
+        "label": "NA", # no PDS label
+        "support_np": True,
+    },
     # Supplementary files in the extras directory
     "extras": {
         "manifest": SB_FILE,

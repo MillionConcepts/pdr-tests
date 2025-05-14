@@ -124,7 +124,7 @@ file_information = {
     # PD1   Path Delay Data File from AWVR1
     "pd1": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.PD1)|(.pd1)'],
+        "fn_regex": [r'(\.PD1)|(\.pd1)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(PD1)|(pd1)'],
         "label": "D",
@@ -133,7 +133,7 @@ file_information = {
     # PD2   Path Delay Data File from AWVR2
     "pd2": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.PD2)|(.pd2)'],
+        "fn_regex": [r'(\.PD2)|(\.pd2)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(PD2)|(pd2)'],
         "label": "D",
@@ -142,7 +142,7 @@ file_information = {
     # TNF
     "tnf": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.TNF)|(.tnf)'],
+        "fn_regex": [r'(\.TNF)|(\.tnf)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(TNF)|(tnf)'],
         "label": "D",
@@ -151,7 +151,7 @@ file_information = {
     # EOP   Earth Orientation Parameters File
     "eop": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.EOP)|(.eop)'],
+        "fn_regex": [r'(\.EOP)|(\.eop)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(EOP)|(eop)'],
         "label": "D",
@@ -160,7 +160,7 @@ file_information = {
     # ION   Ionosphere Calibration File
     "ion": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.ION)|(.ion)'],
+        "fn_regex": [r'(\.ION)|(\.ion)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(ION)|(ion)'],
         "label": "D",
@@ -169,9 +169,27 @@ file_information = {
     # TRO   Troposphere Calibration File
     "tro": {
         "manifest": ATM_FILE,
-        "fn_regex": [r'(.TRO)|(.tro)'],
+        "fn_regex": [r'(\.TRO)|(\.tro)'],
         "url_must_contain": ['cors_'],
         "url_regex": [r'(TRO)|(tro)'],
+        "label": "D",
+        "support_np": True
+    },
+    # CKF   C-Kernel File
+    "ckf": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(CKF$)|(ckf$)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(CKF)|(ckf)'],
+        "label": "D",
+        "support_np": True
+    },
+    # SPK   SP-Kernel File
+    "spk": {
+        "manifest": ATM_FILE,
+        "fn_regex": [r'(SPK$)|(spk$)'],
+        "url_must_contain": ['cors_'],
+        "url_regex": [r'(SPK)|(spk)'],
         "label": "D",
         "support_np": True
     },

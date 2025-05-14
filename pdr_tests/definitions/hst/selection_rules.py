@@ -61,6 +61,14 @@ file_information = {
         "url_must_contain": ['ASTROM_xxxx/ASTROM_0101/DATA/EASYDATA'],
         "label": "D",
     },
+    # Spice kernels
+    "spice": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.bsp'],
+        "url_must_contain": ['ASTROM_xxxx/ASTROM_', 'SPICE'],
+        "label": "D",
+        "support_np": True,
+    },
 
     # HST WFPC2 observations of Jupiter during the comet Shoemaker-Levy 9 impact
     "jup_sl9_impact": {
@@ -69,5 +77,18 @@ file_information = {
         "url_regex": [r'sl9_000[56]/wfpc2/'],
         "label": "D",
     },
-    
+
+    # "PDS preview" version of HST data sets that are maintained by STScI.
+    # RMS node uses these copies for their data search tool, OPUS.
+    # File types: JPEG, TIFF, ASCII
+    # The ascii products use "DOCUMENT" pointers that are currently unsupported 
+    "opus_db": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.ASC'],
+        "url_must_contain": ['/DATA'],
+        "url_regex": [r'(HSTIx_xxxx)|(HSTJx_xxxx)|(HSTNx_xxxx)|(HSTOx_xxxx)'
+                      r'|(HSTUx_xxxx)'],
+        "label": "D",
+        "support_np": True,
+    },
 }

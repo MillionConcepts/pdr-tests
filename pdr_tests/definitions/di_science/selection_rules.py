@@ -150,7 +150,7 @@ file_information = {
     "notes": {
         "manifest": SBN_FILE,
         "url_must_contain": ['/NOTES'],
-        "url_regex": [r'(dif-)|(dii-)'],
+        "url_regex": [r'(dif-)|(dii-)|(di_iras)'],
         "label": "NA",
         "support_np": True
     },

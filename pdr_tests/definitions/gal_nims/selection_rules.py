@@ -47,6 +47,24 @@ file_information = {
 #        "url_must_contain": ['NIMS/go_100', 'edr'],
 #        "label": "A",
 #    },
+    # EDR ancillary vicar labels
+    "vicar": {
+        "manifest": IMG_FILE,
+        "fn_regex": [r'(([0-9]{2}[a-z])|(vic)$)'],
+        "url_must_contain": ['NIMS/go_100', 'vic'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    # # Currently unsupported; low priority, probably just support_np
+    # # There are extra newline characters throughout the files, and the ends 
+    # # of the labels are not being parsed correctly
+    # "spike": {
+    #     "manifest": IMG_FILE,
+    #     "fn_must_contain": ['.spi'],
+    #     "url_must_contain": ['NIMS/go_100', 'spike'],
+    #     "label": "A",
+    #     # "support_np": True
+    # },
     # Cubes (go_1101-go_1120)
     # SAMPLE_SPECTRUM_QUBE pointers are not supported (only included in 
     # early mission products)
@@ -55,6 +73,14 @@ file_information = {
        "fn_regex": [r'qu[bt]$'],
        "url_must_contain": ['NIMS/go_11'],
        "label": "A",
+    },
+    # EDRs and Cubes - spice kernels and other ancillary geometry files 
+    "geom": {
+        "manifest": IMG_FILE,
+        "fn_regex": [r'((nim)|(ti)$)'],
+        "url_must_contain": ['NIMS/go_1', 'geometry'],
+        "label": "A",
+        "support_np": True # no pointers in the labels
     },
     # Data from a Shoemaker-Levy 9 fragment's impact with Jupiter
     "impact": {

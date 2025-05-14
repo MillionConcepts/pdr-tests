@@ -61,4 +61,12 @@ file_information = {
         "url_must_contain": ['mg_22', 'geometry'],
         "label": "D",
     },
+    # Unsupported spice kernels; labels have no pointers to the data files
+    "spice": {
+        "manifest": ATM_MANIFEST,
+        "fn_regex": [r'((tsp)|(xsp))$'],
+        "url_must_contain": ['mg_22', 'geometry'],
+        "label": "D",
+        "support_np": True
+    },
 }

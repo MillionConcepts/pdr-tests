@@ -59,8 +59,10 @@ file_information = {
               'url_must_contain': ['data/mrors_2001/tps'],
               "label": "D"},
         
-#     # Unsupported; probably support not planned
-#     # The FILE_HEADER pointer opens, but the rest do not. Their block is 'None'
+    # Unsupported; support planned, low priority
+    # The FILE_HEADER pointer opens, but the rest do not. Most pointer names do 
+    # not match the object names, they're missing "FREQUENCY_" from the pointer 
+    # names
 #     'dlf': {'manifest': GEO_MRO_FILE,
 #             'fn_must_contain': ['.dlf'],
 #             'url_must_contain': ['rss','/ancillary/'],
