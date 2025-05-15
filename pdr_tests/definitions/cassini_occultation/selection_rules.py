@@ -37,6 +37,12 @@ file_information = {
         "url_must_contain": ['COVIMS_8xxx/COVIMS_8001/data'],
         "label": 'D',
     },
+    "vims_old": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_regex": [r'COVIMS_8xxx_v(1|2.0)/COVIMS_8001/((data)|(EASYDATA))'],
+        "label": 'D',
+    },
     # UVIS occultation data
     "uvis": {
         "manifest": RMS_FILE,
@@ -44,11 +50,23 @@ file_information = {
         "url_must_contain": ['COUVIS_8xxx/COUVIS_8001/data'],
         "label": 'D',
     },
+    "uvis_old": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_regex": [r'COUVIS_8xxx_v(1|2.[01])/COUVIS_8001/((data)|(DATA))'],
+        "label": 'D',
+    },
     # RSS occultation data
     "rss": {
         "manifest": RMS_FILE,
         "fn_must_contain": ['.TAB'],
         "url_must_contain": ['CORSS_8xxx/CORSS_8001/data'],
+        "label": 'D',
+    },
+    "rss_old": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['CORSS_8xxx_v1/CORSS_8001/EASYDATA'],
         "label": 'D',
     },
 }

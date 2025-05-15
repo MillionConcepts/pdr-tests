@@ -63,4 +63,36 @@ file_information = {
         "url_regex": [r'LO[345]_0001/constructed_frames'],
         "label": 'A',
     },
+    # extras
+    "mosaics": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.cub'],
+        "url_must_contain": ['global_mosaic'],
+        "url_regex": [r'LO[345]_0001/extras'],
+        "label": 'A',
+    },
+    "scanned_strips": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.raw'],
+        "url_must_contain": ['scanned_strips'],
+        "url_regex": [r'LO[345]_0001/extras'],
+        "label": 'A', # no PDS labels, attached or otherwise
+        "support_np": True
+    },
+    "scan_list": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.lst'],
+        "url_must_contain": ['scanned_strips'],
+        "url_regex": [r'LO[345]_0001/extras'],
+        "label": 'A', # no PDS labels, attached or otherwise
+        "support_np": True
+    },
+    "spice_info": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.flat'],
+        "url_must_contain": ['ancillary_info'],
+        "url_regex": [r'LO[345]_0001/extras'],
+        "label": 'A', # no PDS labels, attached or otherwise
+        "support_np": True
+    },
 }

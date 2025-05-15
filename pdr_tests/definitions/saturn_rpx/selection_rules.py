@@ -160,4 +160,28 @@ file_information = {
         "url_must_contain": ['RPX_xxxx/RPX_0401/DATA'],
         "label": "D",
     },
+
+    # older version of the HST dataset
+    # (IMAGE and HEADER pointers open fine; the EXTENSION_TABLE is missing rows)
+    "hst_old_cal_img": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['RPX_xxxx_v1/RPX_000', '/199'],
+        "label": "D",
+    },
+    "hst_old_compressed": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.ZIP'],
+        "url_must_contain": ['RPX_xxxx_v1/RPX_000', '/199'],
+        "label": "D",
+        "support_np": True,
+    },
+    # HST spice kernels
+    "hst_spice": {
+        "manifest": RMS_FILE,
+        "fn_regex": [r'((TLS)|(TPC)|(BSP)|(XSP))$'],
+        "url_regex": [r'RPX_xxxx(_v1)?/RPX_000./GEOMETRY'],
+        "label": "D",
+        "support_np": True,
+    },
 }

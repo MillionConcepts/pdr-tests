@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+020B_C0F.LBL,"[""020B_C0F.IMG"", ""020B_C0F.LBL"", ""FITS.TXT"", ""EXTTAB.FMT""]",020B_C0F,http://pds-rings.seti.org/holdings/volumes/RPX_xxxx_v1/RPX_0003/199508XX/U2TFXXXX/CALIMAGE,"{""PC1_IMAGE"": ""df2c57fcd000acb6c3cae7d84c12d808"", ""WF2_IMAGE"": ""9907a680d9b291cd955efb5b1920fb58"", ""WF3_IMAGE"": ""9dbc1a4e87962bf8bbd340a15db98801"", ""WF4_IMAGE"": ""092f076889c95560df02623d2b860aad"", ""EXTENSION_TABLE"": ""30756cb63f23a43bae24eff61270547d""}"

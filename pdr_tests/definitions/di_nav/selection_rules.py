@@ -78,11 +78,26 @@ file_information = {
         "url_must_contain": ['dif-c-rss-1-9p-encounter', '/data'],
         "label": "D",
     },
+    "rss_support_np": {
+        "manifest": SBN_FILE,
+        "fn_regex": [r'((eop)|(ion)|(tro))$'],
+        "url_must_contain": ['dif-c-rss-1-9p-encounter', '/data'],
+        "label": "D", # no data pointers in the labels
+        "support_np": True
+    },
     # spacecraft instrument temperatures
     "temps": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['dif-c-hrii_hriv_mri-6-temps', '/data'],
+        "label": "D",
+    },
+    # additional temperature logs
+    "templog": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['-2-ground-', 'data/templog'],
+        "url_regex": [r'(dif-cal)|(dii-cal)'],
         "label": "D",
     },
     # pre-launch testing

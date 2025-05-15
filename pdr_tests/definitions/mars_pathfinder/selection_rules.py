@@ -72,6 +72,12 @@ file_information = {
         "url_must_contain": ['mpim_000', '/seq'],
         "label": "A",
     },
+    "imp_cal": {
+        "manifest": IMG_FILE,
+        "fn_regex": [r'((drk)|(nul)|(str)$)'],
+        "url_must_contain": ['mpim_000', 'calimg', '/seq'],
+        "label": "A",
+    },
     # Rover Camera EDRs
     "rvrcam_edr": {
         "manifest": IMG_FILE,

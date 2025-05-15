@@ -185,6 +185,13 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    "lsp_gz_uncompressed": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['ihw-c-lspn-2-didr-gz', 'data/uncompressed'],
+        "label": "A", # no PDS labels
+        "support_np": True # notionally supported
+    },
     # Compressed GZ and Halley v1.0 images are not supported. Some images open
     # incorrectly as all static, others do not open at all.
     "lsp_compressed": {
@@ -202,6 +209,39 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+
+    # Geometry files
+    "geom_gz": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ihw-c','-gz', 'geometry'],
+        "label": "A", # no PDS labels
+        "support_np": True # safed dataset
+    },
+    "geom_ephem": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['ephemeris.tab'],
+        "url_must_contain": ['ihw-c','-halley', 'geometry/ephem'],
+        "label": "D",
+    },
+    "geom_ephem_old": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['ephem.tab'],
+        "url_must_contain": ['ihw-c','-halley', 'geometry/ephem'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    # No newlines in the data files. Very very low priority for a special case 
+    # (only v1.0 of the Halley datasets have geometry directories, they are not 
+    # included in the updated v2.0 datasets)
+    "geom_hist": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ihw-c','-halley', 'geometry/ast_hist'],
+        "label": "D",
+        "support_np": True
+    },
+
 }
 """
 Update 11/11/24:

@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+i052733r.drk,"[""i052733r.drk""]",IMP_EDR-1250052733-DARK_CURRENT-0051050003,http://asc-pds-mars-pathfinder.s3.us-west-2.amazonaws.com/mpim_0003/calimg/seq0051/c1250xxx,"{""IMAGE"": ""5961ce17ee9e7e5eed26d5d257200f5b""}"
+i952521n.nul,"[""i952521n.nul""]",IMP_EDR-1253952521-NULL_STRIP-0283020120,http://asc-pds-mars-pathfinder.s3.us-west-2.amazonaws.com/mpim_0003/calimg/seq0283/c1253xxx,"{""IMAGE"": ""b2f0a9fb9641017250dad6be40dcefac""}"
+i066544s.str,"[""i066544s.str""]",IMP_EDR-1253066544-DARK_STRIP-0051050002,http://asc-pds-mars-pathfinder.s3.us-west-2.amazonaws.com/mpim_0003/calimg/seq0051/c1253xxx,"{""IMAGE"": ""19960cf7bb4976dc499d988bca9bd93b""}"
