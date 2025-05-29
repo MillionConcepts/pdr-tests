@@ -52,8 +52,13 @@ file_information = {
         "url_must_contain": ['VG_28xx/VG_2810/DATA'],
         "label": "D",
     },
-    # Additional images (.IMG) in this dataset are duplicates of images included
-    # in the vg_iss selection rules.
+    # Duplicates of images included in the vg_iss selection rules
+    "iss_img": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['VG_28xx/VG_2810/DATA'],
+        "label": "D",
+    },
     # Compressed EDR images (.IMQ) are known unsupported, support not planned.
     
     

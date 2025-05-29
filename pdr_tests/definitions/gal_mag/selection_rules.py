@@ -79,4 +79,21 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    # spice kernels
+    "spice": {
+        "manifest": PLASM_FILE,
+        "fn_regex": [r'((BSP)|(TLS)|(TPC)|(TSC))$'],
+        "url_must_contain": ['GO-', '-MAG-', '-RDR-', 'EXTRAS/SPICE'],
+        "label": "D",
+        "support_np": True
+    },
+    # (maybe) software files; no PDS labels
+    "misc": {
+        "manifest": PLASM_FILE,
+        "fn_regex": [r'((mpsh)|(opt))$'],
+        "url_must_contain": ['GO-J-MAG-3-RDR-MAGSPHERIC-SURVEY-V1.0',
+                             'DATA/SURVEY'],
+        "label": "A",
+        "support_np": True
+    },
 }

@@ -36,4 +36,12 @@ file_information = {
         "url_must_contain": ['JNO', "FGM-CAL"],
         "label": "D",
     },
+    # no pointers in the labels
+    "model": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": [".MOD"],
+        "url_must_contain": ['JNO', "FGM-CAL", "DATA/MODEL"],
+        "label": "D",
+        "support_np": True
+    },
 }

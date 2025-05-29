@@ -95,6 +95,14 @@ file_information = {
         "url_must_contain": ['CO-E_SW_J_S-MAG-4-SUMM-1MINAVG', 'DATA'],
         "label": "D",
     },
+    # spice kernels
+    "summ_spice": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.MK'],
+        "url_must_contain": ['CO-E_SW_J_S-MAG-4-SUMM-1MINAVG', 'GEOMETRY'],
+        "label": "D",
+        "support_np": True
+    },
     
 }
 

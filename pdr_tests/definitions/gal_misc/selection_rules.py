@@ -84,6 +84,14 @@ file_information = {
         "url_must_contain": ['/GO-', '-POS-6-REDR-ROTOR', '/DATA'],
         "label": "D",
     },
+    # spice kernels
+    "spice": {
+        "manifest": PLASM_FILE,
+        "fn_regex": [r'((BSP)|(TLS)|(TPC)|(TSC))$'],
+        "url_must_contain": ['GO-', '-POS-6-', 'EXTRAS/SPICE'],
+        "label": "D",
+        "support_np": True
+    },
 
     # Miscellaneous Ida and Gaspra products at the Small Bodies Node
     # Light Curves (data is .dat, supporting products are .tab)
@@ -99,5 +107,14 @@ file_information = {
         "fn_must_contain": ['.tab'],
         "url_must_contain": ['sbnig_0001/data/spectra'],
         "label": "D",
+    },
+
+    # uplink archive (most files are .txt or .pdf)
+    "uplink": {
+        "manifest": PLASM_FILE,
+        "fn_regex": [r'((tab)|(TAB))$'],
+        "url_must_contain": ['GO-J_JSA_X_V_E_A_C-UPL-V1.0/DATA'],
+        "label": "D", # incomplete labels
+        "support_np": True
     },
 }

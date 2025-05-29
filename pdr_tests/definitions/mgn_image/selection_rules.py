@@ -72,7 +72,7 @@ file_information = {
     },
     "f-bidr_no_labels": {
         "manifest": GEO_MANIFEST,
-        "fn_must_contain": ['file'],
+        "fn_must_contain": ['file', '.g0001v'],
         "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
         "label": "A",
         "support_np": True

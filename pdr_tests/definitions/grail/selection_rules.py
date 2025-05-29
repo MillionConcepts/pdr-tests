@@ -127,7 +127,8 @@ file_information = {
     "extras_xls": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.xls'],
-        "url_must_contain": ['grail-l-lgrs-', '/grail_', '/extras'],
+        "url_must_contain": ['/grail_', '/extras'],
+        "url_regex": [r'grail-l-((lgrs)|(rss))-'],
         "label": "A",
         "support_np": True
     },
