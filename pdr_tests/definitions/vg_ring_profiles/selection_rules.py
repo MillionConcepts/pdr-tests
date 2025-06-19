@@ -93,6 +93,43 @@ file_information = {
     },
     # Ancillary products: FOV maps, calibration models, geometry, jitter,
     # trajectory, and vector files. Source data files are safed.
+    "pps_geom": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2801/GEOMETRY'],
+        "label": "D",
+    },
+    # The labels for some products have the wrong filename in their ^SERIES pointer. Needs a special case
+    # "pps_jitter": {
+    #     "manifest": RMS_FILE,
+    #     "fn_must_contain": ['.TAB'],
+    #     "url_must_contain": ['VG_28xx/VG_2801/JITTER'],
+    #     "label": "D",
+    # },
+    "pps_traj": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2801/TRAJECT'],
+        "label": "D",
+    },
+    "pps_vector": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2801/VECTORS'],
+        "label": "D",
+    },
+    "pps_image": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['VG_28xx/VG_2801/IMAGES'],
+        "label": "D",
+    },
+    "pps_fov": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['VG_28xx/VG_2801/FOVMAPS'],
+        "label": "D",
+    },
     
     
     # vg_2802 - Saturn/Uranus/Neptune UVS ring profiles
@@ -130,6 +167,30 @@ file_information = {
     # files. Source data files are safed.
     # Image products (.IMG) in this dataset are duplicates of images included
     # in the vg_iss selection rules.
+    "uvs_geom": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2802/GEOMETRY'],
+        "label": "D",
+    },
+    "uvs_traj": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2802/TRAJECT'],
+        "label": "D",
+    },
+    "uvs_vector": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2802/VECTORS'],
+        "label": "D",
+    },
+    "uvs_image": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.IMG'],
+        "url_must_contain": ['VG_28xx/VG_2802/IMAGES'],
+        "label": "D",
+    },
     
     
     # vg_2803 - Saturn/Uranus radio occultation ring profiles
@@ -174,6 +235,12 @@ file_information = {
     },
     # Ancillary products: calibration models and geometry files. Source
     # data files are safed.
+    "rocc_geom": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2803', '/GEOMETRY'],
+        "label": "D",
+    },
 
 
     # Safed source data files
@@ -202,6 +269,15 @@ file_information = {
         "fn_must_contain": ['.IMQ'],
         "url_must_contain": ['VG_28xx/VG_2810', '/SOURCE'],
         "label": "A",
+        "support_np": True
+    },
+
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": RMS_FILE,
+        "fn_regex": [r'((TLS)|(TPC)|(BSP)|(XSP))$'],
+        "url_must_contain": ['VG_28xx/VG_280', '/SPICE'],
+        "label": "D",
         "support_np": True
     },
 }
