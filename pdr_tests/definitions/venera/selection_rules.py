@@ -36,5 +36,13 @@ file_information = {
         "url_must_contain": ['V15_V16-V-ROE-5-OCC-ELECTRON-DENS-V1.0/DATA'],
         "label": "D",
     },
+    # IDL save file - support not planned; no PDS label
+    "sav": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.SAV'],
+        "url_must_contain": ['V15_V16-V-ROE-5-OCC-ELECTRON-DENS-V1.0/EXTRAS'],
+        "label": "D",
+        "support_np": True
+    },
 }
 

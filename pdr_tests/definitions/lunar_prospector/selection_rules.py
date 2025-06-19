@@ -150,6 +150,12 @@ file_information = {
         "url_must_contain": ['LP-L-ENG', 'DATA/ANCILLARY'],
         "label": "D",
     },
+    # "traj_ancillary": {
+    #     "manifest": PPI_FILE,
+    #     "fn_must_contain": ['.TAB'],
+    #     "url_must_contain": ['LP-L-6-TRAJECTORY-V1.0/EXTRAS'],
+    #     "label": "D",
+    # },
 
     # Support not planned (no pointers in the labels)
     "ephemeris": {
@@ -164,6 +170,20 @@ file_information = {
         "fn_must_contain": ['.DAT'],
         "url_must_contain": ['LP-L-6-POSITION-V1.0/DATA/POSITION'],
         "label": "D",
+        "support_np": True
+    },
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((TLS)|(TSP)|(TPC))$'],
+        "url_must_contain": ['LP-L-', '/EXTRAS'],
+        "label": "D",
+        "support_np": True
+    },
+    "random_file": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.opt'],
+        "url_must_contain": ['LP-L-MAG-4-LUNAR-FIELD-TS-V1.0/DATA'],
+        "label": "A", # no PDS label
         "support_np": True
     },
 }

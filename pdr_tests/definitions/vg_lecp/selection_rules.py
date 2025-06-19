@@ -129,7 +129,7 @@ file_information = {
     # Uranus RDR step 12.8min (formatted differently from LECP-3-RDR-STEP)
     "u_rdr_step_12.8": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'(TAB)|(DAT)$'], # ascii and binary versions available
+        "fn_regex": [r'((TAB)|(DAT))$'], # ascii and binary versions available
         "url_must_contain": ['U-LECP-4-RDR-STEP-12.8MIN', '/DATA'],
         "label": "D",
     },
@@ -150,14 +150,14 @@ file_information = {
     # Uranus SUMM average
     "u_summ_average": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'(TAB)|(DAT)$'], # ascii and binary versions available
+        "fn_regex": [r'((TAB)|(DAT))'], # ascii and binary versions available
         "url_must_contain": ['U-LECP-4-SUMM-AVERAGE-15MIN', '/DATA'],
         "label": "D",
     },
     # Uranus SUMM scan
     "u_summ_scan": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'(TAB)|(DAT)$'], # ascii and binary versions available
+        "fn_regex": [r'((TAB)|(DAT))$'], # ascii and binary versions available
         "url_must_contain": ['U-LECP-4-SUMM-SCAN-24SEC', '/DATA'],
         "label": "D",
     },
@@ -172,17 +172,40 @@ file_information = {
     # Neptune RDR step 12.8min (formatted differently from LECP-3-RDR-STEP)
     "n_rdr_step_12.8": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'(TAB)|(DAT)$'], # ascii and binary versions available
+        "fn_regex": [r'((TAB)|(DAT))$'], # ascii and binary versions available
         "url_must_contain": ['N-LECP-4-RDR-STEP-12.8MIN', '/DATA'],
         "label": "D",
     },
     # Neptune SUMM scan
     "n_summ_scan": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'(TAB)|(DAT)$'], # ascii and binary versions available
+        "fn_regex": [r'((TAB)|(DAT))$'], # ascii and binary versions available
         "url_must_contain": ['N-LECP-4-SUMM-SCAN-24SEC', '/DATA'],
         "label": "D",
     },
     
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((SPK)|(KER)|(TSP)|(TPC)|(TLS))$'],
+        "url_must_contain": ['-LECP-4-SUMM-', '/EXTRAS/SPICE'],
+        "label": "D",
+        "support_np": True
+    },
+    # Extras - support not planned; no PDS labels
+    "extras_splash": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((SPH)|(ABS)|(DAT)|(DES)|(HED))$'],
+        "url_must_contain": ['-LECP-4-SUMM-', '/EXTRAS/SPLASH'],
+        "label": "A", # no labels
+        "support_np": True
+    },
+    "extras_cdr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.cdr'],
+        "url_must_contain": ['-LECP-4-SUMM-', '/EXTRAS'],
+        "label": "A", # no labels
+        "support_np": True
+    },
 }
 

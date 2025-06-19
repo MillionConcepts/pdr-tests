@@ -237,4 +237,13 @@ file_information = {
         "url_must_contain": ['ULY-J-URAP-4-SUMM-WFA-PEAK-E-10MIN-V1.0/DATA'],
         "label": "D",
     },
+
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((LSK)|(PCK)|(XSP))$'],
+        "url_must_contain": ['ULY-J-SCE-1-', '/GEOMETRY'],
+        "label": "D",
+        "support_np": True
+    },
 }

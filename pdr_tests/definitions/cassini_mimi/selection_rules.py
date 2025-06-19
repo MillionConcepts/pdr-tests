@@ -92,5 +92,27 @@ file_information = {
         "url_must_contain": ['CO-S-MIMI-4-LEMMS-CALIB', 'DATA/L'],
         "label": "D",
 	},
+
+    # # ancillary products
+    # "edr_geom": {
+    #     "manifest": PPI_FILE,
+    #     "fn_must_contain": ['.CSV'],
+    #     "url_must_contain": ['CO-E_J_S_SW-MIMI-2-', 'GEOMETRY'],
+    #     "label": "D",
+    # },
+    # "rdr_ancil": {
+    #     "manifest": PPI_FILE,
+    #     "fn_must_contain": ['.CSV'],
+    #     "url_must_contain": ['CO-S-MIMI-4-', 'DATA/ANCILLARY'],
+    #     "label": "D",
+    # },
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TM'],
+        "url_must_contain": ['DATA/ANCILLARY/KERNELS'],
+        "url_regex": [r'(CO-E_J_S_SW-MIMI-2-)|(CO-S-MIMI-4-)'],
+        "label": "D",
+        "support_np": True
+    },
 	
 }

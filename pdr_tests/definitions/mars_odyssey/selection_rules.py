@@ -46,6 +46,13 @@ file_information = {
         "url_must_contain": ['ODY-M-MAR-3-RDR-CALIBRATED-DATA', 'DATA/2'],
         "label": "D",
     },
+    "marie_spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((TI)|(TPC))$'],
+        "url_must_contain": ['ODY-M-MAR-', '/GEOMETRY'],
+        "label": "D",
+        "support_np": True
+    },
     
     # GRS Instrument Suite (GRS/NS/HEND)
     # EDR - gamma spectra
@@ -91,6 +98,13 @@ file_information = {
         "url_must_contain": ['ody-m-grs-2-edr-v1'],
         "label": "D",
     },
+    # # EDR - e-kernel (experimenter's notebook and associated time series)
+    # "edr_e_kernel": {
+    #     "manifest": GEO_FILE,
+    #     "fn_must_contain": ['e_kernel', '.dat'],
+    #     "url_must_contain": ['ody-m-grs-2-edr-v1'],
+    #     "label": "D", # the label and data filenames do not match
+    # },
     # EDR - notionally supported ancillary products that are annoying to test 
     # with ix because the have several (sometimes dozens) of .dat files per 
     # label, and the label names do not always match the data files' names

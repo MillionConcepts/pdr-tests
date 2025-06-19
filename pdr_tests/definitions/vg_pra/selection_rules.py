@@ -94,4 +94,36 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+
+    # Extras - support not planned
+    "extras_splash": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.SPH'],
+        "url_must_contain": ['VG2-', '-PRA-', '/EXTRAS/SPLASH'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_cdr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.cdr'],
+        "url_must_contain": ['VG2-', '-PRA-', '/EXTRAS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_dos": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((CFG)|(HLP)|(OBJ)|(DSK)|(MAK)|(PRJ))$'],
+        "url_must_contain": ['VG2-', '-PRA-', '/EXTRAS/DOS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((TLS)|(TPC)|(TSP)|(TC))$'],
+        "url_must_contain": ['VG2-', '-PRA-'],
+        "url_regex": [r'(/GEOMETRY)|(/EXTRAS/SPICE)'],
+        "label": "D",
+        "support_np": True
+    },
 }

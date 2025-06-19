@@ -65,4 +65,11 @@ file_information = {
         "label": 'D',
         "support_np": True
     },
+    "filename_typo": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.TXT~'],
+        "url_must_contain": ['LROLAM_', 'GEOMETRY'],
+        "label": 'A',
+        "support_np": True
+    },
 }

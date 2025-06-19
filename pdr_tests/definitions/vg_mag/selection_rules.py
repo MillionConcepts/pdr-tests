@@ -152,5 +152,29 @@ file_information = {
         "url_must_contain": ['VG','-SW-MAG-4-SUMM-HGCOORDS', '/DATA'],
         "label": "D",
     },
+
+    # Extras - support not planned
+    "extras_splash": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((SPH)|(ABS)|(DAT)|(DES)|(HED))$'],
+        "url_must_contain": ['VG2-', '-MAG-', '/EXTRAS/SPLASH'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_cdr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.cdr'],
+        "url_must_contain": ['VG2-', '-MAG-', '/EXTRAS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((TLS)|(TPC)|(TSP)|(TC))$'],
+        "url_must_contain": ['VG2-', '-MAG-', '/EXTRAS/SPICE'],
+        "label": "D",
+        "support_np": True
+    },
 }
 

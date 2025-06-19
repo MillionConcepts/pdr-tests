@@ -79,5 +79,36 @@ file_information = {
         "label": "D",
     },
     
+    # Extras - support not planned
+    "extras_splash": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((SPH)|(ABS)|(DAT)|(DES)|(HED))$'],
+        "url_must_contain": ['VG2-S-CRS-4-SUMM-','/EXTRAS/SPLASH'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_cdr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.cdr'],
+        "url_must_contain": ['VG2-', '-CRS-', '/EXTRAS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((TLS)|(TPC)|(TSP)|(TC))$'],
+        "url_must_contain": ['VG2-', '-CRS-', '/EXTRAS/SPICE'],
+        "label": "D",
+        "support_np": True
+    },
+    # Ancillary - support not planned
+    "ancil_csv": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.CSV'],
+        "url_must_contain": ['VG', '-CRS-', '/DATA'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
 }
 

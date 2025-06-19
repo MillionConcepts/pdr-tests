@@ -117,4 +117,11 @@ file_information = {
         "label": "D", # incomplete labels
         "support_np": True
     },
+    "uplink_other": {
+        "manifest": PLASM_FILE,
+        "fn_must_contain": ['.data'],
+        "url_must_contain": ['GO-J_JSA_X_V_E_A_C-UPL-V1.0/DATA'],
+        "label": "A", # no PDS label
+        "support_np": True
+    },
 }

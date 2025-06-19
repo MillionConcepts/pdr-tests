@@ -101,4 +101,22 @@ file_information = {
         "url_must_contain": ['CO-V_E_J_S_SS-RPWS-4-SUMM-KEY60S', 'DATA', 'KEY_PARAMS'],
         "label": "D",
     },
+
+    # ancillary tables
+    # "ancil": {
+    #     "manifest": PPI_FILE,
+    #     "fn_must_contain": ['.TAB'],
+    #     "url_must_contain": ['DATA/ANCILLARY'],
+    #     "url_regex": [r'(CO-V_E_J_S_SS-RPWS-)|(CO-SS_S-RPWS-)'],
+    #     "label": "D",
+    # },
+    # csv files in the extras directory without PDS labels
+    "extras": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.csv'],
+        "url_must_contain": ['EXTRAS/SEQUENCE_INFO'],
+        "url_regex": [r'(CO-V_E_J_S_SS-RPWS-)|(CO-SS_S-RPWS-)'],
+        "label": "A",
+        "support_np": True
+    },
 }

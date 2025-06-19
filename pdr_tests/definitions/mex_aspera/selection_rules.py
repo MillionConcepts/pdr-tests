@@ -109,4 +109,18 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    "spice_PPI": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((BC)|(TF)|(TI)|(TLS)|(ORB)|(TPC)|(BPC)|(TSC)|(BSP))$'],
+        "url_must_contain": ['MEX-M-ASPERA3', 'EXTRAS/SPICE_DATA'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "compressed_PPI": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.ZIP'],
+        "url_must_contain": ['MEX-M-ASPERA3', 'EXTRAS'],
+        "label": "D",
+        "support_np": True
+    },
 }

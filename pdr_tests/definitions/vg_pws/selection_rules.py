@@ -146,9 +146,47 @@ file_information = {
     },
     "nep_summ_asc": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'(TAB)|(BRO)$'],
+        "fn_regex": [r'((TAB)|(BRO))$'],
         "url_must_contain": ['VG2-N-PWS-4-SUMM-SA-48SEC', '/DATA'],
         "label": "D",
+    },
+
+    # Extras - support not planned; no PDS labels
+    "extras_splash": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.SPH'],
+        "url_must_contain": ['VG', '-PWS-', '/EXTRAS/SPLASH'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_cdr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.cdr'],
+        "url_must_contain": ['VG', '-PWS-', '/EXTRAS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_dos": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((CFG)|(HLP)|(OBJ)|(DSK)|(MAK)|(PRJ))$'],
+        "url_must_contain": ['VG', '-PWS-', '/EXTRAS/DOS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_ico": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.ICO'],
+        "url_must_contain": ['VG', '-PWS-', '/EXTRAS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((TLS)|(TPC)|(TSP))$'],
+        "url_must_contain": ['VG', '-PWS-', '/EXTRAS/SPICE'],
+        "label": "D",
+        "support_np": True
     },
 }
 

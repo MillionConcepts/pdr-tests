@@ -72,4 +72,26 @@ file_information = {
         "url_must_contain": ['MGS-M-ER-5-FIELD-MAP','DATA'],
         "label": "D",
     },
+
+    # # Geometry products
+    # "orbit_info": {
+    #     "manifest": MANIFEST_FILE,
+    #     "fn_must_contain": ['.TAB'],
+    #     "url_must_contain": ['MGS-M-', '/GEOMETRY'],
+    #     "label": "D",
+    # },
+    # "ancil_text": {
+    #     "manifest": MANIFEST_FILE,
+    #     "fn_must_contain": ['.KER'],
+    #     "url_must_contain": ['MGS-M-', '/GEOMETRY'],
+    #     "label": "D",
+    # },
+    # Spice kernels - support not planned
+    "spice": {
+        "manifest": MANIFEST_FILE,
+        "fn_regex": [r'((TF)|(TPC)|(TI))$'],
+        "url_must_contain": ['MGS-M-', '/GEOMETRY'],
+        "label": "D",
+        "support_np": True
+    },
 }

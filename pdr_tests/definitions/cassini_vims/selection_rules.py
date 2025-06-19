@@ -27,6 +27,7 @@ are detached.
 # variables naming specific parquet files in node_manifests
 RMS_PDS4 = "ringpds4"
 RMS_PDS3 = "ringvolumes"
+IMG_FILE = "img_usgs_cassini"
 
 file_information = {
 	
@@ -49,6 +50,13 @@ file_information = {
         "manifest": RMS_PDS3,
         "fn_must_contain": ['.qub'],
         "url_must_contain": ['COVIMS_0xxx/', '/data'],
+        "label": "D",
+        "support_np": True
+    },
+    "cube_pds3_img": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.qub'],
+        "url_must_contain": ['VIMS/covims_', '/data'],
         "label": "D",
         "support_np": True
     },
