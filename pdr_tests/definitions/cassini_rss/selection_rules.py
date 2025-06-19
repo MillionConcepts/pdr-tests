@@ -107,7 +107,7 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_regex": [r'(TLM$)|(tlm$)'],
         "url_must_contain": ['cors_'],
-        "url_regex": [r'(TLM)|(tlm)'],
+        "url_regex": [r'(TLM)|(tlm)|(158)'],
         "label": "D",
     },
 
@@ -126,7 +126,7 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_regex": [r'(\.PD1)|(\.pd1)'],
         "url_must_contain": ['cors_'],
-        "url_regex": [r'(PD1)|(pd1)'],
+        "url_regex": [r'(PD[12])|(pd[12])'],
         "label": "D",
         "support_np": True
     },
@@ -135,7 +135,7 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_regex": [r'(\.PD2)|(\.pd2)'],
         "url_must_contain": ['cors_'],
-        "url_regex": [r'(PD2)|(pd2)'],
+        "url_regex": [r'(PD[12])|(pd[12])'],
         "label": "D",
         "support_np": True
     },
@@ -180,7 +180,7 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_regex": [r'(CKF$)|(ckf$)'],
         "url_must_contain": ['cors_'],
-        "url_regex": [r'(CKF)|(ckf)'],
+        "url_regex": [r'(CKF)|(ckf)|(spk)'],
         "label": "D",
         "support_np": True
     },

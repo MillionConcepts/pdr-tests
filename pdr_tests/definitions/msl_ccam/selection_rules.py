@@ -38,13 +38,16 @@ file_information = {
         "label": "D",
         "support_np": True
     },
-    "CCAM_LIBS_EDR_RARE": {
-        "manifest": GEO_FILE,
-        "fn_regex": [r"cl[378].*edr.*ccam.*\.dat"],
-        "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
-        "label": "D",
-        "support_np": True
-    },
+    # # Overlaps with the CCAM_LIBS_EDR ptype. Seems to have been separated out 
+    # # for initial testing, but this '_RARE' ptype is no longer needed because 
+    # # the LIBS EDRs are all support_np now
+    # "CCAM_LIBS_EDR_RARE": {
+    #     "manifest": GEO_FILE,
+    #     "fn_regex": [r"cl[378].*edr.*ccam.*\.dat"],
+    #     "url_must_contain": ["msl-m-chemcam-libs-2-edr-v1"],
+    #     "label": "D",
+    #     "support_np": True
+    # },
 
     "CCAM_RMI_EDR": {
         "manifest": GEO_FILE,

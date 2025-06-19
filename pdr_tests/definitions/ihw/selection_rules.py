@@ -162,6 +162,20 @@ file_information = {
         "url_must_contain": ['ear-c-ccd-3-edr-halley-outburst', 'data'],
         "label": "D",
     },
+    # derived flux (3 products, but they're copies of the same table)
+    "ccd_flux": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['ear-c-ccd-3-edr-halley-outburst', 'data'],
+        "label": "D",
+    },
+    # ascii log file
+    "ccd_log": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.asc'],
+        "url_must_contain": ['ear-c-ccd-3-edr-halley-outburst', 'data'],
+        "label": "D",
+    },
 
     # Most GZ products have incomplete PDS3 labels (support not planned)
     "spec_gz_raw": {

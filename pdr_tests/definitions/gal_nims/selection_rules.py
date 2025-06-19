@@ -36,6 +36,14 @@ file_information = {
         "url_must_contain": ['NIMS/go_100', 'edr'],
         "label": "A",
     },
+    # # Currently unsupported; low priority, probably just support_np
+    # # There are extra newline characters throughout the data files, so data is missing from the end of the table when opened with pdr
+    # "pre_jup_spike": {
+    #     "manifest": IMG_FILE,
+    #     "fn_regex": [r's[0-9]{7}\.[0-9]{2}[a-z]'],
+    #     "url_must_contain": ['NIMS/go_100', 'spike'],
+    #     "label": ('s1020', 'l1020'),
+    # },
     # EDRs (go_1005-go_1008) - Jupiter and its moons
     # DATA_TABLE and HEADER_TABLE do not open (support planned). Both pointers 
     # need a special case to make changes to the fmtdef, similar to 

@@ -130,6 +130,17 @@ file_information = {
         "label": "D",
     },
     
+    # # Ancillary table of informal rock/feature names
+    # # Not supported - one row includes a letter with an accent that throws an 
+    # # error when opened through _interpret_as_ascii() and pd.read_csv(). 
+    # # Could add a special case; low priority
+    # "gazetter": {
+    #     "manifest": IMG_FILE,
+    #     "fn_must_contain": ['.tab'],
+    #     "url_must_contain": ['mpim_000', 'gazetter'],
+    #     "label": "D",
+    # },
+    
     # Support not planned
     # Supplementary files without labels; compressed with gzip
     "3d_unsupported": {

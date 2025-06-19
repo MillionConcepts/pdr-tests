@@ -134,7 +134,7 @@ file_information = {
     # are supported products, the rest are not
     "unsupported_ech_mch": {
         "manifest": MANIFEST_FILE,
-        "fn_regex": [r'^(([0-9])|(g)).*((mch)|(MCH)|(ech)|(ECH))$'],
+        "fn_regex": [r'^(([0-9])|(g)|(h)).*((mch)|(MCH)|(ech)|(ECH))$'],
         "url_must_contain": ['mgs-m-rss-1-'],
         "label": "D",
         "support_np": True
