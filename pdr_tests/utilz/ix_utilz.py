@@ -200,6 +200,8 @@ class HTTPSessionWrapper:
         self.retries = retries
         self.timeout = timeout
         self.backoff = backoff
+        self.tried_https_upgrade = False
+        self.do_https_upgrade = False
 
     def reset(self):
         if self.session is not None:
@@ -216,17 +218,39 @@ class HTTPSessionWrapper:
     def get_with_retries(self, url: str):
         if self.session is None:
             self.reset()
+        base_url = url
+        if self.do_https_upgrade is True:
+            url = url.replace("http", "https")
         for _ in range(self.retries):
             try:
                 return self.session.get(
                     url, stream=True, timeout=self.timeout
                 )
+            except requests.ConnectTimeout:
+                msg = f"connection refused for {url}, reestablishing session"
+                if (
+                    self.tried_https_upgrade is False
+                    and url.startswith("http")
+                ):
+                    self.do_https_upgrade = True
+                    url = url.replace("http", "https")
+                    msg += " and converting url to https"
+                elif (
+                    self.do_https_upgrade is True
+                    and base_url.startswith("http")
+                ):
+                    msg += (
+                        "; because https conversion was ineffective, not "
+                        "converting subsequent urls"
+                    )
+                    self.do_https_upgrade = False
+                console_and_log(msg)
             except requests.ReadTimeout:
                 console_and_log(
                     f"slow response on {url}; reestablishing session"
                 )
-                time.sleep(self.backoff)
-                self.reset()
+            time.sleep(self.backoff)
+            self.reset()
         return None
 
     @property
@@ -360,6 +384,7 @@ def _verbose_web_temp_download_file(
     except FileNotFoundError:
         pass
     console_and_log(f"attempting to download {url}.")
+    response = None
     try:
         response = session.get_with_retries(url)
         if response is None:
@@ -385,7 +410,8 @@ def _verbose_web_temp_download_file(
         _download_chunk(response, Path(data_path), Path(url).name)
         console_and_log(f"completed download of {url}.")
     finally:
-        response.close()
+        if response is not None:
+            response.close()
 
 
 def _download_chunk(response, data_path, data_name):
