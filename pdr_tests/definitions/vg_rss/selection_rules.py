@@ -54,5 +54,23 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    # Geometry files at PPI
+    "geom": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG', 'RSS-1-ROCC', '/GEOMETRY'],
+        "label": "D",
+    },
+    # Support not planned
+    # The SPK products are spice kernels. The DAT products have no pointers in 
+    # the labels. The CRS tables have extra newline characters throughout that 
+    # cause them to open incorrectly.
+    "geom_unsupported": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((SPK)|(DAT)|(CRS))$'],
+        "url_must_contain": ['VG', 'RSS-1-ROCC', '/GEOMETRY'],
+        "label": "D",
+        "support_np": True
+    },
 }
 

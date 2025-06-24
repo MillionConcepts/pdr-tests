@@ -46,6 +46,30 @@ file_information = {
         "url_must_contain": ['ODY-M-MAR-3-RDR-CALIBRATED-DATA', 'DATA/2'],
         "label": "D",
     },
+    "marie_pwr": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['PWR', '.TAB'],
+        "url_must_contain": ['ODY-M-MAR-', 'DATA/ANCIL/BOARD_POWER'],
+        "label": "D",
+    },
+    "marie_brd": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['BRD', '.TAB'],
+        "url_must_contain": ['ODY-M-MAR-', 'DATA/ANCIL/BOARD_TEMPS'],
+        "label": "D",
+    },
+    "marie_ext": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['EXT', '.TAB'],
+        "url_must_contain": ['ODY-M-MAR-', 'DATA/ANCIL/BOARD_VOLTAGES'],
+        "label": "D",
+    },
+    "marie_det": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['DET', '.TAB'],
+        "url_must_contain": ['ODY-M-MAR-', 'DATA/ANCIL/DETECTOR_TEMPS'],
+        "label": "D",
+    },
     "marie_spice": {
         "manifest": PPI_FILE,
         "fn_regex": [r'((TI)|(TPC))$'],

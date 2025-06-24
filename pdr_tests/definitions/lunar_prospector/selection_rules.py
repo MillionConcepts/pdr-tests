@@ -150,12 +150,12 @@ file_information = {
         "url_must_contain": ['LP-L-ENG', 'DATA/ANCILLARY'],
         "label": "D",
     },
-    # "traj_ancillary": {
-    #     "manifest": PPI_FILE,
-    #     "fn_must_contain": ['.TAB'],
-    #     "url_must_contain": ['LP-L-6-TRAJECTORY-V1.0/EXTRAS'],
-    #     "label": "D",
-    # },
+    "traj_ancillary": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['LP-L-6-TRAJECTORY-V1.0/EXTRAS'],
+        "label": "D",
+    },
 
     # Support not planned (no pointers in the labels)
     "ephemeris": {

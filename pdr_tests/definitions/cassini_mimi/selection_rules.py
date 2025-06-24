@@ -93,13 +93,14 @@ file_information = {
         "label": "D",
 	},
 
-    # # ancillary products
-    # "edr_geom": {
-    #     "manifest": PPI_FILE,
-    #     "fn_must_contain": ['.CSV'],
-    #     "url_must_contain": ['CO-E_J_S_SW-MIMI-2-', 'GEOMETRY'],
-    #     "label": "D",
-    # },
+    # ancillary products
+    "edr_geom": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.CSV'],
+        "url_must_contain": ['CO-E_J_S_SW-MIMI-2-', 'GEOMETRY'],
+        "label": "D",
+    },
+    # Most products do not open, others open wrong. Needs more testing
     # "rdr_ancil": {
     #     "manifest": PPI_FILE,
     #     "fn_must_contain": ['.CSV'],
