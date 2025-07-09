@@ -85,4 +85,38 @@ file_information = {
         "label": "D",
     },
 
+    # Volumes not included in the PDS4 juno_jiram_bundle:
+    # jnojir_1000, jnojir_2000
+    "flyby_img_edr": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": [".IMG", "IMG_EDR"],
+        "url_must_contain": ['jnojir_1000/DATA'],
+        "label": "D",
+    },
+    "flyby_spe_edr": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.DAT', "SPE_EDR"],
+        'url_must_contain': ['jnojir_1000/DATA'],
+        "label": "D",
+    },
+    "flyby_logs": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.TAB', "LOG"],
+        'url_regex': [r'jnojir_[12]000/DATA'],
+        "label": "D",
+    },
+    # The RDRs open wrong. Looks like either a scaling or byte counting issue
+    # "flyby_img_rdr": {
+    #     "manifest": ATM_FILE,
+    #     "fn_must_contain": [".IMG", "IMG_RDR"],
+    #     "url_must_contain": ['jnojir_2000/DATA'],
+    #     "label": "D",
+    # },
+    # "flyby_spe_rdr": {
+    #     "manifest": ATM_FILE,
+    #     "fn_must_contain": ['.DAT', 'SPE_RDR'],
+    #     "url_must_contain": ['jnojir_2000/DATA'],
+    #     "label": "D",
+    # },
+
 }
