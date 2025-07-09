@@ -102,10 +102,17 @@ file_information = {
         "label": "D",
     },
 
-    # ancillary tables
-    # "ancil": {
+    # ancillary tables - need more testing, most open wrong
+    # "ancil_tol": {
     #     "manifest": PPI_FILE,
-    #     "fn_must_contain": ['.TAB'],
+    #     "fn_must_contain": ['TOL.TAB'],
+    #     "url_must_contain": ['DATA/ANCILLARY'],
+    #     "url_regex": [r'(CO-V_E_J_S_SS-RPWS-)|(CO-SS_S-RPWS-)'],
+    #     "label": "D",
+    # },
+    # "ancil_stim": {
+    #     "manifest": PPI_FILE,
+    #     "fn_must_contain": ['STIM.TAB'],
     #     "url_must_contain": ['DATA/ANCILLARY'],
     #     "url_regex": [r'(CO-V_E_J_S_SS-RPWS-)|(CO-SS_S-RPWS-)'],
     #     "label": "D",

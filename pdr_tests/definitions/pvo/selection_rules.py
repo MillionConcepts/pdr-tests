@@ -180,7 +180,7 @@ file_information = {
         "label": "A",
     },
 
-    # Ancillary tables for unsupported datasets below
+    # Ancillary tables for the unsupported datasets below
     "orpa_raw_ancillary": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],

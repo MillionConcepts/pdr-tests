@@ -93,6 +93,15 @@ file_information = {
         "url_must_contain": ['mexpfs', 'data/mars/swc/orb001x'],
         "label": "D",
     },
+    # Orbits >orb001x are mirrored at GEO and already covered. 
+    "ATM_dupes": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['mexpfs', 'data/mars'],
+        "url_regex": [r'wc/orb(([0-9][1-9][0-9])|(00[2-9]))x'],
+        "label": "D",
+        "support_np": True
+    },
 
     # The MEX-M-PFS-5-DDR-MAPS-V1.0 dataset is at PSA but not mirrored at GEO.
     # There are a half dozen ascii table products; water vapour maps. They

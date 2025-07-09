@@ -30,6 +30,7 @@ ATM_FILE = "atm"
 file_information = {
     
     # NASA Infra Red Telescope Facility - NSFCAM Near-IR images
+    # Mirrored at ATM: sl9_0002
     "irtf": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.fit'],
@@ -98,11 +99,21 @@ file_information = {
         "label": "D",
     },
     # CASPIR calibration is missing from the tiny_other manifest (as of 8/19/24)
+    # Volume name at SBN: mssso-j-caspir-3-rdr-sl9-v1.0
     "mssso_cal": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.fit'],
         "url_must_contain": ['sl9_0004/mssso/caspir'],
         "label": "D",
+    },
+    # Excluding the rest of ATM's sl9_0004 volume from testing because the 
+    # products are covered by the 'eso_' ptypes above.
+    "eso_ATM": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.fit'],
+        "url_must_contain": ['sl9_0004/eso'],
+        "label": "D",
+        "support_np": True
     },
     
     # Okayama Astrophysical Observatory - OASIS images

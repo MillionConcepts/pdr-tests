@@ -152,6 +152,7 @@ file_information = {
     },
 
     # Extras - support not planned; no PDS labels
+    # (also they're "not subject to PDS standards")
     "extras_splash": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.SPH'],
@@ -185,6 +186,16 @@ file_information = {
         "manifest": PPI_FILE,
         "fn_regex": [r'((TLS)|(TPC)|(TSP))$'],
         "url_must_contain": ['VG', '-PWS-', '/EXTRAS/SPICE'],
+        "label": "D",
+        "support_np": True
+    },
+    # Ancillary tables 
+    # Low priority for support; they're already easy to read CSV files
+    # "UserWarning: Unable to load SPREADSHEET: <class 'pandas.errors.EmptyDataError'>: No columns to parse from file"
+    "summ_filter": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.CSV'],
+        "url_must_contain": ['VG', '-PWS-4-SUMM-', '/DATA'],
         "label": "D",
         "support_np": True
     },
