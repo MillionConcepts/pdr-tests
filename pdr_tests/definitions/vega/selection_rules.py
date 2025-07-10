@@ -49,6 +49,7 @@ file_information = {
     },
 
     # PLASMAG-1 experiment; Vega 1 & 2
+    # Mirrored at SBN
     "pm1": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
@@ -56,6 +57,7 @@ file_information = {
         "label": "D",
     },
     # energetic particle analyzer; Vega 1
+    # Mirrored at SBN
     "tnm": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TAB'],
@@ -64,6 +66,7 @@ file_information = {
     },
     # fluxgate magnetometer; Vega 1
     # MISCHA "original" dataset is safed, "halley" and "cruise" are archived
+    # Mirrored at SBN
     "mischa": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.tab'],

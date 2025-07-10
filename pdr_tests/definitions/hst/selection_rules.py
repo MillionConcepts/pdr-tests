@@ -71,6 +71,7 @@ file_information = {
     },
 
     # HST WFPC2 observations of Jupiter during the comet Shoemaker-Levy 9 impact
+    # Mirrored at SBN: holdings/hst-j-wfpc2-3-sl9-impact-v1.0
     "jup_sl9_impact": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.fit'],

@@ -158,5 +158,12 @@ file_information = {
         "fn_regex": [r'((mk)|(tpc))$'],
         "url_must_contain": ['dawn/fc/DWN', 'GEOMETRY'],
         "label": "D",
-    },    
+    },
+    "fc_spice_no_label": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.MK'],
+        "url_must_contain": ['dawn/fc/DWN', 'GEOMETRY'],
+        "label": "A", # missing a label
+        "support_np": True,
+    },
 }

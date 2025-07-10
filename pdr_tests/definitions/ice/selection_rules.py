@@ -109,9 +109,6 @@ file_information = {
         "url_must_contain": ['ICE-', 'DATA', 'EPHEM'],
         "label": "D",
     },
-}
-
-"""
     # Ion Composition Instrument
     # The data products are just text files
     "ici": {
@@ -120,5 +117,5 @@ file_information = {
         "url_must_contain": ['ice-c-ici-3-rdr-giacobini-zin-v1.0/data'],
         "label": "D",
     },
-"""
+}
 

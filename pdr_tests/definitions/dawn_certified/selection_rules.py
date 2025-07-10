@@ -135,7 +135,7 @@ file_information = {
     "fc_spice": {
         "manifest": MANIFEST_FILE,
         "fn_regex": [r'((mk)|(tpc))$'],
-        "url_must_contain": ['certified', 'FC', 'DWN', 'GEOMETRY'],
+        "url_must_contain": ['fc/certified', 'DWN', 'GEOMETRY'],
         "label": "D",
     },
 }

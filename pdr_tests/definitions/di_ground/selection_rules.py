@@ -44,6 +44,15 @@ file_information = {
         "url_must_contain": ['di_ear-c-i0034-3-uh22m-tmpl1-v1.0/data'],
         "label": "D",
     },
+    # Subdirectory with duplicate products organized by volume instead of dataset
+    "hawaii_dupes": {
+        "manifest": SBN_FILE,
+        "fn_regex": [r'((fit)|(tab))$'],
+        "url_must_contain": ['di_ear-c-i0034-3-uh22m-tmpl1-v1.0/VOLUME', 
+                             '/data'],
+        "label": "D",
+        "support_np": True
+    },
     
     # IRTF Near-IR Spectroscopy of Comet 9P-Tempel 1
     # raw spectral images, flat field and Argon lamp images, and time tables
