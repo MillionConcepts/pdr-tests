@@ -62,4 +62,12 @@ file_information = {
         "url_must_contain": ['lro-l-rss-1-tracking-v1', 'data/wea'],
         "label": 'D',
     },
+    # Spice kernels; support not planned
+    "spice": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.bsp'],
+        "url_must_contain": ['lro-l-rss-1-tracking-v1', 'data/spk'],
+        "label": 'D',
+        "support_np": True
+    },
 }

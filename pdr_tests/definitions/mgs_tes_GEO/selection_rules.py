@@ -45,8 +45,7 @@ file_information = {
     },
     # Ancillary tables - It looks like there are 5 tables that are duplicated 
     # across all tsdr volumes.
-    # .tab files in the data/mars directory are mirrored (and supported) at the 
-    # ASU node's TES archive (their commented out GEO selection rules are below)
+    # The TSDR volume is mirrored (and supported) at the ASU node's TES archive.
     "tsdr_ancillary": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['.tab'],

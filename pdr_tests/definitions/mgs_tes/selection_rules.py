@@ -93,6 +93,13 @@ file_information = {
         "url_must_contain": ['mars_by_table/tlm'],
         "label": "A",
     },
+    # ancillary products
+    "ancillary": {
+        "manifest": MANIFEST_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_regex": [r'tes/data$'],
+        "label": "D",
+    },
 
     # Support not planned
     # Percent concentration tables; fixed length table 
