@@ -56,27 +56,31 @@ file_information = {
     },
     
     # Full-Resolution Basic Image Data Record --> no pointers, not archive compliant
-    "f-bidr": {
-        "manifest": GEO_MANIFEST,
-        "fn_must_contain": ['FILE'],
-        "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
-        "label": "D",
-        "support_np": True
-    },
-    "f-bidr_misc": {
-        "manifest": GEO_MANIFEST,
-        "fn_regex": [r'((DAT)|(BCK))$'],
-        "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
-        "label": "A", # no PDS labels
-        "support_np": True
-    },
-    "f-bidr_no_labels": {
-        "manifest": GEO_MANIFEST,
-        "fn_must_contain": ['file', '.g0001v'],
-        "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
-        "label": "A",
-        "support_np": True
-    },
+    # (Marking the entire dataset as support_np in the manifest analysis 
+    # pipeline, and leaving the ptypes commented out here. A significant number 
+    # of products have no filename extensions and no labels.)
+    # "f-bidr": {
+    #     "manifest": GEO_MANIFEST,
+    #     "fn_must_contain": ['FILE'],
+    #     "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
+    #     "label": "D",
+    #     "support_np": True
+    # },
+    # "f-bidr_misc": {
+    #     "manifest": GEO_MANIFEST,
+    #     "fn_regex": [r'((DAT)|(BCK))$'],
+    #     "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
+    #     "label": "A", # no PDS labels
+    #     "support_np": True
+    # },
+    # "f-bidr_no_labels": {
+    #     "manifest": GEO_MANIFEST,
+    #     "fn_must_contain": ['file', '.g0001v'],
+    #     "url_must_contain": ['mgn-v-rdrs-5-bidr-full-res-v1'],
+    #     "label": "A",
+    #     "support_np": True
+    # },
+
     # Compressed-Resolution Basic Image Data Record
     # The image products are unsupported; they have underdefined line prefix 
     # bytes and intermittent headers between chunks of the image.
