@@ -51,6 +51,13 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    "html": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['.html'],
+        "url_must_contain": ['mer', 'mw_0xxx/'],
+        "label": "A", # no label
+        "support_np": True
+    },
 }
 
 # irrelevant

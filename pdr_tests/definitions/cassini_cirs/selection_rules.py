@@ -125,6 +125,20 @@ file_information = {
         "url_must_contain": ['cocirs', 'DATA/TSDR/UNCALIBR'],
         "label": "D",
     },
+    # Tables in the EXTRAS directories
+    "extras_tab": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['cocirs', 'EXTRAS'],
+        "label": "D",
+    },
+    "extras_asc": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.ASC'],
+        "url_must_contain": ['cocirs', 'EXTRAS'],
+        "label": "D",
+        "support_np": True # incomplete labels
+    },
     
     # spectral QUBE (notionally supported; selected a test case for regression testing)
     "cube": {

@@ -97,7 +97,7 @@ file_information = {
     # Spice kernels - support not planned
     "spice": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'((TLS)|(TPC)|(TSP)|(TC))$'],
+        "fn_regex": [r'((TLS)|(TPC)|(TSP)|(TC)|(ASC))$'],
         "url_must_contain": ['VG2-', '-CRS-', '/EXTRAS/SPICE'],
         "label": "D",
         "support_np": True

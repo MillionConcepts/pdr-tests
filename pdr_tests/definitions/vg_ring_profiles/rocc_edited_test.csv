@@ -1,3 +1,4 @@
 label_file,files,product_id,url_stem,hash
 RS4D1XUI.LBL,"[""RS4D1XUI.LBL"", ""RS4D1XUI.DAT""]",RS4D1XUI.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2803/S_RINGS/EDITDATA,"{""SERIES"": ""87a12713f052a85945e012f869ad4097""}"
 RS4D1SUP.LBL,"[""RS4D1SUP.DAT"", ""RS4D1SUP.LBL""]",RS4D1SUP.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2803/S_RINGS/EDITDATA,"{""SERIES"": ""5d0e2b73903754cc6d372447b86f1586""}"
+RU5D1XNI.LBL,"[""RU5D1XNI.LBL"", ""RU5D1XNI.TAB""]",RU5D1XNI.TAB,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2803/U_RINGS/EDITDATA,"{""SERIES"": ""4d98a1c1f64651848f92f554c4601109""}"

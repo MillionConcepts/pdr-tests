@@ -38,7 +38,15 @@ base = {
     }
 
 # see: MSL Camera SIS, pp. 88+
-file_information = {}
+file_information = {
+    "extras": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['DATA'],
+        "url_must_contain": ['MSLHAZ_0XXX/EXTRAS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+}
 for ptype, samp in product(
     ("EDR", "ERP"),
     ("F", "S", "D", "T")

@@ -40,6 +40,8 @@ file_information = {
         "fn_regex": [r"\w[0-9]{9}((ilf)|(isf)|(inn)|(ffl)|(sfl)|(dnl)).*img$"]},
     "ilut_thumb": base | {
         "fn_regex": [r"\w[0-9]{9}((ith)|(thn)).*img$"]},
+    "filename_typo": base | {
+        "fn_regex": [r"im$"]},
 }
 
 ptypes = ("mr", # radiometric; specifically the MIPLRAD correction

@@ -98,7 +98,7 @@ file_information = {
         "manifest": ATM_FILE,
         "fn_must_contain": ['.dat'],
         "url_must_contain": ['mexpfs', 'data/mars'],
-        "url_regex": [r'wc/orb(([0-9][1-9][0-9])|(00[2-9]))x'],
+        "url_regex": [r'wc/orb((00[2-9])|(0[1-9][0-9])|([1-9][0-9][0-9]))x'],
         "label": "D",
         "support_np": True
     },
@@ -141,6 +141,13 @@ file_information = {
     #     "url_must_contain": ['mex-m-pfs-2-edr', 'geometry'],
     #     "label": "D",
     # },
+    "ATM_dupes_geom": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['mexpfs', '/geometry/'],
+        "label": "D",
+        "support_np": True
+    },
 }
 
 SKIP_FILES = ["MEX_ORIENTATION_DESC.TXT"]

@@ -143,14 +143,14 @@ file_information = {
     # edited data
     "uvs_edited": {
         "manifest": RMS_FILE,
-        "fn_must_contain": ['.DAT'],
+        "fn_regex": [r'((DAT)|(TAB))$'],
         "url_must_contain": ['VG_28xx/VG_2802/EDITDATA'],
         "label": "D",
     },
     # noise data
     "uvs_noise": {
         "manifest": RMS_FILE,
-        "fn_must_contain": ['.DAT'],
+        "fn_regex": [r'((DAT)|(TAB))$'],
         "url_must_contain": ['VG_28xx/VG_2802/NOISDATA'],
         "label": "D",
     },
@@ -206,7 +206,7 @@ file_information = {
     # tables do not open (as of 11/7/23).
     "rocc_edited": {
         "manifest": RMS_FILE,
-        "fn_must_contain": ['.DAT'],
+        "fn_regex": [r'((DAT)|(TAB))$'],
         "url_must_contain": ['VG_28xx/VG_2803/','RINGS/EDITDATA'],
         "label": "D",
     },

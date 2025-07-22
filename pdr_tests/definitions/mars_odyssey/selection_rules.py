@@ -70,6 +70,12 @@ file_information = {
         "url_must_contain": ['ODY-M-MAR-', 'DATA/ANCIL/DETECTOR_TEMPS'],
         "label": "D",
     },
+    "marie_traj": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['TRAJ', '.TAB'],
+        "url_must_contain": ['ODY-M-MAR-', '/GEOMETRY'],
+        "label": "D",
+    },
     "marie_spice": {
         "manifest": PPI_FILE,
         "fn_regex": [r'((TI)|(TPC))$'],

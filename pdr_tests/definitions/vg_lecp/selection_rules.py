@@ -187,7 +187,7 @@ file_information = {
     # Spice kernels - support not planned
     "spice": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'((SPK)|(KER)|(TSP)|(TPC)|(TLS))$'],
+        "fn_regex": [r'((SPK)|(KER)|(TSP)|(TPC)|(TLS)|(ASC))$'],
         "url_must_contain": ['-LECP-4-SUMM-', '/EXTRAS/SPICE'],
         "label": "D",
         "support_np": True
@@ -206,6 +206,20 @@ file_information = {
         "url_must_contain": ['-LECP-4-SUMM-', '/EXTRAS'],
         "label": "A", # no labels
         "support_np": True
+    },
+    "extras_dlc": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((ABS)|(DES)|(HED))$'],
+        "url_must_contain": ['VG', '-LECP-4-SUMM-', '/EXTRAS/DLC'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    "extras_dlc_dat": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['VG', '-LECP-4-SUMM-', '/EXTRAS/DLC'],
+        "label": "D",
+        "support_np": True # looks like the format file or label is wrong
     },
 }
 

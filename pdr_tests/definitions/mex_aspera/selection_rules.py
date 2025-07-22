@@ -94,6 +94,12 @@ file_information = {
         "url_must_contain": ['mex-m-aspera3-2-3-edr-rdr-npi', 'extras'],
         "label": "D",
     },
+    "index_table_PPI": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['MEX-M-ASPERA3', 'EXTRAS'],
+        "label": "D",
+    },
     # support not planned
     "spice": {
         "manifest": GEO_FILE,

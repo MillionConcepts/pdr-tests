@@ -209,9 +209,14 @@ file_information = {
     "SHAPEFILE": {
         "manifest": MANIFEST_FILE,
         "fn_regex": [r"((dbf)|(prj)|(shp)|(shx)|(DBF)|(PRJ)|(SHP)|"
-                     r"(SHX)|(ZIP))$"],
+                     r"(SHX)|(ZIP)|(CSV)|(XML))$"],
         "url_must_contain": ["/EXTRAS/", "SHAPEFILE"],
         "label": "NA",
-        "support_np": True, # not all files have PDS labels; those that do are PDS4
+        "support_np": True, # not all files have PDS labels
     },
+    # .csv products (lowercase filename extensions) in the EXTRAS/SHAPEFILE 
+    # directory are PDS4. It looks like they were added after our last update 
+    # to the img_lroc manifest.
+    # .XML files (uppercase filename extensions) are not PDS4 labels; some of 
+    # the .xml files are labels, some are not
 }

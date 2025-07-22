@@ -1,3 +1,4 @@
 label_file,files,product_id,url_stem,hash
 UU2D01P.LBL,"[""UU2D01P.LBL"", ""UU2D01P.DAT""]",UU2D01P.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2802/EDITDATA,"{""SERIES"": ""6ae960d421d317b4c696223f2ec6f64d""}"
 UN1W01I.LBL,"[""UN1W01I.LBL"", ""UN1W01I.DAT""]",UN1W01I.DAT,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2802/EDITDATA,"{""SERIES"": ""734e32f0fafe541ff2d17a3c24ed1667""}"
+US1D01T.LBL,"[""US1D01T.LBL"", ""US1D01T.TAB""]",US1D01T.TAB,http://pds-rings.seti.org/holdings/volumes/VG_28xx/VG_2802/EDITDATA,"{""SERIES"": ""aca9f4e249bcfd7dd6b965dab7ab6cfe""}"

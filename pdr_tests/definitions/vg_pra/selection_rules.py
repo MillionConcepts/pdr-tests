@@ -117,10 +117,24 @@ file_information = {
         "label": "A", # no PDS labels
         "support_np": True
     },
+    "extras_dlc": {
+        "manifest": PPI_FILE,
+        "fn_regex": [r'((DES)|(HED))$'],
+        "url_must_contain": ['VG', '-PRA-', '/EXTRAS/DLC'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
+    # The .DAT products do have labels and are supported
+    "extras_dlc_dat": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['VG', '-PRA-', '/EXTRAS/DLC'],
+        "label": "D",
+    },
     # Spice kernels - support not planned
     "spice": {
         "manifest": PPI_FILE,
-        "fn_regex": [r'((TLS)|(TPC)|(TSP)|(TC))$'],
+        "fn_regex": [r'((TLS)|(TPC)|(TSP)|(TC)|(ASC))$'],
         "url_must_contain": ['VG2-', '-PRA-'],
         "url_regex": [r'(/GEOMETRY)|(/EXTRAS/SPICE)'],
         "label": "D",

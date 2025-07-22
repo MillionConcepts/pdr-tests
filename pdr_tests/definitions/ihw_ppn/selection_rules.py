@@ -72,6 +72,13 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    "flux_gz_headers": {
+        "manifest": SBN_FILE,
+        "fn_must_contain": ['.hdr'],
+        "url_must_contain": ['ihw-c-ppflx-3-rdr-gz', 'data'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
     "mag_gz": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],

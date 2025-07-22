@@ -61,6 +61,13 @@ file_information = {
         "url_must_contain": ["MSLNAV_1XXX/EXTRAS_V1/SPECIAL_PROCESSING"],
         "label": "D",
     },
+    "mask_desc": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": [".XML"],
+        "url_regex": [r"MSLNAV_1XXX/EXTRAS(_V1)?/MASK_DESC_FILES"],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
 }
 for ptype, samp in product(ptypes, samps):
     info = base | {"fn_regex": [rf"N[LR].*{ptype}(\w|_){samp}.*\.IMG"]}
