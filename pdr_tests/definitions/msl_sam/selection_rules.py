@@ -40,8 +40,13 @@ file_information = {
         "support_np": True
     },
     
-    # The RDRs can have multiple data files per label, so the selection rules
-    # grab the label instead of the csv, tab, and/or txt file(s).
+    # The RDRs can have multiple data files per label. The selection rules
+    # look for a csv or tab file whenever possible, but will grab the 
+    # label instead when there are multiple data files present.
+    # When this happens, the ptype is accompanied by a secondary ptype named 
+    # [ptype]_data_files. This is so the coverage analysis pipeline counts 
+    # the data files as covered. They are flagged as 'ix_skip' to avoid 
+    # duplicating ix coverage.
     
     # level 0 RDRs
     "l0_hk": {
@@ -50,15 +55,22 @@ file_information = {
         "url_must_contain": ["mslsam_", "data", "level0"],
         "label": "D",
     },
+    "l0_hk_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_hk_", ".csv"], # data files for the l0_hk ptype
+        "url_must_contain": ["mslsam_", "data", "level0"],
+        "label": "A", # shares labels with l0_hk ptype above
+        "ix_skip": True
+    },
     "l0_qms": {
         "manifest": GEO_FILE,
-        "fn_must_contain": ["_qms_", ".lbl"],
+        "fn_must_contain": ["_qms_", ".tab"],
         "url_must_contain": ["mslsam_", "data", "level0"],
         "label": "D",
     },
     "l0_gc": {
         "manifest": GEO_FILE,
-        "fn_must_contain": ["_gc_", ".lbl"],
+        "fn_must_contain": ["_gc_", ".tab"],
         "url_must_contain": ["mslsam_", "data", "level0"],
         "label": "D",
     },
@@ -68,6 +80,14 @@ file_information = {
         "url_must_contain": ["mslsam_", "data", "level0"],
         "label": "D",
     },
+    "l0_tls_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_tls_", ".tab"], # data files for the l0_tls ptype
+        "url_must_contain": ["mslsam_", "data", "level0"],
+        "label": "A", # shares labels with l0_tls ptype above
+        "ix_skip": True
+    },
+
     # level 1a RDRs
     "l1a_hk": {
         "manifest": GEO_FILE,
@@ -75,15 +95,29 @@ file_information = {
         "url_must_contain": ["mslsam_", "data", "level1a"],
         "label": "D",
     },
+    "l1a_hk_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_hk_", ".csv"], # data files for the l1a_hk ptype
+        "url_must_contain": ["mslsam_", "data", "level1a"],
+        "label": "A", # shares labels with l1a_hk ptype above
+        "ix_skip": True
+    },
     "l1a_qms": {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_qms_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level1a"],
         "label": "D",
     },
+    "l1a_qms_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_qms_", ".tab"], # data files for the l1a_qms ptype
+        "url_must_contain": ["mslsam_", "data", "level1a"],
+        "label": "A", # shares labels with l1a_qms ptype above
+        "ix_skip": True
+    },
     "l1a_gc": {
         "manifest": GEO_FILE,
-        "fn_must_contain": ["_gc_", ".lbl"],
+        "fn_must_contain": ["_gc_", ".tab"],
         "url_must_contain": ["mslsam_", "data", "level1a"],
         "label": "D",
     },
@@ -93,6 +127,14 @@ file_information = {
         "url_must_contain": ["mslsam_", "data", "level1a"],
         "label": "D",
     },
+    "l1a_tls_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_tls_", ".tab"], # data files for the l1a_tls ptype
+        "url_must_contain": ["mslsam_", "data", "level1a"],
+        "label": "A", # shares labels with l1a_tls ptype above
+        "ix_skip": True
+    },
+
     # level 1b RDRs
     "l1b_qms": {
         "manifest": GEO_FILE,
@@ -100,9 +142,16 @@ file_information = {
         "url_must_contain": ["mslsam_", "data", "level1b"],
         "label": "D",
     },
+    "l1b_qms_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_qms_", ".tab"], # data files for the l1b_qms ptype
+        "url_must_contain": ["mslsam_", "data", "level1b"],
+        "label": "A", # shares labels with l1b_qms ptype above
+        "ix_skip": True
+    },
     "l1b_gc": {
         "manifest": GEO_FILE,
-        "fn_must_contain": ["_gc_", ".lbl"],
+        "fn_must_contain": ["_gc_", ".tab"],
         "url_must_contain": ["mslsam_", "data", "level1b"],
         "label": "D",
     },
@@ -113,9 +162,16 @@ file_information = {
         "url_must_contain": ["mslsam_", "data", "level2"],
         "label": "D",
     },
+    "l2_qms_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_qms_", ".csv"], # data files for the l2_qms ptype
+        "url_must_contain": ["mslsam_", "data", "level2"],
+        "label": "A", # shares labels with l2_qms ptype above
+        "ix_skip": True
+    },
     "l2_gc": {
         "manifest": GEO_FILE,
-        "fn_must_contain": ["_gc_", ".lbl"],
+        "fn_must_contain": ["_gc_", ".csv"],
         "url_must_contain": ["mslsam_", "data", "level2"],
         "label": "D",
     },
@@ -124,6 +180,13 @@ file_information = {
         "fn_must_contain": ["_tls_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level2"],
         "label": "D",
+    },
+    "l2_tls_data_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ["_tls_", ".csv"], # data files for the l2_tls ptype
+        "url_must_contain": ["mslsam_", "data", "level2"],
+        "label": "A", # shares labels with l2_tls ptype above
+        "ix_skip": True
     },
 }
 """

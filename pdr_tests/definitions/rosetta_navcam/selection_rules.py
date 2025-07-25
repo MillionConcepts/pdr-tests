@@ -45,6 +45,19 @@ file_information = {
         "url_must_contain": ['holdings/ro-', '-navcam-3-', '/data'],
         "label": "D",
     },
+    # These are the quality flag images mentioned above. They are fully 
+    # supported, but the RDR ptype alone leaves them marked as 'uncovered' in 
+    # the coverage analysis pipeline. This RDR_quality_flag ptype is here to 
+    # make sure they are counted as covered.
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    "RDR_quality_flag": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['q.img'],
+        "url_must_contain": ['holdings/ro-', '-navcam-3-', '/data'],
+        "label": "A", # shares labels with RDR ptype above
+        "ix_skip": True
+    },
     # FITS versions of IMG data 
     "EDR_fits": {
         "manifest": SB_FILE,

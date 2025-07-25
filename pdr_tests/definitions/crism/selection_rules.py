@@ -34,6 +34,19 @@ file_information = {
         "url_must_contain": ['crism', "/edr/"],
         "label": "D",
     },
+    # These tables are part of the EDR ptype above and are fully supported; 
+    # the EDR product labels have pointers to .img and .tab files. 
+    # This EDR_additional_files ptype is to make sure the .tab files are 
+    # counted correctly in the coverage analysis pipeline. 
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    "EDR_additional_files": {
+        "manifest": GEO_MRO_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['crism', "/edr/"],
+        "label": "A", # shares labels with EDR ptype above
+        "ix_skip": True
+    },
     "CDR": {
         "manifest": GEO_MRO_FILE,
         "fn_must_contain": [".img"],
@@ -57,6 +70,19 @@ file_information = {
         "fn_must_contain": [".img"],
         "url_must_contain": ['crism', "/trdr/"],
         "label": "D",
+    },
+    # These tables are part of the TRDR ptype above and are fully supported; 
+    # the TRDR product labels have pointers to .img and .tab files. 
+    # This TRDR_additional_files ptype is to make sure the .tab files are 
+    # counted correctly in the coverage analysis pipeline. 
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    "TRDR_additional_files": {
+        "manifest": GEO_MRO_FILE,
+        "fn_must_contain": [".tab"],
+        "url_must_contain": ['crism', "/trdr/"],
+        "label": "A", # shares labels with EDR ptype above
+        "ix_skip": True
     },
     "MRDR": {
         "manifest": GEO_MRO_FILE,

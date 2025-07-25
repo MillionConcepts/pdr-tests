@@ -29,10 +29,20 @@ GEO_MRO_FILE = "geomro_full"
 
 file_information = {
     'EDR': {'manifest': GEO_MRO_FILE,
-            "fn_must_contain": ['a_s', '.dat'],
+            "fn_must_contain": ['_s.dat'],
             "url_must_contain": ['sharad', '-edr-', '/data/'],
-            "label": ("a_..dat", "a.lbl"),
+            "label": ("_s.dat", ".lbl"),
             "regex": True},
+    # The way the EDR rules are written leaves the AUXILIARY_DATA_TABLE and 
+    # label files marked as uncovered in the coverage analysis pipeline. This 
+    # ptype explicitly includes them so the coverage metrics are correct. 
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    'EDR_additional_files': {'manifest': GEO_MRO_FILE,
+            "fn_regex": [r'((lbl)|(LBL)|(_a.dat))$'],
+            "url_must_contain": ['sharad', '-edr-', '/data/'],
+            "label": "A", # not actually attached labels, but don't want to double count them when counting coverage 
+            "ix_skip": True},
     'RDR': {'manifest': GEO_MRO_FILE,
             "fn_regex": ['(dat$)|(DAT$)'],
             "url_must_contain": ['sharad', '/data/', '-rdr-'],

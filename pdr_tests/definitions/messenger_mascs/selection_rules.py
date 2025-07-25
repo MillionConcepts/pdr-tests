@@ -105,6 +105,19 @@ file_information = {
         "url_must_contain": ['mascs-3-virs-cdr-caldata-', '/dap', '/virs'],
         "label": "D",
     },
+    # The virs_DAP ptype as written works great for ix testing, but leaves the 
+    # .img files marked as 'uncovered' in the coverage analysis pipeline. This 
+    # virs_DAP_img_files ptype makes sure they are correctly counted as covered 
+    # products. 
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    "virs_DAP_img_files": {
+        "manifest": GEO_MESSENGER_FILE,
+        "fn_must_contain": [".img"],
+        "url_must_contain": ['mascs-3-virs-cdr-caldata-', '/dap', '/virs'],
+        "label": "A", # don't want to double count the labels, so pretend they're attached
+        "ix_skip": True
+    },
 
     # .xls files in the extras directories without PDS labels
     "extras": {

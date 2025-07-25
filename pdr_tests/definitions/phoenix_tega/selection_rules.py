@@ -64,6 +64,20 @@ file_information = {
                              '/engedr'],
         "label": "D",
     },
+    # The engedr ptype as written works great for ix testing, but leaves the 
+    # many .dat files per label marked as 'uncovered' in the coverage analysis 
+    # pipeline. This engedr_additional_files ptype makes sure they are 
+    # correctly counted as covered products. 
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    "engedr_additional_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['edr','.dat'],
+        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008',
+                             '/engedr'],
+        "label": "A", # not actually attached labels, but don't want to double count them 
+        "ix_skip": True
+    },
     # TEGA message log
     "msgedr": {
         "manifest": GEO_FILE,
@@ -104,6 +118,20 @@ file_information = {
         "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008',
                              '/engrdr'],
         "label": "D",
+    },
+    # The engrdr ptype as written works great for ix testing, but leaves the 
+    # many .dat files per label marked as 'uncovered' in the coverage analysis 
+    # pipeline. This engrdr_additional_files ptype makes sure they are 
+    # correctly counted as covered products. 
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    "engrdr_additional_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['rdr','.dat'],
+        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008',
+                             '/engrdr'],
+        "label": "A", # not actually attached labels, but don't want to double count them 
+        "ix_skip": True
     },
     # Thermal scanning calorimetry processed data
     "scrdr": {

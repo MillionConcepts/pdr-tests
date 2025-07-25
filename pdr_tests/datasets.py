@@ -90,17 +90,26 @@ class DatasetDefinition:
         """
         Expand product_type=None to a list of all product types. By default,
         ignore product types marked as support-not-planned ('support_np': True)
-        if product_type=None.
+        if product_type=None. 
+        Always ignore product types marked as skippable ('ix_skip': True) if 
+        product_type=None. (Many notionally supported products are formatted in 
+        ways that make them incompatible with ix testing, but we still want to 
+        write selection rules for them so the coverage analysis pipeline can 
+        count them as supported.)
         """
         if product_type is not None:
             return [product_type]
         if ignore_support_np is True:
             ptypes = filter(
-                lambda k: self.rules[k].get('support_np') is not True,
+                lambda k: (self.rules[k].get('support_np') is not True 
+                           and self.rules[k].get('ix_skip') is not True),
                 self.rules
             )
         else:
-            ptypes = self.rules.keys()
+            ptypes = filter(
+                lambda k: self.rules[k].get('ix_skip') is not True,
+                self.rules
+            )
         return sorted(ptypes)
 
 

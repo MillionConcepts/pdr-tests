@@ -34,6 +34,19 @@ file_information = {
         "url_must_contain": ["-edr-"],
         "label": ('_f.dat', '.lbl'),
     },
+    # The EDR ptype as written works great for ix testing, but leaves the 
+    # label and AUXILIARY_DATA_TABLE files marked as 'uncovered' in the 
+    # coverage analysis pipeline. This EDR_additional_files ptype makes sure 
+    # they are correctly counted as covered products. 
+    # The "ix_skip" flag ensures they are skipped on all ix calls that do not 
+    # specifically pass this ptype.
+    "EDR_additional_files": {
+        "manifest": GEO_MEX_FILE,
+        "fn_regex": [r'((lbl)|(_g.dat))$'],
+        "url_must_contain": ["mex-m-marsis-2-edr", "/data/"],
+        "label": "A", # not actually attached labels, but don't want to double count them 
+        "ix_skip": True
+    },
     "SS_RDR": {
         "manifest": GEO_MEX_FILE,
         "fn_must_contain": ['_cmp_m.dat'],
