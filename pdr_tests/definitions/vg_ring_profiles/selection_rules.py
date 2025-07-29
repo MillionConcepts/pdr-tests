@@ -99,13 +99,14 @@ file_information = {
         "url_must_contain": ['VG_28xx/VG_2801/GEOMETRY'],
         "label": "D",
     },
-    # The labels for some products have the wrong filename in their ^SERIES pointer. Needs a special case
-    # "pps_jitter": {
-    #     "manifest": RMS_FILE,
-    #     "fn_must_contain": ['.TAB'],
-    #     "url_must_contain": ['VG_28xx/VG_2801/JITTER'],
-    #     "label": "D",
-    # },
+    # The labels for some products have the wrong filename in their ^SERIES 
+    # pointer. Added a special case: formats.voyager.get_fn()
+    "pps_jitter": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.TAB'],
+        "url_must_contain": ['VG_28xx/VG_2801/JITTER'],
+        "label": "D",
+    },
     "pps_traj": {
         "manifest": RMS_FILE,
         "fn_must_contain": ['.TAB'],
