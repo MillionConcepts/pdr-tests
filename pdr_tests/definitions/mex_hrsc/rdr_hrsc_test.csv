@@ -1,0 +1,5 @@
+label_file,files,product_id,url_stem,hash
+hg830_0002_re3.img,"[""MEX_POINTING_DESC.TXT"", ""hg830_0002_re3.img"", ""MEX_ORIENTATION_DESC.TXT"", ""VICAR2.TXT""]",HG830_0002_RE3.IMG,http://pds-geosciences.wustl.edu/mex/mex-m-hrsc-3-rdr-ext6-v4/mexhrs_4006/data/g830,"{""IMAGE"": ""4191479606c3c395950286c2466744e3""}"
+h3802_0000_p23.img,"[""h3802_0000_p23.img"", ""MEX_POINTING_DESC.TXT"", ""MEX_ORIENTATION_DESC.TXT"", ""VICAR2.TXT""]",H3802_0000_P23.IMG,http://pds-geosciences.wustl.edu/mex/mex-m-hrsc-3-rdr-ext1-v4/mexhrs_4001/data/3802,"{""IMAGE"": ""f9477486014e66b27edb5e65de13edfe""}"
+h2446_0000_gr3.img,"[""h2446_0000_gr3.img"", ""MEX_POINTING_DESC.TXT"", ""MEX_ORIENTATION_DESC.TXT"", ""VICAR2.TXT""]",H2446_0000_GR3.IMG,http://pds-geosciences.wustl.edu/mex/mex-m-hrsc-3-rdr-ext1-v4/mexhrs_4001/data/2446,"{""IMAGE"": ""7cacf4693bc69ac8677161bcfb01d113""}"
+h5285_0001_ir3.img,"[""VICAR2.TXT"", ""MEX_POINTING_DESC.TXT"", ""MEX_ORIENTATION_DESC.TXT"", ""h5285_0001_ir3.img""]",H5285_0001_IR3.IMG,http://pds-geosciences.wustl.edu/mex/mex-m-hrsc-3-rdr-ext2-v4/mexhrs_4002/data/5285,"{""IMAGE"": ""31e962a00c6bca75eb62d634ac337ca6""}"

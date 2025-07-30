@@ -36,15 +36,13 @@ file_information = {
         "label": "A",
     },
     # RDR - High Resolution Stereo Camera images
-    # Currently unsupported; their line prefixes throw a "not yet supported"
-    # error/warning.
-#    "rdr_hrsc": {
-#        "manifest": GEO_FILE,
-#        "fn_must_contain": ['.img'],
-#        "fn_regex": [r'(_nd)|(_s[12])|(_p[12])|(_bl)|(_gr)|(_ir)|(_re)'],
-#        "url_must_contain": ['mex-m-hrsc-3-rdr','data'],
-#        "label": "A",
-#    },
+    "rdr_hrsc": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.img'],
+        "fn_regex": [r'(_nd)|(_s[12])|(_p[12])|(_bl)|(_gr)|(_ir)|(_re)'],
+        "url_must_contain": ['mex-m-hrsc-3-rdr','data'],
+        "label": "A",
+    },
     # REFDR - Map-Projected Image Data, v4
     "projected_v4": {
         "manifest": GEO_FILE,
