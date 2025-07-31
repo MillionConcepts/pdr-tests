@@ -128,13 +128,25 @@ file_information = {
         "url_must_contain": ['ody-m-grs-2-edr-v1'],
         "label": "D",
     },
-    # # EDR - e-kernel (experimenter's notebook and associated time series)
-    # "edr_e_kernel": {
-    #     "manifest": GEO_FILE,
-    #     "fn_must_contain": ['e_kernel', '.dat'],
-    #     "url_must_contain": ['ody-m-grs-2-edr-v1'],
-    #     "label": "D", # the label and data filenames do not match
-    # },
+    # EDR - e-kernel (experimenter's notebook and associated time series)
+    "edr_e_kernel": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['e_kernel', '.lbl'],
+        "url_must_contain": ['ody-m-grs-2-edr-v1'],
+        "label": "D",
+    },
+    # Because of differences in the label and data file names, the edr_e_kernel 
+    # ptype looks for the label. ix finds the relevant DAT and TXT files during 
+    # the standard testing workflow. This 'additional_files' ptype makes sure 
+    # the DAT files are counted as covered in the coverage analysis pipeline.
+    # They are flagged as 'ix_skip' to avoid duplicating test coverage.
+    "edr_e_kernel_additional_files": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['e_kernel', '.dat'],
+        "url_must_contain": ['ody-m-grs-2-edr-v1'],
+        "label": "A", # not actually attached, but we don't want to double count labels from the edr_e_kernel ptype
+        "ix_skip": True,
+    },
     # EDR - notionally supported ancillary products that are annoying to test 
     # with ix because the have several (sometimes dozens) of .dat files per 
     # label, and the label names do not always match the data files' names
