@@ -290,6 +290,10 @@ def verbose_temp_download(filelist, data_path, full_lower=False,
     if 'url_stem' in filelist.columns:
         filelist = _expand_index_table(filelist, data_path, skip_files)
         isbucket_target = 'url'
+    elif 'url' in filelist.columns:
+        # A handful of datasets still have "shared_lists" of files to download.
+        # The [...]_shared.csv file lists have full urls instead of url_stems.
+        isbucket_target = 'url'
     else:
         isbucket_target = 'domain'
     if len(filelist) == 0:
