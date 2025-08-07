@@ -128,13 +128,15 @@ file_information = {
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
     },
-    # TODO: currently unsupported (BIT_COLUMNs)
-    # "FILM": {
-    #     "manifest": GEO_FILE,
-    #     "fn_regex": [r"cm.*efm.*"],
-    #     "url_must_contain": ["msl-m-chemin-2-edr-v1"],
-    #     "label": "D",
-    # },
+    # Notionally supported: they open VERY slowly (table is all bit columns)
+    # Flagging them as "ix_skip" because of how slow they open.
+    "FILM": {
+        "manifest": GEO_FILE,
+        "fn_regex": [r"cm.*efm.*"],
+        "url_must_contain": ["msl-m-chemin-2-edr-v1"],
+        "label": "D",
+        "ix_skip": True,
+    },
     "HOUSEKEEPING": {
         "manifest": GEO_FILE,
         "fn_regex": [r"cm.*ehk.*\.dat"],

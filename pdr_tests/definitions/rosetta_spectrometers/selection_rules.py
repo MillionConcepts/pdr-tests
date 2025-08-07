@@ -142,7 +142,7 @@ file_information = {
     },
 
 #     # geometry corresponding to RDRs below (these do not open at all)
-#     "EDR_virtis_geo": {
+#     "RDR_virtis_geo": {
 #         "manifest": SB_FILE,
 #         "fn_must_contain": ['.geo'],
 #         "url_must_contain": ['-virtis-3-', '/data'],

@@ -192,19 +192,22 @@ file_information = {
         "url_must_contain": ["/EXTRAS/AMES_DTM"],
          "label": "D",
     },
+    # NAC_DTM_extras and NAC_DTM_thumb are flagged "ix_skip" because they are 
+    # supported but are imcompatible with ix because of missing or incomplete 
+    # PDS labels.
     "NAC_DTM_extras": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ["NAC_DTM", ".TIF"],
         "url_must_contain": ["/EXTRAS/AMES_DTM/LRONAC_DTMS"],
         "label": "D",
-        "support_np": True, # incomplete PDS3 labels
+        "ix_skip": True, # incomplete PDS3 labels
     },
     "NAC_DTM_thumb": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ["NAC_DTM", "Thumbnail", ".TIF"],
         "url_must_contain": ["/EXTRAS/AMES_DTM/LRONAC_THUMBNAILS"],
         "label": "NA",
-        "support_np": True, # no PDS labels
+        "ix_skip": True, # no PDS labels
     },
     "SHAPEFILE": {
         "manifest": MANIFEST_FILE,
