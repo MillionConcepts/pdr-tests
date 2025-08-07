@@ -198,4 +198,16 @@ file_information = {
         "url_regex": [r'(COCIRS_5xxx)|(COCIRS_6xxx)'],
         "label": "D",
     },
+
+    # Jupiter cruise volumes (cocirs_0010 - cocirs_0306) are in a "review" 
+    # directory at ATM, so they are missed by the ptypes above, which only test 
+    # the Saturn datasets.
+    # (Marking RMS volumes cocirs_0401 onwards as duplicates of ATM products)
+    "jupiter": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['COCIRS_0xxx', 'DATA'],
+        "url_regex": [r'COCIRS_0[0-3][0-9][0-9]'],
+        "label": "D",
+    },
 }
