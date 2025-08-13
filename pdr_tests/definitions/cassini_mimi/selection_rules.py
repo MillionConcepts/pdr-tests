@@ -100,13 +100,12 @@ file_information = {
         "url_must_contain": ['CO-E_J_S_SW-MIMI-2-', 'GEOMETRY'],
         "label": "D",
     },
-    # Most products do not open, others open wrong. Needs more testing
-    # "rdr_ancil": {
-    #     "manifest": PPI_FILE,
-    #     "fn_must_contain": ['.CSV'],
-    #     "url_must_contain": ['CO-S-MIMI-4-', 'DATA/ANCILLARY'],
-    #     "label": "D",
-    # },
+    "rdr_ancil": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.CSV'],
+        "url_must_contain": ['CO-S-MIMI-4-', 'DATA/ANCILLARY'],
+        "label": "D",
+    },
     "spice": {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.TM'],

@@ -193,7 +193,7 @@ file_information = {
          "label": "D",
     },
     # NAC_DTM_extras and NAC_DTM_thumb are flagged "ix_skip" because they are 
-    # supported but are imcompatible with ix because of missing or incomplete 
+    # supported but are incompatible with ix because of missing or incomplete 
     # PDS labels.
     "NAC_DTM_extras": {
         "manifest": MANIFEST_FILE,
