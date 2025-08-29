@@ -74,5 +74,16 @@ file_information = {
         "url_must_contain": ['VGIRIS_xxxx_peer_review', '/DATA'],
         "label": "D",
     },
+    # "The EXTRAS directory on this volume contains an exact copy of the CALIB 
+    # directory from volume VG_2001."
+    # SPECTRUM pointer opens fine; TABLE and SPECTRAL_SERIES pointers open 
+    # wrong (looks like miscounted bytes)
+    "iris_extras": {
+        "manifest": RMS_FILE,
+        "fn_must_contain": ['.DAT'],
+        "url_must_contain": ['VGIRIS_xxxx_peer_review', '/EXTRAS'],
+        "label": "D",
+        "support_np": True, 
+    },
 }
 

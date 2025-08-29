@@ -36,7 +36,7 @@ file_information = {
     #   - most Gz product do not open (incomplete labels)
     # In-progress: version 2.0 of several Halley datasets
     
-    # filter response curves
+    # filter response curves (v2.0 of the dataset; v1.0 are .dat files)
     "curve": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['irfc', '.tab'],
@@ -83,7 +83,7 @@ file_information = {
         "url_must_contain": ['ihw-c-irpol-3-rdr-halley', 'data'],
         "label": "D",
     },
-    # spectra
+    # spectra (v2.0 of the dataset; v1.0 are .dat files)
     "spec_halley": {
         "manifest": SBN_FILE,
         "fn_must_contain": ['.tab'],

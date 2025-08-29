@@ -90,6 +90,7 @@ file_information = {
         "label": "D",
     },
     # IR spectrometer (data format is hugely problematic; low priority support planned)
+    # Converted to PDS4 --> Huygens/hpdisr_bundle
     # "ir": {
     #     "manifest": ATM_FILE,
     #     "fn_must_contain": ['IR', '.TAB'],
