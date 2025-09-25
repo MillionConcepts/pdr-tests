@@ -132,7 +132,7 @@ file_information = {
     # Flagging them as "ix_skip" because of how slow they open.
     "FILM": {
         "manifest": GEO_FILE,
-        "fn_regex": [r"cm.*efm.*"],
+        "fn_regex": [r"cm.*efm.*\.dat"],
         "url_must_contain": ["msl-m-chemin-2-edr-v1"],
         "label": "D",
         "ix_skip": True,

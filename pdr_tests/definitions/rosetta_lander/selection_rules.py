@@ -35,7 +35,7 @@ file_information = {
         "manifest": SB_FILE,
         "fn_must_contain": ['.lbl'],
         "url_must_contain": ['-apxs-2-', '/data'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     
 # start COSAC data products
@@ -44,13 +44,13 @@ file_information = {
         "manifest": SB_FILE,
         "fn_must_contain": ['.lbl'],
         "url_must_contain": ['-cosac-2-', '/data'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "RDR_cosac": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.lbl'],
         "url_must_contain": ['-cosac-3-', '/data'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
 
 # start MUPUS data products
@@ -107,13 +107,13 @@ file_information = {
         "manifest": SB_FILE,
         "fn_must_contain": ['.lbl'],
         "url_must_contain": ['-romap-2-', '/data'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "RDR_romap": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.lbl'],
         "url_must_contain": ['-romap-3-', '/data'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "DDR_romap": {
         "manifest": SB_FILE,
@@ -144,13 +144,13 @@ file_information = {
         "manifest": SB_FILE,
         "fn_must_contain": ['.lbl'],
         "url_must_contain": ['-sesame-2-', '/data'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "RDR_sesame": {
         "manifest": SB_FILE,
         "fn_must_contain": ['.lbl'],
         "url_must_contain": ['-sesame-3-', '/data'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
 
 }

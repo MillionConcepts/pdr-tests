@@ -76,6 +76,7 @@ file_information = {
     # SPICE dataset
     "spice": {
         "manifest": SBN_FILE,
+        "fn_regex": [r'((bc)|(bpe)|(tf)|(ti)|(tls)|([12])|([bt]pc)|(tsc)|(bsp))$'],
         "url_must_contain": ['NEAR_A_SPICE_6_', '/data'],
         "label": "D",
         "support_np": True

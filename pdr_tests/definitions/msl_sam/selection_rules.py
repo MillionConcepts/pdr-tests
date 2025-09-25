@@ -53,7 +53,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_hk_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level0"],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "l0_hk_data_files": {
         "manifest": GEO_FILE,
@@ -78,7 +78,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_tls_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level0"],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "l0_tls_data_files": {
         "manifest": GEO_FILE,
@@ -93,7 +93,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_hk_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level1a"],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "l1a_hk_data_files": {
         "manifest": GEO_FILE,
@@ -106,7 +106,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_qms_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level1a"],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "l1a_qms_data_files": {
         "manifest": GEO_FILE,
@@ -125,7 +125,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_tls_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level1a"],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "l1a_tls_data_files": {
         "manifest": GEO_FILE,
@@ -160,7 +160,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_qms_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level2"],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "l2_qms_data_files": {
         "manifest": GEO_FILE,
@@ -179,7 +179,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ["_tls_", ".lbl"],
         "url_must_contain": ["mslsam_", "data", "level2"],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     "l2_tls_data_files": {
         "manifest": GEO_FILE,

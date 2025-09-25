@@ -90,7 +90,7 @@ file_information = {
     # Reagan Radiometer
     "reag_rad": {
         "manifest": MANIFEST_FILE,
-        "fn_must_contain": ['.'],
+        "fn_must_contain": ['.tab'],
         "url_must_contain": ['earth/grsfe', 'reagrad'],
         "label": "D",
     },

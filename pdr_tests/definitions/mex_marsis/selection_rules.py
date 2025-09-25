@@ -42,7 +42,7 @@ file_information = {
     # specifically pass this ptype.
     "EDR_additional_files": {
         "manifest": GEO_MEX_FILE,
-        "fn_regex": [r'((lbl)|(_g.dat))$'],
+        "fn_must_contain": ['_g.dat'],
         "url_must_contain": ["mex-m-marsis-2-edr", "/data/"],
         "label": "A", # not actually attached labels, but don't want to double count them 
         "ix_skip": True

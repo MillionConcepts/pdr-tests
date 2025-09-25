@@ -133,7 +133,7 @@ file_information = {
         "manifest": GEO_FILE,
         "fn_must_contain": ['e_kernel', '.lbl'],
         "url_must_contain": ['ody-m-grs-2-edr-v1'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     # Because of differences in the label and data file names, the edr_e_kernel 
     # ptype looks for the label. ix finds the relevant DAT and TXT files during 
@@ -148,7 +148,7 @@ file_information = {
         "ix_skip": True,
     },
     # EDR - notionally supported ancillary products that are annoying to test 
-    # with ix because the have several (sometimes dozens) of .dat files per 
+    # with ix because they have several (sometimes dozens) of .dat files per 
     # label, and the label names do not always match the data files' names
     "edr_chan": {
         "manifest": GEO_FILE,

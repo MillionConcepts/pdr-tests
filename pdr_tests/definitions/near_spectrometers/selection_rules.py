@@ -114,7 +114,7 @@ file_information = {
     # XRS EDR - xrf products
     "xrs_edr_f": {
         "manifest": SBN_FILE,
-        "fn_must_contain": ['.'],
+        "fn_must_contain": ['.fit'],
         "url_must_contain": ['NEAR_A_XRS_2_EDR_', '/data/xrf'],
         "label": "D",
     },

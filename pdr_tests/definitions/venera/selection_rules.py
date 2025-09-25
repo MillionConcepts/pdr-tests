@@ -41,7 +41,7 @@ file_information = {
         "manifest": PPI_FILE,
         "fn_must_contain": ['.SAV'],
         "url_must_contain": ['V15_V16-V-ROE-5-OCC-ELECTRON-DENS-V1.0/EXTRAS'],
-        "label": "D",
+        "label": "A", # no PDS label; marking as attached so the coverage pipeline doesn't go looking for one
         "support_np": True
     },
 }

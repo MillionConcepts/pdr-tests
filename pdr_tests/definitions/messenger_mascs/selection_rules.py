@@ -103,7 +103,7 @@ file_information = {
         "manifest": GEO_MESSENGER_FILE,
         "fn_must_contain": [".lbl"],
         "url_must_contain": ['mascs-3-virs-cdr-caldata-', '/dap', '/virs'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     # The virs_DAP ptype as written works great for ix testing, but leaves the 
     # .img files marked as 'uncovered' in the coverage analysis pipeline. This 

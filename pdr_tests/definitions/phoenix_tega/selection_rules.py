@@ -62,7 +62,7 @@ file_information = {
         "fn_must_contain": ['edr','.lbl'],
         "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008',
                              '/engedr'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     # The engedr ptype as written works great for ix testing, but leaves the 
     # many .dat files per label marked as 'uncovered' in the coverage analysis 
@@ -117,7 +117,7 @@ file_information = {
         "fn_must_contain": ['rdr','.lbl'],
         "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/2008',
                              '/engrdr'],
-        "label": "D",
+        "label": "A", # these are the labels, so treat them as attached
     },
     # The engrdr ptype as written works great for ix testing, but leaves the 
     # many .dat files per label marked as 'uncovered' in the coverage analysis 
