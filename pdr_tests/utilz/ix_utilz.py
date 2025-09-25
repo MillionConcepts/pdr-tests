@@ -621,11 +621,15 @@ def download_datasets(
 ):
     data_path = Path(pdr_tests.__file__).parent / "data"
     bucket = Bucket(bucket_name)
-    local = pd.DataFrame(index_breadth_first(data_path))
-    local['path'] = local['path'].map(_canonicalize_test_data_path)
-    local = local.loc[
-        local['directory'] == False
-    ].sort_values(by='path').reset_index()
+    local_index = index_breadth_first(data_path)
+    if len(local_index) > 0:
+        local = pd.DataFrame(local_index)
+        local['path'] = local['path'].map(_canonicalize_test_data_path)
+        local = local.loc[
+            local['directory'] == False
+        ].sort_values(by='path').reset_index()
+    else:
+        local = pd.DataFrame({'path': []})
     console_and_log("indexing requested dataset prefixes in bucket")
     if len(datasets) > 1:
         remote = bucket.df()
