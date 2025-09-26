@@ -212,7 +212,7 @@ file_information = {
     "SHAPEFILE": {
         "manifest": MANIFEST_FILE,
         "fn_regex": [r"((dbf)|(prj)|(shp)|(shx)|(DBF)|(PRJ)|(SHP)|"
-                     r"(SHX)|(ZIP)|(CSV)|(XML))$"],
+                     r"(SHX)|(ZIP)|(CSV)|(XML)|(xml)|(XLS))$"],
         "url_must_contain": ["/EXTRAS/", "SHAPEFILE"],
         "label": "NA",
         "support_np": True, # not all files have PDS labels

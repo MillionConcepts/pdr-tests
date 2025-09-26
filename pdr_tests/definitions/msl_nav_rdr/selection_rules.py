@@ -63,7 +63,7 @@ file_information = {
     },
     "mask_desc": {
         "manifest": IMG_FILE,
-        "fn_must_contain": [".XML"],
+        "fn_regex": [r"((XML)|(xml))$"],
         "url_regex": [r"MSLNAV_1XXX/EXTRAS(_V1)?/MASK_DESC_FILES"],
         "label": "A", # no PDS labels
         "support_np": True
