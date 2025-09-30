@@ -100,7 +100,15 @@ file_information = {
         "url_must_contain": ['mexpfs', 'data/mars'],
         "url_regex": [r'wc/orb((00[2-9])|(0[1-9][0-9])|([1-9][0-9][0-9]))x'],
         "label": "D",
-        "support_np": True
+        "ix_skip": True # avoid duplicating ix test coverage
+    },
+    "ATM_cruise_dupes": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['.dat'],
+        "url_must_contain": ['mexpfs'],
+        "url_regex": [r'data/((ic)|(nev))'],
+        "label": "D",
+        "ix_skip": True # avoid duplicating ix test coverage
     },
 
     # The MEX-M-PFS-5-DDR-MAPS-V1.0 dataset is at PSA but not mirrored at GEO.
