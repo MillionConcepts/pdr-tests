@@ -1,0 +1,4 @@
+label_file,files,product_id,url_stem,hash
+cdr6_2_0843670820_el_j_0.LBL,"[""cdr6_2_0843670820_el_j_0.LBL"", ""CDR6_2_0843670820_EL_J_0.TAB""]",CDR6_2_0843670820_EL_J_0,http://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0003/extras/el,"{""TABLE"": ""ee0b4dd102f13d247025b4a194cdd61b""}"
+cdr6_2_0835291663_cp_l_0.LBL,"[""cdr6_2_0835291663_cp_l_0.LBL"", ""CDR6_2_0835291663_CP_L_0.TAB""]",CDR6_2_0835291663_CP_L_0,http://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0001/extras/cp,"{""TABLE"": ""060fc4b1e03c3ec9d0e2fe4df5b006b6""}"
+cdr6_2_0811260000_dr_j_1.LBL,"[""cdr6_2_0811260000_dr_j_1.LBL"", ""CDR6_2_0811260000_DR_J_1.TAB""]",CDR6_2_0811260000_DR_J_1,http://pds-geosciences.wustl.edu/mro/mro-m-crism-2-edr-v1/mrocr_0001/extras/dr,"{""TABLE"": ""3f0f5ff4554f3517dfdb68d8ef6aad82""}"

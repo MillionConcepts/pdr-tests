@@ -98,6 +98,12 @@ file_information = {
         "url_must_contain": ['mex-msa-hrsc-5-refdr-phobos-maps','data/mosaic'],
         "label": "A",
     },
+    "phobos_extras": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.tab'],
+        "url_must_contain": ['mex-msa-hrsc-5-refdr-phobos-maps','extras'],
+        "label": "D",
+    },
     
     # There is a DDR clouds dataset (MEX-M-HRSC-4-DDR-CLOUDS-V1.0) at PSA that
     # is not mirrored at GEO. It only has 1 ascii table product, which opens

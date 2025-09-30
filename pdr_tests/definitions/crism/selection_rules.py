@@ -102,27 +102,64 @@ file_information = {
         'url_must_contain': ['crism', '/mtrdr'],
         "label": "D",
     },
-    'speclib': {'manifest': GEO_MRO_FILE,
-                'fn_must_contain': ['.tab'],
-                'url_must_contain': ['crism', 'speclib-v1'],
-                'label': "A"},
-    'typespec': {'manifest': GEO_MRO_FILE,
-                 'fn_must_contain': ['.tab'],
-                 'url_must_contain': ['crism', 'typespec-v1'],
-                 'label': 'D'},
+    'speclib': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['.tab'],
+        'url_must_contain': ['crism', 'speclib-v1'],
+        'label': "A",
+    },
+    'typespec': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['.tab'],
+        'url_must_contain': ['crism', 'typespec-v1'],
+        'label': 'D',
+    },
     
     # These appear to be ancillary tables
-    'ancil_cdr': {'manifest': GEO_MRO_FILE,
-                 'fn_must_contain': ['.tab'],
-                 'url_must_contain': ['crism', 'cdr'],
-                 'label': 'D'},
-    'ancil_rdr': {'manifest': GEO_MRO_FILE,
-                 'fn_must_contain': ['.tab'],
-                 'url_must_contain': ['crism-4-rdr', 'ter'],
-                 'label': 'D'},
-    'ancil_mrdr': {'manifest': GEO_MRO_FILE,
-                 'fn_must_contain': ['.tab'],
-                 'url_must_contain': ['crism-5-rdr', 'mrdr'],
-                 'url_regex': [r'mrocr_3[12]'],
-                 'label': 'D'},
+    'ancil_cdr': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['.tab'],
+        'url_must_contain': ['crism', 'cdr'],
+        'label': 'D',
+    },
+    'ancil_rdr': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['.tab'],
+        'url_must_contain': ['crism-4-rdr', 'ter'],
+        'label': 'D',
+    },
+    'ancil_mrdr': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['.tab'],
+        'url_must_contain': ['crism-5-rdr', 'mrdr'],
+        'url_regex': [r'mrocr_3[12]'],
+        'label': 'D',
+    },
+    # Products in the extras directories
+    'extras_cdr': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['cdr', '.tab'],
+        'url_must_contain': ['crism-2-edr', '/extras/'],
+        'label': 'D',
+    },
+    'extras_obs': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['obs', '.tab'],
+        'url_must_contain': ['crism-2-edr', '/extras/'],
+        'label': 'D',
+    },
+    'extras_csv': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['.csv'],
+        'url_must_contain': ['crism-2-edr', '/extras/'],
+        'label': 'D',
+        "support_np": True # These are text files using the DOCUMENT pointer
+    },
+    'extras_xls': {
+        'manifest': GEO_MRO_FILE,
+        'fn_must_contain': ['.xls'],
+        'url_must_contain': ['crism-4-rdr', '/extras/'],
+        'label': 'A', # no PDS label
+        "support_np": True
+    },
 }

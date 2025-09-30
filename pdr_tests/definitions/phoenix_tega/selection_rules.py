@@ -141,4 +141,12 @@ file_information = {
                              '/scrdr'],
         "label": "D",
     },
+    # CSV files in the extras directory --> support not planned
+    "extras": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.csv'],
+        "url_must_contain": ['phx-m-tega-2-scedr-v1/phxteg_0001/extras'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
 }

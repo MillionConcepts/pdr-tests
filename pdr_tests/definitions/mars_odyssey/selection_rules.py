@@ -252,5 +252,19 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    "edr_filename_typo": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.x00'],
+        "url_must_contain": ['ody-m-grs-2-edr-v1', '/eng'],
+        "label": "D",
+        "support_np": True
+    },
+    "edr_extras_log": {
+        "manifest": GEO_FILE,
+        "fn_must_contain": ['.log'],
+        "url_must_contain": ['ody-m-grs-2-edr-v1', '/extras'],
+        "label": "A", # no PDS label
+        "support_np": True
+    },
 }
 

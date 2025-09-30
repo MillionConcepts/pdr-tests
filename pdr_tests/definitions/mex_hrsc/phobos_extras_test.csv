@@ -1,0 +1,2 @@
+label_file,files,product_id,url_stem,hash
+phobos_controlnet_a1.LBL,"[""phobos_controlnet_a1.LBL"", ""PHOBOS_CONTROLNET_A1.TAB""]",CONTROLNET_PHOBOS,http://pds-geosciences.wustl.edu/mex/mex-msa-hrsc-5-refdr-phobos-maps-v1/mexhrs_5001/extras,"{""CONTROLNET_TABLE"": ""899221260a3be6f4b4ee0b46034f81cf""}"
