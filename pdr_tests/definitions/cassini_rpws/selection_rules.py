@@ -124,4 +124,12 @@ file_information = {
         "label": "A",
         "support_np": True
     },
+    # thumbnail / logo icon
+    "extras_ico": {
+        "manifest": PPI_FILE,
+        "fn_must_contain": ['.ICO'],
+        "url_must_contain": ['CO-V_E_J_S_SS-RPWS-', 'EXTRAS'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
 }

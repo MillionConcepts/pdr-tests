@@ -51,6 +51,14 @@ file_information = {
         "url_must_contain": ['-gia-5-', '/data'],
         "label": "D",
     },
+    # Config files / templates for PDS3 labels
+    "extras_giada": {
+        "manifest": SB_FILE,
+        "fn_must_contain": ['.xml'],
+        "url_must_contain": ['-gia-2-', '/extras'],
+        "label": "A",
+        "support_np": True
+    },
 	
 # start MIDAS data products
     # RDRs

@@ -103,6 +103,14 @@ file_information = {
         "label": "D",
         "support_np": True
     },
+    # ancillary files
+    "extras_support_np": {
+        "manifest": IMG_FILE,
+        "fn_must_contain": ['aux.xml'],
+        "url_must_contain": ['/extras/thumbnail'],
+        "label": "A", # no PDS labels
+        "support_np": True
+    },
 }
 
 SKIP_FILES = ["JP2INFO.TXT", "DSMAP.CAT"]
