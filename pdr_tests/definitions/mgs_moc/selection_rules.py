@@ -37,14 +37,12 @@ file_information = {
         "label": "A",
     },
     # Compressed Standard Data Products
-    # The context images open (likely incorrectly), the rest do not open at all
     "sdp": {
         "manifest": IMG_FILE,
         "fn_must_contain": ['.imq'],
         "url_must_contain": ['MOC/mgsc_1'],
         "label": "A",
-        "support_np": True
     },
-    
+
 }
 
