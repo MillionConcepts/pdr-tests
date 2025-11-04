@@ -158,7 +158,7 @@ file_information = {
     'extras_xls': {
         'manifest': GEO_MRO_FILE,
         'fn_must_contain': ['.xls'],
-        'url_must_contain': ['crism-4-rdr', '/extras/'],
+        'url_must_contain': ['crism-4-rdr', '/extras'],
         'label': 'A', # no PDS label
         "support_np": True
     },
