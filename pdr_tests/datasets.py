@@ -266,9 +266,9 @@ class IndexMaker(DatasetDefinition):
             print(f"Downloading labels for {self.dataset} {product_type} {dry}")
             subset, needed = self.load_subset_table(product_type)
             if dry_run is True:
-                return
+                continue
             if len(needed) == 0:
-                return
+                continue
             verbose_temp_download(
                 needed,
                 self.product_data_path(product_type),
