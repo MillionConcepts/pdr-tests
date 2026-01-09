@@ -99,9 +99,8 @@ file_information = {
     "mcs_ddr": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['DDR.TAB'],
-        "url_must_contain": ['MROM_2', '/DATA'],
+        "url_must_contain": ['DATA/MROM_2'],
         "label": "D",
-        "support_np": True
     },
     # ancillary files
     "extras_support_np": {
