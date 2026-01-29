@@ -81,12 +81,16 @@ def checksum_object(obj, hash_function=md5):
     if isinstance(obj, np.ndarray):
         hasher.update(obj)
     elif isinstance(obj, pd.DataFrame):
-        # note that object ('O') dtypes do not, by design, have stable
+        # object ('O') and string dtypes do not, by design, have stable
         # byte-level representations.
         blocks = obj._to_dict_of_blocks()
         # sorting to improve consistency between pandas versions
+        # TODO: this may never actually matter because there should not be
+        #  other dtypes that come after 'object', but pandas > 3 will give str
+        #  and pandas < 3 will give object for string columns. so if we have
+        #  some weird edge case, this could lead to a hash mismatch.
         for dtype in sorted(blocks.keys()):
-            if dtype == 'object':
+            if dtype in ('object', 'str'):
                 for c in blocks[dtype].columns:
                     exploded = blocks[dtype][c].explode()
                     stringified = StringIO()
