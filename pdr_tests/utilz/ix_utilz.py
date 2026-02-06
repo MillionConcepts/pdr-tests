@@ -90,7 +90,7 @@ def checksum_object(obj, hash_function=md5):
         #  and pandas < 3 will give object for string columns. so if we have
         #  some weird edge case, this could lead to a hash mismatch.
         for dtype in sorted(blocks.keys()):
-            if dtype in ('object', 'str'):
+            if dtype in ('object', 'str', 'string'):
                 for c in blocks[dtype].columns:
                     exploded = blocks[dtype][c].explode()
                     stringified = StringIO()
