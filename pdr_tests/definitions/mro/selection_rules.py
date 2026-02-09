@@ -94,13 +94,23 @@ file_information = {
         "url_must_contain": ['MROM_1', '/DATA'],
         "label": "D",
     },
-    # Format issues, alerting node
-    # MCS DDR
+    # MCS DDR (latest version)
     "mcs_ddr": {
         "manifest": ATM_FILE,
         "fn_must_contain": ['DDR.TAB'],
         "url_must_contain": ['DATA/MROM_2'],
         "label": "D",
+    },
+    # MCS DDR (version 1)
+    # the spider didn't cover this folder so may re-spider just it later, or
+    # manually edit the csv with the urls (the structure looks the same,
+    # I think).
+    "mcs_ddr_v1": {
+        "manifest": ATM_FILE,
+        "fn_must_contain": ['DDR.TAB'],
+        "url_must_contain": ['DATA/MCSDDRV1/MROM_2'],
+        "label": "D",
+        "support_np": True
     },
     # ancillary files
     "extras_support_np": {

@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-st_2484352917_v.lbl,"[""st_2484352917_v.fit"", ""st_2484352917_v.lbl""]",20051023_ST_2484352917_V_FIT,http://sbnarchive.psi.edu/pds3/hayabusa/HAY_A_AMICA_3_HAYAMICA_V1_0/data/20051023
+label_file,files,product_id,url_stem,hash
+st_2484352917_v.lbl,"[""st_2484352917_v.fit"", ""st_2484352917_v.lbl""]",20051023_ST_2484352917_V_FIT,http://sbnarchive.psi.edu/pds3/hayabusa/HAY_A_AMICA_3_HAYAMICA_V1_0/data/20051023,"{""HEADER"": ""9e53b3a4cec33bf30934e332489d1106"", ""IMAGE"": ""5231d4b09c818671a759c94f65010c2c"", ""IMAGE_HEADER"": ""9e53b3a4cec33bf30934e332489d1106""}"

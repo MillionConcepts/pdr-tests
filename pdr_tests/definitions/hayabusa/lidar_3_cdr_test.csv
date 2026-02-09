@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-cdr_f_20050930_20051028.lbl,"[""cdr_f_20050930_20051028.tab"", ""cdr_f_20050930_20051028.lbl""]",CDR_CDR_F_20050930_20051028_TAB,http://sbnarchive.psi.edu/pds3/hayabusa/HAY_A_LIDAR_3_HAYLIDAR_V2_0/data/cdr
+label_file,files,product_id,url_stem,hash
+cdr_f_20050930_20051028.lbl,"[""cdr_f_20050930_20051028.tab"", ""cdr_f_20050930_20051028.lbl""]",CDR_CDR_F_20050930_20051028_TAB,http://sbnarchive.psi.edu/pds3/hayabusa/HAY_A_LIDAR_3_HAYLIDAR_V2_0/data/cdr,"{""TABLE"": ""347eacd87a7f81aa88435461d9fe1fa9""}"

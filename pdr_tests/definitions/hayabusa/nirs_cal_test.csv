@@ -1,2 +1,2 @@
-label_file,files,product_id,url_stem
-2551431955_lvl3_0.lbl,"[""2551431955_lvl3_0.fit"", ""2551431955_lvl3_0.lbl""]",2551431955_LVL3_0_FIT,http://sbnarchive.psi.edu/pds3/hayabusa/HAY_A_NIRS_3_NIRSCAL_V1_0/data/spectra/itokawa_td/20051116
+label_file,files,product_id,url_stem,hash
+2551431955_lvl3_0.lbl,"[""2551431955_lvl3_0.fit"", ""2551431955_lvl3_0.lbl""]",2551431955_LVL3_0_FIT,http://sbnarchive.psi.edu/pds3/hayabusa/HAY_A_NIRS_3_NIRSCAL_V1_0/data/spectra/itokawa_td/20051116,"{""HEADER"": ""51d5b14ac8a37d53aabe49a50bebc277"", ""COMBINED_SPECTRUM"": ""06bfa368f4d8fd58d0a438a98e2a39cc"", ""COMBINED_SPECTRUM_HEADER"": ""51d5b14ac8a37d53aabe49a50bebc277""}"

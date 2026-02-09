@@ -65,5 +65,6 @@ file_information = {
         "url_must_contain": ['HAY', 'AMICA', 'data'],
         "label": (".fit", ".lbl"),
     },
+    # there are more things on jaxa darts (AMICA DDRs etc)
 
 }
