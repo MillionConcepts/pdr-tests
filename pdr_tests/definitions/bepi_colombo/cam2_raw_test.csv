@@ -1,0 +1,2 @@
+label_file,product_id,files,url_stem,hash
+cam_raw_sc_cam2_image_20250108t061024_14_f__t0004.xml,urn:esa:psa:bc_mtm_mcam:data_raw:cam_raw_sc_cam2_image_20250108t061024_14_f__t0004,"[""cam_raw_sc_cam2_image_20250108t061024_14_f__t0004.fits"", ""cam_raw_sc_cam2_image_20250108t061024_14_f__t0004.xml""]",http://archives.esac.esa.int/psa/ftp/BepiColombo/bc_mtm_mcam/data_raw/flybys/mercury_flyby_6/202501,"{""MCAM_image"": ""6b5159877813292191aed583d8a4dd35""}"

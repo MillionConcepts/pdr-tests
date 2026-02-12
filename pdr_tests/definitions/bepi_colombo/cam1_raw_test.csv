@@ -1,0 +1,2 @@
+label_file,product_id,files,url_stem,hash
+cam_raw_sc_cam1_image_20250113t000002_53_f__t0010.xml,urn:esa:psa:bc_mtm_mcam:data_raw:cam_raw_sc_cam1_image_20250113t000002_53_f__t0010,"[""cam_raw_sc_cam1_image_20250113t000002_53_f__t0010.fits"", ""cam_raw_sc_cam1_image_20250113t000002_53_f__t0010.xml""]",http://archives.esac.esa.int/psa/ftp/BepiColombo/bc_mtm_mcam/data_raw/cruise/202501,"{""MCAM_image"": ""0d37c256b21dd0907d1a6333dc9e0087""}"

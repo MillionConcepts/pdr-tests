@@ -1,0 +1,2 @@
+label_file,product_id,files,url_stem,hash
+mag_der_sc_ib_a001_gse_00000_20200412.xml,urn:esa:psa:bc_mpo_mag:data_derived:mag_der_sc_ib_a001_gse_00000_20200412,"[""mag_der_sc_ib_a001_gse_00000_20200412.tab"", ""mag_der_sc_ib_a001_gse_00000_20200412.xml""]",http://archives.esac.esa.int/psa/ftp/BepiColombo/bc_mpo_mag/data_derived/avg_cal_sc/flybys/earth_flyby/ib/gse,"{""MPOMAG_DERIVED_1-SECOND-AVERAGED_CALIBRATED_SCIENCE_DATA_TABLE"": ""4037fde40929efd47dc3e0f85df2b4f8""}"

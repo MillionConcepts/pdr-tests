@@ -1,0 +1,2 @@
+label_file,product_id,files,url_stem,hash
+mag_der_sc_ob_a001_e2k_00000_20211104.xml,urn:esa:psa:bc_mpo_mag:data_derived:mag_der_sc_ob_a001_e2k_00000_20211104,"[""mag_der_sc_ob_a001_e2k_00000_20211104.tab"", ""mag_der_sc_ob_a001_e2k_00000_20211104.xml""]",http://archives.esac.esa.int/psa/ftp/BepiColombo/bc_mpo_mag/data_derived/avg_cal_sc/cruise/ob/e2k,"{""MPOMAG_DERIVED_1-SECOND-AVERAGED_CALIBRATED_SCIENCE_DATA_TABLE"": ""a83e8959b9a92743581ea4ca576ce64f""}"
