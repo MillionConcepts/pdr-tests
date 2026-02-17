@@ -70,25 +70,31 @@ file_information = {
         "label": "A",
     },
     # Calibrated / RDR
+    # bytes per pixel is .5, not allowed
     "CALIBRATED": {
         "manifest": PSA,
         "fn_must_contain": ['.CAL'],
         "url_must_contain": ['VIRTIS', 'CALIBRATED'],
         "label": "A",
+        "support_np": True
     },
     # Calibrated / RDR
+    # bytes per pixel is .5, not allowed
     "CALIBRATED_DARK": {
         "manifest": PSA,
         "fn_must_contain": ['.DRK'],
         "url_must_contain": ['VIRTIS', 'CALIBRATED'],
         "label": "A",
+        "support_np": True
     },
     # Geometry File / EDR type
+    # array wrong size compared to label
     "GEOM": {
         "manifest": PSA,
         "fn_must_contain": ['.GEO'],
         "url_must_contain": ['VIRTIS', 'GEO'],
         "label": "A",
+        "support_np": True
     },
 }
 

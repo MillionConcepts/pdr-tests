@@ -109,6 +109,7 @@ file_information = {
         ],
         "label": "D",
     },
+    # these are jpegs and png images
     "lim_nc3": {
         "manifest": GEO_FILE,
         "fn_must_contain": [

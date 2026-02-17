@@ -52,11 +52,13 @@ file_information = {
         "label": ('.TAB', '.lbl'),
     },
     # GRS: gamma ray spectrometer
+    # there are updated PDS4 versions of this on the PDS, don't use this one
     "grs_eng_tables": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['GRS_ESPEC2_', '.tbl'],
         "url_must_contain": ['sln', 'sln-l-grs-3-eng-spectrum-v1.0', 'data'],
         "label": "D",
+        "support_np": True,
     },
     # different maps for Al, Ca, Fe, K, Mg, O, Si, Th, Ti, U
     "grs_map": {
@@ -210,6 +212,7 @@ file_information = {
     #     "url_must_contain": ['sln', 'sln-l-lrs-4-wfc-spectrum-v1.0',
     #                          'data'],
     #     "label": "A",
+    #     "support_np": True,
     # },
     # "lrs_npw_spectrum": {
     #     "manifest": MANIFEST_FILE,
@@ -217,6 +220,7 @@ file_information = {
     #     "url_must_contain": ['sln', 'sln-l-lrs-5-npw-spectrum-v1.0',
     #                          'data'],
     #     "label": "A",
+    #     "support_np": True,
     # },
     "sndr_gsi_map": {
         "manifest": MANIFEST_FILE,
@@ -318,12 +322,15 @@ file_information = {
                              'data'],
         "label": "D",
     },
+    # there is specific software for decoding these files
+    # https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-pace-3-pbf1-v3.0/20071222/software/
     "IPACE_PBF1": {
         "manifest": MANIFEST_FILE,
         "fn_must_contain": ['IPACE_PBF1', '.dat.gz'],
         "url_must_contain": ['sln', 'sln-l-pace-3-pbf1-v3.0',
                              'data'],
         "label": ('.dat.gz', '.lbl'),
+        "support_np": True,
     },
     "PACE_ET1": {
         "manifest": MANIFEST_FILE,
