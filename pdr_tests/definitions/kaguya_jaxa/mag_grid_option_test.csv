@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-MA_GDOP_001.LBL,"[""MA_GDOP_001.LBL"", ""MA_GDOP_001.dat""]",MA_GDOP_001,http://darts.isas.jaxa.jp/pub/pds3/sln-l-lmag-5-ma-grid-option-v1.0/data,{}
+MA_GDOP_001.LBL,"[""MA_GDOP_001.LBL"", ""MA_GDOP_001.dat""]",MA_GDOP_001,http://darts.isas.jaxa.jp/pub/pds3/sln-l-lmag-5-ma-grid-option-v1.0/data,"{""TABLE"": ""e8737e7fd551cff8f6a87d3681c140ab""}"

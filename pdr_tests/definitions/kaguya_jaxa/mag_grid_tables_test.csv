@@ -1,2 +1,2 @@
 label_file,files,product_id,url_stem,hash
-MA_GD_002.LBL,"[""MA_GD_002.dat"", ""MA_GD_002.LBL""]",MA_GD_002,http://darts.isas.jaxa.jp/pub/pds3/sln-l-lmag-5-ma-grid-v1.0/data,{}
+MA_GD_002.LBL,"[""MA_GD_002.dat"", ""MA_GD_002.LBL""]",MA_GD_002,http://darts.isas.jaxa.jp/pub/pds3/sln-l-lmag-5-ma-grid-v1.0/data,"{""TABLE"": ""35f9ba70a9ee0c1167cc064683d6988b""}"
